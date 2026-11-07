@@ -1,0 +1,11 @@
+# rd-main-v1: main-paper RD figure (2026-11-01), Mip-NeRF 360 averages
+
+plot_rd_main_v1.py rd-11scenes-v2.csv baselines-rd-v1.csv rd-main-v1 -> rd-main-v1.png/.pdf
+
+(a) ΔPSNR vs each method's OWN uncompressed representation against compression ratio (log). Ours vs our FP32 MeshSplatting reproduction (657 MB / 24.50 mean of 9 scenes): λ 6.2e-4 23x −0.03, 1.85e-3 32x −0.23, 6.2e-3 74x −0.69, 1.85e-2 155x −1.40; level 1.0 (dense + codec) 24x −0.27. HAC / HAC++ / ContextGS vs Scaffold-GS, their base model (253.9 MB / 27.50, HAC++ Table II): 10–30x at +0.0…+0.35 dB. RDO-Gaussian vs 3DGS (its own per-scene 3DGS mean 745.8 MB / 27.49): 32x −0.44, 48x −0.62, 76x −0.99, 121x −1.46, 211x −2.11, 436x −3.06. LightGaussian 17x −0.46, Compact3DGS 15x −0.38 (vs 3DGS 750.9 / 27.46).
+Reading: at every ratio our curve keeps more quality than RDO-Gaussian, the Gaussian method closest in spirit (λ-priced rate inside training); the anchor-based coders sit at +0.1…+0.3 because Scaffold-GS's hash-grid anchors are a far more compressible base (they also stop at ~30x). This is the codec claim the paper can defend: quality per byte within the representation.
+
+(b) absolute size vs PSNR among engine-ready meshes: ours 4 λ + level 1.0 + FP32 star; MeshSplatting authors' RGB-only PLY (100 MB "Memory", 24.78 paper PSNR — their number, our SH-dropped measurement still pending); MiLo 253 MB / 24.09; BakedSDF 434 MB / 24.51 (= (4·27.06 + 5·22.47)/9 from the paper's indoor/outdoor means); Binary Opacity Grids 913 MB (0.85 GiB) / 25.62 (= (4·27.71 + 5·23.94)/9); RaDe-GS mesh 1.1 GB / 23.56; GOF mesh 1.5 GB / 20.78 (MeshSplatting Tables 1–2). Gaussian-splat class drawn grey and small, labelled as not-a-mesh with the +3 dB class gap.
+Reading: among meshes an engine can load, ours is 10–100x smaller than every published mesh at equal or higher PSNR (MiLo 253 MB / 24.09 vs ours 8.9 MB / 23.81 or 20.3 MB / 24.27).
+
+Where the absolute 11-scene hull figure (rd-11scenes-v3) goes: supplement (per-scene curves + HAC per-scene for completeness); the main text uses (a)+(b). Caveats to state in the caption: RDO-Gaussian points taken from its appendix tables (check PDF); HAC family referenced to Scaffold-GS; BakedSDF/BOG averages recomputed from indoor/outdoor means.

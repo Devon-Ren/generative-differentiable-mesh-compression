@@ -1,0 +1,108 @@
+adapt-v7b Blender testbed (2026-11-06, node-batch8-v2, jobs 22079433-36): lego, chair x {2.5, 4} MB; train_rd_adapt_v7b (v6 + exact kept-aware accounting,
+  prune gated on the extrapolated landing and capped at the excess, growth-capped flag, diagnostic probes 22k/26k) + val_select_v3 + level-1.0
+references: rd-prune3b4 lam 6.2e-4 / 6.2e-3 re-delivered with val_select_v3; v6 rows from node-batch7 (same scenes, same delivery)
+
+1. landing (pass bar a-c)
+scene     T |  deliv   hit |  probe  hitP  P/dl | capped bound | lastEst  err% |   P12 e12.5 | active collapsed  V12->V19.5 (-%) | best   val    test   val-test
+lego    2.5 |  2.535  1.014 |  2.608  1.043  1.029 | False   5/17 |  2.616   +0.3 |  0.97  0.94  |  14      11429   146001->133700 ( 8.4) | 21000  33.588  32.371  1.217
+chair   2.5 |  2.419  0.968 |  2.508  1.003  1.037 | False  11/17 |  2.536   +1.1 |  0.86  0.86  |  10       8611   136374->125857 ( 7.7) | 21000  32.469  32.233  0.236
+lego    4.0 |  3.977  0.994 |  3.988  0.997  1.003 | True   13/17 |  3.961   -0.7 |  0.83  0.85  |   0          0   234133->234133 ( 0.0) | 26000  34.415  32.868  1.547
+chair   4.0 |  3.568  0.892 |  3.562  0.890  0.998 | True   13/17 |  3.555   -0.2 |  0.68  0.79  |   0          0   208664->208664 ( 0.0) | 26000  32.841  31.997  0.844
+columns: hitP = final probe / T; P/dl = probe / delivered file; capped = growth_capped flag (last est < T and limiter bound > half the intervals);
+  lastEst = landing estimate at the last round (19.5k), err = lastEst / final probe - 1; P12, e12.5 = probe at 12k and estimate at 12.5k over T;
+  active = rounds that collapsed anything; val = unpruned val PSNR at the chosen checkpoint; val-test = generalisation gap.
+
+2. quality (pass bar d): test PSNR vs the fixed-lambda chord and vs the v6 run at the same target
+scene     T |  bytes   PSNR | chord   dChord | v6 bytes v6 PSNR | bytes x  dPSNR raw  dPSNR eq-bytes | v6 pruned-V% v6 best
+lego    2.5 |  2.535  32.371 | 32.503  -0.132* | 2.364    32.351   |  1.072    +0.020      -0.045         |   18.2        21000
+chair   2.5 |  2.419  32.233 | 32.167  +0.066  | 2.254    32.139   |  1.073    +0.094      +0.089         |   18.7        21000
+lego    4.0 |  3.977  32.868 | 32.923  -0.055  | 3.355    33.029   |  1.185    -0.161      -0.320         |   17.8        21000
+chair   4.0 |  3.568  31.997 | 32.194  -0.197  | 3.065    32.520   |  1.164    -0.523      -0.533         |   16.1        21000
+columns: chord = log-linear PSNR between the two re-delivered references at the delivered bytes (* = extrapolated below 2.391 / 2.763 MB);
+  dPSNR eq-bytes = v7b PSNR minus the v6 PSNR moved to the v7b bytes along the chord slope (lego 0.932, chair 0.069 dB per ln(bytes)).
+  val-test gaps for context: refs lego 6.2e-3 1.269 (2.76 MB), 6.2e-4 1.679 (7.52 MB); chair 6.2e-3 0.250 (2.39 MB), 6.2e-4 0.883 (4.66 MB); v6 chair 4/6: 0.223 / 0.234
+
+3. phase B per round (it, probe, est, wanted, mode, cap, collapsed, collapsed/cap, kept V removed, passes)
+  lego 2.5 MB:
+    12000  2.435  2.435     -462  none    held (74328 edges below lam 4.43e-03)
+    12500  2.431  2.350    -1132  none    held (123963 edges below lam 4.43e-03)
+    13000  2.443  2.534      271  capped    3787    1858  0.49    1330   2
+    13500  2.432  2.543      384  capped    4995    1447  0.29    1005   5
+    14000  2.438  2.598      973  capped   11678    1055  0.09     741   9
+    14500  2.436  2.599     1079  capped   11871     813  0.07     570   8
+    15000  2.443  2.614     1349  capped   13487     671  0.05     457   8
+    15500  2.440  2.596     1290  capped   11611     559  0.05     393   7
+    16000  2.457  2.616     1780  lambda   10955     434  0.04     311   8
+    16500  2.473  2.635     2256  lambda   10030     375  0.04     289   7
+    17000  2.485  2.646     2708  count     9171     370  0.04     271   8
+    17500  2.491  2.644     3383  count    10031     480  0.05     366   8
+    18000  2.490  2.630     3581  count    12349     495  0.04     399  11
+    18500  2.501  2.630     4553  count    13492     656  0.05     553  10
+    19000  2.504  2.621     6130  count    12259     855  0.07     757  10
+    19500  2.510  2.616    11251  count    11251    1361  0.12    1256  11
+  chair 2.5 MB:
+    12000  2.160  2.160    -2831  none    held (77806 edges below lam 2.80e-03)
+    12500  2.160  2.155    -3039  none    held (127714 edges below lam 2.80e-03)
+    13000  2.174  2.332    -1560  none    held (127286 edges below lam 2.80e-03)
+    13500  2.187  2.390    -1078  none    held (123567 edges below lam 2.80e-03)
+    14000  2.203  2.430     -727  none    held (118183 edges below lam 2.80e-03)
+    14500  2.227  2.486     -155  none    held (112156 edges below lam 2.80e-03)
+    15000  2.252  2.534      406  capped    4057    1702  0.42    1174   2
+    15500  2.264  2.557      833  capped    7495    1380  0.18     957  10
+    16000  2.278  2.575     1209  capped    9669    1127  0.12     786  12
+    16500  2.293  2.586     1570  capped   10987     835  0.08     602   9
+    17000  2.307  2.588     1810  capped   10860     703  0.06     521   9
+    17500  2.317  2.579     1914  capped    9571     579  0.06     445  10
+    18000  2.331  2.575     2129  capped    8517     463  0.05     359  10
+    18500  2.347  2.570     2638  count     7915     589  0.07     472   8
+    19000  2.352  2.553     2876  count     5751     554  0.10     456   7
+    19500  2.358  2.536     3832  count     3831     679  0.18     575   3
+  lego 4.0 MB:
+    12000  3.307  3.307    -5500  none    held (125826 edges below lam 1.70e-03)
+    12500  3.311  3.391    -5119  none    held (206310 edges below lam 1.70e-03)
+    13000  3.348  3.794    -1820  none    held (208594 edges below lam 1.70e-03)
+    13500  3.362  3.784    -2025  none    held (205410 edges below lam 1.70e-03)
+    14000  3.396  3.855    -1441  none    held (201744 edges below lam 1.70e-03)
+    14500  3.426  3.896    -1117  none    held (196732 edges below lam 1.70e-03)
+    15000  3.455  3.919     -939  none    held (192986 edges below lam 1.70e-03)
+    15500  3.486  3.939     -781  none    held (189787 edges below lam 1.70e-03)
+    16000  3.514  3.949     -718  none    held (186801 edges below lam 1.70e-03)
+    16500  3.557  3.982     -289  none    held (184831 edges below lam 1.70e-03)
+    17000  3.587  3.992     -139  none    held (182245 edges below lam 1.70e-03)
+    17500  3.608  3.986     -302  none    held (180839 edges below lam 1.70e-03)
+    18000  3.639  3.989     -284  none    held (179422 edges below lam 1.70e-03)
+    18500  3.661  3.980     -702  none    held (178466 edges below lam 1.70e-03)
+    19000  3.688  3.978    -1189  none    held (178082 edges below lam 1.70e-03)
+    19500  3.704  3.961    -4155  none    held (177106 edges below lam 1.70e-03)
+  chair 4.0 MB:
+    12000  2.713  2.713   -12774  none    held (73765 edges below lam 6.01e-04)
+    12500  2.732  3.166    -8634  none    held (162970 edges below lam 6.01e-04)
+    13000  2.759  3.264    -7949  none    held (159086 edges below lam 6.01e-04)
+    13500  2.784  3.286    -8084  none    held (149217 edges below lam 6.01e-04)
+    14000  2.816  3.335    -7932  none    held (138924 edges below lam 6.01e-04)
+    14500  2.857  3.399    -7577  none    held (126968 edges below lam 6.01e-04)
+    15000  2.894  3.440    -7531  none    held (115807 edges below lam 6.01e-04)
+    15500  2.941  3.493    -7329  none    held (105292 edges below lam 6.01e-04)
+    16000  2.976  3.516    -7680  none    held (96135 edges below lam 6.01e-04)
+    16500  3.019  3.542    -8087  none    held (87243 edges below lam 6.01e-04)
+    17000  3.061  3.562    -8813  none    held (80826 edges below lam 6.01e-04)
+    17500  3.103  3.579    -9946  none    held (76472 edges below lam 6.01e-04)
+    18000  3.133  3.574   -12371  none    held (72471 edges below lam 6.01e-04)
+    18500  3.161  3.565   -16656  none    held (69710 edges below lam 6.01e-04)
+    19000  3.202  3.569   -24303  none    held (67834 edges below lam 6.01e-04)
+    19500  3.226  3.555   -49761  none    held (66168 edges below lam 6.01e-04)
+
+4. collapse throughput (independent-set matching + foldover filter deliver only a fraction of the capped count per round)
+  lego  2.5: 14 active rounds, collapsed 11429 of cap-sum 146967 (0.08); per-round collapsed/cap 0.04-0.49; last round wanted 11251 -> collapsed 1361
+  chair 2.5: 10 active rounds, collapsed 8611 of cap-sum 78653 (0.11); per-round collapsed/cap 0.05-0.42; last round wanted 3831 -> collapsed 679
+  lego  4.0: no active round (gate closed in all 16)
+  chair 4.0: no active round (gate closed in all 16)
+
+5. summary
+  (a) hits: lego 2.5 1.014 chair 2.5 0.968 lego 4.0 0.994 chair 4.0 0.892; feasible runs (flag False or hit >= 0.95) all within 0.90-1.10: True; probe/delivered 1.029 1.037 1.003 0.998
+  (b) growth-capped: lego 2.5 False chair 2.5 False lego 4.0 True chair 4.0 True (chair 4 True as expected; lego 4 True at a 1 % shortfall and lands 0.994 -> in tables treat capped = flag AND hit < 0.95)
+  (c) last-round estimate error: +0.3 +1.1 -0.7 -0.2 % (bar +-5 %)
+  (d) equal-bytes dPSNR vs v6: lego 2.5 -0.05 chair 2.5 +0.09 lego 4.0 -0.32 chair 4.0 -0.53 -> PASS on the two runs where phase B collapsed (2.5 MB), FAIL on the two gate-closed runs (4 MB):
+      the 4 MB runs collapsed nothing (est < T all 16 rounds) and are pure phase-A models chosen at 26000; v6 removed 16-18 % of V12 by lambda-prune
+      and landed under target with HIGHER test PSNR: the gradual lambda-prune buys test PSNR on these sparse-view scenes (val-test gap 0.22-0.25 pruned
+      vs 0.84-0.88 unpruned on chair). The v7 gate is right for landing and wrong for RD on non-binding targets; v6 was the reverse.

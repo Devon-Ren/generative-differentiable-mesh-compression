@@ -1,0 +1,15 @@
+# Open3DGC (MPEG-4 Part 16 SC3DMC / TFAN) rows, Room, 2026-11-01, run_o3dgc_v2.sh on cpu-torch (user's paste). Same FP32 asset as generic-codecs-2026-10-24.txt.
+# GPU eval pending (EVAL=1 rerun). sh8int reconstructs the SAME 8-bit SH values as quant_ply_zstd19 (lossless int attributes) and 14-bit positions -> PSNR ~ 28.09 by construction; sh8f has Open3DGC's own 8-bit per-group quantisation -> PSNR unknown until eval.
+room o3dgc_tfan_sh8int | 107.981 MB | decoded V 3193592 (no split) | test pending (~28.09 by construction) | encode+decode 31.9 s | positions q14 parallelogram + 48-ch uint8 SH as 6x8-dim int attributes (lossless differential)
+room o3dgc_tfan_sh8f | 102.517 MB | decoded V 3193592 (no split) | test pending | encode+decode 49.8 s | positions q14 + 48-ch SH as 6x8-dim float attributes, Open3DGC 8-bit quantisation
+# --- v3 rows (run_o3dgc_v3.sh, user's paste 11/01 04:51-04:54 EST), room + garden
+room o3dgc_tfan_geo | 19.886 MB | decoded V 3193592 F 6452971 | positions q14 + faces only (MPEG geometry budget) | 13.8 s
+room o3dgc_texture_geo_uv | 68.845 MB | atlas V 17401503 (5.4x seam duplication) | Open3DGC positions q14 + atlas faces + 12-bit UV
+room o3dgc_texture_4096 | 91.035 MB | geo 68.845 + JPEG 22.190 | quality = draco_rgb8 row 25.287
+room o3dgc_texture_8192 | 145.737 MB | geo 68.845 + JPEG 76.892 | quality = draco_rgb8 row 25.287
+garden o3dgc_tfan_sh8int | 125.981 MB | decoded V 3171988 (no split) | test pending (~24.59 by construction = quant_ply_zstd19) | 41.1 s
+garden o3dgc_tfan_sh8f | 122.814 MB | decoded V 3171988 | test pending | 58.8 s
+garden o3dgc_tfan_geo | 20.690 MB | decoded V 3171988 F 6667681 | positions q15 + faces only | 10.8 s
+garden o3dgc_texture_geo_uv | 73.731 MB | atlas V 18090770 (5.7x) | Open3DGC positions q15 + atlas faces + 12-bit UV
+garden o3dgc_texture_4096 | 94.583 MB | geo 73.731 + JPEG 20.852 | quality = draco_rgb8 row 21.062
+garden o3dgc_texture_8192 | 148.557 MB | geo 73.731 + JPEG 74.826 | quality = draco_rgb8 row 21.062

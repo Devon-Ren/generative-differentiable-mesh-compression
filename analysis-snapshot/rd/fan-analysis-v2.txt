@@ -1,0 +1,225 @@
+
+=== room: joint hull (6 of 24 points); lambda-only hull 4 of 4 ===
+    2.392 MB  26.312  lam 0.01850  K1024 R256 q7    
+    4.834 MB  27.234  lam 0.00620  K1024 R256 q7    0.378 dB/MB
+    5.582 MB  27.410  lam 0.00620  K4096 R256 q8    0.235 dB/MB
+   12.901 MB  28.088  lam 0.00185  K4096 R256 q8    0.093 dB/MB
+   23.017 MB  28.321  lam 0.00062  K4096 R256 q8    0.023 dB/MB
+   25.086 MB  28.339  lam 0.00062  K16384 R1024 q7  0.009 dB/MB
+  base (lambda-only, K4096R256 q7) points vs joint hull at the same bytes:
+    lam 0.01850    2.890 MB  26.383  joint hull 26.500 (+0.117)
+    lam 0.00620    5.402 MB  27.305  joint hull 27.368 (+0.063)
+    lam 0.00185   12.396 MB  28.023  joint hull 28.041 (+0.018)
+    lam 0.00062   22.073 MB  28.255  joint hull 28.299 (+0.044)
+  lever prices (dB/MB) per lambda; lambda-chord slope = towards neighbouring lambda:
+    lam 0.01850 (2.9 MB): chord up 0.367 / down   -   | K4096 R256 q8:0.734  K4096 R1 q7:0.647  K1024 R256 q7:0.143  K4096 R1024 q7:0.151  K16384 R1024 q7:0.036
+    lam 0.00620 (5.4 MB): chord up 0.103 / down 0.367 | K4096 R256 q8:0.583  K4096 R1 q7:0.372  K1024 R256 q7:0.125  K4096 R1024 q7:0.118  K16384 R1024 q7:0.036
+    lam 0.00185 (12.4 MB): chord up 0.024 / down 0.103 | K4096 R256 q8:0.129  K4096 R1 q7:0.171  K1024 R256 q7:0.138  K4096 R1024 q7:0.082  K16384 R1024 q7:0.035
+    lam 0.00062 (22.1 MB): chord up   -   / down 0.024 | K4096 R256 q8:0.070  K4096 R1 q7:0.088  K1024 R256 q7:0.106  K4096 R1024 q7:0.056  K16384 R1024 q7:0.028
+  joint hull vs lambda-only hull: max gain +0.137 dB at 4.83 MB (gain at base points max +0.117)
+  max joint-hull gain over the fixed setting at a base point: +0.117 dB; non-base hull members: ['K1024 R256@0.0185', 'K1024 R256@0.0062', 'K4096 R256 q8@0.0062', 'K4096 R256 q8@0.00185', 'K4096 R256 q8@0.00062', 'K16384 R1024@0.00062']
+
+=== counter: joint hull (6 of 24 points); lambda-only hull 4 of 4 ===
+    2.830 MB  24.400  lam 0.01850  K1024 R256 q7    
+    3.443 MB  24.590  lam 0.01850  K4096 R256 q8    0.310 dB/MB
+    6.590 MB  25.378  lam 0.00620  K4096 R1024 q7   0.250 dB/MB
+   13.415 MB  25.911  lam 0.00185  K4096 R1024 q7   0.078 dB/MB
+   15.545 MB  26.033  lam 0.00185  K16384 R1024 q7  0.057 dB/MB
+   23.602 MB  26.143  lam 0.00062  K16384 R1024 q7  0.014 dB/MB
+  base (lambda-only, K4096R256 q7) points vs joint hull at the same bytes:
+    lam 0.01850    3.341 MB  24.536  joint hull 24.558 (+0.022)
+    lam 0.00620    6.365 MB  25.315  joint hull 25.322 (+0.007)
+    lam 0.00185   13.056 MB  25.844  joint hull 25.883 (+0.039)
+    lam 0.00062   20.742 MB  25.952  joint hull 26.104 (+0.152)
+  lever prices (dB/MB) per lambda; lambda-chord slope = towards neighbouring lambda:
+    lam 0.01850 (3.3 MB): chord up 0.258 / down   -   | K4096 R256 q8:0.529  K4096 R1 q7:1.072  K1024 R256 q7:0.266  K4096 R1024 q7:0.348  K16384 R1024 q7:0.081
+    lam 0.00620 (6.4 MB): chord up 0.079 / down 0.258 | K4096 R256 q8:0.225  K4096 R1 q7:0.624  K1024 R256 q7:0.272  K4096 R1024 q7:0.280  K16384 R1024 q7:0.082
+    lam 0.00185 (13.1 MB): chord up 0.014 / down 0.079 | K4096 R256 q8:0.144  K4096 R1 q7:0.318  K1024 R256 q7:0.244  K4096 R1024 q7:0.187  K16384 R1024 q7:0.076
+    lam 0.00062 (20.7 MB): chord up   -   / down 0.014 | K4096 R256 q8:0.062  K4096 R1 q7:0.196  K1024 R256 q7:0.182  K4096 R1024 q7:0.140  K16384 R1024 q7:0.067
+  joint hull vs lambda-only hull: max gain +0.154 dB at 15.54 MB (gain at base points max +0.152)
+  max joint-hull gain over the fixed setting at a base point: +0.152 dB; non-base hull members: ['K1024 R256@0.0185', 'K4096 R256 q8@0.0185', 'K4096 R1024@0.0062', 'K4096 R1024@0.00185', 'K16384 R1024@0.00185', 'K16384 R1024@0.00062']
+
+=== kitchen: joint hull (7 of 24 points); lambda-only hull 4 of 4 ===
+    3.261 MB  24.508  lam 0.01850  K1024 R256 q7    
+    7.410 MB  25.829  lam 0.00620  K1024 R256 q7    0.318 dB/MB
+    8.022 MB  25.971  lam 0.00620  K4096 R256 q7    0.232 dB/MB
+    8.266 MB  26.027  lam 0.00620  K4096 R1024 q7   0.230 dB/MB
+   16.933 MB  26.945  lam 0.00185  K4096 R1024 q7   0.106 dB/MB
+   19.108 MB  27.049  lam 0.00185  K16384 R1024 q7  0.048 dB/MB
+   27.395 MB  27.254  lam 0.00062  K16384 R1024 q7  0.025 dB/MB
+  base (lambda-only, K4096R256 q7) points vs joint hull at the same bytes:
+    lam 0.01850    3.782 MB  24.623  joint hull 24.674 (+0.051)
+    lam 0.00620    8.022 MB  25.971  joint hull 25.971 (+0.000)
+    lam 0.00185   16.540 MB  26.886  joint hull 26.903 (+0.017)
+    lam 0.00062   24.462 MB  27.092  joint hull 27.181 (+0.089)
+  lever prices (dB/MB) per lambda; lambda-chord slope = towards neighbouring lambda:
+    lam 0.01850 (3.8 MB): chord up 0.318 / down   -   | K4096 R256 q8:0.305  K4096 R1 q7:0.902  K1024 R256 q7:0.221  K4096 R1024 q7:0.281  K16384 R1024 q7:0.063
+    lam 0.00620 (8.0 MB): chord up 0.107 / down 0.318 | K4096 R256 q8:0.128  K4096 R1 q7:0.530  K1024 R256 q7:0.232  K4096 R1024 q7:0.230  K16384 R1024 q7:0.069
+    lam 0.00185 (16.5 MB): chord up 0.026 / down 0.107 | K4096 R256 q8:0.063  K4096 R1 q7:0.268  K1024 R256 q7:0.193  K4096 R1024 q7:0.150  K16384 R1024 q7:0.063
+    lam 0.00062 (24.5 MB): chord up   -   / down 0.026 | K4096 R256 q8:0.039  K4096 R1 q7:0.179  K1024 R256 q7:0.163  K4096 R1024 q7:0.111  K16384 R1024 q7:0.055
+  joint hull vs lambda-only hull: max gain +0.096 dB at 19.11 MB (gain at base points max +0.089)
+  max joint-hull gain over the fixed setting at a base point: +0.089 dB; non-base hull members: ['K1024 R256@0.0185', 'K1024 R256@0.0062', 'K4096 R1024@0.0062', 'K4096 R1024@0.00185', 'K16384 R1024@0.00185', 'K16384 R1024@0.00062']
+
+=== bonsai: joint hull (6 of 24 points); lambda-only hull 4 of 4 ===
+    3.019 MB  25.259  lam 0.01850  K1024 R256 q7    
+    5.478 MB  26.256  lam 0.00620  K1024 R256 q7    0.405 dB/MB
+    6.292 MB  26.436  lam 0.00620  K4096 R256 q8    0.221 dB/MB
+   13.555 MB  27.464  lam 0.00185  K4096 R1024 q7   0.142 dB/MB
+   24.991 MB  27.963  lam 0.00062  K4096 R1024 q7   0.044 dB/MB
+   27.504 MB  28.044  lam 0.00062  K16384 R1024 q7  0.032 dB/MB
+  base (lambda-only, K4096R256 q7) points vs joint hull at the same bytes:
+    lam 0.01850    3.525 MB  25.358  joint hull 25.464 (+0.106)
+    lam 0.00620    6.063 MB  26.364  joint hull 26.385 (+0.021)
+    lam 0.00185   13.157 MB  27.406  joint hull 27.408 (+0.002)
+    lam 0.00062   24.303 MB  27.891  joint hull 27.933 (+0.042)
+  lever prices (dB/MB) per lambda; lambda-chord slope = towards neighbouring lambda:
+    lam 0.01850 (3.5 MB): chord up 0.396 / down   -   | K4096 R256 q8:0.432  K4096 R1 q7:0.878  K1024 R256 q7:0.196  K4096 R1024 q7:0.240  K16384 R1024 q7:0.051
+    lam 0.00620 (6.1 MB): chord up 0.147 / down 0.396 | K4096 R256 q8:0.314  K4096 R1 q7:0.564  K1024 R256 q7:0.185  K4096 R1024 q7:0.211  K16384 R1024 q7:0.053
+    lam 0.00185 (13.2 MB): chord up 0.044 / down 0.147 | K4096 R256 q8:0.116  K4096 R1 q7:0.294  K1024 R256 q7:0.174  K4096 R1024 q7:0.146  K16384 R1024 q7:0.052
+    lam 0.00062 (24.3 MB): chord up   -   / down 0.044 | K4096 R256 q8:0.046  K4096 R1 q7:0.170  K1024 R256 q7:0.142  K4096 R1024 q7:0.105  K16384 R1024 q7:0.048
+  joint hull vs lambda-only hull: max gain +0.124 dB at 5.48 MB (gain at base points max +0.106)
+  max joint-hull gain over the fixed setting at a base point: +0.106 dB; non-base hull members: ['K1024 R256@0.0185', 'K1024 R256@0.0062', 'K4096 R256 q8@0.0062', 'K4096 R1024@0.00185', 'K4096 R1024@0.00062', 'K16384 R1024@0.00062']
+
+=== garden: joint hull (7 of 24 points); lambda-only hull 4 of 4 ===
+    4.404 MB  22.758  lam 0.01850  K1024 R256 q7    
+    9.478 MB  23.617  lam 0.00620  K1024 R256 q7    0.169 dB/MB
+   23.529 MB  24.470  lam 0.00185  K1024 R256 q7    0.061 dB/MB
+   24.599 MB  24.504  lam 0.00185  K4096 R256 q7    0.032 dB/MB
+   25.215 MB  24.523  lam 0.00185  K4096 R1024 q7   0.031 dB/MB
+   37.272 MB  24.753  lam 0.00062  K4096 R1024 q7   0.019 dB/MB
+   40.014 MB  24.777  lam 0.00062  K16384 R1024 q7  0.009 dB/MB
+  base (lambda-only, K4096R256 q7) points vs joint hull at the same bytes:
+    lam 0.01850    4.969 MB  22.783  joint hull 22.854 (+0.071)
+    lam 0.00620   10.175 MB  23.650  joint hull 23.659 (+0.009)
+    lam 0.00185   24.599 MB  24.504  joint hull 24.504 (+0.000)
+    lam 0.00062   36.389 MB  24.734  joint hull 24.736 (+0.002)
+  lever prices (dB/MB) per lambda; lambda-chord slope = towards neighbouring lambda:
+    lam 0.01850 (5.0 MB): chord up 0.167 / down   -   | K4096 R256 q8:0.082  K4096 R1 q7:0.224  K1024 R256 q7:0.044  K4096 R1024 q7:0.074  K16384 R1024 q7:0.014
+    lam 0.00620 (10.2 MB): chord up 0.059 / down 0.167 | K4096 R256 q8:0.034  K4096 R1 q7:0.122  K1024 R256 q7:0.047  K4096 R1024 q7:0.064  K16384 R1024 q7:0.016
+    lam 0.00185 (24.6 MB): chord up 0.020 / down 0.059 | K4096 R256 q8:0.016  K4096 R1 q7:0.053  K1024 R256 q7:0.032  K4096 R1024 q7:0.031  K16384 R1024 q7:0.013
+    lam 0.00062 (36.4 MB): chord up   -   / down 0.020 | K4096 R256 q8:0.010  K4096 R1 q7:0.036  K1024 R256 q7:0.025  K4096 R1024 q7:0.022  K16384 R1024 q7:0.012
+  joint hull vs lambda-only hull: max gain +0.083 dB at 9.48 MB (gain at base points max +0.071)
+  max joint-hull gain over the fixed setting at a base point: +0.071 dB; non-base hull members: ['K1024 R256@0.0185', 'K1024 R256@0.0062', 'K1024 R256@0.00185', 'K4096 R1024@0.00185', 'K4096 R1024@0.00062', 'K16384 R1024@0.00062']
+
+=== bicycle: joint hull (7 of 24 points); lambda-only hull 3 of 4 ===
+    4.609 MB  22.049  lam 0.01850  K1024 R256 q7    
+   11.172 MB  22.659  lam 0.00620  K1024 R256 q7    0.093 dB/MB
+   11.935 MB  22.687  lam 0.00620  K4096 R256 q7    0.037 dB/MB
+   12.307 MB  22.698  lam 0.00620  K4096 R1024 q7   0.030 dB/MB
+   26.971 MB  23.018  lam 0.00185  K4096 R256 q7    0.022 dB/MB
+   27.709 MB  23.032  lam 0.00185  K4096 R1024 q7   0.019 dB/MB
+   30.258 MB  23.049  lam 0.00185  K16384 R1024 q7  0.007 dB/MB
+  base (lambda-only, K4096R256 q7) points vs joint hull at the same bytes:
+    lam 0.01850    5.184 MB  22.077  joint hull 22.102 (+0.025)
+    lam 0.00620   11.935 MB  22.687  joint hull 22.687 (+0.000)
+    lam 0.00185   26.971 MB  23.018  joint hull 23.018 (+0.000)
+    lam 0.00062   31.593 MB  22.986  
+  lever prices (dB/MB) per lambda; lambda-chord slope = towards neighbouring lambda:
+    lam 0.01850 (5.2 MB): chord up 0.090 / down   -   | K4096 R256 q8:0.049  K4096 R1 q7:0.168  K1024 R256 q7:0.049  K4096 R1024 q7:0.069  K16384 R1024 q7:0.015
+    lam 0.00620 (11.9 MB): chord up 0.022 / down 0.090 | K4096 R256 q8:0.022  K4096 R1 q7:0.078  K1024 R256 q7:0.037  K4096 R1024 q7:0.030  K16384 R1024 q7:0.014
+    lam 0.00185 (27.0 MB): chord up -0.007 / down 0.022 | K4096 R256 q8:0.009  K4096 R1 q7:0.032  K1024 R256 q7:0.025  K4096 R1024 q7:0.019  K16384 R1024 q7:0.009
+    lam 0.00062 (31.6 MB): chord up   -   / down -0.007 | K4096 R256 q8:0.007  K4096 R1 q7:0.029  K1024 R256 q7:0.025  K4096 R1024 q7:0.018  K16384 R1024 q7:0.009
+  joint hull vs lambda-only hull: max gain +0.041 dB at 11.17 MB (gain at base points max +0.025)
+  max joint-hull gain over the fixed setting at a base point: +0.025 dB; non-base hull members: ['K1024 R256@0.0185', 'K1024 R256@0.0062', 'K4096 R1024@0.0062', 'K4096 R1024@0.00185', 'K16384 R1024@0.00185']
+
+=== stump: joint hull (8 of 24 points); lambda-only hull 4 of 4 ===
+    3.380 MB  23.194  lam 0.01850  K1024 R256 q7    
+    8.187 MB  24.092  lam 0.00620  K1024 R256 q7    0.187 dB/MB
+   19.411 MB  24.643  lam 0.00185  K4096 R1 q7      0.049 dB/MB
+   20.370 MB  24.682  lam 0.00185  K1024 R256 q7    0.041 dB/MB
+   21.405 MB  24.714  lam 0.00185  K4096 R256 q7    0.031 dB/MB
+   22.374 MB  24.734  lam 0.00185  K4096 R256 q8    0.021 dB/MB
+   28.845 MB  24.835  lam 0.00062  K4096 R256 q8    0.016 dB/MB
+   30.967 MB  24.839  lam 0.00062  K16384 R1024 q7  0.002 dB/MB
+  base (lambda-only, K4096R256 q7) points vs joint hull at the same bytes:
+    lam 0.01850    3.926 MB  23.214  joint hull 23.296 (+0.082)
+    lam 0.00620    8.869 MB  24.121  joint hull 24.125 (+0.004)
+    lam 0.00185   21.405 MB  24.714  joint hull 24.714 (+0.000)
+    lam 0.00062   27.598 MB  24.810  joint hull 24.816 (+0.006)
+  lever prices (dB/MB) per lambda; lambda-chord slope = towards neighbouring lambda:
+    lam 0.01850 (3.9 MB): chord up 0.183 / down   -   | K4096 R256 q8:0.075  K4096 R1 q7:0.257  K1024 R256 q7:0.037  K4096 R1024 q7:0.076  K16384 R1024 q7:0.016
+    lam 0.00620 (8.9 MB): chord up 0.047 / down 0.183 | K4096 R256 q8:0.047  K4096 R1 q7:0.110  K1024 R256 q7:0.043  K4096 R1024 q7:-0.017  K16384 R1024 q7:0.006
+    lam 0.00185 (21.4 MB): chord up 0.016 / down 0.047 | K4096 R256 q8:0.021  K4096 R1 q7:0.036  K1024 R256 q7:0.031  K4096 R1024 q7:0.020  K16384 R1024 q7:0.010
+    lam 0.00062 (27.6 MB): chord up   -   / down 0.016 | K4096 R256 q8:0.020  K4096 R1 q7:0.026  K1024 R256 q7:0.026  K4096 R1024 q7:0.013  K16384 R1024 q7:0.009
+  joint hull vs lambda-only hull: max gain +0.096 dB at 8.19 MB (gain at base points max +0.082)
+  max joint-hull gain over the fixed setting at a base point: +0.082 dB; non-base hull members: ['K1024 R256@0.0185', 'K1024 R256@0.0062', 'K4096 R1@0.00185', 'K1024 R256@0.00185', 'K4096 R256 q8@0.00185', 'K4096 R256 q8@0.00062', 'K16384 R1024@0.00062']
+
+=== flowers: joint hull (5 of 24 points); lambda-only hull 2 of 4 ===
+    5.050 MB  18.828  lam 0.01850  K1024 R256 q7    
+   11.263 MB  19.197  lam 0.00620  K1024 R256 q7    0.059 dB/MB
+   12.029 MB  19.212  lam 0.00620  K4096 R256 q7    0.020 dB/MB
+   12.398 MB  19.219  lam 0.00620  K4096 R1024 q7   0.019 dB/MB
+   14.532 MB  19.232  lam 0.00620  K16384 R1024 q7  0.006 dB/MB
+  base (lambda-only, K4096R256 q7) points vs joint hull at the same bytes:
+    lam 0.01850    5.637 MB  18.839  joint hull 18.863 (+0.024)
+    lam 0.00620   12.029 MB  19.212  joint hull 19.212 (+0.000)
+    lam 0.00185   24.154 MB  19.070  
+    lam 0.00062   25.663 MB  19.018  
+  lever prices (dB/MB) per lambda; lambda-chord slope = towards neighbouring lambda:
+    lam 0.01850 (5.6 MB): chord up 0.058 / down   -   | K4096 R256 q8:0.022  K4096 R1 q7:0.089  K1024 R256 q7:0.019  K4096 R1024 q7:0.044  K16384 R1024 q7:0.010
+    lam 0.00620 (12.0 MB): chord up -0.012 / down 0.058 | K4096 R256 q8:0.009  K4096 R1 q7:0.038  K1024 R256 q7:0.020  K4096 R1024 q7:0.019  K16384 R1024 q7:0.008
+    lam 0.00185 (24.2 MB): chord up -0.034 / down -0.012 | K4096 R256 q8:0.004  K4096 R1 q7:0.015  K1024 R256 q7:0.012  K4096 R1024 q7:0.012  K16384 R1024 q7:0.004
+    lam 0.00062 (25.7 MB): chord up   -   / down -0.034 | K4096 R256 q8:0.005  K4096 R1 q7:0.013  K1024 R256 q7:0.012  K4096 R1024 q7:0.008  K16384 R1024 q7:0.005
+  joint hull vs lambda-only hull: max gain +0.030 dB at 11.26 MB (gain at base points max +0.024)
+  max joint-hull gain over the fixed setting at a base point: +0.024 dB; non-base hull members: ['K1024 R256@0.0185', 'K1024 R256@0.0062', 'K4096 R1024@0.0062', 'K16384 R1024@0.0062']
+
+=== treehill: joint hull (5 of 24 points); lambda-only hull 3 of 4 ===
+    4.515 MB  20.326  lam 0.01850  K1024 R256 q7    
+   11.099 MB  20.389  lam 0.00620  K1024 R256 q7    0.010 dB/MB
+   28.189 MB  20.455  lam 0.00185  K4096 R1024 q7   0.004 dB/MB
+   28.838 MB  20.456  lam 0.00185  K4096 R256 q8    0.002 dB/MB
+   30.807 MB  20.458  lam 0.00185  K16384 R1024 q7  0.001 dB/MB
+  base (lambda-only, K4096R256 q7) points vs joint hull at the same bytes:
+    lam 0.01850    5.101 MB  20.304  joint hull 20.332 (+0.028)
+    lam 0.00620   11.889 MB  20.375  joint hull 20.392 (+0.017)
+    lam 0.00062   26.962 MB  20.311  joint hull 20.450 (+0.139)
+    lam 0.00185   27.419 MB  20.451  joint hull 20.452 (+0.001)
+  lever prices (dB/MB) per lambda; lambda-chord slope = towards neighbouring lambda:
+    lam 0.01850 (5.1 MB): chord up 0.010 / down   -   | K4096 R256 q8:0.035  K4096 R1 q7:0.080  K1024 R256 q7:-0.038  K4096 R1024 q7:0.042  K16384 R1024 q7:0.004
+    lam 0.00620 (11.9 MB): chord up -0.004 / down 0.010 | K4096 R256 q8:0.012  K4096 R1 q7:0.015  K1024 R256 q7:-0.018  K4096 R1024 q7:0.019  K16384 R1024 q7:0.002
+    lam 0.00062 (27.0 MB): chord up 0.306 / down -0.004 | K4096 R256 q8:0.005  K4096 R1 q7:0.000  K1024 R256 q7:-0.010  K4096 R1024 q7:0.008  K16384 R1024 q7:0.004
+    lam 0.00185 (27.4 MB): chord up   -   / down 0.306 | K4096 R256 q8:0.004  K4096 R1 q7:0.004  K1024 R256 q7:0.011  K4096 R1024 q7:0.005  K16384 R1024 q7:0.002
+  joint hull vs lambda-only hull: max gain +0.022 dB at 11.10 MB (gain at base points max +0.139)
+  max joint-hull gain over the fixed setting at a base point: +0.139 dB; non-base hull members: ['K1024 R256@0.0185', 'K1024 R256@0.0062', 'K4096 R1024@0.00185', 'K4096 R256 q8@0.00185', 'K16384 R1024@0.00185']
+
+=== truck: joint hull (4 of 24 points); lambda-only hull 2 of 4 ===
+    3.875 MB  21.610  lam 0.01850  K1024 R256 q7    
+    8.736 MB  22.335  lam 0.00620  K1024 R256 q7    0.149 dB/MB
+    9.712 MB  22.385  lam 0.00620  K4096 R1024 q7   0.051 dB/MB
+   11.757 MB  22.398  lam 0.00620  K16384 R1024 q7  0.006 dB/MB
+  base (lambda-only, K4096R256 q7) points vs joint hull at the same bytes:
+    lam 0.01850    4.424 MB  21.639  joint hull 21.692 (+0.053)
+    lam 0.00620    9.413 MB  22.367  joint hull 22.370 (+0.003)
+    lam 0.00185   19.311 MB  22.201  
+    lam 0.00062   27.271 MB  21.784  
+  lever prices (dB/MB) per lambda; lambda-chord slope = towards neighbouring lambda:
+    lam 0.01850 (4.4 MB): chord up 0.146 / down   -   | K4096 R256 q8:0.067  K4096 R1 q7:0.226  K1024 R256 q7:0.053  K4096 R1024 q7:0.095  K16384 R1024 q7:0.011
+    lam 0.00620 (9.4 MB): chord up -0.017 / down 0.146 | K4096 R256 q8:0.027  K4096 R1 q7:0.104  K1024 R256 q7:0.047  K4096 R1024 q7:0.060  K16384 R1024 q7:0.013
+    lam 0.00185 (19.3 MB): chord up -0.052 / down -0.017 | K4096 R256 q8:0.012  K4096 R1 q7:0.039  K1024 R256 q7:0.033  K4096 R1024 q7:0.027  K16384 R1024 q7:0.010
+    lam 0.00062 (27.3 MB): chord up   -   / down -0.052 | K4096 R256 q8:0.008  K4096 R1 q7:0.024  K1024 R256 q7:0.018  K4096 R1024 q7:0.021  K16384 R1024 q7:0.010
+  joint hull vs lambda-only hull: max gain +0.067 dB at 8.74 MB (gain at base points max +0.053)
+  max joint-hull gain over the fixed setting at a base point: +0.053 dB; non-base hull members: ['K1024 R256@0.0185', 'K1024 R256@0.0062', 'K4096 R1024@0.0062', 'K16384 R1024@0.0062']
+
+=== train: joint hull (3 of 24 points); lambda-only hull 2 of 4 ===
+    5.820 MB  18.559  lam 0.01850  K1024 R256 q7    
+   12.677 MB  18.683  lam 0.00620  K1024 R256 q7    0.018 dB/MB
+   15.979 MB  18.703  lam 0.00620  K16384 R1024 q7  0.006 dB/MB
+  base (lambda-only, K4096R256 q7) points vs joint hull at the same bytes:
+    lam 0.01850    6.412 MB  18.554  joint hull 18.570 (+0.016)
+    lam 0.00620   13.442 MB  18.677  joint hull 18.688 (+0.011)
+    lam 0.00185   25.371 MB  18.662  
+    lam 0.00062   30.082 MB  18.552  
+  lever prices (dB/MB) per lambda; lambda-chord slope = towards neighbouring lambda:
+    lam 0.01850 (6.4 MB): chord up 0.017 / down   -   | K4096 R256 q8:0.014  K4096 R1 q7:0.065  K1024 R256 q7:-0.008  K4096 R1024 q7:0.052  K16384 R1024 q7:0.012
+    lam 0.00620 (13.4 MB): chord up -0.001 / down 0.017 | K4096 R256 q8:0.008  K4096 R1 q7:0.029  K1024 R256 q7:-0.008  K4096 R1024 q7:0.026  K16384 R1024 q7:0.010
+    lam 0.00185 (25.4 MB): chord up -0.023 / down -0.001 | K4096 R256 q8:0.004  K4096 R1 q7:0.026  K1024 R256 q7:0.025  K4096 R1024 q7:-0.008  K16384 R1024 q7:0.004
+    lam 0.00062 (30.1 MB): chord up   -   / down -0.023 | K4096 R256 q8:0.003  K4096 R1 q7:0.014  K1024 R256 q7:0.007  K4096 R1024 q7:0.014  K16384 R1024 q7:0.007
+  joint hull vs lambda-only hull: max gain +0.019 dB at 12.68 MB (gain at base points max +0.016)
+  max joint-hull gain over the fixed setting at a base point: +0.016 dB; non-base hull members: ['K1024 R256@0.0185', 'K1024 R256@0.0062', 'K16384 R1024@0.0062']
+
+=== lever prices over 44 (scene, lambda) pairs: mean / min / max dB per MB ===
+  K4096 R256 q8    +0.103  [+0.003, +0.734]
+  K4096 R1 q7      +0.210  [+0.000, +1.072]
+  K1024 R256 q7    +0.081  [-0.038, +0.272]
+  K4096 R1024 q7   +0.084  [-0.017, +0.348]
+  K16384 R1024 q7  +0.026  [+0.002, +0.082]

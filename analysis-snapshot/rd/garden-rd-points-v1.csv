@@ -1,0 +1,10 @@
+series,label,vertices,faces,MB,test_psnr,test_ssim,test_lpips,val_finetuned,test_finetuned,worst_val
+"garden axisB K4096 R256 q14/q7 stage2-v2 (2026-10-15)",1.0,3171988,6667681,32.539,24.458,0.7405,0.276,25.669,24.732,21.85
+"garden axisB K4096 R256 q14/q7 stage2-v2 (2026-10-15)",0.8,2537590,5278762,26.377,24.230,0.7194,0.3052,24.952,24.48,21.49
+"garden axisB K4096 R256 q14/q7 stage2-v2 (2026-10-15)",0.7,2220392,4584266,23.178,23.988,0.7007,0.3256,24.603,24.193,21.22
+"garden v0.8 precision sweep K4096 R256 stage2-v2 (2026-10-16, re-export)",q14/q7,2537590,5278762,26.377,24.230,0.7194,0.3052,24.625,,
+"garden v0.8 precision sweep K4096 R256 stage2-v2 (2026-10-16, re-export)",q15/q7,2537590,5278762,27.339,24.371,0.7288,0.2981,24.789,,
+"garden v0.8 precision sweep K4096 R256 stage2-v2 (2026-10-16, re-export)",q16/q7,2537590,5278762,28.290,24.409,0.7313,0.2961,24.836,,
+"garden v0.8 precision sweep K4096 R256 stage2-v2 (2026-10-16, re-export)",q14/q8,2537590,5278762,27.704,24.248,0.7214,0.3022,24.645,,
+"garden v0.8 precision sweep K4096 R256 stage2-v2 (2026-10-16, re-export)",q16/q8,2537590,5278762,29.616,24.428,0.7334,0.2931,24.856,,
+"garden v0.8 precision sweep K4096 R256 stage2-v2 (2026-10-16, re-export)",q18/q8,2537590,5278762,31.508,24.441,0.7342,0.2923,24.876,,

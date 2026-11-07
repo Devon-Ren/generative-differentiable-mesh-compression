@@ -1,0 +1,1 @@
+deck-v2 (2026-10-23): only clip 01 changed. Fix: encoder stream text said "faces → context coder, ~2 bit/face"; the measured topology cost is 30.4 bits/vertex ≈ 15 bits/face (edge-cache arithmetic coder), and XYZ is coded as a neighbour-predicted residual on the 14–16 bit grid. Clips 02–04, frames and notes are unchanged: use them from ../deck-v1/.

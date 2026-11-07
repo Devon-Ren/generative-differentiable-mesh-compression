@@ -1,0 +1,5 @@
+scene,V,F,fp32_MB,psnr,ssim,lpips,l1_finetune,l1_MB,l1_test,l1_ssim,l1_lpips,xyz,source
+kitchen,2135895,5237799,507.1,27.465,0.8592,0.2265,27.327,24.325,26.706,0.8294,0.3206,q16,train.log ITER 30000 test (3DGS LPIPS) / pipeline delivered
+room,2552806,5493354,596.9,28.480,0.8740,0.2710,28.369,25.735,27.994,0.8509,0.3949,q14,train.log ITER 30000 test (3DGS LPIPS) / pipeline delivered
+bonsai,2942149,5466257,677.6,28.280,0.8785,0.2937,28.202,28.157,27.663,0.8597,0.3919,q15,train.log ITER 30000 test (3DGS LPIPS) / pipeline delivered
+counter,2221179,4788214,519.5,26.479,0.8462,0.2787,26.366,23.625,25.743,0.8098,0.4054,q15,train.log ITER 30000 test (3DGS LPIPS) / pipeline delivered

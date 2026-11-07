@@ -1,0 +1,5 @@
+# batch A rows (user paste 2026-10-24, $AN/originals.txt). FP32 estimate = V x 208 B + F x 12 B.
+treehill ORIGINAL | vertices 3031201 faces 5107447 | original test 20.387 0.5393 0.4270 | level-1.0: finetune test 20.319 | delivered 28.495 MB test 20.27 0.5244 0.5077 | K4096 R256 q16/q7 | images_4
+flowers ORIGINAL | vertices 2939570 faces 4692329 | original test 19.451 0.4923 0.4086 | level-1.0: finetune test 19.091 | delivered 26.914 MB test 18.949 0.4761 0.4688 | K4096 R256 q15/q7 | images_4
+truck ORIGINAL | vertices 1877757 faces 3482376 | original test 22.387 0.8069 0.2256 | level-1.0: finetune test 22.362 | delivered 20.036 MB test 22.308 0.7945 0.2828 | K4096 R256 q18/q7 | images
+train ORIGINAL | vertices 2089049 faces 4179180 | original test 18.900 0.7119 0.3189 | level-1.0: finetune test 18.815 | delivered 22.316 MB test 18.738 0.6959 0.3933 | K4096 R256 q18/q7 | images

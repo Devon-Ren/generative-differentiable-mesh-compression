@@ -1,0 +1,80 @@
+adapt-v6 Blender testbed (2026-11-06): lego, chair x {2.5, 4, 6} MB; train_rd_adapt_v6 (16 prune rounds 12k-19.5k, phase-A overshoot 1.0, LS extrapolation) + val_select_v3 + level-1.0
+references: rd-prune3b4 lam 6.2e-4 / 6.2e-3 RE-DELIVERED with val_select_v3 (same delivery as the adapt runs)
+
+1. delivery fix (val_select_v3: importance recomputed at the chosen checkpoint, floor 0.999 / 4x)
+  lego  lam 6.2e-03: v2 3.096 MB / 32.582 dB -> v3 2.763 MB / 32.583 dB (bytes x0.892, dPSNR +0.001); kept F recomputed 476135 vs final-floor-4x 476299 (0.9997), running-max 652581 (1.37 x); pruned val +0.025
+  lego  lam 6.2e-04: v2 9.259 MB / 33.496 dB -> v3 7.517 MB / 33.516 dB (bytes x0.812, dPSNR +0.020); kept F recomputed 1587847 vs final-floor-4x 1587933 (0.9999), running-max 2512849 (1.58 x); pruned val +0.018
+  chair lam 6.2e-03: v2 2.653 MB / 32.156 dB -> v3 2.391 MB / 32.166 dB (bytes x0.901, dPSNR +0.010); kept F recomputed 378229 vs final-floor-4x 378354 (0.9997), running-max 518648 (1.37 x); pruned val +0.030
+  chair lam 6.2e-04: v2 5.582 MB / 32.200 dB -> v3 4.660 MB / 32.212 dB (bytes x0.835, dPSNR +0.012); kept F recomputed 874996 vs final-floor-4x 875073 (0.9999), running-max 1357368 (1.55 x); pruned val +0.011
+  adapt runs probe/delivered: 1.026 1.032 1.041 1.059 1.006 1.074 (v5: 0.83-0.94); recomputed/final-floor kept faces 0.9997 0.9996 0.9997 0.9996 0.9999 0.9994
+  -> PASSED: the delivered file is the probe within 0.6-7.4 % (the residual is coarse_finetune 3000 steps + the delivery encoder, not the cleaning).
+
+2. landing
+scene     T |  deliv   hit |  probe  hitP  P/dl |   P12 e12.5 e19.5 e19.5/fin | bound V12/V* | pruneV%% underT%% |  PSNR   ref  dPSNR
+lego    2.5 |  2.364  0.95 |  2.427  0.97  1.03 |  0.97  1.17  1.01   1.037    |  3/17  0.85  |  18.2     4.1  | 32.351 32.438 -0.087*
+chair   2.5 |  2.254  0.90 |  2.328  0.93  1.03 |  0.87  1.16  0.99   1.061    | 11/17  0.80  |  18.7     5.9  | 32.139 32.162 -0.023*
+lego    4.0 |  3.355  0.84 |  3.493  0.87  1.04 |  0.83  1.26  0.92   1.056    | 13/17  0.76  |  17.8     6.2  | 33.029 32.764 +0.265 
+chair   4.0 |  3.065  0.77 |  3.244  0.81  1.06 |  0.68  0.99  0.85   1.043    | 13/17  0.68  |  16.1    13.5  | 32.520 32.183 +0.337 
+lego    6.0 |  5.305  0.88 |  5.335  0.89  1.01 |  0.78  1.28  0.94   1.062    | 13/17  0.79  |  17.9     5.7  | 33.472 33.191 +0.281 
+chair   6.0 |  3.995  0.67 |  4.290  0.71  1.07 |  0.54  0.90  0.75   1.043    | 13/17  0.61  |  13.8    13.8  | 32.716 32.201 +0.515 
+columns: P12 = probe at 12k / T; e12.5, e19.5 = extrapolated-to-24000 size at the 2nd and last round / T; e19.5/fin = extrapolation accuracy at the last round;
+  V12/V* = model vertices at 12k over the phase-A aim; pruneV% = share of V12 removed by the 16 rounds; underT% = the part removed in rounds where the controller wanted MORE bytes (wanted < 0);
+  dPSNR = test PSNR minus the v3 reference curve at the delivered bytes (log-linear between lam 6.2e-3 and 6.2e-4; * = extrapolated; the chord of a concave hull UNDER-reads the hull, so + values are upper bounds).
+
+3. accounting check and the un-stacking growth (per run, all 16 rounds)
+   acc = removed MB as the controller accounted it (pairs x b_coll, b_coll = b_v + b_f x faces removed per pair, ALL faces);
+   kept = kept-aware accounting (kept vertices removed x b_v + faces removed x kept-face share x b_f);
+   growth = implied un-stacking growth of the probe = (p_next - p) + removed, summed 12k->19.5k, and 19.5k->final (30k);
+   no-prune landing = P12 + total growth (what phase B would have landed with no collapse at all)
+scene     T |  acc12k  kept12k ratio |  accSum keptSum | grow12-19.5 (acc / kept) grow19.5-fin (acc / kept) | per-1k early(acc) late(acc) | no-prune landing (acc / kept) feas
+lego    2.5 |  0.080   0.053   1.52 |  0.410   0.294  |   0.304 / 0.190            0.109 / 0.107          |   0.041      0.010     |   2.837 / 2.721 (1.09 x)  yes
+chair   2.5 |  0.070   0.047   1.49 |  0.380   0.244  |   0.416 / 0.282            0.122 / 0.120          |   0.055      0.012     |   2.708 / 2.572 (1.03 x)  yes
+lego    4.0 |  0.120   0.074   1.61 |  0.690   0.437  |   0.641 / 0.395            0.215 / 0.208          |   0.085      0.020     |   4.183 / 3.930 (0.98 x)  NO
+chair   4.0 |  0.090   0.055   1.63 |  0.480   0.269  |   0.709 / 0.500            0.301 / 0.299          |   0.095      0.029     |   3.724 / 3.513 (0.88 x)  NO
+lego    6.0 |  0.200   0.109   1.84 |  1.230   0.664  |   1.383 / 0.833            0.528 / 0.512          |   0.184      0.050     |   6.565 / 5.999 (1.00 x)  NO
+chair   6.0 |  0.110   0.058   1.90 |  0.550   0.262  |   1.103 / 0.819            0.488 / 0.485          |   0.147      0.046     |   4.840 / 4.552 (0.76 x)  NO
+
+4. per-round view of two runs (it, probe, est, slope, wanted, pairs collapsed, kept-removed, acc MB)
+  lego 4.0 MB:
+    12000  3.327  3.327  +0.000    -3603    7453    6142  0.12
+    12500  3.279  5.025  +0.152     4096    5783    4558  0.09
+    13000  3.249  4.800  +0.141     3481    4159    3321  0.07
+    13500  3.235  4.606  +0.131     2790    3362    2733  0.06
+    14000  3.234  4.479  +0.125     2350    2794    2295  0.05
+    14500  3.243  4.400  +0.122     2081    2366    1996  0.04
+    15000  3.253  4.320  +0.119     1814    2114    1761  0.04
+    15500  3.261  4.238  +0.115     1484    1936    1665  0.03
+    16000  3.270  4.162  +0.111     1119    1666    1471  0.03
+    16500  3.276  4.083  +0.108      650    1651    1463  0.03
+    17000  3.276  4.000  +0.103        1    1531    1394  0.03
+    17500  3.292  3.945  +0.100     -592    1312    1214  0.02
+    18000  3.286  3.864  +0.096    -1816    1246    1155  0.02
+    18500  3.288  3.798  +0.093    -3594    1220    1138  0.02
+    19000  3.295  3.742  +0.089    -6828    1109    1044  0.02
+    19500  3.298  3.687  +0.086   -16672    1002     961  0.02
+  chair 4.0 MB:
+    12000  2.714  2.714  +0.000    -6949    6278    5106  0.09
+    12500  2.676  3.969  +0.112     -139    4441    3270  0.07
+    13000  2.682  4.114  +0.130      529    3087    2205  0.05
+    13500  2.693  4.047  +0.129      228    2548    1804  0.04
+    14000  2.707  3.953  +0.125     -242    2050    1396  0.03
+    14500  2.731  3.893  +0.122     -596    1817    1294  0.03
+    15000  2.751  3.821  +0.119    -1080    1547    1109  0.03
+    15500  2.775  3.760  +0.116    -1591    1374     968  0.02
+    16000  2.795  3.696  +0.113    -2210    1228     896  0.02
+    16500  2.822  3.647  +0.110    -2955    1126     832  0.02
+    17000  2.846  3.600  +0.108    -3791    1046     774  0.02
+    17500  2.867  3.550  +0.105    -5213     931     715  0.02
+    18000  2.901  3.521  +0.103    -6765     824     657  0.01
+    18500  2.916  3.472  +0.101    -9858     756     640  0.01
+    19000  2.933  3.426  +0.099   -16017     670     571  0.01
+    19500  2.953  3.385  +0.096   -34940     692     601  0.01
+
+5. summary
+  hit by delivered file: 0.67-0.95 (v5 0.91-1.32, all over); by probe 0.71-0.97; every run UNDER target
+  extrapolation at the last round / final probe: 1.037 1.061 1.056 1.043 1.062 1.043 (v5 at 18k: 1.00-1.04)
+  second-round extrapolation / final probe (the number the first 10 rounds pruned against): 1.20 1.25 1.44 1.22 1.43 1.26
+  phase B removed 18 19 18 16 18 14 % of V12, of which 4 6 6 13 6 14 % in rounds where the controller wanted MORE bytes
+  controller accounting of the first collapse over-counts the kept-aware removal by x1.52 1.49 1.61 1.63 1.84 1.90
+  no-prune landing (kept accounting) / T: lego 2.5: 1.09 chair 2.5: 1.03 lego 4.0: 0.98 chair 4.0: 0.88 lego 6.0: 1.00 chair 6.0: 0.76
+  equal-bytes dPSNR vs the v3 references: -0.09 -0.02 +0.27 +0.34 +0.28 +0.51 (mean +0.215; v5 vs v2 refs: -0.10..+0.20, mean +0.05)

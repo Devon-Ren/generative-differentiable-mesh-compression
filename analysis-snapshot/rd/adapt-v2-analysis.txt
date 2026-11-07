@@ -1,0 +1,25 @@
+adapt-v2 analysis (2026-11-06): 4 scenes x target {5, 10, 20} MB, train_rd_adapt_v2 (real-encoder probes), K4096 R256 q7 delivery
+
+scene      T  deliv   hit prb/dl |  P12k  P18k fin/P18 P12/T |   Vmodel   Vdeliv  kept  projA   aimA projA/aim |   lamA50     lamF  lam_eff |   PSNR  curve  dPSNR
+garden     5   5.23  1.05  0.999 |  3.50  4.50    1.16  0.70 |   429026   406880  0.95   5.32   6.50      0.82 | 2.58e-02 8.73e-03 1.71e-02 | 22.738 22.845 -0.107
+bicycle    5   4.52  0.90  1.000 |  3.53  4.16    1.09  0.71 |   405112   371010  0.92   5.06   6.50      0.78 | 3.08e-02 9.88e-03 2.22e-02 | 21.853 21.976 -0.123 (extrapolated below lam 1.85e-2)
+room       5   4.76  0.95  1.000 |  2.95  3.77    1.26  0.59 |   410707   384558  0.94   5.12   6.50      0.79 | 1.48e-02 5.52e-03 7.72e-03 | 27.018 27.120 -0.102
+kitchen    5   5.04  1.01  0.998 |  2.62  3.95    1.27  0.52 |   375510   354879  0.95   4.73   6.50      0.73 | 2.07e-02 7.84e-03 1.22e-02 | 25.028 25.137 -0.109
+garden    10   9.36  0.94  0.999 |  5.35  7.23    1.29  0.53 |   821348   778872  0.95   9.63  13.00      0.74 | 1.03e-02 4.37e-03 7.04e-03 | 23.466 23.549 -0.083
+bicycle   10   8.64  0.86  1.000 |  5.69  7.16    1.21  0.57 |   837025   770313  0.92   9.81  13.00      0.75 | 1.25e-02 5.70e-03 9.47e-03 | 22.429 22.451 -0.022
+room      10   8.00  0.80  1.000 |  4.08  5.77    1.39  0.41 |   756286   708995  0.94   8.92  13.00      0.69 | 6.28e-03 2.43e-03 3.50e-03 | 27.554 27.645 -0.091
+kitchen   10   8.56  0.86  1.000 |  3.38  6.02    1.42  0.34 |   665909   631469  0.95   7.92  13.00      0.61 | 1.08e-02 3.37e-03 5.56e-03 | 25.969 26.053 -0.084
+garden    20  17.16  0.86  0.999 |  7.82 11.52    1.49  0.39 |  1574062  1485975  0.94  17.91  26.00      0.69 | 5.39e-03 2.32e-03 3.03e-03 | 24.104 24.155 -0.051
+bicycle   20  15.69  0.78  0.999 |  8.43 11.49    1.36  0.42 |  1611853  1477230  0.92  18.33  26.00      0.71 | 6.12e-03 3.14e-03 4.13e-03 | 22.781 22.798 -0.017
+room      20  13.05  0.65  1.000 |  5.25  8.46    1.54  0.26 |  1318381  1229500  0.93  15.10  26.00      0.58 | 2.89e-03 1.10e-03 1.68e-03 | 27.934 28.044 -0.110
+kitchen   20  14.25  0.71  0.999 |  4.15  8.85    1.61  0.21 |  1136408  1071797  0.94  13.10  26.00      0.50 | 4.72e-03 1.45e-03 2.37e-03 | 26.607 26.697 -0.090
+
+hit delivered/target: 0.65-1.05 (mean 0.86); by target 5 MB 0.90-1.05, 10 MB 0.80-0.94, 20 MB 0.65-0.86; within 0.9-1.1: 5/12
+byte meter: probe/delivered 0.998-1.000 -> the encoder probe IS the delivered size (v1's 0.77 projection bias gone)
+phase B never collapsed: vertices before == after in 12/12 runs x 4 rounds (every mid-training probe read below target: P12/T 0.21-0.71, P18/T 0.42-0.90)
+  -> the 'shadow lam' column is the phase-A lambda carried over, not a shadow price (no pairs were collapsed)
+growth after the last control point: final probe / probe@18k = 1.09-1.61 (mean 1.34), larger for larger targets (5 MB 1.20, 10 MB 1.33, 20 MB 1.50)
+  cause: the probe cleans with the final rule (max blending > 0.5 over the train views) but at 12k-18k the opacity floor is still ramping, so faces that will be opaque (kept) at 30000 are dropped now; the model's own V is constant 12k->30k and 0.92-0.95 of it is delivered
+phase A endpoint: constant-projection at the end of growth (V_model x 11 B + 0.6) / aim (target x 1.3) = 0.50-0.82 (5 MB 0.78, 10 MB 0.70, 20 MB 0.62) -> growth stops short of the aim, more so for large targets; lamA q10 = lam0 on room/bicycle 20 (lambda never went below its start) -> the split COUNT, not lambda, limited growth (upstream add_percentage / vertex pruning in phase A): read the densify events
+quality: test PSNR vs the fixed-lambda curve at the delivered bytes -0.123..-0.017 dB (mean -0.082; inside the measured range -0.110..-0.017, n=11) -> still on the hull
+lam_final / lam_eff: garden5:0.51, bicycle5:0.45, room5:0.72, kitchen5:0.64, garden10:0.62, bicycle10:0.60, room10:0.69, kitchen10:0.61, garden20:0.77, bicycle20:0.76, room20:0.66, kitchen20:0.61

@@ -1,0 +1,19 @@
+---
+name: rate-aware-results
+description: Rate-aware training/coding results on Room geo-only mesh (2026-10-13): precision knee q14/q8, DC QAT negative, index_rd lambda sweep, lever ranking, index context coder v10
+metadata:
+  type: project
+---
+
+All on the geo-only collapsed Room mesh (1,984,634 v; q18/q8 delivery 26.695 MB / test 27.624). Tooling: vis_collapse-v8..v10 (see [[c2-collapse-experiments]]).
+
+PRECISION (post-hoc re-export, no training): XYZ q18->q16 free (-1.5 MB), q15 -0.016 dB, q14 -0.056 dB (23.718 MB / 27.568 / 0.8636), q13 -0.19 (34k flips), q12 cliff -0.6. DC q8->q7 -1.04 MB / -0.025 dB (best cheap lever), q6 -0.14 dB / -0.02 SSIM for 1.5 MB. DEFAULT q14/q8. STE DC QAT 0.1 dB worse than post-hoc: negative result.
+
+INDEX RD (index_rd.py, K4096/R1024, neighbour-context reassignment, 200-step refit, q18/q8): base hit z 0.214 / u 0.056, mapping 5.442 MB = 21.9 bits/v (= raw 22: zstd compresses indices ~0, frequencies uniform). lambda 0.3: hit .274/.277, est 19.0 bits, real 5.283 MB, test 27.619 (-0.03); lambda 1: .417/.365, est 16.8, real 4.992 MB, test 27.545 (-0.11); lambda 3: .481/.372, est 16.1, real 4.851 MB, test 27.480 (-0.17). v10 index_ctx coder (decodable, reuses stage2 arithmetic coder). ROOM RESULT (checkpoint order, 1.98M v): ctx bits/v 19.73 (lam0) / 17.78 (0.3) / 15.45 (1) / 14.63 (3) vs delivered zstd 21.9/21.3/20.1/19.6 -> honest file MB (index_rd file_MB - mapping + ctx): 26.16 / 25.66 / 25.08 / 24.87 at test 27.652 / 27.619 / 27.545 / 27.480. Coder alone = lossless -0.55 MB (2%); lam0.3 0.06 dB/MB, lam1 0.10, lam3 0.13. ctx numbers measured in checkpoint order are conservative (delivered meshopt order has more locality). Integration into delivery = user codec change (ask).
+
+LEVER RANKING (dB/MB, lower = cheaper): XYZ q18->q14 ~0 < DC q8->q7 0.02 < vertices 0.9->0.8 0.00, 0.8->0.7 0.05 ~ index ctx lam0.3 0.06 < index lam1 0.10 < DC q7->q6 0.12 < XYZ q14->q13 0.18. Answer to advisor Q2: index frequencies are uniform (no skew to exploit); the exploitable redundancy is SPATIAL (neighbour agreement), tunable by lambda, and only a context coder cashes it in.
+
+AXIS B (2026-10-13, run_axisB.sh, geo-only --target-vertices, 3000-step finetune, sharing, q14/q8; V0 = dense 3,193,592): frac/vertices/MB/decoded test/val/worst: 1.0 3.19M 36.61 28.119 30.715 27.02 | 0.9 2.87M 33.50 27.932 30.396 26.92 | 0.8 2.55M 30.12 27.931 30.165 26.83 | 0.7 2.24M 26.56 27.754 29.922 26.52 | 0.6 1.92M 22.92 27.496 29.603 25.75 | 0.5 1.60M 19.29 27.115 29.093 24.66. Bytes linear 11.5-12.1 B/vertex. Test slopes dB/MB: 1.0->0.9 0.06, 0.9->0.8 0.00 (plateau), 0.8->0.7 0.05, 0.7->0.6 0.07, 0.6->0.5 0.105 -> no sharp knee, gently convex; val is near-linear (-0.25..-0.32 dB per 10% vertices) and finetune did NOT improve 1.0/0.9 (best = step 0). Worst view breaks after 0.7 (-0.77, -1.09). Sharing+quant costs 0.10-0.15 dB at every level. Hull (test): 0.5 -> q14/q7@1.98M -> 0.7 -> 0.8 -> 1.0; v0.8 dominates v0.9 and historical (26.9 MB/27.35 vs v0.7 26.56/27.75 = +0.41 dB at equal bytes). Candidate default = v0.8 (30.1 MB, -0.33 dB vs original 28.263), v0.7 for the low-rate point. Files: /mnt/project-files/analysis/rd/room-rd-points-v1.csv, room-rd-hull-v1.png. v11: run_axisA.sh defaults to v0.8 mesh, outputs $W/axisA-<level>/.
+
+DC ON AXIS-B LEVELS (2026-10-15, re-export only): v0.8 q14/q7 28.792 MB / 27.902 / SSIM 0.8694 / LPIPS 0.3682 (q8->q7: -1.33 MB, -0.029 dB = 0.022 dB/MB); v0.8 q14/q6 27.775 / 27.784 (0.116 dB/MB, SSIM -0.016); v0.7 q7 25.394 / 27.725; v0.7 q6 24.500 / 27.612. DC q7 is on the hull, q6 is dominated by dropping vertices. HULL v2: 0.5 -> q14/q7@1.98M -> v0.7q7 -> v0.8q7 -> v1.0. NEW DEFAULT = v0.8 / q14 / q7 = 28.79 MB, -0.36 dB vs original (25.8x); with ctx coder (~-0.7 MB) + vertex_weight drop (~-1.7 MB) expected ~26.4 MB. Files: analysis/rd/room-rd-points-v2.csv, room-rd-hull-v2.png. matched 2x2 cancelled by user 2026-10-15.
+

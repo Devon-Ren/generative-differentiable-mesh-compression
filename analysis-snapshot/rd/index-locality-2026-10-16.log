@@ -1,0 +1,45 @@
+k1024_r1                 N 1916155 K 1024 hit_z 0.171 (indep 1.64e-03, lift 104x) H 9.64 -> H|nbr 6.42 bits, ctx coder 7.71 b/v | 4 s
+k1024_r1024              N 1916155 K 1024 hit_z 0.171 (indep 1.64e-03, lift 104x) H 9.64 -> H|nbr 6.42 bits, ctx coder 7.71 b/v | R 1024 hit_u 0.034 lift 18x H|nbr 8.86 ctx 9.20 | 4 s
+k1024_r256               N 1916155 K 1024 hit_z 0.171 (indep 1.64e-03, lift 104x) H 9.64 -> H|nbr 6.42 bits, ctx coder 7.71 b/v | R 256 hit_u 0.049 lift 8x H|nbr 7.29 ctx 7.36 | 4 s
+k1024_r4096              N 1916155 K 1024 hit_z 0.171 (indep 1.64e-03, lift 104x) H 9.64 -> H|nbr 6.42 bits, ctx coder 7.71 b/v | R 4090 hit_u 0.026 lift 53x H|nbr 9.90 ctx 11.14 | 4 s
+k16384_r4096             N 1916155 K 16320 hit_z 0.083 (indep 1.16e-04, lift 713x) H 13.71 -> H|nbr 7.39 bits, ctx coder 12.12 b/v | R 4070 hit_u 0.010 lift 17x H|nbr 10.14 ctx 11.21 | 4 s
+k4096_r1                 N 1916155 K 4090 hit_z 0.123 (indep 3.82e-04, lift 323x) H 11.68 -> H|nbr 7.24 bits, ctx coder 9.83 b/v | 3 s
+k4096_r1024              N 1916155 K 4090 hit_z 0.123 (indep 3.82e-04, lift 323x) H 11.68 -> H|nbr 7.24 bits, ctx coder 9.83 b/v | R 1024 hit_u 0.022 lift 11x H|nbr 8.97 ctx 9.29 | 4 s
+k4096_r256               N 1916155 K 4090 hit_z 0.123 (indep 3.82e-04, lift 323x) H 11.68 -> H|nbr 7.24 bits, ctx coder 9.83 b/v | R 256 hit_u 0.037 lift 6x H|nbr 7.35 ctx 7.44 | 4 s
+k4096_r4096              N 1916155 K 4090 hit_z 0.123 (indep 3.82e-04, lift 323x) H 11.68 -> H|nbr 7.24 bits, ctx coder 9.83 b/v | R 4086 hit_u 0.015 lift 29x H|nbr 10.10 ctx 11.24 | 4 s
+k1024_r1                 N 2235514 K 1024 hit_z 0.172 (indep 1.53e-03, lift 112x) H 9.67 -> H|nbr 6.43 bits, ctx coder 7.70 b/v | 4 s
+k1024_r1024              N 2235514 K 1024 hit_z 0.172 (indep 1.53e-03, lift 112x) H 9.67 -> H|nbr 6.43 bits, ctx coder 7.70 b/v | R 1024 hit_u 0.033 lift 19x H|nbr 8.92 ctx 9.23 | 4 s
+k1024_r256               N 2235514 K 1024 hit_z 0.172 (indep 1.53e-03, lift 112x) H 9.67 -> H|nbr 6.43 bits, ctx coder 7.70 b/v | R 256 hit_u 0.050 lift 8x H|nbr 7.26 ctx 7.32 | 4 s
+k1024_r4096              N 2235514 K 1024 hit_z 0.172 (indep 1.53e-03, lift 112x) H 9.67 -> H|nbr 6.43 bits, ctx coder 7.70 b/v | R 4089 hit_u 0.025 lift 54x H|nbr 9.99 ctx 11.15 | 4 s
+k16384_r4096             N 2235514 K 16297 hit_z 0.083 (indep 1.11e-04, lift 743x) H 13.72 -> H|nbr 7.49 bits, ctx coder 12.11 b/v | R 4076 hit_u 0.010 lift 18x H|nbr 10.22 ctx 11.23 | 5 s
+k4096_r1                 N 2235514 K 4084 hit_z 0.124 (indep 3.70e-04, lift 334x) H 11.70 -> H|nbr 7.27 bits, ctx coder 9.82 b/v | 4 s
+k4096_r1024              N 2235514 K 4084 hit_z 0.124 (indep 3.70e-04, lift 334x) H 11.70 -> H|nbr 7.27 bits, ctx coder 9.82 b/v | R 1024 hit_u 0.022 lift 12x H|nbr 9.00 ctx 9.30 | 4 s
+k4096_r256               N 2235514 K 4084 hit_z 0.124 (indep 3.70e-04, lift 334x) H 11.70 -> H|nbr 7.27 bits, ctx coder 9.82 b/v | R 256 hit_u 0.038 lift 6x H|nbr 7.33 ctx 7.41 | 4 s
+k4096_r4096              N 2235514 K 4084 hit_z 0.124 (indep 3.70e-04, lift 334x) H 11.70 -> H|nbr 7.27 bits, ctx coder 9.82 b/v | R 4084 hit_u 0.015 lift 29x H|nbr 10.18 ctx 11.25 | 4 s
+k1024_r1                 N 3193592 K 1024 hit_z 0.219 (indep 1.58e-03, lift 138x) H 9.68 -> H|nbr 6.00 bits, ctx coder 7.13 b/v | 6 s
+k1024_r1024              N 3193592 K 1024 hit_z 0.219 (indep 1.58e-03, lift 138x) H 9.68 -> H|nbr 6.00 bits, ctx coder 7.13 b/v | R 1022 hit_u 0.045 lift 24x H|nbr 8.82 ctx 9.08 | 7 s
+k1024_r256               N 3193592 K 1024 hit_z 0.219 (indep 1.58e-03, lift 138x) H 9.68 -> H|nbr 6.00 bits, ctx coder 7.13 b/v | R 256 hit_u 0.065 lift 9x H|nbr 7.18 ctx 7.19 | 7 s
+k1024_r4096              N 3193592 K 1024 hit_z 0.219 (indep 1.58e-03, lift 138x) H 9.68 -> H|nbr 6.00 bits, ctx coder 7.13 b/v | R 4054 hit_u 0.037 lift 65x H|nbr 9.98 ctx 10.99 | 7 s
+k16384_r1                N 3193592 K 16233 hit_z 0.110 (indep 2.08e-04, lift 527x) H 13.69 -> H|nbr 7.19 bits, ctx coder 11.53 b/v | 6 s
+k16384_r1024             N 3193592 K 16233 hit_z 0.110 (indep 2.08e-04, lift 527x) H 13.69 -> H|nbr 7.19 bits, ctx coder 11.53 b/v | R 1022 hit_u 0.024 lift 11x H|nbr 8.95 ctx 9.23 | 7 s
+k16384_r256              N 3193592 K 16233 hit_z 0.110 (indep 2.08e-04, lift 527x) H 13.69 -> H|nbr 7.19 bits, ctx coder 11.53 b/v | R 256 hit_u 0.043 lift 5x H|nbr 7.23 ctx 7.31 | 7 s
+k16384_r4096             N 3193592 K 16233 hit_z 0.110 (indep 2.08e-04, lift 527x) H 13.69 -> H|nbr 7.19 bits, ctx coder 11.53 b/v | R 4048 hit_u 0.017 lift 25x H|nbr 10.25 ctx 11.13 | 7 s
+k4096_r1                 N 3193592 K 4066 hit_z 0.163 (indep 4.77e-04, lift 342x) H 11.67 -> H|nbr 6.80 bits, ctx coder 9.17 b/v | 6 s
+k4096_r1024              N 3193592 K 4066 hit_z 0.163 (indep 4.77e-04, lift 342x) H 11.67 -> H|nbr 6.80 bits, ctx coder 9.17 b/v | R 1024 hit_u 0.032 lift 16x H|nbr 8.93 ctx 9.20 | 7 s
+k4096_r256               N 3193592 K 4066 hit_z 0.163 (indep 4.77e-04, lift 342x) H 11.67 -> H|nbr 6.80 bits, ctx coder 9.17 b/v | R 256 hit_u 0.051 lift 7x H|nbr 7.22 ctx 7.28 | 6 s
+k4096_r4096              N 3193592 K 4066 hit_z 0.163 (indep 4.77e-04, lift 342x) H 11.67 -> H|nbr 6.80 bits, ctx coder 9.17 b/v | R 4056 hit_u 0.023 lift 38x H|nbr 10.21 ctx 11.13 | 7 s
+k1024_r1                 N 2554874 K 1024 hit_z 0.174 (indep 1.55e-03, lift 113x) H 9.67 -> H|nbr 6.39 bits, ctx coder 8.82 b/v | 5 s
+k1024_r1024              N 2554874 K 1024 hit_z 0.174 (indep 1.55e-03, lift 113x) H 9.67 -> H|nbr 6.39 bits, ctx coder 8.82 b/v | R 1024 hit_u 0.033 lift 19x H|nbr 8.92 ctx 10.25 | 5 s
+k1024_r256               N 2554874 K 1024 hit_z 0.174 (indep 1.55e-03, lift 113x) H 9.67 -> H|nbr 6.39 bits, ctx coder 8.82 b/v | R 256 hit_u 0.051 lift 8x H|nbr 7.27 ctx 7.52 | 5 s
+k1024_r4096              N 2554874 K 1024 hit_z 0.174 (indep 1.55e-03, lift 113x) H 9.67 -> H|nbr 6.39 bits, ctx coder 8.82 b/v | R 4091 hit_u 0.026 lift 56x H|nbr 10.06 ctx 12.30 | 5 s
+k16384_r1                N 2554874 K 16319 hit_z 0.084 (indep 1.08e-04, lift 779x) H 13.73 -> H|nbr 7.54 bits, ctx coder 13.69 b/v | 5 s
+k16384_r1024             N 2554874 K 16319 hit_z 0.084 (indep 1.08e-04, lift 779x) H 13.73 -> H|nbr 7.54 bits, ctx coder 13.69 b/v | R 1023 hit_u 0.017 lift 8x H|nbr 9.03 ctx 10.18 | 5 s
+k16384_r256              N 2554874 K 16319 hit_z 0.084 (indep 1.08e-04, lift 779x) H 13.73 -> H|nbr 7.54 bits, ctx coder 13.69 b/v | R 256 hit_u 0.032 lift 4x H|nbr 7.34 ctx 7.48 | 5 s
+k16384_r4096             N 2554874 K 16319 hit_z 0.084 (indep 1.08e-04, lift 779x) H 13.73 -> H|nbr 7.54 bits, ctx coder 13.69 b/v | R 4078 hit_u 0.010 lift 18x H|nbr 10.30 ctx 12.30 | 5 s
+k4096_r1                 N 2554874 K 4086 hit_z 0.127 (indep 3.69e-04, lift 343x) H 11.70 -> H|nbr 7.25 bits, ctx coder 11.48 b/v | 5 s
+k4096_r1024              N 2554874 K 4086 hit_z 0.127 (indep 3.69e-04, lift 343x) H 11.70 -> H|nbr 7.25 bits, ctx coder 11.48 b/v | R 1024 hit_u 0.022 lift 12x H|nbr 9.01 ctx 10.22 | 5 s
+k4096_r256               N 2554874 K 4086 hit_z 0.127 (indep 3.69e-04, lift 343x) H 11.70 -> H|nbr 7.25 bits, ctx coder 11.48 b/v | R 256 hit_u 0.039 lift 6x H|nbr 7.32 ctx 7.50 | 5 s
+k4096_r4096              N 2554874 K 4086 hit_z 0.127 (indep 3.69e-04, lift 343x) H 11.70 -> H|nbr 7.25 bits, ctx coder 11.48 b/v | R 4091 hit_u 0.015 lift 30x H|nbr 10.25 ctx 12.30 | 5 s
+own                      N 2537590 K 4096 hit_z 0.038 (indep 3.44e-04, lift 109x) H 11.77 -> H|nbr 8.41 bits, ctx coder 11.22 b/v | R 1024 hit_u 0.013 lift 8x H|nbr 9.19 ctx 9.59 | 5 s
+xfer-frozen              N 2537590 K 4057 hit_z 0.047 (indep 9.04e-04, lift 52x) H 10.90 -> H|nbr 8.35 bits, ctx coder 10.40 b/v | R 1022 hit_u 0.027 lift 14x H|nbr 8.78 ctx 9.32 | 5 s
+xfer-adapt               N 2537590 K 4057 hit_z 0.047 (indep 9.04e-04, lift 52x) H 10.90 -> H|nbr 8.35 bits, ctx coder 10.40 b/v | R 1022 hit_u 0.027 lift 14x H|nbr 8.78 ctx 9.32 | 5 s

@@ -1,0 +1,21 @@
+head = f'''# node-batch12-v1（2026-11-07）：adapt-v9 = v8 + phase-A 计划的两处计数修正 —— lego / chair 2.5 + chair 4 + room / bicycle 10 + room 20，6 个 job 一波（≈6.5 GPU-h，4 卡 ≈2.3 h 墙钟）
+
+**batch11 判定**：(a)(b)(e) 过——soup 上量的 b_v 和 12k 网格的 b_v 相差 1–8 %，overhead 相差 < 1 %，probe 总开销 2–3 min；(c)(d) 不过——6 行全比 v7b 低（hit 0.71–0.92 vs 0.78–1.01）。**原因在 densify 日志里，不在 b_v**：
+
+1. **计划多数了一个 interval**。`remaining = (until − it) // interval + 1` 在 9500 给 2，但 upstream 只在 `iteration < densify_until`（10000）时 densify，9500 就是最后一个（1500…9500 共 17 个，计划以为 18 个）。几何计划把还差的增长摊到"两个"interval，最后一个只长到 sqrt(V·V*)：6 个 run 最后一次 upstream prune 后的模型 = 0.81–0.92 V*，和 sqrt(V_9500/V*) = 0.83–0.92 一致（CPU 重放 6 条轨迹，旧计划预测误差 0.3–5 %）。v4–v7b 全部带着这个 bug（sweep 分析里"phase A 只到 V* 的 0.83–0.97"就是它）；v7b 的常数先验在 Blender 上把 V* 抬高 30 % 恰好盖住了，v8 把先验量准了，缺口就露出来。
+2. **limiter 单位错了 3 倍**。upstream `add_new_gs` 每个 interval 最多分裂 add_pct·V − V 个**三角形**（rd_select 的 max_split 也是这个数），plan_splits 的前向模拟却把它除以 3 当成顶点数——以为 limiter 紧 3 倍，过早 front-load，而 front-load 时又只要了允许量的 1/3。4 MB Blender 行的"limiter-bound 12–13/17"大半是这个假象。
+
+**v9**（`rdgrowth/train_rd_adapt_v9.py`，{tr_n} 行 = v8 887 行 + 头注释，代码 diff 4 行）：`remaining = ceil((until − it)/interval)`；plan_splits 的 limiter 用三角形数；densify 行打印 `cap N limiter M`（以前把 min(cap, limiter) 打成 limit，看起来像 limiter 卡住，其实是计划自己的上限），事件带 `limiter_max`。phase-A probe、phase B 一字不动。CPU 检查：生成脚本精确替换（11 处）、py_compile/pyflakes、intervals 公式对 5 种 schedule 穷举比对、6 条 batch11 轨迹重放（旧计划复现实测缺口，v9 在 9500 全部到 V*；从 3500 整段重放 6/6 到 1.000 V*、limiter 不卡）、smoke 断言块在假日志上正反各跑一次。
+
+**sbatch**：`adapt-v9-blender.sbatch`（{sb_n} 行，VERSION v9b-r1）、`adapt-v9.sbatch`（{sm_n} 行，VERSION v9-r1）= v8 的两个 + 文件名 / 目录名 adapt9 / 表 adapt-v9*.txt / smoke 断言 densify 事件的 `remaining` 等于按 config 算的值且带 `limiter_max`。
+
+**这 6 个 job**：lego/chair 2.5（机制 + 和 v7b/v8 直接比；预期 phase A 到 V*，先验在 Blender 偏高 3–10 % → 落点 1.00–1.10，phase B 这次要真砍）、chair 4（v8 0.797 capped，看 limiter 修正后是否还 capped）、room 10 / bicycle 10（v8 0.795 / 0.710；预期 ≈0.91 / ≈0.87，剩下的差是拓扑先验 5 B/V vs Mip 实测 3.7–4.5）、room 20（v7b 0.75，看 20 MB 档）。
+
+**通过标准**：
+- (a) 6 个 job exit 0，smoke 里有 `smoke v9 plan: {{... 'remaining': 17 ...}} | expected remaining 17`；
+- (b) **计划到位**：每行 `prune rounds 16 ... (V M -> ...)` 的 M（最后一次 upstream prune 后的模型顶点数）≥ 0.95 × 9500 那行的 V*（`[RD 9500] ... = V* vertices`），limiter-bound 的行除外；
+- (c) room 10 ≥ 0.88、bicycle 10 ≥ 0.85（v8 0.795 / 0.710），等字节 PSNR 比 v7b 不低超过 0.05 dB；
+- (d) lego/chair 2.5 落点 0.95–1.05（phase B 砍过之后），PSNR 比 v7b 同目标行不低超过 0.05 dB；chair 4 ≥ 0.85；
+- (e) room 20 ≥ 0.80（v7b 0.75）。
+(b)(c) 过 → batch13 = 33 个 Mip/T&T 重跑（`adapt-v9.sbatch` 不再改，场景参数同 batch9-v2）+ Blender 16 行重跑（v9 的 phase B 在 Blender 上会动，v7b 那批不等价）。
+

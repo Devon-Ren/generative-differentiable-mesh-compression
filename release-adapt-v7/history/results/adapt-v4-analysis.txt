@@ -1,0 +1,24 @@
+adapt-v4 analysis (2026-11-06): 4 scenes x {5,10,20} MB, train_rd_adapt_v4 (probe at final floor + 4x, count-only phase B, limiter-aware geometric phase A), K4096 R256 q7
+
+scene     T  deliv   hit v3hit |     V12k       V*  V/V* bound front sig50 |    P12    P18 kept18 fin/P18 coll% |    PSNR   curve   dPSNR    v3dP
+bicycle   5   4.46  0.89  0.85 |   395840   468181  0.85     0     0  0.75 |   4.83   4.65   0.76    0.96   0.0 |  21.794  21.967  -0.173*  -0.101*
+garden    5   5.15  1.03  0.97 |   439616   468181  0.94     0     0  0.61 |   5.51   5.22   0.72    0.99   9.0 |  22.749  22.826  -0.077  -0.037*
+kitchen   5   5.67  1.14  1.03 |   433260   468181  0.93     2     2  0.37 |   5.28   5.30   0.60    1.07   4.7 |  25.324  25.350  -0.026  +0.061
+room      5   4.86  0.97  0.90 |   423854   468181  0.91     0     0  0.52 |   4.54   4.61   0.54    1.06   0.0 |  27.082  27.150  -0.068  -0.035
+bicycle  10   8.08  0.81  0.80 |   781002   990909  0.79     4     4  0.75 |   8.51   8.28   0.68    0.98   0.0 |  22.282  22.401  -0.119  -0.031
+garden   10   9.92  0.99  0.89 |   866569   990909  0.87     0     0  0.58 |   9.74   9.66   0.64    1.03   0.0 |  23.526  23.619  -0.093  -0.002
+kitchen  10  11.05  1.10  0.96 |   873720   990909  0.88    11    11  0.38 |   8.95   9.62   0.50    1.15   0.0 |  26.323  26.376  -0.053  -0.006
+room     10   9.11  0.91  0.82 |   863853   990909  0.87     1     1  0.48 |   7.67   8.20   0.47    1.11   0.0 |  27.722  27.757  -0.035  -0.012
+bicycle  20  15.40  0.77  0.73 |  1583691  2036363  0.78    18    18  0.67 |  15.21  15.05   0.59    1.02   0.0 |  22.766  22.791  -0.025  +0.011
+garden   20  18.08  0.90  0.81 |  1670018  2036363  0.82     8     8  0.57 |  16.73  16.94   0.54    1.07   0.0 |  24.146  24.206  -0.060  +0.027
+kitchen  20  20.56  1.03  0.87 |  1716266  2036363  0.84    13    13  0.34 |  14.29  16.72   0.41    1.23   0.0 |  26.896  27.001  -0.105  -0.029
+room     20  16.53  0.83  0.75 |  1680532  2036363  0.83    13    13  0.46 |  12.75  14.16   0.41    1.17   0.0 |  28.133  28.139  -0.006  +0.071
+
+hit 0.77-1.14 (mean 0.95); by target 5 MB 0.89-1.14, 10 MB 0.81-1.10, 20 MB 0.77-1.03; within 0.9-1.1: 6/12 (v3: 3/12, mean 0.87; v2: 5/12, mean 0.86)
+quality vs fixed-lambda curve at equal bytes: -0.173..-0.006 dB (mean -0.070; inside the measured range -0.119..-0.006, n=11); v3 mean -0.007  (* = extrapolated)
+probe accuracy (final / probe@18k): outdoor 0.96-1.07 (v3 1.03-1.28) -> solved by the 4x pass; indoor 1.06-1.23 (v3 1.12-1.39) -> still under-reads, growing with the target
+  indoor probes RISE 12k->18k (kitchen5 5.3->5.3, room5 4.5->4.6, kitchen10 8.9->9.6, room10 7.7->8.2, kitchen20 14.3->16.7, room20 12.8->14.2) with V constant: the kept set keeps growing while the opacity floor ramps to 24000 (faces un-stack), a dynamic the 18k probe cannot see
+phase B: modes per round (c=count, n=none) bicycle5:nnnn, garden5:cccc, kitchen5:cccc, room5:nnnn, bicycle10:nnnn, garden10:nnnn, kitchen10:nnnn, room10:nnnn, bicycle20:nnnn, garden20:nnnn, kitchen20:nnnn, room20:nnnn; collapsed only where the probe was above target (garden 5, kitchen 5)
+phase A: V@12k / V* = bicycle5 0.85(0b), garden5 0.94(0b), kitchen5 0.93(2b), room5 0.91(0b), bicycle10 0.79(4b), garden10 0.87(0b), kitchen10 0.88(11b), room10 0.87(1b), bicycle20 0.78(18b), garden20 0.82(8b), kitchen20 0.84(13b), room20 0.83(13b)
+  20 MB: limiter-bound 8-18 of 17-18 intervals (bicycle 18/18 -> 1.58 M of 2.04 M: the upstream add_percentage cap); bicycle 10: bound 4 only, yet V@12k/V* 0.79: rank-lambda delivered pass/desired 0.66-0.85 every interval (the next interval's ratios are not the current ones)
+lam_final / lam_eff: bicycle5:0.65, garden5:0.47, kitchen5:0.13, room5:0.73, bicycle10:0.59, garden10:0.75, kitchen10:0.70, room10:0.71, bicycle20:0.63, garden20:0.71, kitchen20:0.65, room20:0.63

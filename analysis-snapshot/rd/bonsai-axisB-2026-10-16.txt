@@ -1,0 +1,4 @@
+# bonsai (scene-v1.sbatch job 20054993, images_2, K4096 R256 q14/q7 stage2-v2 const/ctx), lines as printed by run_garden.sh (tag says "garden", scene is bonsai)
+garden frac 1.0 | vertices 2923381 faces 4508348 | val0 28.184 val 28.184 worst 22.39 | test 27.291 | delivered 25.502 MB test 26.987 0.8581 0.3874 | K4096 R256 q14/q7 stage2-v2 const ctx
+garden frac 0.8 | vertices 2338705 faces 3592351 | val0 26.813 val 27.429 worst 21.47 | test 26.834 | delivered 21.081 MB test 26.568 0.8516 0.4037 | K4096 R256 q14/q7 stage2-v2 const ctx
+garden frac 0.7 | vertices 2046367 faces 3127511 | val0 26.317 val 27.06 worst 21.04 | test 26.56 | delivered 18.557 MB test 26.333 0.8429 0.4202 | K4096 R256 q14/q7 stage2-v2 const ctx

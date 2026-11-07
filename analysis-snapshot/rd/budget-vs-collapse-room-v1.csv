@@ -1,0 +1,14 @@
+series,label,vertices,MB,test_psnr,test_ssim,note
+collapse,v1.0,3193592,30.932,28.061,0.8730,levels-csv K4096R256 q14/q7
+collapse,v0.8,2554874,25.513,27.883,0.8686,levels-csv
+collapse,v0.7,2235514,22.511,27.705,0.8634,levels-csv
+collapse,v0.6,1916155,19.434,27.452,0.8567,levels-csv
+collapse,v0.5,1596796,16.892,27.090,0.8481,axisB-v2 (R1024 dict)
+collapse,ctrl-1.35M,1348124,13.926,26.660,0.8372,G0 control
+collapse,ctrl-0.97M,966571,10.139,25.665,0.8127,G0 control
+budget,dense,3193592,30.932,28.061,0.8730,same model as collapse v1.0
+budget,B1.6M,1348124,13.558,27.984,0.8620,G0
+budget,B1.0M,966571,10.378,27.711,0.8549,G0
+budget,B700k,677638,7.588,27.461,0.8476,budget-sweep
+budget,B500k,411779,4.985,26.986,0.8362,budget-sweep
+budget,B350k,361813,4.484,26.628,0.8284,budget-sweep

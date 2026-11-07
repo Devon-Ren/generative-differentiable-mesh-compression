@@ -1,0 +1,264 @@
+room | lam 0.00062 | K4096 R256 q7 (base)   |  22.073 MB | test 28.255 0.8568 0.3892 | dPSNR +0.000 | dMB +0.000
+room | lam 0.00062 | K4096 R256 q8          |  23.017 MB | test 28.321 0.8646 0.3775 | dPSNR +0.066 | dMB +0.944
+room | lam 0.00062 | K4096 R1 q7            |  20.123 MB | test 28.083 0.8504 0.3982 | dPSNR -0.172 | dMB -1.950
+room | lam 0.00062 | K1024 R256 q7          |  21.062 MB | test 28.148 0.8540 0.3921 | dPSNR -0.108 | dMB -1.010
+room | lam 0.00062 | K4096 R1024 q7         |  22.676 MB | test 28.289 0.8582 0.3872 | dPSNR +0.034 | dMB +0.603
+room | lam 0.00062 | K16384 R1024 q7        |  25.086 MB | test 28.339 0.8605 0.3837 | dPSNR +0.083 | dMB +3.013
+kitchen | lam 0.00062 | K4096 R256 q7 (base)   |  24.462 MB | test 27.092 0.8443 0.2975 | dPSNR +0.000 | dMB +0.000
+kitchen | lam 0.00062 | K4096 R256 q8          |  25.432 MB | test 27.130 0.8482 0.2927 | dPSNR +0.037 | dMB +0.970
+kitchen | lam 0.00062 | K4096 R1 q7            |  22.622 MB | test 26.762 0.8309 0.3131 | dPSNR -0.330 | dMB -1.839
+kitchen | lam 0.00062 | K1024 R256 q7          |  23.497 MB | test 26.935 0.8391 0.3037 | dPSNR -0.157 | dMB -0.965
+kitchen | lam 0.00062 | K4096 R1024 q7         |  25.021 MB | test 27.154 0.8467 0.2946 | dPSNR +0.062 | dMB +0.559
+kitchen | lam 0.00062 | K16384 R1024 q7        |  27.395 MB | test 27.254 0.8508 0.2888 | dPSNR +0.162 | dMB +2.933
+room | lam 0.00185 | K4096 R256 q7 (base)   |  12.396 MB | test 28.023 0.8472 0.4172 | dPSNR +0.000 | dMB +0.000
+room | lam 0.00185 | K4096 R256 q8          |  12.901 MB | test 28.088 0.8549 0.4065 | dPSNR +0.065 | dMB +0.505
+room | lam 0.00185 | K4096 R1 q7            |  11.342 MB | test 27.843 0.8403 0.4247 | dPSNR -0.180 | dMB -1.054
+room | lam 0.00185 | K1024 R256 q7          |  11.643 MB | test 27.919 0.8442 0.4204 | dPSNR -0.104 | dMB -0.753
+room | lam 0.00185 | K4096 R1024 q7         |  12.772 MB | test 28.054 0.8479 0.4161 | dPSNR +0.031 | dMB +0.376
+room | lam 0.00185 | K16384 R1024 q7        |  14.898 MB | test 28.110 0.8506 0.4129 | dPSNR +0.087 | dMB +2.502
+kitchen | lam 0.00185 | K4096 R256 q7 (base)   |  16.540 MB | test 26.886 0.8338 0.3219 | dPSNR +0.000 | dMB +0.000
+kitchen | lam 0.00185 | K4096 R256 q8          |  17.161 MB | test 26.925 0.8375 0.3172 | dPSNR +0.039 | dMB +0.621
+kitchen | lam 0.00185 | K4096 R1 q7            |  15.322 MB | test 26.560 0.8203 0.3354 | dPSNR -0.326 | dMB -1.218
+kitchen | lam 0.00185 | K1024 R256 q7          |  15.746 MB | test 26.733 0.8285 0.3280 | dPSNR -0.153 | dMB -0.794
+kitchen | lam 0.00185 | K4096 R1024 q7         |  16.933 MB | test 26.945 0.8361 0.3189 | dPSNR +0.058 | dMB +0.393
+kitchen | lam 0.00185 | K16384 R1024 q7        |  19.108 MB | test 27.049 0.8402 0.3140 | dPSNR +0.162 | dMB +2.568
+room | lam 0.0062 | K4096 R256 q7 (base)   |   5.402 MB | test 27.305 0.8186 0.4712 | dPSNR +0.000 | dMB +0.000
+room | lam 0.0062 | K4096 R256 q8          |   5.582 MB | test 27.410 0.8308 0.4573 | dPSNR +0.104 | dMB +0.180
+room | lam 0.0062 | K4096 R1 q7            |   4.961 MB | test 27.141 0.8129 0.4765 | dPSNR -0.164 | dMB -0.441
+room | lam 0.0062 | K1024 R256 q7          |   4.834 MB | test 27.234 0.8165 0.4735 | dPSNR -0.072 | dMB -0.568
+room | lam 0.0062 | K4096 R1024 q7         |   5.622 MB | test 27.331 0.8197 0.4704 | dPSNR +0.026 | dMB +0.220
+room | lam 0.0062 | K16384 R1024 q7        |   7.556 MB | test 27.382 0.8223 0.4677 | dPSNR +0.076 | dMB +2.154
+kitchen | lam 0.0062 | K4096 R256 q7 (base)   |   8.022 MB | test 25.971 0.7968 0.3810 | dPSNR +0.000 | dMB +0.000
+kitchen | lam 0.0062 | K4096 R256 q8          |   8.295 MB | test 26.006 0.8002 0.3768 | dPSNR +0.035 | dMB +0.273
+kitchen | lam 0.0062 | K4096 R1 q7            |   7.443 MB | test 25.664 0.7831 0.3918 | dPSNR -0.306 | dMB -0.579
+kitchen | lam 0.0062 | K1024 R256 q7          |   7.410 MB | test 25.829 0.7911 0.3862 | dPSNR -0.142 | dMB -0.612
+kitchen | lam 0.0062 | K4096 R1024 q7         |   8.266 MB | test 26.027 0.7993 0.3784 | dPSNR +0.056 | dMB +0.244
+kitchen | lam 0.0062 | K16384 R1024 q7        |  10.260 MB | test 26.125 0.8040 0.3735 | dPSNR +0.154 | dMB +2.237
+garden | lam 0.00062 | K4096 R256 q7 (base)   |  36.389 MB | test 24.734 0.7610 0.2529 | dPSNR +0.000 | dMB +0.000
+garden | lam 0.00062 | K4096 R256 q8          |  38.041 MB | test 24.750 0.7629 0.2506 | dPSNR +0.016 | dMB +1.652
+garden | lam 0.00062 | K4096 R1 q7            |  33.267 MB | test 24.621 0.7540 0.2594 | dPSNR -0.113 | dMB -3.122
+garden | lam 0.00062 | K1024 R256 q7          |  35.005 MB | test 24.699 0.7589 0.2553 | dPSNR -0.035 | dMB -1.385
+garden | lam 0.00062 | K4096 R1024 q7         |  37.272 MB | test 24.753 0.7623 0.2518 | dPSNR +0.019 | dMB +0.883
+garden | lam 0.00062 | K16384 R1024 q7        |  40.014 MB | test 24.777 0.7637 0.2499 | dPSNR +0.043 | dMB +3.625
+room | lam 0.0185 | K4096 R256 q7 (base)   |   2.890 MB | test 26.383 0.8008 0.4970 | dPSNR +0.000 | dMB +0.000
+room | lam 0.0185 | K4096 R256 q8          |   2.984 MB | test 26.452 0.8090 0.4892 | dPSNR +0.069 | dMB +0.094
+room | lam 0.0185 | K4096 R1 q7            |   2.666 MB | test 26.238 0.7944 0.5019 | dPSNR -0.146 | dMB -0.225
+room | lam 0.0185 | K1024 R256 q7          |   2.392 MB | test 26.312 0.7972 0.5002 | dPSNR -0.071 | dMB -0.498
+room | lam 0.0185 | K4096 R1024 q7         |   3.049 MB | test 26.407 0.8010 0.4969 | dPSNR +0.024 | dMB +0.159
+room | lam 0.0185 | K16384 R1024 q7        |   4.893 MB | test 26.455 0.8033 0.4954 | dPSNR +0.072 | dMB +2.003
+kitchen | lam 0.0185 | K4096 R256 q7 (base)   |   3.782 MB | test 24.623 0.7344 0.4536 | dPSNR +0.000 | dMB +0.000
+kitchen | lam 0.0185 | K4096 R256 q8          |   3.900 MB | test 24.659 0.7382 0.4488 | dPSNR +0.036 | dMB +0.118
+kitchen | lam 0.0185 | K4096 R1 q7            |   3.506 MB | test 24.374 0.7215 0.4607 | dPSNR -0.249 | dMB -0.276
+kitchen | lam 0.0185 | K1024 R256 q7          |   3.261 MB | test 24.508 0.7291 0.4572 | dPSNR -0.115 | dMB -0.521
+kitchen | lam 0.0185 | K4096 R1024 q7         |   3.953 MB | test 24.671 0.7367 0.4521 | dPSNR +0.048 | dMB +0.172
+kitchen | lam 0.0185 | K16384 R1024 q7        |   5.845 MB | test 24.754 0.7415 0.4479 | dPSNR +0.132 | dMB +2.063
+garden | lam 0.00185 | K4096 R256 q7 (base)   |  24.599 MB | test 24.504 0.7401 0.2873 | dPSNR +0.000 | dMB +0.000
+garden | lam 0.00185 | K4096 R256 q8          |  25.684 MB | test 24.521 0.7421 0.2847 | dPSNR +0.017 | dMB +1.085
+garden | lam 0.00185 | K4096 R1 q7            |  22.516 MB | test 24.394 0.7327 0.2937 | dPSNR -0.110 | dMB -2.082
+garden | lam 0.00185 | K1024 R256 q7          |  23.529 MB | test 24.470 0.7379 0.2893 | dPSNR -0.034 | dMB -1.069
+garden | lam 0.00185 | K4096 R1024 q7         |  25.215 MB | test 24.523 0.7414 0.2859 | dPSNR +0.019 | dMB +0.617
+garden | lam 0.00185 | K16384 R1024 q7        |  27.634 MB | test 24.544 0.7429 0.2843 | dPSNR +0.040 | dMB +3.035
+garden | lam 0.0062 | K4096 R256 q7 (base)   |  10.175 MB | test 23.650 0.6681 0.3854 | dPSNR +0.000 | dMB +0.000
+garden | lam 0.0062 | K4096 R256 q8          |  10.590 MB | test 23.664 0.6697 0.3832 | dPSNR +0.014 | dMB +0.415
+garden | lam 0.0062 | K4096 R1 q7            |   9.338 MB | test 23.548 0.6604 0.3902 | dPSNR -0.102 | dMB -0.836
+garden | lam 0.0062 | K1024 R256 q7          |   9.478 MB | test 23.617 0.6657 0.3872 | dPSNR -0.033 | dMB -0.697
+garden | lam 0.0062 | K4096 R1024 q7         |  10.486 MB | test 23.670 0.6694 0.3844 | dPSNR +0.019 | dMB +0.311
+garden | lam 0.0062 | K16384 R1024 q7        |  12.549 MB | test 23.687 0.6711 0.3827 | dPSNR +0.036 | dMB +2.374
+garden | lam 0.0185 | K4096 R256 q7 (base)   |   4.969 MB | test 22.783 0.5913 0.4673 | dPSNR +0.000 | dMB +0.000
+garden | lam 0.0185 | K4096 R256 q8          |   5.153 MB | test 22.798 0.5928 0.4654 | dPSNR +0.014 | dMB +0.184
+garden | lam 0.0185 | K4096 R1 q7            |   4.571 MB | test 22.694 0.5843 0.4711 | dPSNR -0.089 | dMB -0.398
+garden | lam 0.0185 | K1024 R256 q7          |   4.404 MB | test 22.758 0.5890 0.4694 | dPSNR -0.025 | dMB -0.565
+garden | lam 0.0185 | K4096 R1024 q7         |   5.173 MB | test 22.798 0.5925 0.4666 | dPSNR +0.014 | dMB +0.204
+garden | lam 0.0185 | K16384 R1024 q7        |   7.111 MB | test 22.812 0.5943 0.4650 | dPSNR +0.029 | dMB +2.142
+counter | lam 0.00062 | K4096 R256 q7 (base)   |  20.742 MB | test 25.952 0.8162 0.4000 | dPSNR +0.000 | dMB +0.000
+counter | lam 0.00062 | K4096 R256 q8          |  21.583 MB | test 26.004 0.8240 0.3898 | dPSNR +0.052 | dMB +0.840
+counter | lam 0.00062 | K4096 R1 q7            |  19.031 MB | test 25.617 0.8030 0.4126 | dPSNR -0.335 | dMB -1.712
+counter | lam 0.00062 | K1024 R256 q7          |  19.809 MB | test 25.782 0.8102 0.4062 | dPSNR -0.170 | dMB -0.934
+counter | lam 0.00062 | K4096 R1024 q7         |  21.270 MB | test 26.026 0.8188 0.3974 | dPSNR +0.075 | dMB +0.528
+counter | lam 0.00062 | K16384 R1024 q7        |  23.602 MB | test 26.143 0.8237 0.3919 | dPSNR +0.192 | dMB +2.860
+stump | lam 0.00062 | K4096 R256 q7 (base)   |  27.598 MB | test 24.810 0.6747 0.3719 | dPSNR +0.000 | dMB +0.000
+stump | lam 0.00062 | K4096 R256 q8          |  28.845 MB | test 24.835 0.6772 0.3690 | dPSNR +0.025 | dMB +1.246
+stump | lam 0.00062 | K4096 R1 q7            |  24.960 MB | test 24.742 0.6692 0.3751 | dPSNR -0.068 | dMB -2.638
+stump | lam 0.00062 | K1024 R256 q7          |  26.354 MB | test 24.778 0.6721 0.3738 | dPSNR -0.031 | dMB -1.244
+stump | lam 0.00062 | K4096 R1024 q7         |  28.369 MB | test 24.820 0.6760 0.3708 | dPSNR +0.010 | dMB +0.770
+stump | lam 0.00062 | K16384 R1024 q7        |  30.967 MB | test 24.839 0.6777 0.3696 | dPSNR +0.030 | dMB +3.368
+bonsai | lam 0.00062 | K4096 R256 q7 (base)   |  24.303 MB | test 27.891 0.8633 0.3931 | dPSNR +0.000 | dMB +0.000
+bonsai | lam 0.00062 | K4096 R256 q8          |  25.490 MB | test 27.946 0.8700 0.3840 | dPSNR +0.055 | dMB +1.187
+bonsai | lam 0.00062 | K4096 R1 q7            |  22.113 MB | test 27.519 0.8512 0.4086 | dPSNR -0.371 | dMB -2.189
+bonsai | lam 0.00062 | K1024 R256 q7          |  23.175 MB | test 27.731 0.8588 0.3997 | dPSNR -0.159 | dMB -1.128
+bonsai | lam 0.00062 | K4096 R1024 q7         |  24.991 MB | test 27.963 0.8652 0.3902 | dPSNR +0.072 | dMB +0.689
+bonsai | lam 0.00062 | K16384 R1024 q7        |  27.504 MB | test 28.044 0.8682 0.3856 | dPSNR +0.154 | dMB +3.201
+bicycle | lam 0.00062 | K4096 R256 q7 (base)   |  31.593 MB | test 22.986 0.6389 0.3946 | dPSNR +0.000 | dMB +0.000
+bicycle | lam 0.00062 | K4096 R256 q8          |  33.203 MB | test 22.997 0.6404 0.3930 | dPSNR +0.011 | dMB +1.611
+bicycle | lam 0.00062 | K4096 R1 q7            |  28.673 MB | test 22.902 0.6322 0.3993 | dPSNR -0.083 | dMB -2.919
+bicycle | lam 0.00062 | K1024 R256 q7          |  30.230 MB | test 22.952 0.6368 0.3963 | dPSNR -0.033 | dMB -1.363
+bicycle | lam 0.00062 | K4096 R1024 q7         |  32.471 MB | test 23.002 0.6402 0.3933 | dPSNR +0.016 | dMB +0.878
+bicycle | lam 0.00062 | K16384 R1024 q7        |  35.194 MB | test 23.020 0.6416 0.3924 | dPSNR +0.034 | dMB +3.601
+counter | lam 0.00185 | K4096 R256 q7 (base)   |  13.056 MB | test 25.844 0.8051 0.4246 | dPSNR +0.000 | dMB +0.000
+counter | lam 0.00185 | K4096 R256 q8          |  13.522 MB | test 25.911 0.8146 0.4127 | dPSNR +0.068 | dMB +0.466
+counter | lam 0.00185 | K4096 R1 q7            |  12.021 MB | test 25.515 0.7920 0.4349 | dPSNR -0.329 | dMB -1.035
+counter | lam 0.00185 | K1024 R256 q7          |  12.319 MB | test 25.664 0.7989 0.4299 | dPSNR -0.180 | dMB -0.737
+counter | lam 0.00185 | K4096 R1024 q7         |  13.415 MB | test 25.911 0.8077 0.4224 | dPSNR +0.067 | dMB +0.359
+counter | lam 0.00185 | K16384 R1024 q7        |  15.545 MB | test 26.033 0.8126 0.4169 | dPSNR +0.189 | dMB +2.488
+bonsai | lam 0.00185 | K4096 R256 q7 (base)   |  13.157 MB | test 27.406 0.8428 0.4397 | dPSNR +0.000 | dMB +0.000
+bonsai | lam 0.00185 | K4096 R256 q8          |  13.717 MB | test 27.471 0.8503 0.4296 | dPSNR +0.065 | dMB +0.560
+bonsai | lam 0.00185 | K4096 R1 q7            |  12.027 MB | test 27.074 0.8307 0.4516 | dPSNR -0.332 | dMB -1.131
+bonsai | lam 0.00185 | K1024 R256 q7          |  12.375 MB | test 27.270 0.8387 0.4442 | dPSNR -0.136 | dMB -0.782
+bonsai | lam 0.00185 | K4096 R1024 q7         |  13.555 MB | test 27.464 0.8448 0.4378 | dPSNR +0.058 | dMB +0.398
+bonsai | lam 0.00185 | K16384 R1024 q7        |  15.707 MB | test 27.538 0.8477 0.4338 | dPSNR +0.132 | dMB +2.550
+stump | lam 0.00185 | K4096 R256 q7 (base)   |  21.405 MB | test 24.714 0.6671 0.3900 | dPSNR +0.000 | dMB +0.000
+stump | lam 0.00185 | K4096 R256 q8          |  22.374 MB | test 24.734 0.6691 0.3876 | dPSNR +0.020 | dMB +0.969
+stump | lam 0.00185 | K4096 R1 q7            |  19.411 MB | test 24.643 0.6613 0.3931 | dPSNR -0.071 | dMB -1.994
+stump | lam 0.00185 | K1024 R256 q7          |  20.370 MB | test 24.682 0.6646 0.3922 | dPSNR -0.032 | dMB -1.035
+stump | lam 0.00185 | K4096 R1024 q7         |  22.009 MB | test 24.726 0.6684 0.3890 | dPSNR +0.012 | dMB +0.604
+stump | lam 0.00185 | K16384 R1024 q7        |  24.417 MB | test 24.745 0.6702 0.3876 | dPSNR +0.031 | dMB +3.012
+counter | lam 0.0062 | K4096 R256 q7 (base)   |   6.365 MB | test 25.315 0.7818 0.4610 | dPSNR +0.000 | dMB +0.000
+counter | lam 0.0062 | K4096 R256 q8          |   6.587 MB | test 25.365 0.7888 0.4529 | dPSNR +0.051 | dMB +0.222
+counter | lam 0.0062 | K4096 R1 q7            |   5.873 MB | test 25.008 0.7694 0.4691 | dPSNR -0.307 | dMB -0.491
+counter | lam 0.0062 | K1024 R256 q7          |   5.784 MB | test 25.157 0.7760 0.4655 | dPSNR -0.158 | dMB -0.581
+counter | lam 0.0062 | K4096 R1024 q7         |   6.590 MB | test 25.378 0.7844 0.4594 | dPSNR +0.063 | dMB +0.225
+counter | lam 0.0062 | K16384 R1024 q7        |   8.547 MB | test 25.495 0.7892 0.4549 | dPSNR +0.180 | dMB +2.183
+bicycle | lam 0.00185 | K4096 R256 q7 (base)   |  26.971 MB | test 23.018 0.6362 0.4047 | dPSNR +0.000 | dMB +0.000
+bicycle | lam 0.00185 | K4096 R256 q8          |  28.310 MB | test 23.030 0.6377 0.4032 | dPSNR +0.012 | dMB +1.339
+bicycle | lam 0.00185 | K4096 R1 q7            |  24.520 MB | test 22.939 0.6295 0.4094 | dPSNR -0.078 | dMB -2.452
+bicycle | lam 0.00185 | K1024 R256 q7          |  25.750 MB | test 22.987 0.6340 0.4066 | dPSNR -0.031 | dMB -1.221
+bicycle | lam 0.00185 | K4096 R1024 q7         |  27.709 MB | test 23.032 0.6374 0.4036 | dPSNR +0.014 | dMB +0.738
+bicycle | lam 0.00185 | K16384 R1024 q7        |  30.258 MB | test 23.049 0.6388 0.4027 | dPSNR +0.031 | dMB +3.287
+stump | lam 0.0062 | K4096 R256 q7 (base)   |   8.869 MB | test 24.121 0.6196 0.4614 | dPSNR +0.000 | dMB +0.000
+stump | lam 0.0062 | K4096 R256 q8          |   9.252 MB | test 24.139 0.6212 0.4591 | dPSNR +0.017 | dMB +0.383
+stump | lam 0.0062 | K4096 R1 q7            |   8.069 MB | test 24.033 0.6126 0.4651 | dPSNR -0.089 | dMB -0.799
+stump | lam 0.0062 | K1024 R256 q7          |   8.187 MB | test 24.092 0.6173 0.4631 | dPSNR -0.029 | dMB -0.682
+stump | lam 0.0062 | K4096 R1024 q7         |   9.170 MB | test 24.116 0.6194 0.4628 | dPSNR -0.006 | dMB +0.301
+stump | lam 0.0062 | K16384 R1024 q7        |  11.218 MB | test 24.135 0.6212 0.4612 | dPSNR +0.014 | dMB +2.349
+bonsai | lam 0.0062 | K4096 R256 q7 (base)   |   6.063 MB | test 26.364 0.8064 0.4928 | dPSNR +0.000 | dMB +0.000
+bonsai | lam 0.0062 | K4096 R256 q8          |   6.292 MB | test 26.436 0.8151 0.4825 | dPSNR +0.071 | dMB +0.229
+bonsai | lam 0.0062 | K4096 R1 q7            |   5.561 MB | test 26.081 0.7955 0.5002 | dPSNR -0.284 | dMB -0.502
+bonsai | lam 0.0062 | K1024 R256 q7          |   5.478 MB | test 26.256 0.8025 0.4963 | dPSNR -0.109 | dMB -0.585
+bonsai | lam 0.0062 | K4096 R1024 q7         |   6.286 MB | test 26.411 0.8081 0.4913 | dPSNR +0.047 | dMB +0.224
+bonsai | lam 0.0062 | K16384 R1024 q7        |   8.220 MB | test 26.479 0.8109 0.4886 | dPSNR +0.115 | dMB +2.157
+counter | lam 0.0185 | K4096 R256 q7 (base)   |   3.341 MB | test 24.536 0.7488 0.4982 | dPSNR +0.000 | dMB +0.000
+counter | lam 0.0185 | K4096 R256 q8          |   3.443 MB | test 24.590 0.7559 0.4907 | dPSNR +0.054 | dMB +0.102
+counter | lam 0.0185 | K4096 R1 q7            |   3.091 MB | test 24.268 0.7374 0.5043 | dPSNR -0.268 | dMB -0.250
+counter | lam 0.0185 | K1024 R256 q7          |   2.830 MB | test 24.400 0.7437 0.5019 | dPSNR -0.136 | dMB -0.511
+counter | lam 0.0185 | K4096 R1024 q7         |   3.505 MB | test 24.593 0.7510 0.4967 | dPSNR +0.057 | dMB +0.164
+counter | lam 0.0185 | K16384 R1024 q7        |   5.378 MB | test 24.700 0.7559 0.4933 | dPSNR +0.164 | dMB +2.037
+stump | lam 0.0185 | K4096 R256 q7 (base)   |   3.926 MB | test 23.214 0.5485 0.5345 | dPSNR +0.000 | dMB +0.000
+stump | lam 0.0185 | K4096 R256 q8          |   4.086 MB | test 23.226 0.5496 0.5332 | dPSNR +0.012 | dMB +0.159
+stump | lam 0.0185 | K4096 R1 q7            |   3.592 MB | test 23.128 0.5423 0.5371 | dPSNR -0.086 | dMB -0.335
+stump | lam 0.0185 | K1024 R256 q7          |   3.380 MB | test 23.194 0.5464 0.5356 | dPSNR -0.020 | dMB -0.546
+stump | lam 0.0185 | K4096 R1024 q7         |   4.111 MB | test 23.228 0.5497 0.5338 | dPSNR +0.014 | dMB +0.185
+stump | lam 0.0185 | K16384 R1024 q7        |   6.024 MB | test 23.247 0.5515 0.5329 | dPSNR +0.033 | dMB +2.097
+bicycle | lam 0.0062 | K4096 R256 q7 (base)   |  11.935 MB | test 22.687 0.5900 0.4697 | dPSNR +0.000 | dMB +0.000
+bicycle | lam 0.0062 | K4096 R256 q8          |  12.492 MB | test 22.699 0.5914 0.4683 | dPSNR +0.012 | dMB +0.557
+bicycle | lam 0.0062 | K4096 R1 q7            |  10.888 MB | test 22.605 0.5834 0.4731 | dPSNR -0.081 | dMB -1.048
+bicycle | lam 0.0062 | K1024 R256 q7          |  11.172 MB | test 22.659 0.5879 0.4714 | dPSNR -0.028 | dMB -0.763
+bicycle | lam 0.0062 | K4096 R1024 q7         |  12.307 MB | test 22.698 0.5912 0.4686 | dPSNR +0.011 | dMB +0.372
+bicycle | lam 0.0062 | K16384 R1024 q7        |  14.425 MB | test 22.721 0.5926 0.4678 | dPSNR +0.034 | dMB +2.490
+bonsai | lam 0.0185 | K4096 R256 q7 (base)   |   3.525 MB | test 25.358 0.7765 0.5230 | dPSNR +0.000 | dMB +0.000
+bonsai | lam 0.0185 | K4096 R256 q8          |   3.650 MB | test 25.412 0.7832 0.5163 | dPSNR +0.054 | dMB +0.124
+bonsai | lam 0.0185 | K4096 R1 q7            |   3.247 MB | test 25.114 0.7669 0.5281 | dPSNR -0.245 | dMB -0.278
+bonsai | lam 0.0185 | K1024 R256 q7          |   3.019 MB | test 25.259 0.7728 0.5257 | dPSNR -0.099 | dMB -0.506
+bonsai | lam 0.0185 | K4096 R1024 q7         |   3.692 MB | test 25.398 0.7781 0.5222 | dPSNR +0.039 | dMB +0.167
+bonsai | lam 0.0185 | K16384 R1024 q7        |   5.510 MB | test 25.460 0.7811 0.5198 | dPSNR +0.102 | dMB +1.985
+bicycle | lam 0.0185 | K4096 R256 q7 (base)   |   5.184 MB | test 22.077 0.5260 0.5346 | dPSNR +0.000 | dMB +0.000
+bicycle | lam 0.0185 | K4096 R256 q8          |   5.409 MB | test 22.088 0.5271 0.5339 | dPSNR +0.011 | dMB +0.225
+bicycle | lam 0.0185 | K4096 R1 q7            |   4.750 MB | test 22.004 0.5202 0.5372 | dPSNR -0.073 | dMB -0.434
+bicycle | lam 0.0185 | K1024 R256 q7          |   4.609 MB | test 22.049 0.5239 0.5360 | dPSNR -0.028 | dMB -0.575
+bicycle | lam 0.0185 | K4096 R1024 q7         |   5.401 MB | test 22.092 0.5271 0.5336 | dPSNR +0.015 | dMB +0.217
+bicycle | lam 0.0185 | K16384 R1024 q7        |   7.332 MB | test 22.109 0.5284 0.5324 | dPSNR +0.032 | dMB +2.148
+flowers | lam 0.00062 | K4096 R256 q7 (base)   |  25.663 MB | test 19.018 0.4810 0.4570 | dPSNR +0.000 | dMB +0.000
+flowers | lam 0.00062 | K4096 R256 q8          |  26.921 MB | test 19.024 0.4822 0.4557 | dPSNR +0.006 | dMB +1.259
+flowers | lam 0.00062 | K4096 R1 q7            |  23.193 MB | test 18.985 0.4758 0.4609 | dPSNR -0.033 | dMB -2.469
+flowers | lam 0.00062 | K1024 R256 q7          |  24.457 MB | test 19.004 0.4793 0.4588 | dPSNR -0.014 | dMB -1.206
+flowers | lam 0.00062 | K4096 R1024 q7         |  26.407 MB | test 19.024 0.4819 0.4563 | dPSNR +0.006 | dMB +0.745
+flowers | lam 0.00062 | K16384 R1024 q7        |  28.953 MB | test 19.035 0.4831 0.4551 | dPSNR +0.017 | dMB +3.291
+treehill | lam 0.00062 | K4096 R256 q7 (base)   |  26.962 MB | test 20.311 0.5174 0.5127 | dPSNR +0.000 | dMB +0.000
+treehill | lam 0.00062 | K4096 R256 q8          |  28.372 MB | test 20.318 0.5187 0.5104 | dPSNR +0.007 | dMB +1.410
+treehill | lam 0.00062 | K4096 R1 q7            |  24.335 MB | test 20.310 0.5138 0.5149 | dPSNR -0.001 | dMB -2.627
+treehill | lam 0.00062 | K1024 R256 q7          |  25.679 MB | test 20.324 0.5154 0.5147 | dPSNR +0.013 | dMB -1.282
+treehill | lam 0.00062 | K4096 R1024 q7         |  27.739 MB | test 20.317 0.5185 0.5112 | dPSNR +0.006 | dMB +0.778
+treehill | lam 0.00062 | K16384 R1024 q7        |  30.376 MB | test 20.324 0.5198 0.5097 | dPSNR +0.013 | dMB +3.414
+truck | lam 0.00062 | K4096 R256 q7 (base)   |  27.271 MB | test 21.784 0.7882 0.2761 | dPSNR +0.000 | dMB +0.000
+truck | lam 0.00062 | K4096 R256 q8          |  28.594 MB | test 21.794 0.7921 0.2729 | dPSNR +0.010 | dMB +1.323
+truck | lam 0.00062 | K4096 R1 q7            |  24.903 MB | test 21.727 0.7831 0.2840 | dPSNR -0.057 | dMB -2.368
+truck | lam 0.00062 | K1024 R256 q7          |  26.089 MB | test 21.763 0.7859 0.2795 | dPSNR -0.021 | dMB -1.182
+truck | lam 0.00062 | K4096 R1024 q7         |  27.978 MB | test 21.799 0.7893 0.2745 | dPSNR +0.015 | dMB +0.707
+truck | lam 0.00062 | K16384 R1024 q7        |  30.545 MB | test 21.817 0.7910 0.2719 | dPSNR +0.032 | dMB +3.274
+flowers | lam 0.00185 | K4096 R256 q7 (base)   |  24.154 MB | test 19.070 0.4835 0.4589 | dPSNR +0.000 | dMB +0.000
+flowers | lam 0.00185 | K4096 R256 q8          |  25.330 MB | test 19.075 0.4845 0.4578 | dPSNR +0.006 | dMB +1.176
+flowers | lam 0.00185 | K4096 R1 q7            |  21.892 MB | test 19.037 0.4783 0.4624 | dPSNR -0.033 | dMB -2.261
+flowers | lam 0.00185 | K1024 R256 q7          |  23.024 MB | test 19.057 0.4818 0.4602 | dPSNR -0.013 | dMB -1.129
+flowers | lam 0.00185 | K4096 R1024 q7         |  24.820 MB | test 19.078 0.4845 0.4578 | dPSNR +0.009 | dMB +0.666
+flowers | lam 0.00185 | K16384 R1024 q7        |  27.298 MB | test 19.083 0.4846 0.4580 | dPSNR +0.013 | dMB +3.145
+treehill | lam 0.00185 | K4096 R256 q7 (base)   |  27.419 MB | test 20.451 0.5244 0.5050 | dPSNR +0.000 | dMB +0.000
+treehill | lam 0.00185 | K4096 R256 q8          |  28.838 MB | test 20.456 0.5256 0.5027 | dPSNR +0.006 | dMB +1.419
+treehill | lam 0.00185 | K4096 R1 q7            |  24.812 MB | test 20.440 0.5207 0.5071 | dPSNR -0.011 | dMB -2.607
+treehill | lam 0.00185 | K1024 R256 q7          |  26.131 MB | test 20.437 0.5221 0.5076 | dPSNR -0.014 | dMB -1.288
+treehill | lam 0.00185 | K4096 R1024 q7         |  28.189 MB | test 20.455 0.5256 0.5037 | dPSNR +0.004 | dMB +0.770
+treehill | lam 0.00185 | K16384 R1024 q7        |  30.807 MB | test 20.458 0.5269 0.5024 | dPSNR +0.007 | dMB +3.388
+truck | lam 0.00185 | K4096 R256 q7 (base)   |  19.311 MB | test 22.201 0.7956 0.2782 | dPSNR +0.000 | dMB +0.000
+truck | lam 0.00185 | K4096 R256 q8          |  20.208 MB | test 22.212 0.7996 0.2742 | dPSNR +0.011 | dMB +0.896
+truck | lam 0.00185 | K4096 R1 q7            |  17.642 MB | test 22.136 0.7902 0.2853 | dPSNR -0.064 | dMB -1.669
+truck | lam 0.00185 | K1024 R256 q7          |  18.342 MB | test 22.169 0.7929 0.2817 | dPSNR -0.032 | dMB -0.969
+truck | lam 0.00185 | K4096 R1024 q7         |  19.832 MB | test 22.215 0.7968 0.2765 | dPSNR +0.014 | dMB +0.521
+truck | lam 0.00185 | K16384 R1024 q7        |  22.169 MB | test 22.231 0.7985 0.2736 | dPSNR +0.031 | dMB +2.858
+flowers | lam 0.0062 | K4096 R256 q7 (base)   |  12.029 MB | test 19.212 0.4622 0.4942 | dPSNR +0.000 | dMB +0.000
+flowers | lam 0.0062 | K4096 R256 q8          |  12.574 MB | test 19.217 0.4631 0.4933 | dPSNR +0.005 | dMB +0.545
+flowers | lam 0.0062 | K4096 R1 q7            |  10.948 MB | test 19.171 0.4569 0.4971 | dPSNR -0.041 | dMB -1.081
+flowers | lam 0.0062 | K1024 R256 q7          |  11.263 MB | test 19.197 0.4604 0.4953 | dPSNR -0.015 | dMB -0.766
+flowers | lam 0.0062 | K4096 R1024 q7         |  12.398 MB | test 19.219 0.4631 0.4934 | dPSNR +0.007 | dMB +0.369
+flowers | lam 0.0062 | K16384 R1024 q7        |  14.532 MB | test 19.232 0.4643 0.4922 | dPSNR +0.020 | dMB +2.502
+train | lam 0.00062 | K4096 R256 q7 (base)   |  30.082 MB | test 18.552 0.6867 0.3871 | dPSNR +0.000 | dMB +0.000
+train | lam 0.00062 | K4096 R256 q8          |  31.713 MB | test 18.557 0.6889 0.3844 | dPSNR +0.005 | dMB +1.631
+train | lam 0.00062 | K4096 R1 q7            |  27.445 MB | test 18.515 0.6814 0.3918 | dPSNR -0.037 | dMB -2.637
+train | lam 0.00062 | K1024 R256 q7          |  28.879 MB | test 18.543 0.6848 0.3896 | dPSNR -0.010 | dMB -1.202
+train | lam 0.00062 | K4096 R1024 q7         |  30.856 MB | test 18.563 0.6883 0.3847 | dPSNR +0.011 | dMB +0.775
+train | lam 0.00062 | K16384 R1024 q7        |  33.515 MB | test 18.576 0.6912 0.3804 | dPSNR +0.023 | dMB +3.433
+treehill | lam 0.0062 | K4096 R256 q7 (base)   |  11.889 MB | test 20.375 0.5090 0.5585 | dPSNR +0.000 | dMB +0.000
+treehill | lam 0.0062 | K4096 R256 q8          |  12.468 MB | test 20.382 0.5101 0.5568 | dPSNR +0.007 | dMB +0.578
+treehill | lam 0.0062 | K4096 R1 q7            |  10.795 MB | test 20.359 0.5048 0.5607 | dPSNR -0.016 | dMB -1.094
+treehill | lam 0.0062 | K1024 R256 q7          |  11.099 MB | test 20.389 0.5082 0.5593 | dPSNR +0.013 | dMB -0.790
+treehill | lam 0.0062 | K4096 R1024 q7         |  12.266 MB | test 20.382 0.5103 0.5578 | dPSNR +0.006 | dMB +0.376
+treehill | lam 0.0062 | K16384 R1024 q7        |  14.412 MB | test 20.380 0.5119 0.5560 | dPSNR +0.005 | dMB +2.523
+truck | lam 0.0062 | K4096 R256 q7 (base)   |   9.413 MB | test 22.367 0.7839 0.3125 | dPSNR +0.000 | dMB +0.000
+truck | lam 0.0062 | K4096 R256 q8          |   9.814 MB | test 22.378 0.7868 0.3095 | dPSNR +0.010 | dMB +0.400
+truck | lam 0.0062 | K4096 R1 q7            |   8.661 MB | test 22.289 0.7781 0.3192 | dPSNR -0.078 | dMB -0.753
+truck | lam 0.0062 | K1024 R256 q7          |   8.736 MB | test 22.335 0.7813 0.3158 | dPSNR -0.032 | dMB -0.678
+truck | lam 0.0062 | K4096 R1024 q7         |   9.712 MB | test 22.385 0.7852 0.3110 | dPSNR +0.017 | dMB +0.299
+truck | lam 0.0062 | K16384 R1024 q7        |  11.757 MB | test 22.398 0.7870 0.3083 | dPSNR +0.030 | dMB +2.344
+flowers | lam 0.0185 | K4096 R256 q7 (base)   |   5.637 MB | test 18.839 0.4169 0.5421 | dPSNR +0.000 | dMB +0.000
+flowers | lam 0.0185 | K4096 R256 q8          |   5.866 MB | test 18.844 0.4176 0.5415 | dPSNR +0.005 | dMB +0.229
+flowers | lam 0.0185 | K4096 R1 q7            |   5.154 MB | test 18.796 0.4120 0.5447 | dPSNR -0.043 | dMB -0.483
+flowers | lam 0.0185 | K1024 R256 q7          |   5.050 MB | test 18.828 0.4154 0.5427 | dPSNR -0.011 | dMB -0.587
+flowers | lam 0.0185 | K4096 R1024 q7         |   5.862 MB | test 18.849 0.4180 0.5413 | dPSNR +0.010 | dMB +0.225
+flowers | lam 0.0185 | K16384 R1024 q7        |   7.825 MB | test 18.860 0.4191 0.5405 | dPSNR +0.021 | dMB +2.188
+truck | lam 0.0185 | K4096 R256 q7 (base)   |   4.424 MB | test 21.639 0.7433 0.3756 | dPSNR +0.000 | dMB +0.000
+truck | lam 0.0185 | K4096 R256 q8          |   4.588 MB | test 21.650 0.7464 0.3722 | dPSNR +0.011 | dMB +0.165
+truck | lam 0.0185 | K4096 R1 q7            |   4.087 MB | test 21.563 0.7378 0.3809 | dPSNR -0.076 | dMB -0.337
+truck | lam 0.0185 | K1024 R256 q7          |   3.875 MB | test 21.610 0.7405 0.3786 | dPSNR -0.029 | dMB -0.549
+truck | lam 0.0185 | K4096 R1024 q7         |   4.613 MB | test 21.657 0.7446 0.3740 | dPSNR +0.018 | dMB +0.189
+truck | lam 0.0185 | K16384 R1024 q7        |   6.532 MB | test 21.663 0.7465 0.3714 | dPSNR +0.024 | dMB +2.108
+treehill | lam 0.0185 | K4096 R256 q7 (base)   |   5.101 MB | test 20.304 0.4749 0.6114 | dPSNR +0.000 | dMB +0.000
+treehill | lam 0.0185 | K4096 R256 q8          |   5.328 MB | test 20.312 0.4759 0.6096 | dPSNR +0.008 | dMB +0.227
+treehill | lam 0.0185 | K4096 R1 q7            |   4.651 MB | test 20.268 0.4701 0.6135 | dPSNR -0.036 | dMB -0.450
+treehill | lam 0.0185 | K1024 R256 q7          |   4.515 MB | test 20.326 0.4731 0.6123 | dPSNR +0.021 | dMB -0.586
+treehill | lam 0.0185 | K4096 R1024 q7         |   5.317 MB | test 20.313 0.4759 0.6104 | dPSNR +0.008 | dMB +0.216
+treehill | lam 0.0185 | K16384 R1024 q7        |   7.264 MB | test 20.313 0.4774 0.6096 | dPSNR +0.009 | dMB +2.163
+train | lam 0.00185 | K4096 R256 q7 (base)   |  25.371 MB | test 18.662 0.6946 0.3837 | dPSNR +0.000 | dMB +0.000
+train | lam 0.00185 | K4096 R256 q8          |  26.690 MB | test 18.667 0.6969 0.3808 | dPSNR +0.004 | dMB +1.319
+train | lam 0.00185 | K4096 R1 q7            |  23.179 MB | test 18.606 0.6872 0.3911 | dPSNR -0.056 | dMB -2.192
+train | lam 0.00185 | K1024 R256 q7          |  24.281 MB | test 18.635 0.6905 0.3897 | dPSNR -0.028 | dMB -1.090
+train | lam 0.00185 | K4096 R1024 q7         |  26.029 MB | test 18.657 0.6942 0.3846 | dPSNR -0.005 | dMB +0.658
+train | lam 0.00185 | K16384 R1024 q7        |  28.538 MB | test 18.676 0.6970 0.3800 | dPSNR +0.013 | dMB +3.167
+train | lam 0.0062 | K4096 R256 q7 (base)   |  13.442 MB | test 18.677 0.6906 0.4040 | dPSNR +0.000 | dMB +0.000
+train | lam 0.0062 | K4096 R256 q8          |  14.096 MB | test 18.682 0.6927 0.4010 | dPSNR +0.005 | dMB +0.654
+train | lam 0.0062 | K4096 R1 q7            |  12.328 MB | test 18.645 0.6851 0.4079 | dPSNR -0.032 | dMB -1.114
+train | lam 0.0062 | K1024 R256 q7          |  12.677 MB | test 18.683 0.6889 0.4063 | dPSNR +0.007 | dMB -0.765
+train | lam 0.0062 | K4096 R1024 q7         |  13.825 MB | test 18.687 0.6922 0.4019 | dPSNR +0.010 | dMB +0.383
+train | lam 0.0062 | K16384 R1024 q7        |  15.979 MB | test 18.703 0.6950 0.3978 | dPSNR +0.026 | dMB +2.537
+train | lam 0.0185 | K4096 R256 q7 (base)   |   6.412 MB | test 18.554 0.6641 0.4426 | dPSNR +0.000 | dMB +0.000
+train | lam 0.0185 | K4096 R256 q8          |   6.695 MB | test 18.558 0.6658 0.4401 | dPSNR +0.004 | dMB +0.283
+train | lam 0.0185 | K4096 R1 q7            |   5.901 MB | test 18.521 0.6590 0.4452 | dPSNR -0.033 | dMB -0.510
+train | lam 0.0185 | K1024 R256 q7          |   5.820 MB | test 18.559 0.6628 0.4442 | dPSNR +0.004 | dMB -0.592
+train | lam 0.0185 | K4096 R1024 q7         |   6.645 MB | test 18.566 0.6658 0.4406 | dPSNR +0.011 | dMB +0.233
+train | lam 0.0185 | K16384 R1024 q7        |   8.596 MB | test 18.581 0.6686 0.4361 | dPSNR +0.026 | dMB +2.184

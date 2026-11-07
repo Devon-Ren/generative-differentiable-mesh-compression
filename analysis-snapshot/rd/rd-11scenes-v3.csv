@@ -1,0 +1,101 @@
+scene,series,label,MB,test,lpips
+room,collapse-noflag,v0.8,25.513,27.883,
+room,collapse-noflag,v0.7,22.511,27.705,
+room,collapse-noflag,v0.6,19.434,27.452,
+room,collapse-noflag,v0.5,16.892,27.09,
+room,collapse-noflag,1.35M,13.926,26.66,
+room,collapse-noflag,0.97M,10.139,25.665,
+garden,collapse,v1.0 q14,32.539,24.458,
+garden,collapse,v0.8,27.339,24.371,
+garden,collapse,1.48M,16.248,23.154,
+garden,collapse,1.09M,12.136,22.299,
+bonsai,collapse-noflag,v0.8,21.964,26.672,
+bonsai,collapse-noflag,v0.7,19.33,26.428,
+bonsai,collapse-noflag,1.44M,13.833,25.028,
+bonsai,collapse-noflag,0.91M,8.961,22.287,
+counter,collapse-noflag,v0.8,21.024,25.377,
+counter,collapse-noflag,v0.7,18.614,25.132,
+counter,collapse-noflag,1.46M,15.811,24.707,
+counter,collapse-noflag,0.72M,8.151,22.393,
+kitchen,collapse-noflag,v0.8,18.029,25.808,
+kitchen,collapse-noflag,v0.7,16.097,25.445,
+kitchen,collapse-noflag,1.35M,15.96,25.406,
+kitchen,collapse-noflag,0.80M,10.104,23.395,
+bicycle,collapse,v1.0,28.372,22.838,
+bicycle,collapse,v0.8,23.266,22.693,
+bicycle,collapse,v0.7,20.453,22.591,
+bicycle,collapse,1.50M,14.874,22.006,
+bicycle,collapse,0.86M,8.634,20.515,
+stump,collapse,v1.0,29.21,24.648,
+stump,collapse,v0.8,23.663,24.347,
+stump,collapse,v0.7,20.721,24.068,
+stump,collapse,1.14M,11.12,22.879,
+stump,collapse,0.88M,8.615,22.158,
+room,lambda-v2,λ 0.00062,28.38,28.272,
+room,lambda-v2,λ 0.0019,13.699,27.985,
+room,lambda-v2,λ 0.0062,5.695,27.37,
+room,lambda-v2,λ 0.018,3.013,26.509,
+garden,lambda-v2,λ 0.002,24.781,24.445,
+garden,lambda-v2,λ 0.006,10.685,23.637,
+bonsai,lambda-v2,λ 0.002,14.796,26.727,
+bonsai,lambda-v2,λ 0.006,6.914,26.066,
+counter,lambda-v2,λ 0.002,14.899,25.761,
+counter,lambda-v2,λ 0.006,6.94,25.263,
+kitchen,lambda-v2,λ 0.002,15.894,26.144,
+kitchen,lambda-v2,λ 0.006,7.604,25.312,
+bicycle,lambda-v2,λ 0.002,30.067,23.018,
+bicycle,lambda-v2,λ 0.006,13.831,22.703,
+stump,lambda-v2,λ 0.002,23.317,24.729,
+stump,lambda-v2,λ 0.006,10.044,24.166,
+flowers,collapse,v1.0,26.914,18.949,
+treehill,collapse,v1.0,28.495,20.27,
+truck,collapse,v1.0,20.036,22.308,
+train,collapse,v1.0,22.316,18.738,
+bicycle,v3,λ 0.0062,11.935,22.687,0.4697
+bicycle,v3,λ 0.00185,26.971,23.018,0.4047
+garden,v3,λ 0.0062,10.175,23.65,0.3854
+garden,v3,λ 0.00185,24.599,24.504,0.2873
+stump,v3,λ 0.0062,8.869,24.121,0.4614
+stump,v3,λ 0.00185,21.405,24.714,0.39
+flowers,v3,λ 0.0062,12.029,19.212,0.4942
+flowers,v3,λ 0.00185,24.154,19.07,0.4589
+treehill,v3,λ 0.0062,11.889,20.375,0.5585
+treehill,v3,λ 0.00185,27.419,20.451,0.505
+truck,v3,λ 0.0062,9.413,22.367,0.3125
+truck,v3,λ 0.00185,19.311,22.201,0.2782
+train,v3,λ 0.0062,13.442,18.677,0.404
+train,v3,λ 0.00185,25.371,18.662,0.3837
+bicycle,v3,λ 0.00062,31.593,22.986,0.3946
+bicycle,v3,λ 0.0185,5.184,22.077,0.5346
+flowers,v3,λ 0.00062,25.663,19.018,0.457
+flowers,v3,λ 0.0185,5.637,18.839,0.5421
+garden,v3,λ 0.00062,36.389,24.734,0.2529
+garden,v3,λ 0.0185,4.969,22.783,0.4673
+stump,v3,λ 0.00062,27.598,24.81,0.3719
+stump,v3,λ 0.0185,3.926,23.214,0.5345
+train,v3,λ 0.00062,30.082,18.552,0.3871
+train,v3,λ 0.0185,6.412,18.554,0.4426
+treehill,v3,λ 0.00062,26.962,20.311,0.5127
+treehill,v3,λ 0.0185,5.101,20.304,0.6114
+truck,v3,λ 0.00062,27.271,21.784,0.2761
+truck,v3,λ 0.0185,4.424,21.639,0.3756
+kitchen,collapse,v1.0,24.325,26.706,0.3206
+room,collapse,v1.0,25.735,27.994,0.3949
+bonsai,collapse,v1.0,28.157,27.663,0.3919
+counter,collapse,v1.0,23.625,25.743,0.4054
+bonsai,v3,λ 0.00185,13.157,27.406,0.4397
+bonsai,v3,λ 0.00062,24.303,27.891,0.3931
+bonsai,v3,λ 0.0062,6.063,26.364,0.4928
+bonsai,v3,λ 0.0185,3.525,25.358,0.523
+counter,v3,λ 0.00185,13.056,25.844,0.4246
+counter,v3,λ 0.00062,20.742,25.952,0.4
+counter,v3,λ 0.0062,6.365,25.315,0.461
+counter,v3,λ 0.0185,3.341,24.536,0.4982
+kitchen,v3,λ 0.00185,16.54,26.886,0.3219
+kitchen,v3,λ 0.00062,24.462,27.092,0.2975
+kitchen,v3,λ 0.0062,8.022,25.971,0.381
+kitchen,v3,λ 0.0185,3.782,24.623,0.4536
+room,v3,λ 0.00185,12.396,28.023,0.4172
+room,v3,λ 0.00062,22.073,28.255,0.3892
+room,v3,λ 0.0062,5.402,27.305,0.4712
+room,v3,λ 0.0185,2.89,26.383,0.497

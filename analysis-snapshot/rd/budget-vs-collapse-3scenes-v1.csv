@@ -1,0 +1,29 @@
+scene,series,label,vertices,MB,test_psnr
+room,collapse,v1.0,3193592,30.932,28.061
+room,collapse,v0.8,2554874,25.513,27.883
+room,collapse,v0.7,2235514,22.511,27.705
+room,collapse,v0.6,1916155,19.434,27.452
+room,collapse,v0.5,1596796,16.892,27.090
+room,collapse,1.35M,1348124,13.926,26.660
+room,collapse,0.97M,966571,10.139,25.665
+room,budget,dense,3193592,30.932,28.061
+room,budget,1.35M,1348124,13.558,27.984
+room,budget,0.97M,966571,10.378,27.711
+room,budget,678k,677638,7.588,27.461
+room,budget,412k,411779,4.985,26.986
+room,budget,362k,361813,4.484,26.628
+garden,collapse,v1.0 q14,3173000,32.539,24.458
+garden,collapse,v0.8,2538000,27.339,24.371
+garden,collapse,1.48M,1475565,16.248,23.154
+garden,collapse,1.09M,1090596,12.136,22.299
+garden,budget,dense q14,3173000,32.539,24.458
+garden,budget,1.48M,1475565,16.510,23.996
+garden,budget,1.09M,1090596,12.523,23.699
+bonsai,collapse,v1.0,2923381,26.607,27.102
+bonsai,collapse,v0.8,2338705,21.964,26.672
+bonsai,collapse,v0.7,2046000,19.330,26.428
+bonsai,collapse,1.44M,1437892,13.833,25.028
+bonsai,collapse,0.91M,912476,8.961,22.287
+bonsai,budget,dense,2923381,26.607,27.102
+bonsai,budget,1.44M,1437892,13.960,26.585
+bonsai,budget,0.91M,912476,9.542,26.585

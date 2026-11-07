@@ -1,0 +1,12 @@
+---
+name: quality-gap-diagnostics-oct2026
+description: Why MeshSplatting is ~2.4 dB below 3DGS and what the 10/19-10/20 diagnostics (error anatomy, env-map probe) showed; renderer facts (alpha cap 0.999, no background model); line closed
+metadata:
+  type: project
+---
+
+Context: [[meshsplatting-compression-status]]. Assessment doc plan/quality-gap-assessment-2026-10-19.md.
+
+QUALITY-GAP ASSESSMENT 2026-10-19 (plan/quality-gap-assessment-2026-10-19.md): the 2.4 dB gap to 3DGS is the opaque-mesh class gap (matches authors' paper), not a fixable mismatch; no method stacking before the full-scene batches. Renderer facts: per-vertex SH evaluated at the vertex, RGB interpolated with screen-space barycentrics (Gouraud), no background/sky model (C + T*black), opaque by 24k/30k, 4x supersampling. Room train[::8] vs test gap 2.5 dB at 2.9M v, 1.4 dB at 226k v (dense overfits). Only candidate small fix = learnable env map for outdoor scenes, gated on the error-anatomy diagnostic (analysis/diag/error_anatomy_v1.py, paste block analysis/commands/error-anatomy-v1.md, 10 min GPU): run only if the 'background' bucket upper bound >= 0.5 dB.
+ERROR ANATOMY RESULT 10/19 (rd/error-anatomy-room-2026-10-19.md): Room dense test 28.263: background (alpha<0.99, 0.4 % px) carries 9.1 % SSE (+0.74 dB if zero), silhouette 3.3x density (+0.27), interior_hf 2.3x (+0.77), affine/exposure UB only +0.34; "seam" bucket = ordinary interior at this tessellation (70 % px, 0.83x), ignore. Train/test gap 2.45 dB dense vs 1.70 at 440k v (lambda 6.2e-3): half of dense capacity is memorisation. Next: env-map post-hoc probe (analysis/diag/envmap_fit_v1.py, commands/envmap-probe-v1.md; Room+garden+stump+bicycle originals, 3-5 min each); gate: test gain >=0.3 indoor / >=0.5 outdoor -> put env map in codec + phase-B training; <0.2 -> drop, start batch A.
+ENV-MAP PROBE 10/20 (rd/envmap-probe-2026-10-20.md): post-hoc env map gains 0.002-0.121 dB test on room/garden/stump/bicycle, uncovered pixels <0.4 % everywhere -> LINE CLOSED, no background model needed (one sentence in analysis). Quality-gap question settled: no small fix, start full-scene batches. Batch A delivered: commands/batchA-originals-v1.md (originals-v1.sbatch: normals + train + precision rule + level-1.0 delivery for flowers/treehill/truck/train, general, 3.5 h walltime, 64G, ~10 GPU-h; T&T download block included). Rasterizer fact: per-layer alpha capped at 0.999 (forward.cu 558) -> any 'alpha<0.999' mask selects every pixel.

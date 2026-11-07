@@ -1,0 +1,19 @@
+---
+name: adaptive-lambda-nov2026
+description: adaptive lambda (closed-loop --target_mb) CURRENT 11/07 11:30Z: v9 (plan count + limiter fixes) reaches V*; hits Blender 0.95-0.99, Mip 10/20 MB 0.79-0.88, residual = final-cleaning share + topology prior (dataset-class, unmeasurable before Delaunay); node-batch13-v1 = 43-job v9 sweep ready, user choosing A/B/C
+metadata:
+  type: project
+  modified: 2026-11-07T11:30:00.000Z
+---
+
+Goal (user, 11/06): fully adaptive lambda, no tuned constants, parameters updated from the process. RULES: iterate only on lego/chair (Blender protocol, ~25 min/run), never tune on big scenes; review the whole chain on CPU before any GPU job ([[feedback-review-before-gpu]]).
+
+Versions: v6 ([[adapt-v6-blender-results-nov2026]]) delivery fixed, quality above hull, all under target. v7/v7b = v6 + exact accounting + gate (collapse only if est > target) + growth_capped flag + probes 22k/26k: rdgrowth/train_rd_adapt_v7b.py (827 l, md5 24f478ca), rd/adapt-v7b-blender.sbatch (VERSION v7b-r2), rd/adapt-v7b.sbatch (VERSION v7-r2, Mip/T&T).
+
+BATCH8-v2 (11/06): v7b landing passed (lego2.5 1.014, chair2.5 0.968, lego4 0.994, chair4 0.892 capped) but gate-closed 4 MB rows 0.32/0.53 dB below v6 (gradual lambda-prune = regulariser on sparse views); v7c (lambda-prune always on) = later ablation only.
+
+SCENE SWEEP (node-batch9-v2 + batch10, 47/47; rd/adapt-v7b-sweep-analysis.txt/.csv/-table.tex): probe/delivered 0.999-1.001; Mip/T&T hit 5/10/20 MB mean 0.89/0.83/0.77 (phase B never collapsed: landing never above target); equal-bytes dPSNR vs hull mean -0.10. Blender 2.5 lego/chair/hotdog 1.01/0.97/0.98, ficus/mic capped; 4 MB all capped. The "B/V prior" cause written there is only half right: see v8 RESULT.
+
+v8 RESULT 11/07 09:00Z (batch11, rd/adapt-v8-batch11-2026-11-07-paste.md): b_v soup->mesh transfers (0.8-8 %), overhead 1 %, probe cost 2-3 min, but ALL 6 landings below v7b (lego2.5 0.916, chair2.5 0.879, lego4 0.846, chair4 0.797, bicycle10 0.710, room10 0.795). ROOT CAUSE (v4-v8, found from the densify lines): plan counted one densify interval too many (`remaining = (until-it)//interval + 1` = 2 at 9500, upstream densifies only while it < 10000 -> 17 intervals, plan believed 18) so the geometric plan reached sqrt(V x V*) at the last interval = 0.81-0.92 V* on all runs (CPU replay reproduces it within 0.3-5 %); the sweep's "phase A reaches 0.83-0.97 of V*" was this bug, masked on Blender by v7b's 30 %-high constant V*. Second: plan_splits divided upstream's limiter (add_pct*V - V triangles) by 3 -> believed it 3x tighter (the 4 MB "limiter-bound 12-13/17" is mostly artifact). Residual = topology prior 5 B/V vs delivered 3.7-4.5 (Mip, V* 9-13 % low) / 5.9-6.3 (Blender, V* 3-10 % high, phase B prunes); not measurable on the soup.
+
+v9 RESULT 11/07 11:10Z (batch12, rd/adapt-v9-batch12-2026-11-07-paste.md): plan reaches V* (model after last prune 0.96-0.99 V*, chair4 limiter-bound). Hits lego2.5 0.991, chair2.5 0.965, chair4 0.947, bicycle10 0.790, room10 0.877, room20 0.829 (v7b 1.014/0.968/0.892/0.775/0.814/0.75). Residual on Mip = two dataset-class priors not visible on the soup: final-cleaning share kappa_end 0.92-0.94 (Blender 0.995) and topology b_f x fpv_end 3.7-4.4 B/V (Blender 6.1) vs prior 5; hit = kappa x (b_v+topo)/(b_v+5) reproduces 0.86/0.80/0.81. PSNR vs chord lego -0.22, chair +0.02, chair4 -0.13. Cosmetic: plan complete at 9500 -> lam_max reported as lam_final on no-collapse rows (phase B resets to shadow price on its first capped round). NEXT: commands/node-batch13-v1.md = 43-job v9 sweep (same params as batch9-v2, batch12 rows reused, ~34 GPU-h), recommended; v10 idea = second growth window after the 11k Delaunay mesh probe (measured kappa/b_f/fpv, Delaunay again, phase B prunes the kappa trend). See [[adaptive-lambda-history-nov2026]], [[sweep-scene-settings-nov2026]], [[handover-package-nov2026]].

@@ -1,0 +1,14 @@
+v12 2026-10-15
+v1: pixel-space builder (--base pixel only), target_faces mode
+v2: + sensitivity arrays in footprint (sens_pos/sens_dc/l1_pos), --geo-weight/--app-weight, per-vertex appearance_scale in C++
+v3: + --base uniform (default) and --weight-divide-pixel-scale; report.json carries "package_version"
+v4: + deliver_coarse.py / deliver_coarse.sh (best.pt -> stage2 sharing -> shared fit -> codec export -> MB + test metrics); uniform-mode report cleanup
+v5: + --target-vertices (collapse to a vertex count instead of a face count; equal faces != equal bytes)
+v6: deliver_coarse.py + --k/--r (k-means dictionaries on the mesh), --xyz/--dc precision, --qat (pre-quantised geometry + STE DC fit); precision_sweep.py; stage2_run.sh; scripts/ (run_draco, run_axisA, run_axisB, run_rate_aware, topology_reference.py)
+v7: + index_rd.py / scripts/run_index_rd.sh (neighbour-context RD reassignment of SH indices, rate-aware step 2); scripts point at vis_collapse-v7
+v8: default delivery precision q14/q8; XYZ q15/q13 and DC q7 modes; QAT fit uses a fixed, pinned DC grid (v7 dynamic grid = negative result); run_draco.sh no longer uses set -e; run_rate_aware.sh sweeps the knee (q16..q13 x q8/q7)
+v9: index_rd.py table printing rewritten without nested same-quote f-strings (SyntaxError on Python 3.11, the HPC venv); all .py files now compile under python3.11; scripts point at vis_collapse-v9
+v10: + native/index_ctx.cpp (decodable neighbour-context arithmetic coder for app_mapping/app_residual_mapping, reuses stage2 codec/native.cpp coder), build_index_ctx.py, index_context_codec.py, scripts/run_index_ctx.sh (real bytes zstd vs ctx per lambda, merged with index_rd metrics); scripts point at vis_collapse-v10
+v11: run_axisA.sh defaults to the axis-B v0.8 mesh and writes to $W/axisA-<level>/ + axisA-<level>.txt (TAG/MESH overridable), so sweeps on different meshes do not collide; scripts point at vis_collapse-v11
+v12: stage2-v2 delivery format (constant vertex_weight + neighbour-context index coder) as default; deliver_coarse --weight/--index-codec,
+     --seed-asset optional with --k, --historical-config none; codec_variants.py; scripts/run_codec_variants.sh, run_default_room.sh, run_garden.sh

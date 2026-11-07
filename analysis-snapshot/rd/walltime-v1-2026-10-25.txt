@@ -1,0 +1,48 @@
+# walltime-v1.sh output (user paste 2026-10-25); first/last [dd/mm hh:mm:ss] stamp in train.log -> minutes; test PSNR = [ITER 30000] test
+room | room-vis-collapse | no train.log
+room | room-rd3-lam0.00185-mu1.0 | [19/10 06:02:37] -> [19/10 06:36:21] | 33.7 min | test PSNR 28.270865367009087
+room | room-rd3-lam0.0062-mu1.0 | [19/10 05:29:57] -> [19/10 05:56:02] | 26.1 min | test PSNR 27.56234540694799
+garden | garden-vis-collapse | [15/10 11:55:57] -> [15/10 12:45:07] | 49.2 min | test PSNR 24.745946089426674
+garden | garden-rd3-lam0.00185-mu1.0 | [24/10 07:14:13] -> [24/10 07:52:22] | 38.1 min | test PSNR 24.606923500696816
+garden | garden-rd3-lam0.0062-mu1.0 | [24/10 06:43:35] -> [24/10 07:07:16] | 23.7 min | test PSNR 23.65959072113037
+bonsai | bonsai-vis-collapse | [16/10 11:06:46] -> [16/10 11:59:58] | 53.2 min | test PSNR 27.35857311454979
+bonsai | bonsai-rd3-lam0.00185-mu1.0 | [24/10 07:20:38] -> [24/10 07:58:35] | 38.0 min | test PSNR 26.85098539816367
+bonsai | bonsai-rd3-lam0.0062-mu1.0 | [24/10 06:43:47] -> [24/10 07:12:49] | 29.0 min | test PSNR 26.172307504189984
+counter | counter-vis-collapse | [17/10 00:04:37] -> [17/10 01:02:30] | 57.9 min | test PSNR 26.067403920491536
+counter | counter-rd3-lam0.00185-mu1.0 | [24/10 07:25:02] -> [24/10 08:07:41] | 42.6 min | test PSNR 26.16496442159017
+counter | counter-rd3-lam0.0062-mu1.0 | [24/10 06:43:46] -> [24/10 07:16:34] | 32.8 min | test PSNR 25.55273043314616
+kitchen | kitchen-vis-collapse | [17/10 00:04:47] -> [17/10 00:58:30] | 53.7 min | test PSNR 26.394318989345006
+kitchen | kitchen-rd3-lam0.00185-mu1.0 | [24/10 07:26:08] -> [24/10 08:11:28] | 45.3 min | test PSNR 26.530701991489956
+kitchen | kitchen-rd3-lam0.0062-mu1.0 | [24/10 06:43:46] -> [24/10 07:17:35] | 33.8 min | test PSNR 25.61144267490932
+bicycle | bicycle-vis-collapse | [17/10 00:04:58] -> [17/10 00:45:47] | 40.8 min | test PSNR 23.041341094970704
+bicycle | bicycle-rd3-lam0.00185-mu1.0 | [24/10 07:15:05] -> [24/10 07:55:26] | 40.4 min | test PSNR 23.226826095581057
+bicycle | bicycle-rd3-lam0.0062-mu1.0 | [24/10 06:43:27] -> [24/10 07:08:00] | 24.6 min | test PSNR 22.848317794799804
+stump | stump-vis-collapse | [17/10 00:04:56] -> [17/10 00:46:12] | 41.3 min | test PSNR 24.986058950424194
+stump | stump-rd3-lam0.00185-mu1.0 | [24/10 07:13:50] -> [24/10 07:45:27] | 31.6 min | test PSNR 25.03596842288971
+stump | stump-rd3-lam0.0062-mu1.0 | [24/10 06:47:52] -> [24/10 07:07:57] | 20.1 min | test PSNR 24.363627433776855
+flowers | flowers-vis-collapse | [24/10 03:22:35] -> [24/10 04:06:38] | 44.0 min | test PSNR 19.451906030828304
+flowers | flowers-rd3-lam0.00185-mu1.0 | [24/10 09:45:22] -> [24/10 10:24:07] | 38.8 min | test PSNR 19.528403238816697
+flowers | flowers-rd3-lam0.0062-mu1.0 | [24/10 09:12:25] -> [24/10 09:38:16] | 25.9 min | test PSNR 19.55384176427668
+treehill | treehill-vis-collapse | [24/10 03:22:39] -> [24/10 04:05:52] | 43.2 min | test PSNR 20.387756294674343
+treehill | treehill-rd3-lam0.00185-mu1.0 | [24/10 09:46:36] -> [24/10 10:29:43] | 43.1 min | test PSNR 20.53113063176473
+treehill | treehill-rd3-lam0.0062-mu1.0 | [24/10 09:12:29] -> [24/10 09:38:36] | 26.1 min | test PSNR 20.464991357591416
+truck | truck-vis-collapse | [24/10 03:22:53] -> [24/10 03:53:45] | 30.9 min | test PSNR 22.387323319911957
+truck | truck-rd3-lam0.00185-mu1.0 | [24/10 09:36:24] -> [24/10 10:04:40] | 28.3 min | test PSNR 22.26438820362091
+truck | truck-rd3-lam0.0062-mu1.0 | [24/10 09:14:06] -> [24/10 09:30:52] | 16.8 min | test PSNR 22.38263964653015
+train | train-vis-collapse | [24/10 03:24:03] -> [24/10 03:56:40] | 32.6 min | test PSNR 18.900934269553737
+train | train-rd3-lam0.00185-mu1.0 | [24/10 09:42:01] -> [24/10 10:16:34] | 34.5 min | test PSNR 18.80265456751773
+train | train-rd3-lam0.0062-mu1.0 | [24/10 09:14:06] -> [24/10 09:35:33] | 21.4 min | test PSNR 18.829228576860928
+# Room extra (user paste 2026-10-25, stamps only; test PSNR from previous paste). Room original (room-fixed-sharing) has no train.log; proxy = room-rd-error-lam0 (rd v1 code, lambda 0 = unpriced dense growth).
+room | room-rd-error-lam0 | [18/10 00:10:31] -> [18/10 01:01:23] | 50.9 min | test PSNR 28.5085
+room | room-rd-error-lam0.0003 | [18/10 00:15:05] -> [18/10 01:06:53] | 51.8 min | test PSNR 28.5149
+room | room-rd-error-lam0.001 | [18/10 01:13:07] -> [18/10 02:03:07] | 50.0 min | test PSNR 28.6096
+room | room-rd-error-lam0.003 | [18/10 01:18:44] -> [18/10 01:53:07] | 34.4 min | test PSNR 28.3287
+room | room-rd-error-lam0.01 | [18/10 02:15:01] -> [18/10 02:41:25] | 26.4 min | test PSNR 27.5872
+room | room-rd-error-lam0.03 | [18/10 02:02:00] -> [18/10 02:25:51] | 23.9 min | test PSNR 26.6874
+room | room-rdm-importance-lam0.0062 | [19/10 02:28:23] -> [19/10 02:55:06] | 26.7 min | test PSNR 27.0550
+room | room-budget-1600000 | [17/10 01:49:00] -> [17/10 02:24:58] | 36.0 min | test PSNR 28.2915
+room | room-budget-1000000 | [17/10 02:47:54] -> [17/10 03:19:57] | 32.1 min | test PSNR 27.9955
+room | room-budget-700000 | [17/10 06:34:31] -> [17/10 07:03:39] | 29.1 min | test PSNR 27.7676
+room | room-budget-500000 | [17/10 07:10:59] -> [17/10 07:36:59] | 26.0 min | test PSNR 27.1860
+room | room-budget-350000 | [17/10 07:43:39] -> [17/10 08:08:42] | 25.1 min | test PSNR 26.8138
+# Summary (10 scenes with original train.log): original mean 44.7 min (30.9-57.9); lam 1.85e-3 38.1 (0.87x, range 0.71-1.06); lam 6.2e-3 25.4 (0.57x, range 0.48-0.66). Room vs lam0 proxy 50.9: hi 0.66x, lo 0.51x.

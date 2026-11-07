@@ -1,0 +1,19 @@
+---
+name: meshsplat-plus-vision
+description: 10/29 "MeshSplat+++" next-paper formalisation (plan/meshsplat-plus-2026-10-29.md): per-face textures, manifold by construction, mesh + alpha cards, one pricing law; probes P1 face-level (failed), P1b vertex-level (PASSED 10/30), P2 texture refit delivered 10/30 (nvdiffrast, run pending)
+metadata:
+  type: project
+  modified: 2026-10-30T04:00:00Z
+---
+
+Doc: plan/meshsplat-plus-2026-10-29.md (user's 10/29 ask: a completely better formalisation of the differentiable mesh). Position: next paper, not CVPR 2027.
+
+Evidence used: soup freedom = quality (A dead, [[decoder-side-topology-idea]]); vertices do texture's job (codebook results); bytes must buy evidence in the loop ([[evidence-priced-growth-principle]], [[scenes7-budget-vs-collapse]]). Baselines ([[baseline-numbers-literature]]): watertight BakedSDF/BOG match MeshSplatting indoors and lose outdoors; Radiance Meshes (volumetric tets) reach 3DGS => the 2-3 dB gap is the single opaque primitive, not meshness.
+
++++ axes: 4.1 per-face textures (Ptex / mesh-colors, no UV) so vertex density follows shape only; 4.2 closed init (coarse SDF / visual hull / 2DGS->TSDF + far shell) then only manifold ops (split/collapse/flip) with Laplacian preconditioning, no RDel, connectivity ~2 bits/v; 4.3 opaque manifold mesh for solids + alpha cards for fuzzy/thin content; 4.4 one law: consistent-residual dD > lambda dR prices split/collapse/card/texture-res. Risks: edge-only visibility gradients, topology changes after init, UV-free texture filtering, months of CUDA.
+
+Probes (CPU first, user 10/30). Code: diag/planarity_v1.py (face level), diag/planarity_points_v1.py (vertex level, k32 PCA normals, recursive normal bisection), commands/planarity-v1b.md + run_planarity_v1b.sh (restartable; outputs $AN/planarity-v1.txt PLANARITY rows, $AN/planarity-v1b.txt PLANES rows, per-vertex plane labels npy per checkpoint for P2).
+P1 (face level, eps 0.25 %/theta 10): vertex share kitchen 49 / counter 40 / room 34 / bonsai 27 / T&T 24 / vegetation 6-12 %, INTERIOR <= 12.7 % everywhere, outline 1.2-1.5x; theta binds (5->10 doubles share), eps does not; dihedral < 10 deg 42-52 % indoor / 26-29 % outdoor => large-angle shingles at triangle scale. FAILED its pass rule.
+P1b (vertex level, eps 0.5 %/theta 10, planes >= 1000 pts, lam 6.2e-3): kitchen 75 (one plane 70 %), garden 59 (ground 42), room 54, truck 53, train 51, counter 50, bonsai 46, bicycle 42, stump 40, treehill 32, flowers 16 %; lam 1.85e-3 / dense same or higher (room dense 71); locally flat 97.5-100 %. PASSED (indoor >= 40 %) => "world flat, mesh crumpled": 50-75 % of indoor vertices on planes vs 10-12 % plane-interior faces = crumple; argues for 4.1 + 4.2 worth >= 2x vertices; vegetation low => cards 4.3. P1b complete 10/30 (truck dense 49, train dense 42 %). P2 RESULT 10/30 (diag/texture_refit_v1.py, opaque nvdiffrast, room+kitchen x 2 lam, $AN/texrefit-v1.txt): (a) opaque-render loss of the trained soup: room -2.0 dB (25.55 vs 27.56), kitchen -3.6 dB (22.03 vs 25.61; planar px 18 dB) => soup quality depends on soft blended compositing, it is not an opaque surface; (b) fixed mesh: vdc ~ tb2 ~ tb4 (within 0.2 dB), all 0.3-0.7 below vsh3_init; faces are ~1 px (1-2.6 M faces on 1.6 Mpx) so textures are unresolvable; colour is not the limiter; (c) coarse+tb4 25.27 < fine+vdc 25.44 < fine init 26.05: extra vertices buy pixel-scale geometry/blending, not colour => 4.1 untestable without a coarser mesh (= 4.2). P2b (grid re-mesh of P1b planes + textures, ~1 GPU-h) DEFERRED: user 10/30 chose CVPR paper first.
+
+11/05 first-principles discussion (surface-first decomposition, P2b chain): [[surface-first-decomposition-nov2026]]. P2b lego 11/05 FAILED the surface+texture premise (layering = capacity); 4.3 surface + alpha cards intro: plan/surface-plus-alpha-cards-2026-11-05.md (route A: surface + soup residual faces -> cards, probe = residual share 0.3 GPU-h; route B from scratch).

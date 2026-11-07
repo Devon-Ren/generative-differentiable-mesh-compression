@@ -1,0 +1,261 @@
+diff -ruN -x .pytest_cache -x __pycache__ -x '*.pyc' stage2-v1/codec/delivery.py stage2-v2/codec/delivery.py
+--- stage2-v1/codec/delivery.py	2026-10-15 05:27:33.192227369 +0000
++++ stage2-v2/codec/delivery.py	2026-10-15 05:31:39.260542888 +0000
+@@ -36,10 +36,20 @@
+     if low.shape!=(3,) or scale.shape!=(3,) or not np.isfinite(low).all() or not np.isfinite(scale).all() or np.any(scale<0):raise ValueError('Invalid quantization range')
+     return (q.astype(np.float64).reshape(-1,3)*scale+low).astype(np.float32).reshape(q.shape)
+ 
+-def prepare(state,xyz='f32',dc='f32',strip=True):
++def weight_summary(state):
++    """stage2-v2: per-vertex opacity logits replaced by one constant (opacity is floor+(1-floor)*sigmoid, floor .999)."""
++    w,_=array_of(state['vertex_weight']);w=np.asarray(w,np.float64);const=float(w.mean())
++    floor=float(state.get('opacity_floor',.999));op=lambda x:floor+(1-floor)/(1+np.exp(-x))
++    return const,float(np.abs(op(w)-op(const)).max()),(1 if w.ndim==2 else 0)
++
++def prepare(state,xyz='f32',dc='f32',strip=True,weight='keep'):
+     if xyz not in XYZ_MODES or dc not in DC_MODES:raise ValueError('Unknown mode')
++    if weight not in ('keep','const'):raise ValueError('Unknown weight mode')
+     result={k:v for k,v in state.items() if not strip or k not in AUX}
+     result['delivery_schema']=1
++    if weight=='const' and 'vertex_weight' in result:
++        const,_,cols=weight_summary(result);result.pop('vertex_weight')
++        result['vertex_weight_const']=const;result['vertex_weight_cols']=cols
+     for key,mode in [('triangles_points',xyz),('features_dc',dc)]:
+         if mode=='f32':continue
+         a,kind=array_of(result[key])
+@@ -50,7 +60,10 @@
+ 
+ def restore(state):
+     if state.get('delivery_schema')!=1:raise ValueError('Unknown delivery schema')
+-    result={k:v for k,v in state.items() if not k.startswith('quant_') and k!='delivery_schema'}
++    result={k:v for k,v in state.items() if not k.startswith('quant_') and k not in ('delivery_schema','vertex_weight_const','vertex_weight_cols')}
++    if 'vertex_weight_const' in state:
++        n=len(state['triangles_points']);shape=(n,1) if state.get('vertex_weight_cols',1) else (n,)
++        result['vertex_weight']=torch.full(shape,float(state['vertex_weight_const']),dtype=torch.float32)
+     for key in ('triangles_points','features_dc'):
+         prefix='quant_'+key+'_'
+         meta={k[len(prefix):]:v for k,v in state.items() if k.startswith(prefix)}
+diff -ruN -x .pytest_cache -x __pycache__ -x '*.pyc' stage2-v1/codec/index_context.py stage2-v2/codec/index_context.py
+--- stage2-v1/codec/index_context.py	1970-01-01 00:00:00.000000000 +0000
++++ stage2-v2/codec/index_context.py	2026-10-15 05:33:08.284369367 +0000
+@@ -0,0 +1,64 @@
++"""stage2-v2: neighbour-context arithmetic coding of the shared-SH index arrays (codec/index_ctx.cpp).
++
++Replaces the zstd-coded app_mapping (and app_residual_mapping when the residual covers every vertex) by two
++context-coded streams.  The decoder rebuilds the context from the decoded faces, so this runs AFTER topology
++decoding and never transmits neighbour tables.  Fields added to the wire:
++  ctx_schema=1, ctx_mapping (uint8), ctx_mapping_k, ctx_mapping_u32 (0: uint16 array, 1: uint32),
++  ctx_residual (uint8), ctx_residual_k, ctx_residual_u32   (residual fields only when coded)
++"""
++import os
++from pathlib import Path
++import shlex
++import shutil
++import subprocess
++import numpy as np
++import local_codec as lc
++
++FIELDS=('ctx_schema','ctx_mapping','ctx_mapping_k','ctx_mapping_u32','ctx_residual','ctx_residual_k','ctx_residual_u32')
++
++def native(cache):
++    cache=Path(cache);cache.mkdir(parents=True,exist_ok=True)
++    root=Path(__file__).parent;exe=cache/('ctx-'+lc.digest(root/'index_ctx.cpp')[:12]+'-'+lc.digest(root/'native.cpp')[:12])
++    if not exe.exists():
++        compiler=shlex.split(os.environ.get('CXX','')) or [shutil.which('c++') or 'g++']
++        temp=exe.with_suffix('.building');subprocess.run(compiler+['-O3','-std=c++17',str(root/'index_ctx.cpp'),'-o',str(temp)],check=True);temp.replace(exe)
++    return exe
++
++def _faces_file(faces,folder,name):
++    f=np.asarray(faces);path=Path(folder)/name
++    if f.ndim!=2 or f.shape[1]!=3 or f.min()<0:raise ValueError('Expected Nx3 nonnegative faces')
++    f.astype('<u4').tofile(path);return path
++
++def _code(exe,command,faces_path,n,src,K,dst):
++    lc.call(exe,command,faces_path,n,src,int(K),dst)
++
++def full_coverage(wire):
++    rows=np.asarray(wire.get('app_rows',()));n=len(np.asarray(wire['app_mapping']))
++    return len(rows)==n and np.array_equal(rows,np.arange(n))
++
++def encode(wire,faces,folder,exe):
++    """wire: topology-encoded wire (vertex order = delivered order); faces: int faces in that order."""
++    folder=Path(folder);n=len(np.asarray(wire['app_mapping']));fp=_faces_file(faces,folder,'ctx-faces.bin')
++    result=dict(wire);result['ctx_schema']=1
++    jobs=[('app_mapping','ctx_mapping',len(wire['app_bank']))]
++    if wire.get('app_schema')==2 and full_coverage(wire) and len(wire['app_residual_mapping'])==n:
++        jobs.append(('app_residual_mapping','ctx_residual',len(wire['app_residual_bank'])))
++    for key,out,K in jobs:
++        a=np.asarray(wire[key]);src=folder/(out+'-codes.bin');dst=folder/(out+'-stream.bin')
++        if a.ndim!=1 or len(a)!=n or a.dtype.kind!='u':raise ValueError(key)
++        a.astype('<u4').tofile(src);_code(exe,'encode',fp,n,src,K,dst)
++        result.pop(key);result[out]=np.fromfile(dst,np.uint8);result[out+'_k']=int(K);result[out+'_u32']=int(a.dtype.itemsize==4)
++    return result
++
++def decode(wire,faces,folder,exe):
++    if wire.get('ctx_schema')!=1:raise ValueError('ctx schema')
++    folder=Path(folder);n=len(wire['triangles_points']);fp=_faces_file(faces,folder,'ctx-dec-faces.bin')
++    result={k:v for k,v in wire.items() if not k.startswith('ctx_')}
++    for key,out in (('app_mapping','ctx_mapping'),('app_residual_mapping','ctx_residual')):
++        if out not in wire:continue
++        src=folder/(out+'-dec-stream.bin');dst=folder/(out+'-dec-codes.bin');np.asarray(wire[out],np.uint8).tofile(src)
++        _code(exe,'decode',fp,n,src,wire[out+'_k'],dst)
++        a=np.fromfile(dst,np.uint32)
++        if len(a)!=n:raise ValueError('decoded index count')
++        result[key]=a.astype(np.uint32 if wire[out+'_u32'] else np.uint16)
++    return result
+diff -ruN -x .pytest_cache -x __pycache__ -x '*.pyc' stage2-v1/codec/index_ctx.cpp stage2-v2/codec/index_ctx.cpp
+--- stage2-v1/codec/index_ctx.cpp	1970-01-01 00:00:00.000000000 +0000
++++ stage2-v2/codec/index_ctx.cpp	2026-10-15 05:31:39.227234166 +0000
+@@ -0,0 +1,48 @@
++// Neighbour-context coder for the shared-SH index arrays (app_mapping / app_residual_mapping), stage2-v2.
++// Reuses the adaptive binary arithmetic coder of native.cpp (same trick as edge.cpp).  Decodable from the
++// DELIVERED mesh alone: both sides rebuild, from the decoded faces, each vertex's distinct codes of
++// earlier-index neighbours (ascending neighbour index, at most 32), so topology must be decoded first.
++//   index_ctx encode faces.bin vertex_count codes.bin K out.bin     codes: uint32[vertex_count]
++//   index_ctx decode faces.bin vertex_count in.bin K out.bin        writes uint32[vertex_count]
++// Per vertex: m = #candidates.  m>0: hit bit (context m); hit -> 5-bit slot via prefix tree (context m);
++// miss or m==0 -> raw code via an adaptive prefix tree over ceil(log2 K) bits (order-0 model of the codes).
++#define main xyz_program_main
++#include "native.cpp"
++#undef main
++static const int MAXC=32;
++struct Model{int nbits;std::vector<Count> hit,slot,raw;
++ Model(U K):nbits(0){while((U(1)<<nbits)<K)nbits++;hit.resize(MAXC+1);slot.resize((MAXC+1)*64);raw.resize(size_t(1)<<(nbits+1));}};
++// CSR of earlier neighbours (u<v), ascending, built from the oriented face list; degenerate edges ignored.
++static void earlier(const std::vector<U>&f,size_t n,std::vector<int64_t>&ptr,std::vector<U>&dst){
++ std::vector<uint64_t> e;e.reserve(f.size()*2);
++ for(size_t i=0;i+2<f.size()+0;i+=3){U t[3]={f[i],f[i+1],f[i+2]};
++  for(int k=0;k<3;k++){U a=t[k],b=t[(k+1)%3];if(a==b)continue;if(a>=n||b>=n)throw std::runtime_error("face index range");
++   U lo=std::min(a,b),hi=std::max(a,b);e.push_back((uint64_t(hi)<<32)|lo);}}
++ std::sort(e.begin(),e.end());e.erase(std::unique(e.begin(),e.end()),e.end());
++ ptr.assign(n+1,0);for(uint64_t x:e)ptr[(x>>32)+1]++;for(size_t v=0;v<n;v++)ptr[v+1]+=ptr[v];
++ dst.resize(e.size());for(uint64_t x:e){U v=U(x>>32);dst[ptr[v]++]=U(x&0xffffffffu);}
++ for(size_t v=n;v>0;v--)ptr[v]=ptr[v-1];ptr[0]=0;}
++static int candidates(size_t v,const std::vector<int64_t>&ptr,const std::vector<U>&dst,const std::vector<U>&code,U*cand){int m=0;
++ for(int64_t j=ptr[v];j<ptr[v+1]&&m<MAXC;j++){U c=code[dst[j]];bool seen=false;for(int k=0;k<m;k++)if(cand[k]==c){seen=true;break;}if(!seen)cand[m++]=c;}
++ return m;}
++template<class F> static void prefix(int nbits,std::vector<Count>&c,size_t base,U&x,F&&bit){int p=1;U v=0;for(int b=nbits-1;b>=0;b--){int k=bit(c[base+p],(x>>b)&1);v=(v<<1)|k;p=p*2+k;}x=v;}
++int main(int argc,char**argv){try{
++ if(argc!=7)throw std::runtime_error("encode/decode faces.bin vertex_count codes_or_stream.bin K out.bin");
++ bool encoding=std::string(argv[1])=="encode";if(!encoding&&std::string(argv[1])!="decode")throw std::runtime_error("command");
++ size_t n=std::stoull(argv[3]);U K=U(std::stoul(argv[5]));if(K<1)throw std::runtime_error("K");
++ auto f=read<U>(argv[2]);if(f.size()%3)throw std::runtime_error("faces");
++ std::vector<int64_t> ptr;std::vector<U> dst;earlier(f,n,ptr,dst);Model M(K);U cand[MAXC];
++ if(encoding){auto code=read<U>(argv[4]);if(code.size()!=n)throw std::runtime_error("code count");Encoder enc;
++  auto bit=[&](Count&ct,int b){enc.code(b,ct);return b;};
++  for(size_t v=0;v<n;v++){if(code[v]>=K)throw std::runtime_error("code out of range");
++   int m=candidates(v,ptr,dst,code,cand);int s=-1;for(int k=0;k<m;k++)if(cand[k]==code[v]){s=k;break;}
++   if(m>0){enc.code(s>=0,M.hit[m]);if(s>=0){U x=U(s);prefix(5,M.slot,size_t(m)*64,x,bit);continue;}}
++   U x=code[v];prefix(M.nbits,M.raw,0,x,bit);}
++  enc.finish();write(argv[6],enc.out.v);
++ }else{auto bytes=read<uint8_t>(argv[4]);Decoder dec(bytes);std::vector<U> code(n);
++  auto bit=[&](Count&ct,int){return dec.code(ct);};
++  for(size_t v=0;v<n;v++){int m=candidates(v,ptr,dst,code,cand);
++   if(m>0&&dec.code(M.hit[m])){U x=0;prefix(5,M.slot,size_t(m)*64,x,bit);if(int(x)>=m)throw std::runtime_error("slot out of range");code[v]=cand[x];continue;}
++   U x=0;prefix(M.nbits,M.raw,0,x,bit);if(x>=K)throw std::runtime_error("decoded code out of range");code[v]=x;}
++  write(argv[6],code);}
++ return 0;}catch(const std::exception&e){std::cerr<<"index_ctx: "<<e.what()<<"\n";return 1;}}
+diff -ruN -x .pytest_cache -x __pycache__ -x '*.pyc' stage2-v1/codec/topology.py stage2-v2/codec/topology.py
+--- stage2-v1/codec/topology.py	2026-10-15 05:27:33.192398886 +0000
++++ stage2-v2/codec/topology.py	2026-10-15 05:31:39.259981444 +0000
+@@ -17,10 +17,11 @@
+ import meshoptimizer as mo
+ from codec_benchmark import pack, unpack, equal
+ import local_codec as lc
++import index_context as ic
+ 
+ VERTEX=('triangles_points','features_dc','vertex_weight','app_mapping','app_gain')
+ SPARSE=('app_correction','app_residual_mapping')
+-FIXED={'sigma','active_sh_degree','opacity_floor','app_schema','app_bank','app_residual_bank','delivery_schema'}
++FIXED={'sigma','active_sh_degree','opacity_floor','app_schema','app_bank','app_residual_bank','delivery_schema','vertex_weight_const','vertex_weight_cols'}
+ TOPOLOGIES=('raw','meshopt','edge-zstd','edge-arithmetic')
+ 
+ def take(a,p):
+@@ -104,12 +105,13 @@
+         temp=exe.with_suffix('.building');subprocess.run(compiler+['-O3','-std=c++17',str(root/'edge.cpp'),'-o',str(temp)],check=True);temp.replace(exe)
+     return exe
+ 
+-def encode(s,topo,entropy,exe,edge,folder,pred):
++def encode(s,topo,entropy,exe,edge,folder,pred,ctx=None):
++    # stage2-v2: ctx = index_context.native(...) codes app_mapping/app_residual_mapping with neighbour context after topology.
+     # FP32 fallback retains XYZ directly; integer XYZ uses causal prediction.
+     xyz_mode=2 if np.asarray(s['triangles_points']).dtype.kind=='u' else 0
+     wire=lc.encode(s,False,xyz_mode,entropy,exe,folder,pred)
+     wire.update(top_schema=1,top_codec=TOPOLOGIES.index(topo),top_n=len(s['triangles_points']),top_f=len(s['_triangle_indices']))
+-    if topo=='raw':return wire
++    if topo=='raw':return ic.encode(wire,s['_triangle_indices'].numpy(),folder,ctx) if ctx is not None else wire
+     f=s['_triangle_indices'].numpy().astype(np.uint32)
+     if topo=='meshopt':data=mo.encode_index_buffer(f.reshape(-1),f.size,len(s['triangles_points']))
+     elif topo in ('edge-zstd','edge-arithmetic'):
+@@ -117,9 +119,10 @@
+         lc.call(edge,'encode',src,dst,len(s['triangles_points']),len(f),int(topo=='edge-arithmetic'));data=dst.read_bytes()
+     else:raise ValueError(topo)
+     wire.pop('_triangle_indices');wire['top_stream']=np.frombuffer(data,np.uint8).copy()
++    if ctx is not None:wire=ic.encode(wire,s['_triangle_indices'].numpy(),folder,ctx)
+     return wire
+ 
+-def decode(w,exe,edge,folder):
++def decode(w,exe,edge,folder,ctx=None):
+     if w.get('top_schema')!=1:raise ValueError('Topology schema')
+     if w['top_codec'] not in range(len(TOPOLOGIES)):raise ValueError('Topology codec')
+     topo=TOPOLOGIES[w['top_codec']];s={k:v for k,v in w.items() if not k.startswith('top_')}
+@@ -129,11 +132,15 @@
+         lc.call(edge,'decode',src,dst,w['top_n'],w['top_f'],int(topo=='edge-arithmetic'));f=np.fromfile(dst,np.uint32).reshape(-1,3)
+     elif topo!='raw':raise ValueError(topo)
+     if topo!='raw':s['_triangle_indices']=torch.from_numpy(f.astype(np.int32))
+-    return lc.decode(s,exe,folder)
++    result=lc.decode(s,exe,folder)
++    if 'ctx_schema' in result:
++        if ctx is None:raise ValueError('Asset uses context-coded indices; index_context native required')
++        result=ic.decode(result,result['_triangle_indices'].numpy(),folder,ctx)
++    return result
+ 
+ def read_asset(path,cache,folder):
+     w=unpack(path)
+-    if 'top_schema' in w:return decode(w,lc.native(cache),edge_native(cache),folder)
++    if 'top_schema' in w:return decode(w,lc.native(cache),edge_native(cache),folder,ic.native(cache))
+     if 'local_schema' in w:return lc.decode(w,lc.native(cache),folder)
+     return w
+ 
+diff -ruN -x .pytest_cache -x __pycache__ -x '*.pyc' stage2-v1/runtime.py stage2-v2/runtime.py
+--- stage2-v1/runtime.py	2026-10-15 05:27:33.968359427 +0000
++++ stage2-v2/runtime.py	2026-10-15 05:31:39.261025006 +0000
+@@ -47,27 +47,32 @@
+         return dict(**{k:float(np.mean([r[k] for r in rows])) for k in keys},views=len(rows),per_view=rows,
+             timing_scope='CUDA device time: SH evaluation+rasterization+downsample; excludes decoding, metrics, PNG I/O and CPU overhead')
+ 
+-def export_asset(wire,folder,xyz='q18',dc='q8'):
++def export_asset(wire,folder,xyz='q18',dc='q8',weight='const',index_codec='ctx'):
++    # stage2-v2: weight='const' drops per-vertex opacity logits (one constant); index_codec='ctx' context-codes the SH indices.
+     import tempfile
+     from codec_benchmark import pack,unpack,equal
+     from delivery import prepare,restore
+     import topology as tc
+     folder.mkdir(parents=True,exist_ok=False)
+-    quant=prepare(wire,xyz,dc,True);ordered,p=tc.reorder(quant,'strip-fetch');audit=tc.semantic_audit(quant,ordered,p)
++    if index_codec not in ('ctx','zstd'):raise ValueError('index_codec')
++    quant=prepare(wire,xyz,dc,True,weight);ordered,p=tc.reorder(quant,'strip-fetch');audit=tc.semantic_audit(quant,ordered,p)
+     with tempfile.TemporaryDirectory(dir=folder) as temp:
+-        temp=Path(temp);exe=tc.lc.native(folder/'native');edge=tc.edge_native(folder/'native')
+-        pred=tc.lc.graph(exe,ordered,temp);encoded=tc.encode(ordered,'edge-arithmetic',1,exe,edge,temp,pred)
++        temp=Path(temp);exe=tc.lc.native(folder/'native');edge=tc.edge_native(folder/'native');ctx=tc.ic.native(folder/'native') if index_codec=='ctx' else None
++        pred=tc.lc.graph(exe,ordered,temp);encoded=tc.encode(ordered,'edge-arithmetic',1,exe,edge,temp,pred,ctx)
+         path=folder/'asset.mslb';info=pack(encoded,path,'auto');del encoded
+-        decoded=tc.decode(unpack(path),exe,edge,temp)
++        decoded=tc.decode(unpack(path),exe,edge,temp,ctx)
+         equal({k:v for k,v in ordered.items() if k!='_triangle_indices'}, {k:decoded[k] for k in ordered if k!='_triangle_indices'})
+         if not np.array_equal(tc.cyclic(ordered['_triangle_indices'].numpy()),tc.cyclic(decoded['_triangle_indices'].numpy())):raise AssertionError('Topology roundtrip')
+     report=dict(file_bytes=path.stat().st_size,asset=str(path),sha256=tc.lc.digest(path),semantic_audit=audit,
+-        scope=f'XYZ={xyz}, DC={dc}; shared banks FP32; reordered edge/arithmetic codec; lossy representation',
++        scope=f'XYZ={xyz}, DC={dc}, vertex_weight={weight}, indices={index_codec}; shared banks FP32; reordered edge/arithmetic codec; lossy representation',
+         payload_bytes={f['name']:f.get('payload_bytes',0) for f in info['fields']})
+     save_json(folder/'codec-report.json',report)
+     # Health check is before vertex/face reordering, so correspondence is exact.
+     from algorithm import health
+     qhealth=health(wire['triangles_points'],restore(quant)['triangles_points'],wire['_triangle_indices'])
+     report['quantization_geometry']=qhealth
++    if weight=='const' and 'vertex_weight' in wire:
++        from delivery import weight_summary
++        const,err,_=weight_summary(wire);report['vertex_weight_const']=dict(value=const,max_abs_opacity_error=err)
+     save_json(folder/'codec-report.json',report)
+     return restore(decoded),report

@@ -1,0 +1,24 @@
+room original | V 3193592 F 6452971 | test 28.263 / 0.8833 / 0.3389
+room fp32_minimal | 741.703 MB | test n/a | xyz + 48 SH + weight float32, int32 faces
+room ply_zstd19 | 632.609 MB | test n/a | zstd19
+room quant_ply_zstd19 | 158.537 MB | test 28.092 / 0.8756 / 0.3517 (-0.172 dB) | xyz uint16 q14 + SH uint8 + int32 faces, zstd19
+room draco_geo | 32.82 MB | decoded V 14357649 | test n/a | positions + faces only
+room draco_full_sh8 | 456.058 MB | decoded V 14357649 | test 28.092 / 0.8756 / 0.3517 (-0.172 dB) | positions q14 + faces + 48-ch uint8 SH generic attribute
+room draco_full_sh16 | 1126.698 MB | decoded V 14357649 | test 28.101 / 0.8769 / 0.3504 (-0.162 dB) | positions q14 + faces + 48-ch uint16 SH generic attribute
+room draco_rgb8 | 62.183 MB | decoded V 14357649 | test 25.287 / 0.7941 / 0.4412 (-2.977 dB) | positions + faces + uint8 RGB (SH0 only, no view dependence)
+room texture_atlas | None MB | test n/a | xatlas UV parametrisation (vertices duplicated at chart seams)
+room texture_draco_geo_uv | 59.929 MB | test n/a | Draco positions + faces + 12-bit UV on the atlas mesh
+room texture_4096 | 82.119 MB | PNG total 105.26 MB | test 25.287 / 0.7941 / 0.4412 (-2.977 dB) | baked vertex colour, 4096x4096, JPEG q90; quality = draco_rgb8 row (vertex colours only, no SH)
+room texture_8192 | 136.821 MB | PNG total 144.517 MB | test 25.287 / 0.7941 / 0.4412 (-2.977 dB) | baked vertex colour, 8192x8192, JPEG q90; quality = draco_rgb8 row (vertex colours only, no SH)
+garden original | V 3171988 F 6667681 | test 24.732 / 0.7624 / 0.2485
+garden fp32_minimal | 739.786 MB | test n/a | xyz + 48 SH + weight float32, int32 faces
+garden ply_zstd19 | 626.416 MB | test n/a | zstd19
+garden quant_ply_zstd19 | 171.979 MB | test 24.594 / 0.7529 / 0.2575 (-0.138 dB) | xyz uint16 q15 + SH uint8 + int32 faces, zstd19
+garden draco_geo | 35.569 MB | decoded V 14709855 | test n/a | positions + faces only
+garden draco_full_sh8 | 544.445 MB | decoded V 14709855 | test 24.594 / 0.7529 / 0.2575 (-0.139 dB) | positions q15 + faces + 48-ch uint8 SH generic attribute
+garden draco_full_sh16 | 1228.08 MB | decoded V 14709855 | test 24.599 / 0.7536 / 0.2565 (-0.133 dB) | positions q15 + faces + 48-ch uint16 SH generic attribute
+garden draco_rgb8 | 72.995 MB | decoded V 14709855 | test 21.062 / 0.6458 / 0.3323 (-3.670 dB) | positions + faces + uint8 RGB (SH0 only, no view dependence)
+garden texture_atlas | None MB | test n/a | xatlas UV parametrisation (vertices duplicated at chart seams)
+garden texture_draco_geo_uv | 63.478 MB | test n/a | Draco positions + faces + 12-bit UV on the atlas mesh
+garden texture_4096 | 84.33 MB | PNG total 111.919 MB | test 21.062 / 0.6458 / 0.3323 (-3.670 dB) | baked vertex colour, 4096x4096, JPEG q90; quality = draco_rgb8 row (vertex colours only, no SH)
+garden texture_8192 | 138.304 MB | PNG total 152.739 MB | test 21.062 / 0.6458 / 0.3323 (-3.670 dB) | baked vertex colour, 8192x8192, JPEG q90; quality = draco_rgb8 row (vertex colours only, no SH)

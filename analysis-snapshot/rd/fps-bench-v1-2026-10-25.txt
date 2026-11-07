@@ -1,0 +1,9 @@
+# BENCH lines from viewer.html (user paste 2026-10-25). Laptop: MacBook Pro M2 Max, Chrome 154, ANGLE Metal. Resolution = cameras.json width x height (full-resolution dataset images, 4x the training images_4 size for outdoor scenes). 300 frames, SH degree 3, GPU-bound (1-px readPixels after each draw).
+BENCH bicycle lam0.0062 | 4946x3286 | F 2411284 | mean 1.91 ms = 523 fps | median 1.80 ms | p95 3.50 ms | SH deg 3 | ANGLE (Apple, ANGLE Metal Renderer: Apple M2 Max, Unspecified Version) | Chrome/154 macOS
+BENCH garden lam0.0062 | 5187x3361 | F 2157003 | mean 1.77 ms = 566 fps | median 1.70 ms | p95 2.30 ms | SH deg 3 | ANGLE (Apple, ANGLE Metal Renderer: Apple M2 Max, Unspecified Version) | Chrome/154 macOS
+BENCH room lam0.0062 | 3114x2075 | F 1022252 | mean 1.22 ms = 820 fps | median 0.90 ms | p95 2.60 ms | SH deg 3 | ANGLE (Apple, ANGLE Metal Renderer: Apple M2 Max, Unspecified Version) | Chrome/154 macOS
+# Phone (iOS 18.7 Safari 27, model TBD; Safari rounds performance.now to 1 ms so median/p95 are integers):
+BENCH room lam0.0062 | 3114x2075 | F 1022252 | mean 2.84 ms = 352 fps | median 3.00 ms | p95 4.00 ms | SH deg 3 | Apple GPU | iPhone iOS 18.7 Safari 27.0.1
+BENCH garden lam0.0062 | 5187x3361 | F 2157003 | mean 6.25 ms = 160 fps | median 6.00 ms | p95 7.00 ms | SH deg 3 | Apple GPU | iPhone 17 Pro iOS 18.7 Safari 27.0.1
+BENCH bicycle lam0.0062 | 4946x3286 | F 2411284 | mean 6.92 ms = 145 fps | median 7.00 ms | p95 8.00 ms | SH deg 3 | Apple GPU | iPhone 17 Pro iOS 18.7 Safari 27.0.1
+# Phone model: iPhone 17 Pro (all three phone lines). Display fps capped at 60 by Safari vsync. Screenshot (bicycle, correct rendering): analysis/figures/viewer-iphone17pro-bicycle-2026-10-25.jpg

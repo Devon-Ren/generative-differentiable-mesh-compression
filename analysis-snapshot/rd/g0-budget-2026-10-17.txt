@@ -1,0 +1,7 @@
+# G0 (job 20133555, 2026-10-17): train Room with --max_points vs post-hoc collapse to same vertices; K4096 R256 q14/q7 const/ctx
+# dense original: 3,193,592 v, test 28.263; v1.0 delivery 31.87 MB / 28.091; v0.8 25.51 / 27.883; v0.5 16.89 / 27.090
+G0 budget 1600000 TRAIN-AT-BUDGET | vertices 1348124 faces 2795068 | val0 30.037 val 30.037 worst 26.7 | test 28.165 | delivered 13.558 MB test 27.984 0.862 0.3963 | K4096 R256 q14/q7 | train 37 min
+G0 budget 1600000 POST-HOC-COLLAPSE | vertices 1348124 faces 2725380 | val0 27.634 val 28.517 worst 23.72 | test 26.772 | delivered 13.926 MB test 26.66 0.8372 0.4239 | K4096 R256 q14/q7
+G0 budget 1000000 TRAIN-AT-BUDGET | vertices 966571 faces 2120485 | val0 29.625 val 29.625 worst 26.33 | test 27.843 | delivered 10.378 MB test 27.711 0.8549 0.413 | K4096 R256 q14/q7
+G0 budget 1000000 POST-HOC-COLLAPSE | vertices 966571 faces 1910564 | val0 26.07 val 27.21 worst 21.88 | test 25.736 | delivered 10.139 MB test 25.665 0.8127 0.4558 | K4096 R256 q14/q7
+# g0 exit 0 03:42 EDT; budget slope 1.35M->0.97M 0.086 dB/MB; dense 31.87/28.091 -> 1.35M 13.56/27.984 = 0.006 dB/MB (flat)

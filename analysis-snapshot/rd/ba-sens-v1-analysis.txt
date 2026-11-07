@@ -1,0 +1,20 @@
+B_a sensitivity (2026-11-06): kitchen (--indoor) / garden, B_v = B_a + 2 B_f in {8, 10 (default), 13} B, B_f 2 B, lambda {6.2e-3, 6.2e-4}; K4096 R256 q7 delivery.
+bpv 10 rows = the lambda assets of the main curve (rd3i / rd3).  curve = bpv-10 lambda curve interpolated in log MB at this point's bytes; lam_eff = the bpv-10 lambda with these bytes.
+
+scene         lam  bpv |        V      MB    PSNR |   curve  dPSNR |  lam_eff lam_eff/lam bpv/10
+kitchen   0.00620   10 |            8.022  25.971 |                | 6.20e-03        1.00   1.00
+kitchen   0.00620    8 |   658388   9.318  26.182 |  26.160 +0.022 | 4.83e-03        0.78   0.80
+kitchen   0.00620   13 |   460560   6.672  25.654 |  25.641 +0.013 | 8.10e-03        1.31   1.30
+kitchen   0.00062   10 |           24.462  27.092 |                | 6.20e-04        1.00   1.00
+kitchen   0.00062    8 |  2026503  25.775  27.144 |  27.120 +0.024 | 5.36e-04        0.86   0.80 (extrapolated above lam 6.2e-4)
+kitchen   0.00062   13 |  1739296  22.843  27.121 |  27.056 +0.065 | 7.51e-04        1.21   1.30
+garden    0.00620   10 |           10.175  23.650 |                | 6.20e-03        1.00   1.00
+garden    0.00620    8 |   989571  11.995  23.861 |  23.809 +0.052 | 4.95e-03        0.80   0.80
+garden    0.00620   13 |   673742   8.433  23.458 |  23.423 +0.035 | 8.26e-03        1.33   1.30
+garden    0.00062   10 |           36.389  24.734 |                | 6.20e-04        1.00   1.00
+garden    0.00062    8 |  3374766  38.149  24.749 |  24.762 -0.013 | 5.43e-04        0.88   0.80 (extrapolated above lam 6.2e-4)
+garden    0.00062   13 |  2459964  27.898  24.594 |  24.578 +0.016 | 1.30e-03        2.10   1.30
+
+dPSNR vs the bpv-10 curve at equal bytes: -0.013..+0.065 dB (mean +0.027, n=8)
+  -> B_a in {4, 6, 9} B moves the operating point ALONG the lambda curve, not off it: a price error is a lambda rescale, as the Lagrangian predicts (split dR = 3 B_v).
+  lam_eff/lam vs bpv/10: the size shift is in the predicted direction (bpv 8 -> larger model, bpv 13 -> smaller) and of the same order as the price ratio; phase B (collapse dR = B_a + n B_f) is not purely proportional, so the match is approximate.

@@ -1,0 +1,81 @@
+adapt-v7b scene sweep (2026-11-07, node-batch9-v2, 42 of 47 jobs exit 0): Mip-360 / T&T 11 scenes x {5, 10, 20} MB (adapt-v7b.sbatch: 8 prune rounds 12k-19k),
+  NeRF-Synthetic {lego, chair, drums} x 2.5 MB and 8 scenes x 4 MB (adapt-v7b-blender.sbatch: 16 rounds 12k-19.5k; ficus/hotdog/materials/mic/ship 2.5 MB failed at the smoke stage).
+fixed-lambda reference: Mip/T&T = rd-hull6-v2 (lam 6.2e-4 / 1.85e-3 / 6.2e-3 / 1.85e-2, upper hull in log bytes); Blender = lam 6.2e-4 / 6.2e-3 re-delivered with val_select_v3.
+
+1. landing, Mip-360 / T&T (phase B collapsed nothing in all 33 runs: the extrapolated landing never exceeded the target)
+scene       T |  deliv   hit  P/dl | capped bound | V12/V*  P12/T  e2/T | lastEst err | B/V@12k (prior 11) | test PSNR   hull  dPSNR
+room         5 |   4.418  0.884  1.000 | False   0/17 |  0.94    0.83   0.52 |    -2.6 %   |   10.98             |  26.870   27.003  -0.133 
+kitchen      5 |   5.087  1.017  0.999 | False   1/17 |  0.95    0.96   0.58 |    -4.4 %   |   12.62             |  25.059   25.149  -0.090 
+counter      5 |   4.747  0.949  1.000 | False   1/17 |  0.94    0.91   0.54 |    -3.5 %   |   12.19             |  24.869   24.968  -0.099 
+bonsai       5 |   4.290  0.858  1.001 | False   0/17 |  0.96    0.89   0.48 |    -1.2 %   |   11.56             |  25.514   25.726  -0.212 
+garden       5 |   4.825  0.965  0.999 | False   0/17 |  0.97    0.99   0.79 |    -0.4 %   |   12.78             |  22.633   22.737  -0.104*
+bicycle      5 |   4.166  0.833  1.000 | False   0/17 |  0.91    0.90   0.74 |    +2.5 %   |   12.34             |  21.724   21.917  -0.193*
+stump        5 |   4.035  0.807  1.000 | False   0/17 |  0.89    0.88   0.75 |    +5.4 %   |   12.34             |  23.028   23.248  -0.220 
+flowers      5 |   4.133  0.827  1.000 | False   1/17 |  0.90    0.88   0.69 |    +1.5 %   |   12.24             |  18.562   18.693  -0.131*
+treehill     5 |   4.077  0.815  1.000 | False   1/17 |  0.91    0.89   0.73 |    +3.2 %   |   12.20             |  20.231   20.279  -0.048*
+truck        5 |   4.523  0.905  1.000 | False   0/17 |  0.92    0.94   0.76 |    +0.0 %   |   12.78             |  21.427   21.667  -0.240 
+train        5 |   4.515  0.903  0.999 | False   1/17 |  0.92    0.92   0.60 |    -3.0 %   |   12.53             |  18.090   18.489  -0.399*
+  5 MB: hit 0.81-1.02 (mean 0.888), within +-10 %: 5/11, growth-capped flag: 0 (); equal-bytes dPSNR vs hull -0.40..-0.05 (mean -0.170)
+room        10 |   8.144  0.814  1.000 | False   1/17 |  0.91    0.71   0.55 |    -3.2 %   |    9.09             |  27.591   27.656  -0.065 
+kitchen     10 |   9.894  0.989  0.999 | False   7/17 |  0.91    0.82   0.61 |    -4.3 %   |   10.55             |  26.149   26.240  -0.091 
+counter     10 |   8.847  0.885  1.000 | True    9/17 |  0.90    0.77   0.57 |    -4.4 %   |   10.07             |  25.485   25.555  -0.070 
+bonsai      10 |   8.034  0.803  0.999 | False   0/17 |  0.91    0.76   0.50 |    -1.7 %   |    9.77             |  26.588   26.735  -0.147 
+garden      10 |   9.097  0.910  0.999 | False   0/17 |  0.93    0.91   0.72 |    -1.7 %   |   11.38             |  23.430   23.510  -0.080 
+bicycle     10 |   7.748  0.775  0.999 | False   1/17 |  0.87    0.82   0.64 |    +1.3 %   |   10.94             |  22.279   22.374  -0.095 
+stump       10 |   7.648  0.765  1.000 | False   4/17 |  0.87    0.81   0.69 |    +3.5 %   |   10.84             |  23.753   23.953  -0.200 
+flowers     10 |   7.670  0.767  0.999 | False   3/17 |  0.87    0.78   0.64 |    +1.0 %   |   10.52             |  18.901   18.993  -0.092 
+treehill    10 |   7.463  0.746  0.999 | False   1/17 |  0.87    0.79   0.68 |    +1.9 %   |   10.61             |  20.402   20.336  +0.066 
+truck       10 |   8.555  0.855  0.999 | False   1/17 |  0.89    0.83   0.72 |    -3.1 %   |   10.84             |  22.119   22.279  -0.160 
+train       10 |   8.369  0.837  0.999 | True   10/17 |  0.87    0.79   0.62 |    -3.3 %   |   10.63             |  18.645   18.597  +0.048 
+  10 MB: hit 0.75-0.99 (mean 0.831), within +-10 %: 2/11, growth-capped flag: 2 (counter train); equal-bytes dPSNR vs hull -0.20..+0.07 (mean -0.081)
+room        20 |  15.017  0.751  1.000 | True   12/17 |  0.86    0.59   0.57 |    -4.8 %   |    7.73             |  28.033   28.096  -0.063 
+kitchen     20 |  18.380  0.919  0.999 | True   12/17 |  0.86    0.66   0.61 |    -4.3 %   |    8.64             |  26.846   26.945  -0.099 
+counter     20 |  15.981  0.799  1.000 | True   13/17 |  0.86    0.64   0.53 |    -4.0 %   |    8.45             |  25.841   25.888  -0.047 
+bonsai      20 |  14.588  0.729  0.999 | True    9/17 |  0.88    0.63   0.54 |    +1.5 %   |    8.10             |  27.097   27.489  -0.392 
+garden      20 |  17.028  0.851  0.999 | False   0/17 |  0.89    0.79   0.64 |    -4.0 %   |   10.12             |  24.086   24.145  -0.059 
+bicycle     20 |  14.576  0.729  1.000 | True   10/17 |  0.84    0.72   0.58 |    -2.0 %   |    9.74             |  22.716   22.772  -0.056 
+stump       20 |  14.054  0.703  1.000 | True   18/17 |  0.83    0.71   0.63 |    +1.9 %   |    9.73             |  24.245   24.427  -0.182 
+flowers     20 |  14.320  0.716  0.999 | True   18/17 |  0.84    0.68   0.63 |    -0.1 %   |    9.23             |  19.131   19.175  -0.044 
+treehill    20 |  14.009  0.700  0.999 | False   8/17 |  0.84    0.70   0.59 |    +0.9 %   |    9.42             |  20.575   20.394  +0.181 
+truck       20 |  15.316  0.766  0.999 | True   11/17 |  0.83    0.70   0.57 |    -5.9 %   |    9.51             |  22.411   22.255  +0.156 
+train       20 |  15.575  0.779  0.999 | True   11/17 |  0.83    0.67   0.56 |    -6.1 %   |    9.16             |  18.834   18.675  +0.159 
+  20 MB: hit 0.70-0.92 (mean 0.767), within +-10 %: 1/11, growth-capped flag: 9 (room kitchen counter bonsai bicycle stump flowers truck train); equal-bytes dPSNR vs hull -0.39..+0.18 (mean -0.040)
+columns: P/dl = final probe / delivered; capped = growth_capped flag; bound = limiter-bound densify intervals; V12/V* = vertices at 12k over the phase-A plan;
+  P12/T = first probe over target; e2/T = extrapolated landing at the 2nd round over target; lastEst err = last-round landing estimate vs the final probe;
+  B/V@12k = probe bytes per vertex at 12k (file bytes incl. overhead / V); hull = fixed-lambda upper hull at the delivered bytes (* extrapolated beyond lam 1.85e-2 / 6.2e-4).
+
+2. landing, NeRF-Synthetic
+scene       T |  deliv   hit  P/dl | capped bound | V12/V*  P12/T | lastEst err | active collapsed | best   val    test  | chord  dPSNR
+lego       2.5 |   2.535  1.014  1.029 | False   5/17 |  0.85    0.97  |    +0.3 %   |  14     11429    | 21000  35.133  32.371 | 32.503 -0.132*
+chair      2.5 |   2.419  0.968  1.037 | False  11/17 |  0.79    0.86  |    +1.1 %   |  10      8611    | 21000  34.109  32.233 | 32.167 +0.066 
+drums      2.5 |   2.504  1.002  1.001 | True   11/17 |  0.79    0.86  |    -1.8 %   |   0         0    | 26000  27.334  25.480 | 25.486 -0.006*
+ficus      2.5 |   1.926  0.770  0.986 | True   13/17 |  0.62    0.77  |    -1.4 %   |   0         0    | 26000  33.883  32.079 | 32.120 -0.041*
+hotdog     2.5 |   2.449  0.979  1.013 | False  13/17 |  0.78    0.85  |    +5.2 %   |  15     15435    | 21000  37.177  35.627 | 35.561 +0.066 
+materials  2.5 |   2.421  0.968  1.040 | True   13/17 |  0.82    0.92  |    -5.6 %   |   0         0    | 22000  31.012  27.757 | 27.760 -0.003 
+mic        2.5 |   2.177  0.871  1.063 | True   13/17 |  0.70    0.71  |    -0.7 %   |   0         0    | 21000  34.903  33.248 | 33.204 +0.044 
+ship       2.5 |   2.475  0.990  1.022 | True   13/17 |  0.80    0.88  |    -5.8 %   |   0         0    | 26000  30.372  28.981 | 29.121 -0.140*
+lego         4 |   3.977  0.994  1.003 | True   13/17 |  0.76    0.83  |    -0.7 %   |   0         0    | 26000  36.507  32.868 | 32.923 -0.055 
+chair        4 |   3.568  0.892  0.998 | True   13/17 |  0.68    0.68  |    -0.2 %   |   0         0    | 26000  34.652  31.997 | 32.194 -0.197 
+drums        4 |   3.402  0.850  1.003 | True   13/17 |  0.67    0.68  |    -3.4 %   |   0         0    | 26000  27.486  25.543 | 25.504 +0.039 
+ficus        4 |   1.943  0.486  0.991 | True   13/17 |  0.35    0.49  |    -3.6 %   |   0         0    | 26000  33.941  32.098 | 32.125 -0.027*
+hotdog       4 |   3.435  0.859  0.997 | True   13/17 |  0.61    0.64  |    +2.9 %   |   2      2619    | 26000  37.550  35.537 | 35.779 -0.242 
+materials    4 |   3.256  0.814  1.070 | False  13/17 |  0.70    0.74  |    -8.1 %   |   0         0    | 22000  31.206  27.812 | 27.769 +0.043 
+mic          4 |   2.443  0.611  1.076 | True   13/17 |  0.47    0.49  |    -2.3 %   |   0         0    | 21000  35.138  33.389 | 33.337 +0.052 
+ship         4 |   3.449  0.862  1.029 | True   13/17 |  0.69    0.72  |    -8.0 %   |   0         0    | 26000  30.739  29.230 | 29.321 -0.091 
+  chord = log-linear between the lam 6.2e-3 and 6.2e-4 references (* extrapolated; all 8 scenes have both references; only the lego FP32 original was re-delivered (the other originals have no checkpoints));
+  ficus / mic 4 MB: the target exceeds the FP32 model size class (lam 6.2e-4 reference 1.88 / 2.60 MB) -> growth-capped is the right answer.
+
+3. why Mip-360 / T&T land under target (phase A, open loop until the first probe at 12k; densification ends at 10k; phase B can only remove)
+   5 MB: B/V@12k 11.0-12.8 (prior 11 -> V* low by 0--16 %); V12/V* 0.89-0.97 (limiter-bound 0-1 intervals); P12/T 0.83-0.99; final probe / P12 0.91-1.07 (late growth); hit 0.81-1.02
+  10 MB: B/V@12k 9.1-11.4 (prior 11 -> V* low by 17--3 %); V12/V* 0.87-0.93 (limiter-bound 0-10 intervals); P12/T 0.71-0.91; final probe / P12 0.94-1.20 (late growth); hit 0.75-0.99
+  20 MB: B/V@12k 7.7-10.1 (prior 11 -> V* low by 30-8 %); V12/V* 0.83-0.89 (limiter-bound 0-18 intervals); P12/T 0.59-0.79; final probe / P12 0.99-1.40 (late growth); hit 0.70-0.92
+  -> the vertex plan V* = (T - 0.6 MB) / 11 B is 10-30 % too small because the delivered bytes per vertex fall with model size (12.8 -> 7.7 B/V from 5 to 20 MB on the
+     same scenes), phase A reaches only 83-97 % of even that plan (rank yield / limiter), and nothing after 12k can add vertices. The v4 run (phase-A aim x1.15) hid
+     part of this with a constant; v7b removed the constant and the shortfall shows in full. Fix for v8 = measure B/V with the real encoder during phase A (probe at
+     the densify intervals from ~6k, 30-60 s each) and re-plan V* from the measurement -- no constant, same machinery as phase B.
+
+4. quality: equal-bytes dPSNR vs the fixed-lambda hull
+  Mip/T&T 33 runs: -0.40..+0.18, mean -0.097; by target 5 / 10 / 20 MB mean -0.170 / -0.081 / -0.040; runs below the hull by > 0.1 dB: room5(-0.13) bonsai5(-0.21) garden5(-0.10) bicycle5(-0.19) stump5(-0.22) flowers5(-0.13) truck5(-0.24) train5(-0.40) bonsai10(-0.15) stump10(-0.20) truck10(-0.16) bonsai20(-0.39) stump20(-0.18)
+  Blender 16 runs: lego2.5(-0.13*) chair2.5(+0.07) drums2.5(-0.01*) ficus2.5(-0.04*) hotdog2.5(+0.07) materials2.5(-0.00) mic2.5(+0.04) ship2.5(-0.14*) lego4(-0.05) chair4(-0.20) drums4(+0.04) ficus4(-0.03*) hotdog4(-0.24) materials4(+0.04) mic4(+0.05) ship4(-0.09)
+  Note: these are v7b models whose phase B never collapsed anything on Mip/T&T (no lambda-prune): the v4 Mip-360 analysis measured the lambda-prune at +0.07 dB equal-bytes,
+  and batch8-v2 showed -0.3/-0.5 dB on the gate-closed Blender 4 MB runs vs v6; the lambda-prune-as-regulariser ablation is still open.

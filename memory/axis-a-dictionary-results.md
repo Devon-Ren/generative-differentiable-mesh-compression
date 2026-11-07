@@ -1,0 +1,15 @@
+---
+name: axis-a-dictionary-results
+description: Axis A (SH dictionary K x R) sweep on the Room v0.8 mesh, 2026-10-15 — hull, slopes, default K4096 R256, combined-hull insight
+metadata:
+  type: project
+---
+
+AXIS A (run_axisA.sh on axisB v0.8 mesh, 2.55M v, k-means dictionaries 4 rounds, 400-step fit, q14/q8). MB / decoded test PSNR / SSIM / mapping MB / banks MB:
+K1024: R1 25.34/27.648/.865/2.82/.15 | R256 27.81/27.843/.871/5.22/.20 | R1024 28.80/27.888/.8721/6.09/.31 | R4096 29.92/27.927/.8732/6.74/.77
+K4096: R1 26.65/27.786/.8684/3.67/.61 | R256 29.10/27.912/.8729/6.06/.65 | R1024 30.09/27.934/.8737/6.93/.77 (= axis B v0.8 point) | R4096 31.22/27.957/.8745/7.60/1.23
+K16384: R1 29.19/27.883/.8711/4.37/2.44 | R256 31.63/27.956/.8745/6.76/2.48 | R1024 32.61/27.971/.875/7.62/2.60 | R4096 33.76/27.987/.8755/8.30/3.06
+Mapping = raw log2(K)+log2(R) minus 0-1.7 bits (zstd); banks small except K16384 (2.4-3 MB) -> K16384 never on the hull except the extreme top point.
+Axis-A hull: K1024R1 -> K4096R1 -> K4096R256 -> K4096R1024 -> K4096R4096 -> K16384R4096. From the K4096R1024 default: R256 saves 0.99 MB for 0.022 dB (0.022 dB/MB, same price as DC q7); R1 saves 3.44 MB for 0.148 dB (0.043); K1024R256 saves 2.28 MB for 0.091 (0.040); adding bytes (K16384 or R4096) buys only 0.014-0.020 dB/MB.
+Fit matters more for small dictionaries (shared_initial->fitted: +0.6 dB at K1024R1, +0.2 at K16384R4096); decoding q14/q8 costs ~0.11 dB everywhere.
+COMBINED HULL (axis A + B + DC): 0.5 -> q14/q7@1.98M -> v0.7q7 -> v0.8q7 -> K4096R256 -> v1.0. Near the default all levers cost 0.02-0.06 dB/MB: the frontier is smooth, redundancy is spread across vertices / dictionary / precision, no single dominant knob. DEFAULT MEASURED 2026-10-15 (run_default_room.sh, stage2-v2 const/ctx): v0.8 K4096 R256 q14/q7 = 25.513 MB / test 27.883 / SSIM 0.8686 / LPIPS 0.3703 (val fitted 29.975, decoded 29.82); beats v0.7q7 (25.39 / 27.725) by 0.16 dB at equal bytes = the RD-allocation story. Payload: top_stream 9.83, XYZ residual 5.80, DC 3.72, ctx_mapping 3.11 (9.75 b/v of 12), ctx_residual 2.36 (7.4 b/v of 8, nearly incompressible), banks 0.65. stage2-v2 2x2 on v0.8 K4096R1024 q14/q7: keep/zstd 28.792, const/zstd 27.126, keep/ctx 27.988, const/ctx 26.322 MB; PSNR 27.9019 vs 27.9018 (opacity err 9.7e-4), ctx exactly lossless. Files: analysis/rd/room-rd-points-v4.csv. CLEAN FIGURE (2026-10-16, user wants only the v0.8 K x R sweep + its hull): analysis/rd/room-rd-codebook-v1.png/.pdf from room-codebook-v1.csv via plot_codebook_rd.py (dataviz palette by K, hull line, default ring; v1-format q14/q8 numbers). v2 figure DONE: room-rd-codebook-v2.png, numbers in [[room-final-format-hull-v2]]. USER ASK 2026-10-16: the paper figure = fixed q14/q7, EVERY vertex level (100..50 %) with its own 12 K x R points + its own hull in ONE figure (hulls may cross like CPU/GPU benchmark curves), kept simple. Tooling: commands/axisA-levels-v1.sh (sweep on all axis-B levels, waits for hull-v2.txt) -> $W/axisA-levels.txt; rd/plot_codebook_levels.py (colour = level ramp, marker = K, hull per level, label column). See [[rate-aware-results]], [[c2-collapse-experiments]].

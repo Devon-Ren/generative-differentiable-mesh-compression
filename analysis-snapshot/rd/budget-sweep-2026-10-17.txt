@@ -1,0 +1,35 @@
+# budget-sweep-v1 (2026-10-17): train-at-budget rows (level-1.0 protocol, K4096 R256, scene XYZ / q7, stage2-v2 const/ctx)
+bonsai budget 1600000 TRAIN-AT-BUDGET | vertices 1437892 faces 2502696 | val0 27.455 val 27.455 worst 22.06 | test 26.692 | delivered 13.96 MB test 26.585 0.842 0.4285 | K4096 R256 q15/q7
+bonsai budget 1000000 TRAIN-AT-BUDGET | vertices 912476 faces 1726193 | val0 26.971 val 26.987 worst 21.8 | test 26.682 | delivered 9.542 MB test 26.585 0.8375 0.4523 | K4096 R256 q15/q7
+garden budget 1600000 TRAIN-AT-BUDGET | vertices 1475565 faces 3271855 | val0 24.748 val 24.748 worst 21.19 | test 24.04 | delivered 16.51 MB test 23.996 0.7039 0.3433 | K4096 R256 q15/q7
+garden budget 1000000 TRAIN-AT-BUDGET | vertices 1090596 faces 2505786 | val0 24.274 val 24.274 worst 20.58 | test 23.717 | delivered 12.523 MB test 23.699 0.6804 0.3749 | K4096 R256 q15/q7
+room budget 700000 TRAIN-AT-BUDGET | vertices 677638 faces 1534567 | val0 29.229 val 29.229 worst 25.38 | test 27.583 | delivered 7.588 MB test 27.461 0.8476 0.4294 | K4096 R256 q14/q7
+room budget 500000 TRAIN-AT-BUDGET | vertices 411779 faces 954949 | val0 28.677 val 28.677 worst 24.48 | test 27.058 | delivered 4.985 MB test 26.986 0.8362 0.4522 | K4096 R256 q14/q7
+room budget 350000 TRAIN-AT-BUDGET | vertices 361813 faces 858444 | val0 28.277 val 28.277 worst 23.41 | test 26.691 | delivered 4.484 MB test 26.628 0.8284 0.462 | K4096 R256 q14/q7
+# references: room dense 3.19M test 28.263 (742 MB); garden 3.17M 24.732 (740 MB), dense q15 not delivered, v0.8 q15 27.34/24.371, v0.7 q14 23.18/23.988; bonsai 2.92M 27.291 (680 MB), v1.0 q15 26.61/27.102, v0.7 q15 19.33/26.428
+# controls (budget-control-v1, 2026-10-17): dense collapsed to the budget runs' vertex counts, same finetune + delivery
+bonsai budget 1600000 POST-HOC-COLLAPSE | vertices 1437892 faces 2131322 | val0 24.274 val 25.306 worst 19.73 | test 25.077 | delivered 13.833 MB test 25.028 0.8031 0.4701 | K4096 R256 q15/q7
+bonsai budget 1000000 POST-HOC-COLLAPSE | vertices 912476 faces 1248237 | val0 21.27 val 22.341 worst 17.72 | test 22.27 | delivered 8.961 MB test 22.287 0.7162 0.5316 | K4096 R256 q15/q7
+garden budget 1600000 POST-HOC-COLLAPSE | vertices 1475565 faces 2986640 | val0 21.676 val 23.412 worst 19.63 | test 23.16 | delivered 16.248 MB test 23.154 0.6464 0.3817 | K4096 R256 q15/q7
+garden budget 1000000 POST-HOC-COLLAPSE | vertices 1090596 faces 2155624 | val0 20.462 val 22.456 worst 18.51 | test 22.269 | delivered 12.136 MB test 22.299 0.5967 0.4261 | K4096 R256 q15/q7
+# gains at equal vertices (delivered test): room +1.32 (1.35M) / +2.05 (0.97M); garden +0.84 (1.48M) / +1.40 (1.09M); bonsai +1.56 (1.44M) / +4.30 (0.91M)
+# four more scenes (budget-sweep-v1 + budget-control-v1 chained, tandon_advanced, 2026-10-17/18): budgets 1.6M / 1.0M, scene XYZ (counter q15, kitchen/bicycle/stump q16) / q7
+counter budget 1600000 TRAIN-AT-BUDGET | vertices 1457550 faces 2979347 | val0 26.446 val 26.446 worst 23.81 | test 25.734 | delivered 15.35 MB test 25.403 0.8119 0.4104 | K4096 R256 q15/q7
+counter budget 1600000 POST-HOC-COLLAPSE | vertices 1457550 faces 2951581 | val0 25.196 val 25.57 worst 23.31 | test 24.988 | delivered 15.811 MB test 24.707 0.7952 0.4273 | K4096 R256 q15/q7
+counter budget 1000000 TRAIN-AT-BUDGET | vertices 718834 faces 1552714 | val0 25.928 val 25.928 worst 23.5 | test 25.382 | delivered 8.097 MB test 25.102 0.7941 0.4431 | K4096 R256 q15/q7
+counter budget 1000000 POST-HOC-COLLAPSE | vertices 718833 faces 1395623 | val0 22.029 val 22.847 worst 19.56 | test 22.527 | delivered 8.151 MB test 22.393 0.7249 0.4937 | K4096 R256 q15/q7
+kitchen budget 1600000 TRAIN-AT-BUDGET | vertices 1345638 faces 3102494 | val0 26.657 val 26.73 worst 23.31 | test 26.059 | delivered 15.236 MB test 25.722 0.8001 0.3632 | K4096 R256 q16/q7
+kitchen budget 1600000 POST-HOC-COLLAPSE | vertices 1345638 faces 3285994 | val0 25.839 val 26.281 worst 22.46 | test 25.7 | delivered 15.96 MB test 25.406 0.7931 0.37 | K4096 R256 q16/q7
+kitchen budget 1000000 TRAIN-AT-BUDGET | vertices 802091 faces 1934172 | val0 26.048 val 26.127 worst 23.15 | test 25.498 | delivered 9.678 MB test 25.211 0.7762 0.3968 | K4096 R256 q16/q7
+kitchen budget 1000000 POST-HOC-COLLAPSE | vertices 802091 faces 2048509 | val0 22.599 val 23.821 worst 19.29 | test 23.546 | delivered 10.104 MB test 23.395 0.7159 0.4413 | K4096 R256 q16/q7
+bicycle budget 1600000 TRAIN-AT-BUDGET | vertices 1504191 faces 2715919 | val0 21.066 val 21.066 worst 15.6 | test 22.578 | delivered 14.939 MB test 22.424 0.5902 0.4623 | K4096 R256 q16/q7
+bicycle budget 1600000 POST-HOC-COLLAPSE | vertices 1504191 faces 2422624 | val0 19.491 val 20.05 worst 12.96 | test 22.118 | delivered 14.874 MB test 22.006 0.5477 0.4883 | K4096 R256 q16/q7
+bicycle budget 1000000 TRAIN-AT-BUDGET | vertices 863510 faces 1604393 | val0 20.568 val 20.568 worst 15.36 | test 22.132 | delivered 9.143 MB test 22.025 0.5572 0.5004 | K4096 R256 q16/q7
+bicycle budget 1000000 POST-HOC-COLLAPSE | vertices 863510 faces 1199745 | val0 17.47 val 18.401 worst 10.56 | test 20.55 | delivered 8.634 MB test 20.515 0.4493 0.5567 | K4096 R256 q16/q7
+stump budget 1600000 TRAIN-AT-BUDGET | vertices 1135937 faces 1956177 | val0 22.626 val 22.626 worst 14.12 | test 23.952 | delivered 11.498 MB test 23.783 0.6036 0.477 | K4096 R256 q16/q7
+stump budget 1600000 POST-HOC-COLLAPSE | vertices 1135937 faces 1599446 | val0 19.915 val 20.629 worst 12.3 | test 22.959 | delivered 11.12 MB test 22.879 0.5371 0.5104 | K4096 R256 q16/q7
+stump budget 1000000 TRAIN-AT-BUDGET | vertices 878908 faces 1622540 | val0 22.426 val 22.426 worst 14.76 | test 23.641 | delivered 9.31 MB test 23.506 0.5866 0.4939 | K4096 R256 q16/q7
+stump budget 1000000 POST-HOC-COLLAPSE | vertices 878908 faces 1102679 | val0 19.049 val 19.88 worst 11.91 | test 22.192 | delivered 8.615 MB test 22.158 0.4912 0.5448 | K4096 R256 q16/q7
+# gains at equal vertices (delivered test), 4 scenes: counter +0.70 (1.46M) / +2.71 (719k); kitchen +0.32 (1.35M) / +1.82 (802k); bicycle +0.42 (1.50M) / +1.51 (864k); stump +0.90 (1.14M) / +1.35 (879k)
+# => train-at-budget > post-hoc collapse at equal vertex count on 7/7 Mip-360 scenes (14/14 points), gap grows as the budget shrinks
+# dense-collapse references at scene precision (scenes4-precision): counter q15 v1.0 25.369/25.593 v0.8 21.024/25.377 v0.7 18.614/25.132; kitchen q16 21.356/26.094, 18.029/25.808, 16.097/25.445; bicycle q16 28.372/22.838, 23.266/22.693, 20.453/22.591; stump q16 29.210/24.648, 23.663/24.347, 20.721/24.068

@@ -1,0 +1,56 @@
+
+=== room: joint hull (6 of 24 points) ===
+    2.392 MB  26.312  lam 0.01850  K1024 R256 q7    
+    4.834 MB  27.234  lam 0.00620  K1024 R256 q7    0.378 dB/MB
+    5.582 MB  27.410  lam 0.00620  K4096 R256 q8    0.235 dB/MB
+   12.901 MB  28.088  lam 0.00185  K4096 R256 q8    0.093 dB/MB
+   23.017 MB  28.321  lam 0.00062  K4096 R256 q8    0.023 dB/MB
+   25.086 MB  28.339  lam 0.00062  K16384 R1024 q7  0.009 dB/MB
+  base (lambda-only, K4096R256 q7) points vs joint hull at the same bytes:
+    lam 0.01850    2.890 MB  26.383  joint hull 26.500 (+0.117)
+    lam 0.00620    5.402 MB  27.305  joint hull 27.368 (+0.063)
+    lam 0.00185   12.396 MB  28.023  joint hull 28.041 (+0.018)
+    lam 0.00062   22.073 MB  28.255  joint hull 28.299 (+0.044)
+  lever prices (dB/MB) per lambda; lambda-chord slope = towards neighbouring lambda:
+    lam 0.01850 (2.9 MB): chord up 0.367 / down   -   | K1024 R256 q7:0.143  K4096 R1 q7:0.647  K4096 R256 q8:0.734  K4096 R1024 q7:0.151  K16384 R1024 q7:0.036
+    lam 0.00620 (5.4 MB): chord up 0.103 / down 0.367 | K1024 R256 q7:0.125  K4096 R1 q7:0.372  K4096 R256 q8:0.583  K4096 R1024 q7:0.118  K16384 R1024 q7:0.036
+    lam 0.00185 (12.4 MB): chord up 0.024 / down 0.103 | K4096 R1 q7:0.171  K1024 R256 q7:0.138  K4096 R1024 q7:0.082  K4096 R256 q8:0.129  K16384 R1024 q7:0.035
+    lam 0.00062 (22.1 MB): chord up   -   / down 0.024 | K4096 R1 q7:0.088  K1024 R256 q7:0.106  K4096 R1024 q7:0.056  K4096 R256 q8:0.070  K16384 R1024 q7:0.028
+
+=== kitchen: joint hull (7 of 24 points) ===
+    3.261 MB  24.508  lam 0.01850  K1024 R256 q7    
+    7.410 MB  25.829  lam 0.00620  K1024 R256 q7    0.318 dB/MB
+    8.022 MB  25.971  lam 0.00620  K4096 R256 q7    0.232 dB/MB
+    8.266 MB  26.027  lam 0.00620  K4096 R1024 q7   0.230 dB/MB
+   16.933 MB  26.945  lam 0.00185  K4096 R1024 q7   0.106 dB/MB
+   19.108 MB  27.049  lam 0.00185  K16384 R1024 q7  0.048 dB/MB
+   27.395 MB  27.254  lam 0.00062  K16384 R1024 q7  0.025 dB/MB
+  base (lambda-only, K4096R256 q7) points vs joint hull at the same bytes:
+    lam 0.01850    3.782 MB  24.623  joint hull 24.674 (+0.051)
+    lam 0.00620    8.022 MB  25.971  joint hull 25.971 (+0.000)
+    lam 0.00185   16.540 MB  26.886  joint hull 26.903 (+0.017)
+    lam 0.00062   24.462 MB  27.092  joint hull 27.181 (+0.089)
+  lever prices (dB/MB) per lambda; lambda-chord slope = towards neighbouring lambda:
+    lam 0.01850 (3.8 MB): chord up 0.318 / down   -   | K1024 R256 q7:0.221  K4096 R1 q7:0.902  K4096 R256 q8:0.305  K4096 R1024 q7:0.281  K16384 R1024 q7:0.063
+    lam 0.00620 (8.0 MB): chord up 0.107 / down 0.318 | K1024 R256 q7:0.232  K4096 R1 q7:0.530  K4096 R1024 q7:0.230  K4096 R256 q8:0.128  K16384 R1024 q7:0.069
+    lam 0.00185 (16.5 MB): chord up 0.026 / down 0.107 | K4096 R1 q7:0.268  K1024 R256 q7:0.193  K4096 R1024 q7:0.150  K4096 R256 q8:0.063  K16384 R1024 q7:0.063
+    lam 0.00062 (24.5 MB): chord up   -   / down 0.026 | K4096 R1 q7:0.179  K1024 R256 q7:0.163  K4096 R1024 q7:0.111  K4096 R256 q8:0.039  K16384 R1024 q7:0.055
+
+=== garden: joint hull (7 of 24 points) ===
+    4.404 MB  22.758  lam 0.01850  K1024 R256 q7    
+    9.478 MB  23.617  lam 0.00620  K1024 R256 q7    0.169 dB/MB
+   23.529 MB  24.470  lam 0.00185  K1024 R256 q7    0.061 dB/MB
+   24.599 MB  24.504  lam 0.00185  K4096 R256 q7    0.032 dB/MB
+   25.215 MB  24.523  lam 0.00185  K4096 R1024 q7   0.031 dB/MB
+   37.272 MB  24.753  lam 0.00062  K4096 R1024 q7   0.019 dB/MB
+   40.014 MB  24.777  lam 0.00062  K16384 R1024 q7  0.009 dB/MB
+  base (lambda-only, K4096R256 q7) points vs joint hull at the same bytes:
+    lam 0.01850    4.969 MB  22.783  joint hull 22.854 (+0.071)
+    lam 0.00620   10.175 MB  23.650  joint hull 23.659 (+0.009)
+    lam 0.00185   24.599 MB  24.504  joint hull 24.504 (+0.000)
+    lam 0.00062   36.389 MB  24.734  joint hull 24.736 (+0.002)
+  lever prices (dB/MB) per lambda; lambda-chord slope = towards neighbouring lambda:
+    lam 0.01850 (5.0 MB): chord up 0.167 / down   -   | K1024 R256 q7:0.044  K4096 R1 q7:0.224  K4096 R256 q8:0.082  K4096 R1024 q7:0.074  K16384 R1024 q7:0.014
+    lam 0.00620 (10.2 MB): chord up 0.059 / down 0.167 | K4096 R1 q7:0.122  K1024 R256 q7:0.047  K4096 R1024 q7:0.064  K4096 R256 q8:0.034  K16384 R1024 q7:0.016
+    lam 0.00185 (24.6 MB): chord up 0.020 / down 0.059 | K4096 R1 q7:0.053  K1024 R256 q7:0.032  K4096 R1024 q7:0.031  K4096 R256 q8:0.016  K16384 R1024 q7:0.013
+    lam 0.00062 (36.4 MB): chord up   -   / down 0.020 | K4096 R1 q7:0.036  K1024 R256 q7:0.025  K4096 R1024 q7:0.022  K4096 R256 q8:0.010  K16384 R1024 q7:0.012

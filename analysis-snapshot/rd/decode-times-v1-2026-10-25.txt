@@ -1,0 +1,14 @@
+# decode-times-v1.txt (user paste 2026-10-25; export-all-v1.sh on cpu_short node cs655, native decoders precompiled; "read" = container+connectivity+XYZ+SH-index decode, "total" adds dequantisation)
+VIEWER room lam0.0062 | V 439781 F 1022252 K 4034 R 256 | cameras 311 | source asset 5.228 MB | decode 2.22 s read, 2.295 s total | msv 27.2 MB
+VIEWER garden lam0.0062 | V 827254 F 2157003 K 4096 R 256 | cameras 185 | source asset 10.175 MB | decode 4.302 s read, 4.386 s total | msv 53.2 MB
+VIEWER bonsai lam0.0062 | V 520207 F 1130601 K 4013 R 256 | cameras 292 | source asset 6.076 MB | decode 2.381 s read, 2.409 s total | msv 31.1 MB
+VIEWER counter lam0.0062 | V 516071 F 1361405 K 4086 R 256 | cameras 240 | source asset 6.650 MB | decode 2.76 s read, 2.787 s total | msv 33.7 MB
+VIEWER kitchen lam0.0062 | V 554815 F 1637144 K 4088 R 256 | cameras 279 | source asset 7.497 MB | decode 3.21 s read, 3.244 s total | msv 38.3 MB
+VIEWER bicycle lam0.0062 | V 1080563 F 2411284 K 4082 R 256 | cameras 194 | source asset 11.935 MB | decode 5.32 s read, 5.416 s total | msv 64.4 MB
+VIEWER stump lam0.0062 | V 798792 F 1740270 K 4096 R 256 | cameras 125 | source asset 8.869 MB | decode 3.607 s read, 3.654 s total | msv 47.3 MB
+VIEWER flowers lam0.0062 | V 1104375 F 2358594 K 4096 R 256 | cameras 173 | source asset 12.029 MB | decode 5.034 s read, 5.102 s total | msv 64.5 MB
+VIEWER treehill lam0.0062 | V 1120642 F 2264837 K 4095 R 256 | cameras 141 | source asset 11.889 MB | decode 5.036 s read, 5.101 s total | msv 63.9 MB
+VIEWER truck lam0.0062 | V 767587 F 1750112 K 4084 R 256 | cameras 251 | source asset 9.413 MB | decode 3.875 s read, 3.918 s total | msv 46.4 MB
+VIEWER train lam0.0062 | V 1142555 F 2753184 K 4053 R 256 | cameras 301 | source asset 13.442 MB | decode 6.301 s read, 6.378 s total | msv 70.5 MB
+VIEWER room lam0.00185 | V 1187152 F 2620270 K 4072 R 256 | cameras 311 | source asset 12.572 MB | decode 5.891 s read, 5.96 s total | msv 70.3 MB
+# Summary: lam 6.2e-3 11 scenes decode total 2.3-6.4 s (mean 4.1 s), 4.6-5.8 us/vertex (mean 5.1), ~2.3 MB/s of compressed stream, ~200k vertices/s, single CPU core (cs655), Python driver + three C++ decoders (edge / local XYZ / ctx index) + zstd. msv (f32 mesh + per-vertex indices) is 4.9-5.6x the asset. Decode is linear in V; tested asset 40k V = 0.17 s.

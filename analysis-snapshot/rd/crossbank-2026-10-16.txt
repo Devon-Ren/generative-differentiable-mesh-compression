@@ -1,0 +1,10 @@
+# garden v0.8 mesh, q15/q7, stage2-v2 const/ctx; seed = /scratch/zr2245/room-delivery-quant-0i2F5s/run/xyz-q18_dc-q8-_luz1ezw/asset.mslb (Room K4096 R1024)
+own          | 28.056 MB test 24.393 0.7302 0.2970 | val coarse 24.952 shared_initial 24.665 fitted 24.912 decoded 24.814 | banks 0.765 MB mapping 6.602 MB
+xfer-frozen  | 27.721 MB test 23.745 0.7172 0.3080 | val coarse 24.952 shared_initial 23.926 fitted 24.239 decoded 24.160 | banks 0.766 MB mapping 6.256 MB
+xfer-adapt   | 27.714 MB test 24.162 0.7232 0.3032 | val coarse 24.952 shared_initial 23.926 fitted 24.645 decoded 24.556 | banks 0.765 MB mapping 6.256 MB
+# crossbank-v2 controls (2026-10-16): garden v0.8 q15/q7 unless noted; Room rows = Room v0.8 q14/q7 (Room own rounds 4, hull-v2: 26.237 / 27.907)
+rand         | 27.771 MB test 24.346 0.7259 0.2998 | val coarse 24.952 shared_initial 24.479 fitted 24.847 decoded 24.751 | banks 0.776 MB mapping 6.295 MB   # garden, k-means 0 rounds (data sample), convert rounds 0
+own-r0       | 27.993 MB test 24.384 0.7294 0.2974 | val coarse 24.952 shared_initial 24.632 fitted 24.900 decoded 24.803 | banks 0.770 MB mapping 6.533 MB   # garden k-means, convert rounds 0
+room-own-r0  | 26.222 MB test 27.890 0.8688 0.3697 | val coarse 30.165 shared_initial 29.659 fitted 29.991 decoded 29.833 | banks 0.770 MB mapping 6.047 MB   # Room k-means, rounds 0
+rev-frozen   | 25.499 MB test 27.658 0.8618 0.3803 | val coarse 30.165 shared_initial 29.167 fitted 29.664 decoded 29.516 | banks 0.702 MB mapping 5.336 MB   # garden codebook on Room, frozen
+rev-adapt    | 25.464 MB test 27.743 0.8652 0.3756 | val coarse 30.165 shared_initial 29.167 fitted 29.779 decoded 29.629 | banks 0.704 MB mapping 5.336 MB   # garden codebook on Room, adapted

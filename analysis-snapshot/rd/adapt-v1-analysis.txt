@@ -1,0 +1,26 @@
+adapt-v1 analysis (2026-11-06): 4 scenes x target {5, 10, 20} MB, train_rd_adapt_v1 (lambda rate controller), K4096 R256 q7 delivery
+price constants B_v 10 B/vertex (= B_a 6 + 2 B_f), B_f 2 B/face, overhead 0.6 MB.  projected* = corrected projection V*(B_v - 2 B_f) + F*B_f (no double count).
+
+scene      T  deliv   hit |   proj  proj* deliv/proj* |   R12k   R18k  final post18k |     lam0   lamA50     lamF |   PSNR  curve  dPSNR  lam_eff
+garden     5   3.83  0.77 |   4.82   3.71       1.033 |   6.31   5.39   4.82   0.894 | 1.65e-02 4.95e-02 1.00e-01 | 22.419 22.469 -0.050 2.75e-02 (extrapolated below lam 1.85e-2)
+room       5   3.55  0.71 |   4.61   3.57       0.993 |   6.31   5.53   4.61   0.834 | 1.65e-02 1.94e-02 7.99e-02 | 26.713 26.686 +0.027 1.29e-02
+kitchen    5   3.81  0.76 |   4.70   3.70       1.031 |   6.04   5.34   4.70   0.880 | 1.65e-02 2.90e-02 6.29e-02 | 24.515 24.639 -0.124 1.83e-02
+garden    10   6.67  0.67 |   8.57   6.48       1.029 |  11.43   9.86   8.57   0.869 | 5.20e-03 1.43e-02 1.94e-02 | 23.168 23.139 +0.029 1.18e-02
+bicycle    5   3.21  0.64 |   4.10   3.14       1.023 |   5.41   4.61   4.10   0.889 | 1.65e-02 4.64e-02 4.63e-02 | 21.592 21.727 -0.135 3.47e-02 (extrapolated below lam 1.85e-2)
+room      10   6.18  0.62 |   8.30   6.28       0.983 |  11.62  10.27   8.30   0.808 | 5.20e-03 8.48e-03 1.12e-02 | 27.383 27.421 -0.038 5.10e-03
+kitchen   10   6.59  0.66 |   8.22   6.37       1.035 |  10.72   9.57   8.22   0.859 | 5.20e-03 1.41e-02 1.43e-02 | 25.645 25.620 +0.025 8.24e-03
+garden    20  12.25  0.61 |  16.06  11.99       1.021 |  22.26  19.16  16.06   0.838 | 1.63e-03 7.13e-03 8.09e-03 | 23.875 23.830 +0.045 4.81e-03
+bicycle   10   6.15  0.61 |   8.20   6.13       1.003 |  11.24   9.50   8.20   0.863 | 5.20e-03 1.77e-02 2.32e-02 | 22.190 22.202 -0.012 1.48e-02
+room      20  10.38  0.52 |  14.40  10.73       0.967 |  20.50  18.37  14.40   0.784 | 1.63e-03 3.86e-03 3.57e-03 | 27.915 27.869 +0.046 2.40e-03
+bicycle   20  11.52  0.58 |  15.64  11.50       1.002 |  21.59  18.67  15.64   0.838 | 1.63e-03 8.37e-03 7.53e-03 | 22.649 22.661 -0.012 6.49e-03
+kitchen   20  11.39  0.57 |  14.33  11.02       1.034 |  19.03  17.25  14.33   0.831 | 1.63e-03 6.41e-03 3.34e-03 | 26.479 26.414 +0.065 3.45e-03
+
+hit ratio delivered/target: 0.52-0.77 (mean 0.64); none in the 0.85-1.15 band -> v1 controller NOT usable as is
+(i) price bias: delivered / corrected projection = 0.967-1.035 (mean 1.013) -> the corrected size model is accurate; the biased one (used by the controller) overestimates by 1/0.77 = x1.30
+(ii) post-control shrink: final projection / projection after the last prune round (it 18000) = 0.78-0.89 (mean 0.85) -> upstream opacity pruning + final cleaning remove ~15 % of the bytes after the controller's last action
+(iii) phase-A endpoint (biased projection before the first prune round / target) = 0.95-1.26 (mean 1.12); phase B then removes 13 % on average (four rounds)
+  product check: hit = (R12/T) * (R18/R12) * (final/R18) * (delivered/final): mean 1.12 * 0.87 * 0.85 * 0.77
+quality: test PSNR vs the fixed-lambda curve at the delivered bytes: -0.135..+0.065 dB (mean -0.011; inside the measured lambda range -0.124..+0.065, mean +0.005, n=10)
+  -> the controller's operating points lie on the fixed-lambda hull: adapting lambda online costs no quality; only the size calibration is off.
+lambda: lam_final / lam_eff (the fixed lambda that gives the same bytes) = garden5:3.64, room5:6.18, kitchen5:3.44, garden10:1.64, bicycle5:1.34, room10:2.20, kitchen10:1.73, garden20:1.68, bicycle10:1.57, room20:1.49, bicycle20:1.16, kitchen20:0.97
+fix for v2 (no new constants): projected_mb = (V*(B_v - 2B_f) + F*B_f)/1e6 + overhead (removes the x0.76 bias); plan phase A/B against target / s_post with s_post the measured post-18000 shrink (0.78-0.89, one constant 0.85), or add a late control point (prune round at 20000+ is blocked by upstream supersampling).

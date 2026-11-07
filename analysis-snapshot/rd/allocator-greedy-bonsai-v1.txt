@@ -1,0 +1,11 @@
+greedy path (level,K,R -> MB / dB / gap-to-hull dB):
+  v1.0 K16384 R4096  30.21 MB 27.092 dB  gap +0.000 HULL
+  v1.0 K4096  R4096  27.52 MB 27.059 dB  gap +0.000 HULL
+  v1.0 K4096  R1024  26.34 MB 27.018 dB  gap +0.000 HULL
+  v1.0 K4096  R256   25.50 MB 26.987 dB  gap +0.000 HULL
+  v1.0 K4096  R1     22.87 MB 26.772 dB  gap +0.000 HULL
+  v0.8 K4096  R1     18.93 MB 26.372 dB  gap +0.005
+  v0.7 K4096  R1     16.66 MB 26.149 dB  gap +0.000 HULL
+  v0.7 K1024  R1     15.63 MB 25.995 dB  gap +0.000 HULL
+8 greedy points, 7 on the global hull; hull has 7 points; max gap 0.005 dB
+global hull: v0.7K1024R1 -> v0.7K4096R1 -> v1.0K4096R1 -> v1.0K4096R256 -> v1.0K4096R1024 -> v1.0K4096R4096 -> v1.0K16384R4096
