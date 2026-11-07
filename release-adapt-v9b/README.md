@@ -1,0 +1,23 @@
+# release-adapt-v9b — adaptive λ v9b: continuous price + asymmetric aim (2026-11-07 evening, Devon's first batch)
+
+## What changed vs v9 (and why)
+1. **Code, one line** (`code/rdgrowth/train_rd_adapt_v9b.py`, 932 lines = v9 910 + header; `build/make_v9b.py` generates it by exact-count replacement, diff below the header = 1 fix + 4 version strings). At the last densify interval (9500) the plan asks for zero splits, `rank_lambda(k=0)` returned `lam_max` = 0.1, and every v4–v9 run entered phase B with λ = 0.1. Phase B compares edge scores with λ·μ, so 0.1 admits every edge (logs: "663k–7.9M edges below lam 1e-1") and `wanted = min(max(desired, n_lam), excess_pairs)` becomes the whole excess in the first round whose landing estimate exceeds the target: one capped cut instead of the progressive λ-prune (the regulariser v6 measured at +0.3/+0.5 dB on Blender 4 MB). v9b: `lam_now = rank_lambda(...) if k_asked > 0 else lam_used`. "The same price in reverse" now holds literally.
+2. **Asymmetric aim, no code** (`sbatch/adapt-v9b.sbatch` OVER default 1.25, `sbatch/adapt-v9b-blender.sbatch` 1.1; `build/make_sbatch_v9b.py`). batch12's Mip miss decomposes as hit = κ_end × (b_v,mesh + b_f·fpv) / (b_v,soup + 5) = 0.880 / 0.807 / 0.829 vs observed 0.877 / 0.790 / 0.829 (room 10 / bicycle 10 / room 20): the final cleaning keeps 0.92–0.94 of the model vertices (Blender 0.995), the delivered Delaunay topology costs 3.7–4.4 B/V against the prior 5, the soup over-reads b_v by 3–9 %. None is observable before the 11k Delaunay rebuild and nothing adds bytes after 9500; the design rule is to put the error on the side phase B can correct. 1/0.80 = 1.25 for every Mip-360 / T&T scene, 1.1 for NeRF-Synthetic (where the prior already lands 3–10 % high).
+3. **Prune rounds 12500 … 19500** (15; sbatch PRUNE default). The 12000 probe right after the Delaunay reads high and the 12500 one lower (bicycle 8.301 → 8.224), so the first slope was strongly negative; starting at 12500 keeps the transient out of the trend.
+4. HPC names: Mip/T&T jobs `adapt9x`, run dirs `$SCENE-adapt9x-t${T}mb`, table `adapt-v9b.txt`, VERSION v9x-r1; Blender `adapt9xb`, `$SCENE-adapt9xb-t${T}mb` (+ -best), `adapt-v9b-blender.txt`, VERSION v9xb-r1 (`adapt9b` is taken by the v9 Blender runs). The sbatch asserts the fix line and OVER ≥ 1.
+
+## Files
+- `build/make_v9b.py`, `build/make_sbatch_v9b.py`: generators (v9 files untouched). `build/test_v9b_cpu.py`: diff audit (5 lines), k_asked = 0 semantics, the v9 plan replays on v9b's `plan_splits`. `build/make_batch14.py`: writes the paste block. `build/fixture-batch12-rows.txt`: the six batch12 rows (gate parser test).
+- `scripts/gate_batch14_v1.py`: pass bar, fixed before the runs (see below). `scripts/gate-batch14.sbatch`: CPU job with `--dependency=afterany` on the six test jobs; runs the gate and submits the sweep part(s) that passed. `scripts/submit-batch14-sweep-v1.sh all|mip|blender`: the 43-job sweep (28 Mip/T&T + 15 Blender; the six test rows are not resubmitted). `scripts/submit-batch14-v1.sh`: checks + six test jobs + gate.
+- `scripts/kappa_analysis_v1.py` + `commands/cpu-kappa-analysis-v1.md`: CPU measurement of κ_end / topology price / soup b_v / horizon error on every finished adapt run on disk (the 11-scene validation of the 1.25 margin; paper table).
+- `commands/node-batch14-v1.md`: **the paste**. §1 writes six files and submits; §2 smoke check after 10–15 min; §3 morning collection; §4 manual gate fallback.
+
+## Test batch (6 jobs, ≈5 GPU-h) and pass bar
+room 10, bicycle 10, room 20 (before/after vs batch12), garden 5, truck 10 (new scene classes), lego 2.5 (does a 10 % surplus + trimming cost dB?). Smoke + self-check on room 10, garden 5, lego 2.5 only.
+Gate (automatic): Mip/T&T ≥ 4 of 5 rows, ≥ 4 within 0.93–1.07 × target, none outside 0.88–1.12, test PSNR ≥ the v9/v7b row of the same scene and target − 0.08 dB (those had fewer bytes); Blender: lego within 0.93–1.07 and PSNR ≥ 32.173 − 0.10. Mip pass → 28 Mip/T&T sweep jobs; Blender pass → 15 Blender jobs. Total night ≈ 41 GPU-h ≈ 10.5 h on 4 L40S.
+
+## Expected
+Mip rows 0.99–1.09 before phase B, 0.95–1.05 after (last-estimate-vs-final error −1.4..+4.4 %, 20 MB indoor worst); `prune rounds 15 active ≥ 1` on every Mip row (v9: 0); `lam_final` a real price; lego ≈ 1.0 with more pairs collapsed than v9's 4321 and PSNR within 0.1 dB of 32.17.
+
+## Not in v9b (next, if the sweep lands)
+Delaunay-on-copy probe at 8500/9500 to measure the topology price two intervals before growth ends (would shrink the margin from 1.25 to ≈1/κ ≈ 1.08); a late trim round after supersampling for the horizon error; `growth_capped` defined on the last-interval shortfall.
