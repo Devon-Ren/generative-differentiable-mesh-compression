@@ -1,0 +1,9 @@
+# release-g0-refresh-v1 — G0 on the current protocol, 7 outdoor / T&T scenes (night of 2026-11-08, node-batch19)
+
+**Why.** The paper's premise table (train-at-budget beats post-hoc collapse to the same vertex count by +0.3–4.3 dB) rests on 7 Mip-360 scenes, the October parameters and two budgets. This refresh reruns it on the current protocol for garden, bicycle, stump, flowers, treehill, truck, train at three budgets each, chosen as the vertex counts of the scene's own λ 1.85e-3 / 6.2e-3 / 1.85e-2 assets (÷0.9 for the cap), so that the three paths — λ-grown, budget-capped, post-hoc collapsed — meet at about the same V and can be compared at equal bytes.
+
+**Files.** `sbatch/budget-sweep-v2.sbatch` (VERSION g0r-v2): upstream `train.py --max_points B` + level-1.0 delivery (path A), then the control (path B): `coarse_vis.py --target-vertices V_A` on the scene's dense FP32 original, same 3000-step `coarse_finetune.py`, same `deliver_coarse.sh` (K4096 R256, scene XYZ, DC q7); rows `TRAIN-AT-BUDGET` / `POST-HOC-COLLAPSE` into `$AN/g0-refresh-$SCENE.txt`; DATA / ORIG overrides for T&T; refuses INDOOR=1 (upstream's `update_indoor()` overwrites `--max_points` after parsing; indoor scenes need the train_ckpt_v4 override path, to be smoke-tested first). `scripts/submit-batch19-v1.sh`: checks, then 7 G0 jobs (5:00 limit, 64 GB), 2 Deep Blending fixed-λ jobs (λ 6.2e-4 / 1.85e-2 → full hull), 11 adaptive v9d runs at 2.5 MB. `commands/node-batch19-v1.md` = the paste (§1 submit, §3 morning collection).
+
+Budgets (B = V_λ / 0.9): garden 2346000 919000 414000; bicycle 2886000 1201000 474000; stump 2292000 888000 344000; flowers 2639000 1227000 522000; treehill 3053000 1245000 482000; truck 1934000 853000 354000; train 2546000 1270000 553000.
+
+Verified locally: sbatch and submit `bash -n`; paste replayed byte-exact; dry-run with a fake sbatch (scene skip when an original is missing works; 19–20 jobs).
