@@ -15,3 +15,8 @@ Principle: "the same price in reverse" must be the price of the *file*, not of t
 
 ## Batch16
 Same six test rows as batch15 (room 5, counter 5, kitchen 10, counter 10, kitchen 20, lego 2.5), same gate pass bar (≥ 4/5 within 0.95–1.05, none outside 0.90–1.08, PSNR ≥ hull − 0.15; lego within 0.95–1.05 and ≥ 32.233) → 43-job v9d sweep. Expected: 5–7 B per pair, the five rows at 0.97–1.05, lego within 0.1 dB. `commands/node-batch16-v1.md` is the paste.
+
+## batch16 result (2026-11-08 morning) and the calibrated-aim sweep (batch17)
+v9d did what it was built for: both-kept share 1.00 on all 22 rows, 8.6–10.4 B freed per pair (v9c 0.6–2.4), kitchen 10 removed 0.78 MB of real bytes. The five test rows still landed 1.047 / 1.046 / 1.130 / 1.070 / 1.088 (gate FAIL; the Blender v9d sweep passed and ran, 16 rows: 2.5 MB mean 1.03 without ficus, 4 MB 0.95 without ficus / mic). Reason: the kept set keeps un-stacking through phase B: (final probe + bytes removed) / first probe = 1.10 room 5, 1.13 counter 5, 1.24 counter 10, 1.28 kitchen 10, 1.49 kitchen 20. Thirty rounds at ~0.4 % of V per round (independent set + foldover) cannot trim 10–30 %. Phase B is the fine lever; the aim is the coarse one.
+
+The aim per capture class, measured two independent ways: (a) kappa-analysis-v1 on 59 earlier runs → indoor 1.11–1.16, outdoor 1.23–1.28, T&T 1.17–1.22; (b) the v9b sweep's pre-trim landing with the uniform 1.25 → indoor 1.076 (→ 1.16), outdoor 0.988 (→ 1.27), T&T 1.020 (→ 1.23). `commands/node-batch17-v1.md` runs the 33 Mip/T&T rows with v9d + `adapt-v9e.sbatch` (names only) and OVER indoor 1.16 / outdoor 1.27 / T&T 1.23, calibrated on earlier runs, not on these. Results: `results/adapt-v9d-*.txt` (batch16), `results/adapt-v9e-*.txt` (batch17, pending).
