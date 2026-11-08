@@ -52,8 +52,8 @@ drums      2.5 |   2.674  1.070  0.997 | False   0/17 |  0.97    0.946   |    +0
 ficus      2.5 |   1.959  0.784  0.984 | False   3/17 |  0.67    0.769   |    -2.6 %   |   0         0    | 26000  33.948  32.110 | 32.129 -0.019* |  0.770
 hotdog     2.5 |   2.730  1.092  0.991 | False   0/17 |  0.96    0.913   |    +4.7 %   |  14     16723    | 26000  37.344  35.432 | 35.631 -0.199  |  0.979
 materials  2.5 |   2.601  1.040  1.048 | False   0/17 |  0.99    0.982   |    -5.2 %   |   6      6282    | 22000  31.123  27.793 | 27.762 +0.031  |  0.968
-mic        2.5 |  (no row: smoke-stage failure, resubmit with SMOKE=0)
-ship       2.5 |  (no row: smoke-stage failure, resubmit with SMOKE=0)
+mic        2.5 |   2.336  0.934  1.070 | False   2/17 |  0.83    0.751   |    -1.3 %   |   1       218    | 21000  35.023  33.303 | 33.285 +0.018  |  0.871
+ship       2.5 |   2.660  1.064  1.016 | False   0/17 |  0.97    0.957   |    -4.1 %   |   9      9739    | 26000  30.450  29.013 | 29.164 -0.151* |  0.990
 lego         4 |   4.073  1.018  1.011 | False   0/17 |  0.98    0.932   |    -0.3 %   |  14     42376    | 26000  36.774  33.116 | 32.945 +0.171  |  0.994
 chair        4 |   4.012  1.003  1.001 | False   1/17 |  0.87    0.753   |    +1.2 %   |  12      9846    | 26000  34.845  32.117 | 32.202 -0.085  |  0.892
 drums        4 |   3.795  0.949  1.010 | False   2/17 |  0.81    0.736   |    -2.2 %   |   0         0    | 26000  27.478  25.541 | 25.510 +0.031  |  0.850
@@ -62,7 +62,7 @@ hotdog       4 |   3.712  0.928  0.994 | False   3/17 |  0.76    0.693   |    +2
 materials    4 |   3.590  0.897  1.076 | False   2/17 |  0.84    0.787   |    -8.6 %   |   0         0    | 22000  31.129  27.831 | 27.771 +0.060  |  0.814
 mic          4 |   2.581  0.645  1.086 | False   4/17 |  0.55    0.508   |    -2.1 %   |   0         0    | 21000  35.216  33.397 | 33.401 -0.004  |  0.611
 ship         4 |   4.135  1.034  1.034 | False   1/17 |  0.94    0.841   |    -7.4 %   |   1      4748    | 26000  30.981  29.391 | 29.430 -0.039  |  0.862
-  2.5 MB without ficus (5 rows): hit 0.983-1.092 (mean 1.037), dPSNR vs chord -0.199..+0.091 (mean -0.038); 4 MB without ficus / mic (6 rows): hit 0.897-1.034 (mean 0.971), dPSNR -0.235..+0.171 (mean -0.016)
+  2.5 MB without ficus (7 rows): hit 0.934-1.092 (mean 1.026), dPSNR vs chord -0.199..+0.091 (mean -0.046); 4 MB without ficus / mic (6 rows): hit 0.897-1.034 (mean 0.971), dPSNR -0.235..+0.171 (mean -0.016)
   ficus 2.5 / 4 and mic 4: lambda at lam_min (1e-4) from the first intervals and the upstream add_percentage limiter binding at 9500: the scene has no residual left to buy at any price (model-size class limit, as in v7b); growth_capped stays False because the limiter bound only the last 1-2 intervals (flag definition: majority of intervals).
 
 3. the two residual mechanisms (read from the logs)
