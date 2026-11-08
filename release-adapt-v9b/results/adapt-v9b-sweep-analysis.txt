@@ -1,0 +1,76 @@
+adapt-v9b scene sweep (2026-11-08, node-batch14-v1): v9 + continuous phase-A price + phase A aims at 1.25 x target (Mip/T&T) / 1.1 x (Blender) + 15 prune rounds 12500-19500.
+  Mip-360 / T&T 11 scenes x {5, 10, 20} MB (33 rows); NeRF-Synthetic 6 x 2.5 MB + 8 x 4 MB (14 rows; mic / ship 2.5 MB failed at the smoke stage: K-means on the degenerate 1550-it smoke mesh).
+  fixed-lambda reference: Mip/T&T = rd-hull6-v2 upper hull in log bytes; Blender = lam 6.2e-4 / 6.2e-3 re-delivered with val_select_v3 (chord).  v7b columns from adapt-v7b-sweep.csv.
+
+1. landing, Mip-360 / T&T
+scene       T |  deliv   hit  P/dl | active coll  1st | V12/V*  P12.5/T | lastEst err | test PSNR   hull  dPSNR | v7b hit  v7b dPSNR
+room         5 |   5.305  1.061  1.000 |    9   39659  15500 |  1.00    0.999  |    -0.4 %   |  27.191   27.274  -0.083  |  0.884    -0.133
+kitchen      5 |   5.308  1.062  0.999 |   10   54002  12500 |  0.99    1.049  |    -1.1 %   |  25.256   25.226  +0.030  |  1.017    -0.090
+counter      5 |   5.461  1.092  1.000 |   10   48086  12500 |  1.00    1.047  |    -0.3 %   |  25.109   25.133  -0.024  |  0.949    -0.099
+bonsai       5 |   5.015  1.003  0.998 |    1     696  19500 |  0.99    0.999  |    +0.1 %   |  25.807   26.007  -0.200  |  0.858    -0.212
+garden       5 |   4.827  0.965  0.999 |    5   47709  12500 |  0.99    1.061  |    +1.9 %   |  22.712   22.737  -0.025* |  0.965    -0.104
+bicycle      5 |   4.833  0.967  1.000 |    1   17789  12500 |  0.98    1.057  |    +2.3 %   |  21.901   22.026  -0.125* |  0.833    -0.193
+stump        5 |   4.776  0.955  1.000 |    9   20781  12500 |  0.98    1.058  |    +4.9 %   |  23.267   23.433  -0.166  |  0.807    -0.220
+flowers      5 |   4.906  0.981  0.999 |    6   25304  12500 |  0.99    1.046  |    +2.5 %   |  18.810   18.776  +0.034* |  0.827    -0.131
+treehill     5 |   4.761  0.952  0.999 |    1   14530  12500 |  0.98    1.041  |    +3.4 %   |  20.103   20.294  -0.191* |  0.815    -0.048
+truck        5 |   5.008  1.002  0.999 |    2    6857  12500 |  0.98    1.014  |    +0.1 %   |  21.598   21.764  -0.166  |  0.905    -0.240
+train        5 |   5.120  1.024  1.000 |    8   39744  12500 |  0.99    1.060  |    +0.5 %   |  18.218   18.511  -0.293* |  0.903    -0.399
+  5 MB: hit 0.952-1.092 (mean 1.006; v7b 0.888), within +-5 %: 8/11, within +-10 %: 11/11 (v7b 5/11); phase B active on 11/11 rows; equal-bytes dPSNR vs hull -0.29..+0.03 (mean -0.110; v7b -0.170)
+room        10 |  10.291  1.029  1.000 |    7   67765  16500 |  1.00    0.879  |    +0.1 %   |  27.833   27.859  -0.026  |  0.814    -0.065
+kitchen     10 |  11.352  1.135  0.999 |   11   90512  14500 |  1.00    0.943  |    -1.0 %   |  26.423   26.415  +0.008  |  0.989    -0.091
+counter     10 |  10.785  1.079  1.000 |   10   78278  15000 |  1.00    0.935  |    -3.2 %   |  25.659   25.699  -0.040  |  0.885    -0.070
+bonsai      10 |  10.088  1.009  0.999 |    6   36628  17000 |  0.99    0.905  |    -0.5 %   |  26.972   27.044  -0.072  |  0.803    -0.147
+garden      10 |  10.205  1.020  0.999 |    7   53661  12500 |  0.98    1.026  |    -0.3 %   |  23.610   23.650  -0.040  |  0.910    -0.080
+bicycle     10 |   9.836  0.984  0.999 |    1    4539  12500 |  0.97    1.005  |    +1.4 %   |  22.466   22.550  -0.084  |  0.775    -0.095
+stump       10 |   9.644  0.964  1.000 |    1    8521  12500 |  0.98    1.010  |    +3.3 %   |  23.943   24.174  -0.231  |  0.765    -0.200
+flowers     10 |   9.871  0.987  0.999 |    7   33604  16500 |  0.99    0.980  |    +2.6 %   |  19.018   19.115  -0.097  |  0.767    -0.092
+treehill    10 |   9.534  0.953  0.999 |    0       0      - |  0.97    0.984  |    +3.2 %   |  20.463   20.359  +0.104  |  0.746    +0.066
+truck       10 |  10.120  1.012  0.999 |    0       0      - |  0.98    0.948  |    -2.2 %   |  22.174   22.353  -0.179  |  0.855    -0.160
+train       10 |  10.506  1.051  1.000 |    6   53265  17000 |  0.99    0.971  |    -2.3 %   |  18.730   18.637  +0.093  |  0.837    +0.048
+  10 MB: hit 0.953-1.135 (mean 1.020; v7b 0.831), within +-5 %: 8/11, within +-10 %: 10/11 (v7b 2/11); phase B active on 9/11 rows; equal-bytes dPSNR vs hull -0.23..+0.10 (mean -0.051; v7b -0.081)
+room        20 |  20.641  1.032  1.000 |    2   56277  19000 |  0.98    0.761  |    -2.0 %   |  28.186   28.223  -0.037  |  0.751    -0.063
+kitchen     20 |  21.999  1.100  0.999 |   11  205699  14500 |  1.00    0.793  |    -2.2 %   |  27.027   27.036  -0.009  |  0.919    -0.099
+counter     20 |  21.089  1.054  1.000 |   10  163183  15000 |  1.00    0.801  |    -3.2 %   |  25.970   25.954  +0.016* |  0.799    -0.047
+bonsai      20 |  19.323  0.966  0.999 |    1   48084  13000 |  1.00    0.794  |    -1.4 %   |  27.559   27.710  -0.151  |  0.729    -0.392
+garden      20 |  20.783  1.039  0.999 |    5   38059  17500 |  0.98    0.940  |    -2.5 %   |  24.270   24.337  -0.067  |  0.851    -0.059
+bicycle     20 |  19.138  0.957  0.999 |    0       0      - |  0.95    0.910  |    -1.1 %   |  22.839   22.881  -0.042  |  0.729    -0.056
+stump       20 |  18.721  0.936  0.999 |    0       0      - |  0.95    0.910  |    +1.8 %   |  24.416   24.620  -0.204  |  0.703    -0.182
+flowers     20 |  19.210  0.961  0.999 |    0       0      - |  0.97    0.881  |    +0.1 %   |  19.123   19.116  +0.007  |  0.716    -0.044
+treehill    20 |  18.670  0.934  0.999 |    0       0      - |  0.95    0.901  |    +1.2 %   |  20.554   20.418  +0.136  |  0.700    +0.181
+truck       20 |  18.689  0.934  0.999 |    0       0      - |  0.95    0.829  |    -5.5 %   |  22.383   22.208  +0.175  |  0.766    +0.156
+train       20 |  20.542  1.027  1.000 |    0       0      - |  0.96    0.842  |    -6.5 %   |  18.901   18.667  +0.234  |  0.779    +0.159
+  20 MB: hit 0.934-1.100 (mean 0.995; v7b 0.767), within +-5 %: 6/11, within +-10 %: 11/11 (v7b 1/11); phase B active on 5/11 rows; equal-bytes dPSNR vs hull -0.20..+0.23 (mean +0.005; v7b -0.041)
+  all 33: mean hit 1.007, within +-5 % 22/33, within +-10 % 32/33; mean equal-bytes dPSNR -0.052 (v7b: 0.829, 3/33, 8/33, -0.097)
+columns: P/dl = final probe / delivered; active / coll = phase-B rounds that collapsed / pairs; 1st = first active round; V12/V* = vertices after the Delaunay over the plan; P12.5/T = first probe over target;
+  lastEst err = last-round landing estimate vs the final probe; hull = fixed-lambda upper hull at the delivered bytes (* extrapolated beyond lam 1.85e-2 / 6.2e-4).
+
+2. landing, NeRF-Synthetic
+scene       T |  deliv   hit  P/dl | capped bound | V12/V*  P12.5/T | lastEst err | active collapsed | best   val    test  | chord  dPSNR | v7b hit
+lego       2.5 |   2.496  0.999  1.018 | False   0/17 |  0.99    0.999   |    +1.3 %   |  14     24124    | 21000  35.122  32.383 | 32.488 -0.105* |  1.014
+chair      2.5 |   2.457  0.983  1.043 | False   0/17 |  0.96    0.924   |    +1.5 %   |  14     23131    | 21000  34.136  32.259 | 32.168 +0.091  |  0.968
+drums      2.5 |   2.674  1.070  0.997 | False   0/17 |  0.97    0.946   |    +0.3 %   |  12     11953    | 26000  27.351  25.484 | 25.490 -0.006* |  1.002
+ficus      2.5 |   1.959  0.784  0.984 | False   3/17 |  0.67    0.769   |    -2.6 %   |   0         0    | 26000  33.948  32.110 | 32.129 -0.019* |  0.770
+hotdog     2.5 |   2.730  1.092  0.991 | False   0/17 |  0.96    0.913   |    +4.7 %   |  14     16723    | 26000  37.344  35.432 | 35.631 -0.199  |  0.979
+materials  2.5 |   2.601  1.040  1.048 | False   0/17 |  0.99    0.982   |    -5.2 %   |   6      6282    | 22000  31.123  27.793 | 27.762 +0.031  |  0.968
+mic        2.5 |  (no row: smoke-stage failure, resubmit with SMOKE=0)
+ship       2.5 |  (no row: smoke-stage failure, resubmit with SMOKE=0)
+lego         4 |   4.073  1.018  1.011 | False   0/17 |  0.98    0.932   |    -0.3 %   |  14     42376    | 26000  36.774  33.116 | 32.945 +0.171  |  0.994
+chair        4 |   4.012  1.003  1.001 | False   1/17 |  0.87    0.753   |    +1.2 %   |  12      9846    | 26000  34.845  32.117 | 32.202 -0.085  |  0.892
+drums        4 |   3.795  0.949  1.010 | False   2/17 |  0.81    0.736   |    -2.2 %   |   0         0    | 26000  27.478  25.541 | 25.510 +0.031  |  0.850
+ficus        4 |   1.983  0.496  0.991 | False   6/17 |  0.38    0.486   |    -1.7 %   |   0         0    | 26000  33.901  32.087 | 32.135 -0.048* |  0.486
+hotdog       4 |   3.712  0.928  0.994 | False   3/17 |  0.76    0.693   |    +2.3 %   |   8     11551    | 26000  37.618  35.594 | 35.829 -0.235* |  0.859
+materials    4 |   3.590  0.897  1.076 | False   2/17 |  0.84    0.787   |    -8.6 %   |   0         0    | 22000  31.129  27.831 | 27.771 +0.060  |  0.814
+mic          4 |   2.581  0.645  1.086 | False   4/17 |  0.55    0.508   |    -2.1 %   |   0         0    | 21000  35.216  33.397 | 33.401 -0.004  |  0.611
+ship         4 |   4.135  1.034  1.034 | False   1/17 |  0.94    0.841   |    -7.4 %   |   1      4748    | 26000  30.981  29.391 | 29.430 -0.039  |  0.862
+  2.5 MB without ficus (5 rows): hit 0.983-1.092 (mean 1.037), dPSNR vs chord -0.199..+0.091 (mean -0.038); 4 MB without ficus / mic (6 rows): hit 0.897-1.034 (mean 0.971), dPSNR -0.235..+0.171 (mean -0.016)
+  ficus 2.5 / 4 and mic 4: lambda at lam_min (1e-4) from the first intervals and the upstream add_percentage limiter binding at 9500: the scene has no residual left to buy at any price (model-size class limit, as in v7b); growth_capped stays False because the limiter bound only the last 1-2 intervals (flag definition: majority of intervals).
+
+3. the two residual mechanisms (read from the logs)
+  a. over-target indoor rows (room5 kitchen5 counter5 kitchen10 counter10 kitchen20 counter20): the first probe reads 0.76-1.05 x target and the landing estimate stays UNDER target for 3-9 rounds (kitchen 10: 9.43 / 8.51 / 9.24 / 9.79 MB at 12.5-14k, final 11.34),
+     because the kept set keeps growing under the opacity ramp (un-stacking: indoor final / first probe = 1.00-1.39); the gate opens late and 7-11 rounds collapse 39659-205699 pairs (0.8-1 % of V per round, the foldover / independent-set limit, far below the 15 % cap) without reaching the target.
+     -> the lever is trimming authority / an earlier gate, not the aim: more rounds (every 250 it from 12500: 30 rounds, +8 min/run, sbatch flag) or a prior on the un-stacking growth.
+  b. under-target outdoor 20 MB rows (stump20 treehill20 truck20): V12/V* 0.95-0.98 (the last interval admitted 88-92 % of the asked splits: rank-yield error with no interval left to correct), first probe 0.83-0.94 x target, phase B never opened;
+     the implied landing of these scenes (kappa 0.91-0.92 x topology 3.4-3.8 B/V, kappa-analysis-v1) was 0.95-0.97 with the 1.25 aim, so the margin is thin for the outdoor class at 20 MB and the yield shortfall takes the rest.
+
+4. quality: equal-bytes dPSNR vs the fixed-lambda hull, all 33 Mip/T&T rows: -0.293..+0.234, mean -0.052 (v7b mean -0.097); rows below the hull by > 0.1 dB: bonsai5(-0.20) bicycle5(-0.13) stump5(-0.17) treehill5(-0.19) truck5(-0.17) train5(-0.29) stump10(-0.23) truck10(-0.18) bonsai20(-0.15) stump20(-0.20)
+   phase B active (26 rows) vs inactive (7): mean dPSNR -0.078 vs +0.029

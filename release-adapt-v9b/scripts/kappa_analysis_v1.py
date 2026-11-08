@@ -31,7 +31,7 @@ for pat in sys.argv[1:]:
     for d in sorted(glob.glob(pat)):
         rs_p, lg_p = os.path.join(d, 'original', 'rd_summary.json'), os.path.join(d, 'original', 'rd_log.jsonl')
         if not (os.path.exists(rs_p) and os.path.exists(lg_p)): continue
-        m = re.match(r'^(\w+?)-adapt(\d+b?)-t([0-9.]+)mb$', os.path.basename(d))
+        m = re.match(r'^(\w+?)-adapt(\d+[a-z]*)-t([0-9.]+)mb$', os.path.basename(d))
         if not m: continue
         scene, ver, T = m.group(1), m.group(2), float(m.group(3))
         try:
