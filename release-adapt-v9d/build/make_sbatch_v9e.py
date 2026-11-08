@@ -13,7 +13,7 @@ def rep(old, new, count=1):
     s = s.replace(old, new); n_rep += 1
 
 
-assert 'adapt9db' not in s
+if 'adapt9db' in s: rep('adapt9db', 'adapt9eb', s.count('adapt9db'))  # only in the v9d header comment
 rep('adapt9d', 'adapt9e', s.count('adapt9d')); rep('v9d-r1', 'v9e-r1', s.count('v9d-r1'))
 rep('TAB=$AN/adapt-v9d.txt;', 'TAB=$AN/adapt-v9e.txt;')
 rep("# adapt-v9d.sbatch (2026-11-08, VERSION v9e-r1): = adapt-v9c.sbatch (VERSION v9c-r1) with train_rd_adapt_v9d.py + rd_prune_v2.py.\n",
