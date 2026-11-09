@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>One Interval, Step by Step</title>
+<title>From Step Zero</title>
 <style>
 :root{--bg:#fbfaf7;--fg:#1d1d1b;--mute:#6b6b66;--line:#d9d6ce;--ours:#d9822b;--ours-bg:#fdf1e3;--up:#5b7a99;--up-bg:#e8eef4;--bad:#b4473b;--code:#f1efe9}
 @media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#17181a;--fg:#ecebe6;--mute:#a4a39c;--line:#3a3b3f;--ours-bg:#3a2a16;--up-bg:#1f2a36;--code:#232428}}
@@ -25,182 +25,155 @@ td.s{font-family:ui-monospace,Menlo,Consolas,monospace;white-space:nowrap}
 </head>
 <body><main>
 
-<h1>One 500-step interval, explained from scratch</h1>
-<p class="mute">Scene <b>room</b>, requested size <b>10 MB</b>, the interval from step 9000 to step 9500. Numbers marked <i>(log)</i> are from the real run; numbers marked <i>(est.)</i> are filled in so the arithmetic can be followed end to end.</p>
+<h1>From step zero: how the mesh grows to 10 MB</h1>
+<p class="mute">Scene <b>room</b> (indoor preset), requested size <b>10 MB</b>. Numbers marked <i>(log)</i> are from the real run. Numbers marked <i>(est.)</i> are plausible fill-ins so every line of arithmetic can be followed.</p>
 
-<h2>What the system is, in one paragraph</h2>
-<p>You give it photos of a room and one number: <b>"the file must be 10 MB."</b> It gives back a triangle mesh file of about 10 MB. MeshSplatting trains a mesh that <i>grows</i>: every 500 steps it picks some triangles and cuts each into four. The original picks them by a rule of thumb, and the final file size is whatever it turns out to be. We change one thing: <b>every 500 steps, first compute how many vertices the 10 MB can pay for, then how many triangles to cut this round, and only then set the cut-off line λ so that exactly that many triangles pass.</b> λ is not an input. It is computed.</p>
+<h2>1. The two kinds of quantities</h2>
+<p>Everything on this page is one of two kinds. Keeping them apart is the whole trick.</p>
+<table>
+<tr><th>Kind</th><th>Examples</th><th>Lives where</th></tr>
+<tr><td><b>Accumulated over an interval</b> (an interval = the 500 training steps between two boundaries)</td><td>the error ledger ΔD_t, and therefore ratio_t</td><td>Built up during the interval, read once at its end, then wiped</td></tr>
+<tr><td><b>Set at a boundary and held constant through the next interval</b></td><td>λ, σ, yield, the byte-table prices b_v / overhead, V*</td><td>Rewritten at a boundary, used unchanged until the next one</td></tr>
+</table>
+<p>There is <b>one</b> variable λ. It is rewritten at every boundary. The λ that is <i>used</i> at a boundary is the one written at the <i>previous</i> boundary.</p>
 
 <figure>
-<svg viewBox="0 0 840 115" role="img" aria-label="timeline">
-<line x1="30" y1="58" x2="810" y2="58" class="ln"/>
-<g font-size="12" class="m"><text x="30" y="82" text-anchor="middle">0</text><text x="112" y="82" text-anchor="middle">1500</text><text x="336" y="82" text-anchor="middle">9500</text><text x="372" y="82" text-anchor="middle">11k</text><text x="408" y="82" text-anchor="middle">12.5k</text><text x="572" y="82" text-anchor="middle">19.5k</text><text x="810" y="82" text-anchor="middle">30k</text></g>
-<rect x="112" y="28" width="224" height="22" rx="4" class="o"/><text x="224" y="44" font-size="12.5" text-anchor="middle">every 500 steps: how far to go → how many to cut → set λ</text>
-<rect x="408" y="28" width="164" height="22" rx="4" class="o"/><text x="490" y="44" font-size="12.5" text-anchor="middle">every 500 steps: measure, trim if over</text>
-<rect x="294" y="54" width="42" height="9" fill="var(--bad)" opacity="0.7"/><text x="315" y="106" font-size="12.5" text-anchor="middle" fill="var(--bad)">this page: these 500 steps</text>
-<text x="372" y="22" font-size="12" text-anchor="middle" class="m">11k: loose triangles get stitched into a mesh</text>
-<text x="810" y="22" font-size="12" text-anchor="end" class="m">30k: encode to file</text>
+<svg viewBox="0 0 840 215" role="img" aria-label="relay">
+<g font-size="12.5" class="m"><text x="100" y="20" text-anchor="middle">interval 1: steps 0–1500</text><text x="330" y="20" text-anchor="middle">interval 2: 1500–2000</text><text x="560" y="20" text-anchor="middle">interval 3: 2000–2500</text><text x="770" y="20" text-anchor="middle">…</text></g>
+<rect x="20" y="30" width="160" height="34" rx="5" class="u"/><text x="100" y="52" font-size="13" text-anchor="middle">ledger 1 fills up</text>
+<rect x="250" y="30" width="160" height="34" rx="5" class="u"/><text x="330" y="52" font-size="13" text-anchor="middle">ledger 2 fills up</text>
+<rect x="480" y="30" width="160" height="34" rx="5" class="u"/><text x="560" y="52" font-size="13" text-anchor="middle">ledger 3 fills up</text>
+<line x1="215" y1="25" x2="215" y2="205" stroke="var(--bad)" stroke-dasharray="4 3"/><text x="215" y="212" font-size="12" text-anchor="middle" fill="var(--bad)">boundary 1500</text>
+<line x1="445" y1="25" x2="445" y2="205" stroke="var(--bad)" stroke-dasharray="4 3"/><text x="445" y="212" font-size="12" text-anchor="middle" fill="var(--bad)">boundary 2000</text>
+<line x1="675" y1="25" x2="675" y2="205" stroke="var(--bad)" stroke-dasharray="4 3"/><text x="675" y="212" font-size="12" text-anchor="middle" fill="var(--bad)">boundary 2500</text>
+<rect x="150" y="85" width="130" height="30" rx="5" class="o"/><text x="215" y="105" font-size="12.5" text-anchor="middle">ratio¹ = ledger 1 / 33 B</text>
+<rect x="380" y="85" width="130" height="30" rx="5" class="o"/><text x="445" y="105" font-size="12.5" text-anchor="middle">ratio² = ledger 2 / 33 B</text>
+<rect x="610" y="85" width="130" height="30" rx="5" class="o"/><text x="675" y="105" font-size="12.5" text-anchor="middle">ratio³ = ledger 3 / 33 B</text>
+<rect x="20" y="135" width="110" height="30" rx="5" class="o"/><text x="75" y="155" font-size="12.5" text-anchor="middle">λ₁ = guess</text>
+<path d="M130 150 L150 150" class="ln"/><text x="165" y="154" font-size="12.5" fill="var(--bad)">cut ratio¹ &gt; λ₁</text>
+<rect x="150" y="170" width="130" height="30" rx="5" class="o"/><text x="215" y="190" font-size="12.5" text-anchor="middle">λ₂ = k-th bar of ratio¹</text>
+<path d="M280 185 L365 185 L365 150 L380 150" class="ln"/><text x="395" y="154" font-size="12.5" fill="var(--bad)">cut ratio² &gt; λ₂</text>
+<rect x="380" y="170" width="130" height="30" rx="5" class="o"/><text x="445" y="190" font-size="12.5" text-anchor="middle">λ₃ = k-th bar of ratio²</text>
+<path d="M510 185 L595 185 L595 150 L610 150" class="ln"/><text x="625" y="154" font-size="12.5" fill="var(--bad)">cut ratio³ &gt; λ₃</text>
+<rect x="610" y="170" width="130" height="30" rx="5" class="o"/><text x="675" y="190" font-size="12.5" text-anchor="middle">λ₄ = k-th bar of ratio³</text>
 </svg>
+<figcaption>The relay. At each boundary: read this interval's ledger, compare it with the λ written at the previous boundary, cut, then write the next λ from this same ledger. λ always moves exactly one boundary forward.</figcaption>
 </figure>
 
-<h2>The symbols, in plain words</h2>
-<table>
-<tr><th>Symbol</th><th>What it is</th><th>Picture it as</th><th>Value here</th></tr>
-<tr><td class="s">V</td><td>Number of vertices (corner points) in the mesh right now</td><td>Number of nails on the board</td><td>919 243 at step 9500 <i>(log)</i></td></tr>
-<tr><td class="s">F</td><td>Number of triangles (faces)</td><td>Number of rubber bands stretched over the nails</td><td>574 749 <i>(log)</i></td></tr>
-<tr><td class="s">b_v</td><td>How many bytes the file spends per vertex (its position, colour, two colour-dictionary indices)</td><td>The price tag on one nail</td><td>6.42 B <i>(log)</i></td></tr>
-<tr><td class="s">b_f</td><td>How many bytes the file spends per face (three integers saying which vertices it connects)</td><td>The price tag on one rubber band</td><td>2.0 B (prior, measured later as 1.8)</td></tr>
-<tr><td class="s">fpv</td><td>Faces per vertex in the finished mesh</td><td>How many bands touch each nail</td><td>2.5 (prior, measured later as 2.0)</td></tr>
-<tr><td class="s">overhead</td><td>Bytes that do not depend on V or F: the two colour dictionaries and the file header</td><td>The box the nails ship in</td><td>0.649 MB <i>(log)</i></td></tr>
-<tr><td class="s">target</td><td>What the user asked for</td><td>The budget</td><td>10 MB</td></tr>
-<tr><td class="s">aim</td><td>What the growth phase actually steers to: target × 1.25</td><td>Pack 25 % extra because customs will take some</td><td>12.5 MB</td></tr>
-<tr><td class="s">V*</td><td>How many vertices the aim can pay for</td><td>How many nails the budget buys</td><td>1 037 451 <i>(log)</i></td></tr>
-<tr><td class="s">ΔD_t</td><td>Error that triangle t is responsible for, summed over the last 500 training steps</td><td>t's bill for the pixels it painted wrong</td><td>per triangle</td></tr>
-<tr><td class="s">ΔR</td><td>Bytes one cut adds to the file: 3 new vertices with their faces</td><td>The price of one cut</td><td>33 B (fixed; only sets the unit of λ)</td></tr>
-<tr><td class="s">ratio_t</td><td>ΔD_t ÷ ΔR</td><td>Error fixed per byte spent: "value for money" of cutting t</td><td>per triangle</td></tr>
-<tr><td class="s">λ</td><td>The cut-off: triangles with ratio_t above λ get cut</td><td>A horizontal line drawn across a bar chart</td><td>1.93 × 10⁻³ <i>(log)</i></td></tr>
-<tr><td class="s">σ</td><td>Fraction of freshly created vertices that survive the next pruning</td><td>Seedlings that make it</td><td>0.46 <i>(log)</i></td></tr>
-<tr><td class="s">remaining</td><td>Growth rounds still to come, this one included</td><td>Paydays left before the deadline</td><td>1 (9500 is the last)</td></tr>
-<tr><td class="s">desired</td><td>How many triangles to cut this round</td><td>This month's instalment</td><td>85 349 <i>(log)</i></td></tr>
-<tr><td class="s">yield</td><td>Of the k triangles the line was set for, the share that actually passed 500 steps later</td><td>RSVPs that show up</td><td>0.88 <i>(log)</i></td></tr>
-<tr><td class="s">k_asked</td><td>How many to set the line for, so that <code>desired</code> actually pass</td><td>Invitations sent</td><td>desired ÷ yield</td></tr>
-</table>
-
-<h2>What is in hand at step 9000, right after that round's cut</h2>
+<h2>2. Step 0: what exists before any training</h2>
 <ul>
-<li>A pile of loose triangles (each owns its three vertices, nothing shared yet). About 1 010 000 vertices <i>(est.)</i>.</li>
-<li>λ_now = 1.93 × 10⁻³ <i>(log)</i>: the line that will be used at 9500. It was drawn at 9000.</li>
-<li>σ = 0.46, yield = 0.88, b_v = 6.42 B, overhead = 0.649 MB, all measured <i>(log)</i>.</li>
-<li>An error ledger with one row per triangle, just wiped to zero.</li>
+<li>Photos of the room go through COLMAP: camera poses plus a sparse point cloud (a few hundred thousand points, each with a colour).</li>
+<li>For every point, one triangle: centred on the point, size 2.23 × the distance to the nearest other point, random orientation, the point's colour, opacity 0.1. Each triangle owns its own three vertices; nothing is shared. This is the "soup".</li>
+<li>The error ledger: one row per triangle, all zero.</li>
+<li><b>λ₁ = 5.2 × 10⁻³</b> <i>(log)</i>, from a one-line guess: <span class="f">λ₁ = 6.2e-3 · (9 / target_MB)^1.67</span>. It is used exactly once, at the first boundary, and never again.</li>
+<li>Byte table at its priors, used until the first measurement: b_v 6 B, b_f 2 B, fpv 2.5, overhead 0.6 MB. σ = 1 (nothing gets pruned before step 3000, so every new vertex survives). yield = 1 (nothing measured yet).</li>
 </ul>
 
-<h2>The recursion</h2>
+<h2>3. Interval 1: steps 0 → 1500, and the first boundary</h2>
 <pre>
-<i>── steps 9000 → 9500: ordinary training, 500 times ─────────────────────────────</i>
-for each step:
-    take one training photo, render the scene with the current triangles
-    compare render and photo pixel by pixel → an error per pixel
-    <b>charge each pixel's error to the triangle that painted that pixel</b>      ← ΔD_t accumulates
-    backprop; Adam updates positions, colours, opacities              ← upstream, unchanged
+<i>── steps 0 → 1500: training. Every step: ──────────────────────────────</i>
+    render one training photo with the current triangles
+    error per pixel = |render − photo|
+    <b>add each pixel's error to the row of the triangle that painted it</b>     ← ledger 1 fills
+    Adam moves vertices, colours, opacities                            ← upstream, unchanged
+    (no pruning before 3000, no cutting before 1500: pure optimisation)
 
-<i>── step 9500: the decision ──────────────────────────────────────────────────────</i>
-1  upstream pruning: drop triangles too transparent, too big on screen,
-   or that no pixel relies on                                      → V = 919 243
+<i>── boundary 1500 (the first decision) ───────────────────────────────────</i>
+1  (pruning is still off)                                          V = 3 × #points (est. 450 000)
+2  read ledger 1:   ratio¹_t = ΔD_t / 33 B   for every triangle
+3  V* = (aim − overhead) / (b_v + fpv·b_f) = (12.5 − 0.6) MB / (6 + 5) B   → V* ≈ 1 082 000 (priors)
+4  remaining = 17 boundaries (1500, 2000, …, 9500), σ = 1 for now
+       f = (V*/V)^(1/17) = (1 082 000 / 450 000)^(1/17)                      → f = 1.053
+       desired = V·(f − 1)/(3·σ) = 450 000 × 0.053 / 3                      → ≈ 8 000 (est.)
+5  cap = min(upstream limit 0.27·V = 121 500, desired)                      → 8 000
+6  <b>cut triangles with ratio¹_t &gt; λ₁ (5.2e-3), at most 8 000 of them</b>
+7  write λ for the next boundary:
+       V_exp = V + σ·(added) ; desired_next = line 4 again with remaining = 16
+       k_asked = desired_next / yield(=1)
+       <b>λ₂ = the k_asked-th largest value in ratio¹</b>                        → held constant until 2000
+8  wipe ledger 1, start ledger 2 with the new triangle count
+</pre>
+<div class="why">Notice the order inside the boundary: the λ that selects the cut (line 6) is λ₁, written before this interval. The λ written here (line 7) is λ₂, and nothing is done with it until boundary 2000. There is no step at which a λ is written and used on the same ledger.</div>
 
-2  read the ledger:   ratio_t = ΔD_t / ΔR    for every triangle (ΔR = 33 B)
+<h2>4. Interval 2: steps 1500 → 2000, second boundary</h2>
+<pre>
+<i>── steps 1500 → 2000: training, ledger 2 fills (the 8 000 × 4 new children have rows too) ──</i>
+<i>── boundary 2000 ─────────────────────────────────────────────────────────</i>
+2  ratio²_t = ledger 2 / 33 B
+3  V* unchanged (no new measurement yet)
+4  remaining = 16; f = (V*/V)^(1/16); desired = …
+6  <b>cut ratio²_t &gt; λ₂</b>, at most cap
+   count how many passed: n_pass. yield := n_pass / k_asked (the first real yield)
+7  <b>λ₃ = k_asked-th largest of ratio²</b>, with k_asked = desired_next / yield
+8  wipe ledger 2
+</pre>
+<div class="why">This is already the steady state. Every later boundary is this block again. Three things change along the way, each the first time it becomes measurable:</div>
+<table>
+<tr><th>From which boundary</th><th>What starts</th><th>Why then</th></tr>
+<tr><td>3500 (first boundary after step 3000)</td><td>Upstream pruning runs at every boundary; σ is measured: of the vertices created at the previous boundary, the fraction still alive after this pruning (room: 0.46 <i>(log)</i>)</td><td>Before 3000 nothing is pruned, so there is nothing to measure</td></tr>
+<tr><td>3500, then every ≥1000 steps (4500, 5500, …, 9500)</td><td>The byte probe: copy the triangles, clean the copy the way step 30k will, run the real encoder on the copy, read b_v and overhead from its stream sizes. V* is recomputed from the measured values</td><td>Before 3000 most of the soup is junk that the first pruning removes; encoding it says nothing</td></tr>
+<tr><td>2000 onward</td><td>yield measured (mean of the last three boundaries)</td><td>Needs one completed relay step</td></tr>
+</table>
 
-3  how many vertices can the aim pay for?
-       V* = (aim − overhead) / (b_v + fpv · b_f)
-          = (12.5 MB − 0.649 MB) / (6.42 + 2.5 × 2.0) B             → V* = 1 037 451
-
-4  how many triangles to cut this round?
-       growth factor  f = (V*/V)^(1/remaining) = 1 037 451 / 919 243  → f = 1.1286
-       vertices to add    V · (f − 1) = 919 243 × 0.1286            → 118 208
-       one cut adds 3 vertices, σ of them survive → net per cut 3 · σ = 1.38
-       desired = V · (f − 1) / (3 · σ) = 118 208 / 1.38              → 85 349
-
-5  cap = min(upstream's own limit, desired) = min(248 195, 85 350)  → 85 350
-
-6  <b>cut every triangle with ratio_t &gt; λ_now, at most cap of them</b>
-       83 177 pass the line, 83 611 cut (plus upstream's 100 largest)
-       each cut: 3 new vertices at the edge midpoints, 1 → 4       → V = 1 163 690
-
-7  set the line for the NEXT round
-       V_exp        = V + σ · (vertices just added)     count expected after next pruning
-                    = 919 243 + 0.46 × 244 447                      → 1 031 700 (est.)
-       desired_next = line 4 again, from V_exp, remaining − 1        → 0 (no round left)
-       k_asked      = desired_next / yield                           → 0
-       <b>λ_next = the k_asked-th largest ratio_t</b>                     → k = 0: keep λ = 1.93e-3
-
-8  wipe the ledger, resize it to the new triangle count
-
-<i>── steps 9500 → 10000: repeat the training loop ────────────────────────────────</i>
+<h2>5. The same block at the last growth boundary, 9500, with real numbers</h2>
+<pre>
+<i>── steps 9000 → 9500: ledger 17 fills ───────────────────────────────────</i>
+<i>── boundary 9500 ────────────────────────────────────────────────────────</i>
+1  upstream pruning                                                → V = 919 243 (log)
+2  ratio¹⁷_t = ledger 17 / 33 B                                     574 749 triangles (log)
+   probe ran here: b_v = 6.42 B, overhead = 0.649 MB (log)
+3  V* = (12.5 − 0.649) MB / (6.42 + 2.5 × 2.0) B                    → 1 037 451 (log)
+4  remaining = 1, σ = 0.46 (log)
+       f = V*/V = 1.1286 ;  V·(f − 1) = 118 208 ;  net per cut 3σ = 1.38
+       desired = 118 208 / 1.38                                     → 85 349 (log)
+5  cap = min(248 195, 85 350)                                       → 85 350 (log)
+6  <b>cut ratio¹⁷_t &gt; λ₁₇</b>, where λ₁₇ = 1.93e-3 was written at 9000 (log)
+       83 177 pass (log) → yield this time 0.97 ; 83 611 cut incl. upstream's largest-area set
+       each cut adds 3 vertices                                      → V = 1 163 690 (log)
+7  desired_next: remaining − 1 = 0 rounds left → 0 → k_asked = 0
+       <b>λ₁₈ := λ₁₇ (nothing to plan; keep the last real price)</b>        → 1.93e-3
+8  wipe ledger
 </pre>
 
-<h2>Why each line is there</h2>
+<h2>6. Why the line is written one boundary early, instead of sorting and taking the top k now</h2>
+<div class="why">Taking the top 85 350 of ratio¹⁷ directly would work as a counter. We keep the rule <span class="f">cut if ratio_t &gt; λ</span> with λ fixed <i>before</i> the ledger it is applied to, because that is exactly the rule of the fixed-λ method; the only difference is that λ is now rewritten every boundary from the scene's own numbers. It also keeps λ meaningful as a price: if the scene has fewer triangles worth cutting than planned, fewer pass and λ is pushed down to its floor, and the run reports "this scene cannot buy more quality" instead of forcing cuts. The cost is that the chart shrinks a little during the 500 steps (training lowers error), so fewer than k pass; that is the yield, measured and divided back in.</div>
 
-<h3>The ledger (the training loop)</h3>
-<figure><svg viewBox="0 0 840 140" role="img">
-<rect x="20" y="14" width="200" height="110" class="u"/>
-<polygon points="60,104 110,30 190,95" class="o"/>
-<g fill="var(--bad)" opacity="0.8"><rect x="100" y="56" width="6" height="6"/><rect x="108" y="62" width="6" height="6"/><rect x="118" y="54" width="6" height="6"/><rect x="130" y="71" width="6" height="6"/><rect x="140" y="81" width="6" height="6"/><rect x="95" y="76" width="6" height="6"/></g>
-<text x="120" y="138" font-size="12.5" text-anchor="middle" class="m">one render; red squares = pixels with large error</text>
-<text x="250" y="45" font-size="14">Those red pixels were painted by triangle t,</text>
-<text x="250" y="68" font-size="14">so their error goes on t's bill. Over 500 steps and a few</text>
-<text x="250" y="91" font-size="14">hundred photos, the bill is ΔD_t.</text>
-<text x="250" y="120" font-size="13" class="m">Large ΔD_t means "t paints badly; cutting it finer may fix it". Divided by megapixels, so resolution does not matter.</text>
-</svg></figure>
+<h2>7. The symbols</h2>
+<table>
+<tr><th>Symbol</th><th>Plain meaning</th><th>Picture</th><th>Set or read when</th></tr>
+<tr><td class="s">V, F</td><td>number of vertices, number of triangles</td><td>nails and rubber bands on a board</td><td>read at each boundary</td></tr>
+<tr><td class="s">ΔD_t</td><td>error charged to triangle t during one interval</td><td>t's bill for the pixels it painted wrong</td><td>accumulated over the interval</td></tr>
+<tr><td class="s">ΔR = 33 B</td><td>bytes one cut adds (3 vertices + their faces)</td><td>price of one cut; only sets λ's unit</td><td>constant</td></tr>
+<tr><td class="s">ratio_t = ΔD_t / ΔR</td><td>error removed per byte spent</td><td>value for money of cutting t</td><td>computed at the boundary from that interval's ledger</td></tr>
+<tr><td class="s">λ</td><td>cut-off on ratio_t</td><td>a horizontal line across the bar chart</td><td>written at a boundary from that boundary's chart, used at the next boundary</td></tr>
+<tr><td class="s">b_v, b_f, overhead, fpv</td><td>bytes per vertex, per face, fixed bytes, faces per vertex</td><td>price tags on a nail, on a band, the shipping box, bands per nail</td><td>b_v, overhead measured by the probe from 3500; b_f, fpv priors until the first mesh probe at 12 500</td></tr>
+<tr><td class="s">aim = 1.25 × target</td><td>what growth steers to</td><td>pack 25 % extra, customs takes some</td><td>constant per dataset class</td></tr>
+<tr><td class="s">V*</td><td>vertices the aim can pay for</td><td>nails the budget buys</td><td>recomputed at each boundary</td></tr>
+<tr><td class="s">σ</td><td>share of new vertices that survive the next pruning</td><td>seedlings that make it</td><td>measured at each boundary from 3500</td></tr>
+<tr><td class="s">remaining</td><td>growth boundaries still to come, this one included</td><td>paydays before the deadline</td><td>17 at 1500, 1 at 9500</td></tr>
+<tr><td class="s">desired</td><td>triangles to cut at this boundary</td><td>this month's instalment</td><td>computed at each boundary</td></tr>
+<tr><td class="s">yield</td><td>passed ÷ asked, last three boundaries</td><td>RSVPs that show up</td><td>updated at each boundary</td></tr>
+<tr><td class="s">k_asked</td><td>bar index at which the next λ is drawn</td><td>invitations sent</td><td>desired_next ÷ yield</td></tr>
+</table>
 
-<h3>Line 3: the byte table, and why it is solved backwards</h3>
-<div class="f">file bytes = b_v · V + b_f · F + overhead</div>
-<div class="why">Every vertex costs b_v bytes, every face costs b_f bytes, plus the box. In the finished mesh F ≈ fpv · V, so the file is a straight line in V: <code>(b_v + fpv·b_f) · V + overhead</code>. The user hands us bytes; the only knob the system has is "how many triangles to cut", which is a count. So solve the line for V: that is V*, the number of vertices the budget buys.</div>
-<div class="why">b_v and overhead are not guesses. From step 4500 on, every 1000 steps, the current triangles are copied, cleaned the way step 30k will clean them, and <b>run through the real file encoder</b>. The stream sizes it writes give b_v and overhead. The copy is thrown away; training never notices.</div>
-<div class="why"><b>Why aim at 12.5 and not 10.</b> At step 9500 three things are invisible: the final cleaning at 30k will drop about 10 % of the vertices; once stitched into a mesh the connectivity costs less per vertex than the prior 5 B; and b_v read on loose triangles is slightly high. All three make the final file smaller than the formula says, and after step 10k nothing can ever add bytes again, only remove them. So the growth phase deliberately overshoots by 25 % and the second half trims back with the real encoder measuring every round. This 1.25 is a calibrated number, one value for all Mip-NeRF / T&T scenes, 1.1 for Blender.</div>
-
-<h3>Line 4: why grow geometrically instead of cutting everything at once</h3>
-<div class="f">desired = V · ((V*/V)^(1/remaining) − 1) / (3 · σ)</div>
-<div class="why">Freshly cut triangles need training before anyone knows if they are useful, and about half of them (σ = 0.46) are pruned at the next round. Cutting everything at once would dump a huge batch of untrained triangles that die together. So the gap to V* is spread as equal <i>ratios</i> over the remaining rounds: 5 rounds left and V must double → each round grows by 2^(1/5) = 15 %. The plan is recomputed every round, so when the byte table moves, V* moves and the plan follows.</div>
-
-<h3>Lines 6 and 7: what λ really is</h3>
-<figure><svg viewBox="0 0 840 205" role="img">
-<text x="20" y="22" font-size="14">Step 9500: the 574 749 values of ratio_t, sorted from largest to smallest</text>
-<g fill="var(--ours)"><rect x="40" y="50" width="5" height="120"/><rect x="47" y="66" width="5" height="104"/><rect x="54" y="76" width="5" height="94"/><rect x="61" y="83" width="5" height="87"/><rect x="68" y="89" width="5" height="81"/><rect x="75" y="94" width="5" height="76"/><rect x="82" y="98" width="5" height="72"/><rect x="89" y="102" width="5" height="68"/><rect x="96" y="105" width="5" height="65"/><rect x="103" y="108" width="5" height="62"/><rect x="110" y="111" width="5" height="59"/></g>
-<g fill="var(--up)"><rect x="117" y="114" width="5" height="56"/><rect x="124" y="117" width="5" height="53"/><rect x="131" y="120" width="5" height="50"/><rect x="138" y="123" width="5" height="47"/><rect x="145" y="126" width="5" height="44"/><rect x="152" y="129" width="5" height="41"/><rect x="159" y="132" width="5" height="38"/><rect x="166" y="135" width="5" height="35"/><rect x="173" y="138" width="5" height="32"/><rect x="180" y="141" width="5" height="29"/><rect x="187" y="144" width="5" height="26"/><rect x="194" y="147" width="5" height="23"/><rect x="201" y="150" width="5" height="20"/><rect x="208" y="153" width="5" height="17"/><rect x="215" y="156" width="5" height="14"/><rect x="222" y="159" width="5" height="11"/><rect x="229" y="162" width="5" height="8"/><rect x="236" y="165" width="5" height="5"/><rect x="243" y="167" width="5" height="3"/></g>
-<line x1="40" y1="170" x2="260" y2="170" class="ln"/>
-<line x1="30" y1="112" x2="270" y2="112" stroke="var(--bad)" stroke-width="1.5" stroke-dasharray="5 3"/>
-<text x="278" y="116" font-size="13" fill="var(--bad)">λ = 1.93e-3</text>
-<text x="80" y="190" font-size="12.5" text-anchor="middle" fill="var(--ours)">above the line: cut (83 177)</text>
-<text x="380" y="58" font-size="14">λ is a horizontal line on this chart: bars above it are cut.</text>
-<text x="380" y="84" font-size="14">The original method lets a human draw the line and the</text>
-<text x="380" y="106" font-size="14">mesh grows to wherever that leads.</text>
-<text x="380" y="134" font-size="14" fill="var(--ours)">We do it backwards: compute k (line 4), then draw the</text>
-<text x="380" y="156" font-size="14" fill="var(--ours)">line at the height of the k-th bar.</text>
-<text x="380" y="184" font-size="13" class="m">Line 7 draws, on the 9000 chart, the line 9500 will use. In 500 steps the bars</text>
-<text x="380" y="200" font-size="13" class="m">all shrink a little (training lowers error), so fewer than k pass: hence ÷ yield.</text>
-</svg></figure>
-<div class="f">λ_next = k_asked-th largest ratio_t,&nbsp;&nbsp; k_asked = desired_next / yield</div>
-<div class="why">This is why the user never sees λ: it is just "how many to cut this round" written as a threshold. Redrawn every 500 steps from the scene's own chart.</div>
-
-<h3>Line 6: what a cut is</h3>
-<figure><svg viewBox="0 0 840 130" role="img">
-<polygon points="60,110 120,20 180,110" class="u"/>
-<text x="120" y="127" font-size="12.5" text-anchor="middle" class="m">parent, 3 vertices</text>
-<path d="M210 65 L260 65" class="ln"/><polygon points="260,60 270,65 260,70" fill="var(--fg)"/>
-<polygon points="300,110 330,65 360,110" class="o"/><polygon points="330,65 360,20 390,65" class="o"/><polygon points="360,110 390,65 420,110" class="o"/><polygon points="330,65 390,65 360,110" class="o"/>
-<circle cx="330" cy="65" r="4" fill="var(--ours)"/><circle cx="390" cy="65" r="4" fill="var(--ours)"/><circle cx="360" cy="110" r="4" fill="var(--ours)"/>
-<text x="360" y="127" font-size="12.5" text-anchor="middle" class="m">4 children, +3 vertices (edge midpoints)</text>
-<text x="460" y="48" font-size="14">Children inherit the parent's colour and opacity and</text>
-<text x="460" y="72" font-size="14">train on their own from 9500 to 10000, with their own bills.</text>
-<text x="460" y="98" font-size="13" class="m">The parent's error is now shared by four, so each child's ratio is smaller and it is not cut again right away.</text>
-</svg></figure>
-
-<h2>The second half: the same recursion, run in reverse (step 16000 → 16500)</h2>
-<p class="mute">After 11k the triangles are stitched into a mesh and can no longer grow. Every 500 steps from 12500 to 19500 the following runs. room 10 MB, real numbers unless marked.</p>
+<h2>8. After growth: the same relay, run backwards (12 500 → 19 500)</h2>
+<p>At 11 000 upstream stitches the soup into a shared-vertex mesh; from then on nothing can add vertices. Every 500 steps from 12 500 to 19 500 the boundary block is:</p>
 <pre>
-<i>── 16000 → 16500: training, ledger as before (ΔD per face) ──────────────────────</i>
-<i>── step 16500 ─────────────────────────────────────────────────────────────────</i>
-1  copy the mesh, clean it as 30k will, run the real encoder  → "delivered today": 9.96 MB (est.)
-       refresh the byte table: b_v 5.9  b_f 1.8  overhead 0.65 MB  (log)
-2  that number has been rising (14000: 9.05 → 16000: 9.93); extend the trend
-   to step 24000, where opacities stop changing                 → landing ≈ 10.3 MB
-3  excess = landing − target = 0.3 MB
-   one edge collapse saves  b_v + 2·b_f ≈ 9.5 B
-   pairs = 0.3 MB / 9.5 B ≈ 32 000, over the 7 rounds left      → ≈ 4 500 this round
-4  <b>if landing ≤ target: do nothing this round</b>  (12500–16000: 8 rounds, no edit)
-5  score every edge (u,v):  score_uv = ΔD_uv / ΔR_uv
-       ΔD_uv = error of all faces touching u or v   (how much the merge would hurt)
-       ΔR_uv = bytes the file loses: b_v if both ends are delivered
-               + b_f per delivered face on the edge
-6  <b>collapse the lowest scores first</b>: merge u and v into their midpoint,
-   average position, colour, opacity and Adam momentum   → optimiser keeps its memory
-   one vertex per round, never flip a face, at most 15 % of V
-7  record the bytes actually removed, for the next round's trend
-<i>── repeat to 19500; 20k upstream supersampling, 24k fully opaque, 30k cleaning → encode → 10.29 MB ──</i>
+1  probe the mesh with the real encoder (all four byte-table values now measured)   → "delivered today" MB
+2  that reading drifts upward until 24 000; extend the trend                       → landing MB
+3  excess = landing − target ;  one collapse frees b_v + 2·b_f ≈ 9.5 B
+   pairs this round = excess / 9.5 B / rounds left
+4  <b>if landing ≤ target: nothing this round</b>
+5  score every edge: score_uv = ΔD_uv / ΔR_uv      (ledger of this interval, same λ)
+       ΔD_uv = bills of all faces around u and v ;  ΔR_uv = bytes the file actually loses
+6  <b>merge the lowest scores first</b>, up to the pairs wanted; position, colour, opacity
+   and Adam momentum averaged into the surviving vertex
+7  record bytes removed, for the next trend
 </pre>
-<div class="f">collapse (u,v) if ΔD_uv / ΔR_uv &lt; λ&nbsp;&nbsp;&nbsp;&nbsp;(the growth rule read backwards: cut if ΔD_t / ΔR_t &gt; λ)</div>
-<div class="why">Growth cuts triangles whose error is large per byte; trimming merges vertices whose error is small per byte. Same λ, same ledger, same price tags. The 25 % packed as margin is removed here while the real encoder measures every round. room ends at 1.029 × target, with picture quality 0.03 dB from the fixed-λ curve at the same bytes.</div>
+<div class="f">growth: cut t if ΔD_t / ΔR_t &gt; λ &nbsp;&nbsp;&nbsp; trimming: merge (u,v) if ΔD_uv / ΔR_uv &lt; λ</div>
+<p>room 10 MB <i>(log)</i>: first probe at 12 500 reads 8.79 MB; the landing estimate rises 8.5 → 9.9 by 16 000 with no edit; 7 rounds from 16 500 merge 67 765 pairs; delivered 10.29 MB, 1.029 × target, 0.03 dB from the fixed-λ curve at equal bytes.</p>
 
-<h2>One sentence</h2>
-<p>The user gives one number, the megabytes. Every 500 steps the real encoder prices a vertex, the byte table turns the budget into a vertex count, the plan turns that into "cut k triangles this round", and λ is simply the height of the k-th bar. In the second half the same λ is read backwards to merge what the margin over-bought. λ, V*, the prices: all computed during training. The one number a human chose is the 25 % margin.</p>
+<h2>9. One sentence</h2>
+<p>The user gives megabytes. At every boundary the real encoder prices a vertex, the byte table turns the budget into a vertex count, the plan turns that into "cut k now", and λ for the <i>next</i> boundary is drawn at the k-th bar of <i>this</i> boundary's chart. After growth ends, the same λ is read backwards to merge what the 25 % margin over-bought.</p>
 
 </main></body></html>
