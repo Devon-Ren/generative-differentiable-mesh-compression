@@ -6,7 +6,7 @@ Reframed after Yao's guidance: the paper is about compression; the growth rule a
 
 **Grow to Budget: Rate-Aware Training and Compression for Opaque Differentiable Meshes**
 
-## Abstract (195 words)
+## Abstract (215 words)
 
 MeshSplatting optimizes an opaque triangle mesh directly from images and renders in any standard rasterizer, but a trained scene occupies hundreds of megabytes, and the representation resists post-hoc compression: reducing a trained mesh to a smaller vertex count costs up to 6 dB relative to a mesh trained at that count, since each pixel is covered by a single opaque triangle and the optimizer does not re-place the surviving vertices. We build on MeshSplatting and make rate part of its training. Each candidate split is accepted only if the distortion it removes exceeds λ times the bytes it adds to the encoded file; the same criterion, applied in reverse, drives an in-training edge collapse. Byte costs are measured by the actual encoder during training rather than assumed, and a closed-loop controller maps a requested file size to λ, so the size becomes an input: a single configuration lands within 10 % of the target on 32 of 33 scene–size pairs over Mip-NeRF 360 and Tanks and Temples, and transfers unchanged to Deep Blending. At equal vertex count and before any entropy coding, rate-aware growth improves MeshSplatting by 0.4 dB; with our dictionary-based SH, grid-position and connectivity coder, files are 24–150× smaller than the trained model at 0.2–1.7 dB and decode in seconds on a CPU.
 
