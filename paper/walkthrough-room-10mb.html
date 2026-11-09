@@ -264,7 +264,13 @@ svg .oursf{fill:var(--ours-bg);stroke:var(--ours);stroke-width:1.5}svg .upf{fill
 <tr><td>9</td><td>切完后 V</td><td>1 163 690（下轮剪枝后约 1.03M）</td><td></td></tr>
 <tr><td>10</td><td>为下一轮定价：算下轮该切多少 k，λ_next = 第 k 大的 ratio。<b>最后一轮 k=0 时保留现在的 λ</b>（v9b）</td><td>k = 0 → λ 保持 1.93e-3 进入 Phase B</td><td>否则 λ 跳到上限 0.1，Phase B 会把所有边都判成该折</td></tr>
 </table>
-<p>yield 修正：rank price 定的 k 个，实际通过的通常只有 0.8–0.9 k（这 500 步里 ratio 又变了）。所以 k_asked = 计划数 ÷ 最近三次的 yield。room 这一行 yield 中位 0.88。</p>
+<p><b>第 10 行展开（为下一轮定价的四步）：</b></p>
+<pre>V_exp        = V + σ·(切完后的 V − 切前的 V)        预计下轮剪枝后剩多少顶点
+desired_next = plan_splits(V_exp, V*, 剩余轮数 − 1)     下一轮按几何计划该切多少个
+yield        = 最近三轮的 (实际过线数 ÷ 当时申请的 k)   λ 是用这轮分布定的，下轮才用，期间误差下降，过线的比 k 少（room 中位 0.88）
+k_asked      = desired_next ÷ yield                   想要 desired_next 个过线，就多申请一点
+λ_next       = 当前 ratio 分布里第 k_asked 大的值       存起来，下一个间隔当 λ_now 用</pre>
+<p>示意（室内 9000 步，数字为假想）：V 820k 切完 1 010k，σ 0.46 → V_exp 907k；V* 1 037k 剩 1 轮 → 要净增 130k 顶点，每切一个净得 1.38 → desired_next ≈ 94k；÷ 0.88 → k_asked ≈ 107k；λ_next = 第 107k 大的 ratio。到 9500 它实际放行约 83k。9500 本身没有下一轮：desired_next = 0，λ 保持不变进 Phase B。</p>
 
 <figure>
 <svg viewBox="0 0 860 240" role="img" aria-label="几何生长计划">
