@@ -1,0 +1,117 @@
+pages 7
+
+--- p2 #1 Highlight by Yao Wang D:20261105102841+08'00'
+COMMENT: how were these determined? based on the average from the pretrained entropy codecs? would these numbers actually vary depending on the rate point you try to operate?
+ANCHOR: Rate is counted in bytes of the delivered file, from two independent constants of our codec: = 6 B, the attribute bytes of one vertex: quantised position residual (≈2.3 B), DC colour Ba Ba = 6 B, the attribute bytes of one vertex: quantise (≈1.5 B) and its two SH dictionary indices (≈2.4 B); • 1.5 B) and its two SH dictionary indices ( = 2 B, the connectivity bytes of one face. Bf
+
+--- p2 #2 Highlight by Yao Wang D:20261105101704+08'00'
+COMMENT: what is the difference from per triangle?
+ANCHOR: at is visible in more vi per-face quantity ∆Df
+
+--- p2 #3 Highlight by Yao Wang D:20261105102204+08'00'
+COMMENT: collapse only remove one vertex?
+ANCHOR: Ba
+
+--- p2 #4 Highlight by Yao Wang D:20261105102959+08'00'
+COMMENT: how do you determine lambda during actual training? based on a target rate? but how do i know the corresponding lambda for a target rate?
+ANCHOR: λ,
+
+--- p2 #5 Highlight by Yao Wang D:20261105111611+08'00'
+COMMENT: ?
+ANCHOR: edge midpoints adds three vertices. The sta which then creates about two faces per vertex,
+
+--- p3 #6 Highlight by Yao Wang D:20261105102749+08'00'
+COMMENT: did not understand this part. Seem to contradict from the previously stated bytes for Ba and Bf
+ANCHOR: Why fixed prices
+
+--- p3 #7 Highlight by Yao Wang D:20261105103245+08'00'
+COMMENT: how do you do this?
+ANCHOR: ionary of 4096 vectors plus a residual diction refit for 400 steps against the rendering loss
+
+--- p3 #8 Highlight by Yao Wang D:20261105103925+08'00'
+COMMENT: need brief description (what context does it use?) and reference
+ANCHOR: k-means on the scene 1-ring context model
+
+--- p3 #9 Highlight by Yao Wang D:20261105103316+08'00'
+COMMENT: need reference
+ANCHOR: ring loss. In zstd-coded
+
+--- p3 #10 Highlight by Yao Wang D:20261105103346+08'00'
+COMMENT: what does this mean? extent is the dynamic range?
+ANCHOR: (0.1 · median edge ·
+
+--- p3 #11 Highlight by Yao Wang D:20261105103429+08'00'
+COMMENT: need more details
+ANCHOR: optimizer for locality, and cod cached-edge arithmetic coder
+
+--- p3 #12 Highlight by Yao Wang D:20261105103455+08'00'
+COMMENT: this is for the entire mesh not per triangle?
+ANCHOR: oded. one opacity scalar
+
+--- p3 #13 Highlight by Yao Wang D:20261105103626+08'00'
+COMMENT: how are these represented?
+ANCHOR: its and zstd- dictionaries
+
+--- p3 #14 Highlight by Yao Wang D:20261105103724+08'00'
+COMMENT: only see 4?
+ANCHOR: five
+
+--- p3 #15 Highlight by Yao Wang D:20261105103844+08'00'
+COMMENT: so this part is similar to SH? can it be further reduced through better context coding?
+ANCHOR: y rasteriser. It ru 16 MB geometry
+
+--- p4 #16 StrikeOut by Yao Wang D:20261105104247+08'00'
+COMMENT: instead add a row indicating Mip-NeRF vs. T&T in the table
+ANCHOR: Mip-NeRF 360, 9 scenes, unless marked T&T.
+
+--- p4 #17 Highlight by Yao Wang D:20261105104321+08'00'
+COMMENT: you have more points?
+ANCHOR: P32 = 6.2 10− −3 λ ×
+
+--- p4 #18 Highlight by Yao Wang D:20261105104715+08'00'
+COMMENT: what does this mean?
+ANCHOR: 2.9–6.4 MB
+
+--- p4 #19 Highlight by Yao Wang D:20261105104824+08'00'
+COMMENT: write as (MB (ratio), PSNR)
+
+instead of PSNR< maybe better do delta PSNR
+ANCHOR: is MB (ratio) · PSNR ·
+
+--- p4 #20 Highlight by Yao Wang D:20261105104959+08'00'
+COMMENT: what does this mean?
+ANCHOR: the hard outdoor scenes (flowers, treehill, truck, train) the two growth that the price lets through does not buy test PSNR there, smallest-λ points are dominated: growth that the price lets through doe which is exactly what the in-the-loop ablation in Section 2.5 measures.
+
+--- p4 #21 Highlight by Yao Wang D:20261105105307+08'00'
+COMMENT: you mean the MPEG coder takes more bytes? MPEG is coding only geometry?
+ANCHOR: es from replacing per-vertex SH by dictionary indices swapping only the geometry encoder for MPEG costs
+
+--- p4 #22 Highlight by Yao Wang D:20261105110010+08'00'
+COMMENT: i think along with this table you should show the average RD curves (fig 4)
+ANCHOR: Dataset
+
+--- p6 #23 Text by Yao Wang D:20261105105917+08'00'
+COMMENT: are all of these points achievable by others? including the top right one?
+ANCHOR: 24 25 p-NeRF 360 me (our reproduction) MeshSplatting, authors' PLY (SH dropped) MiLo RaDe-GS mesh 4× smaller at −0.22 dB (our best point) MeshSplatting, authors' PLY (SH dropped) 100 M 34× smaller at −1.06 dB (our best point) Binary Opacity Grids
+
+--- p6 #24 Highlight by Yao Wang D:20261105110050+08'00'
+COMMENT: i dont think this is necessary
+ANCHOR: (b) bytes needed to reach
+
+--- p6 #25 Highlight by Yao Wang D:20261105110307+08'00'
+COMMENT: not sure you want this figure.
+ANCHOR: (b) quality retained relative to each method’s own
+
+--- p6 #26 Highlight by Yao Wang D:20261105110344+08'00'
+COMMENT: if others do not compare with GS, we dont need to for the paper submission
+ANCHOR: 3DGS-class codecs
+
+--- p6 #27 Highlight by Yao Wang D:20261105110354+08'00'
+COMMENT: what does this mean?
+ANCHOR: than upstream
+
+--- p6 #28 Highlight by Yao Wang D:20261105110530+08'00'
+COMMENT: did you try multiple dictionary size and different lambda, and find convex full ? Also using 7 bits for DC may be the reason that you have reduced PSNR even at the highest rate? did you try to use 8 bits?
+ANCHOR: Indoor assets lose 0.5–0.75 dB more to the fixed delivery settings (DC 7-bit, 4096 + 256 dictio- Indoor assets lose 0.5–0.7 nary) than outdoor ones
+
+TOTAL 28
