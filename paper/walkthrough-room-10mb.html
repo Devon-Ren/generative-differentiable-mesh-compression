@@ -1,386 +1,205 @@
 <!doctype html>
-<html lang="zh">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>从 100 张照片到 10 MB 网格：一步一步走</title>
+<title>One Interval, Step by Step</title>
 <style>
-:root{--bg:#fbfaf7;--fg:#1d1d1b;--mute:#6b6b66;--line:#d9d6ce;--ours:#d9822b;--ours-bg:#fdf1e3;--up:#5b7a99;--up-bg:#e8eef4;--ok:#2f8a5b;--bad:#b4473b;--code:#f1efe9}
+:root{--bg:#fbfaf7;--fg:#1d1d1b;--mute:#6b6b66;--line:#d9d6ce;--ours:#d9822b;--ours-bg:#fdf1e3;--up:#5b7a99;--up-bg:#e8eef4;--bad:#b4473b;--code:#f1efe9}
 @media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#17181a;--fg:#ecebe6;--mute:#a4a39c;--line:#3a3b3f;--ours-bg:#3a2a16;--up-bg:#1f2a36;--code:#232428}}
 :root[data-theme=dark]{--bg:#17181a;--fg:#ecebe6;--mute:#a4a39c;--line:#3a3b3f;--ours-bg:#3a2a16;--up-bg:#1f2a36;--code:#232428}
-body{background:var(--bg);color:var(--fg);font:16px/1.65 -apple-system,"PingFang SC","Noto Sans CJK SC","Helvetica Neue",sans-serif;margin:0;padding:0 16px 64px}
-main{max-width:860px;margin:0 auto}
-h1{font-size:26px;margin:32px 0 6px}h2{font-size:21px;margin:44px 0 10px;padding-top:12px;border-top:1px solid var(--line)}h3{font-size:17px;margin:24px 0 6px}
-p{margin:8px 0}.mute{color:var(--mute)}
-code,pre{font:14px/1.5 ui-monospace,Menlo,Consolas,monospace;background:var(--code);border-radius:4px}
-code{padding:1px 5px}pre{padding:10px 12px;overflow-x:auto}
-table{border-collapse:collapse;width:100%;margin:10px 0;font-size:14.5px}th,td{border:1px solid var(--line);padding:5px 8px;text-align:left;vertical-align:top}th{background:var(--code)}
-.box{border-left:4px solid var(--ours);background:var(--ours-bg);padding:8px 12px;margin:12px 0;border-radius:0 6px 6px 0}
-.up{border-left-color:var(--up);background:var(--up-bg)}
-.q{font-weight:600}
-figure{margin:16px 0}figcaption{font-size:14px;color:var(--mute);margin-top:4px}
-svg{width:100%;height:auto;display:block}
-svg text{font-family:-apple-system,"PingFang SC","Noto Sans CJK SC",sans-serif;fill:var(--fg)}
-svg .m{fill:var(--mute)}svg .ours{fill:var(--ours)}svg .upc{fill:var(--up)}
-svg .ln{stroke:var(--fg);stroke-width:1.2;fill:none}svg .ln2{stroke:var(--line);stroke-width:1;fill:none}
-svg .oursf{fill:var(--ours-bg);stroke:var(--ours);stroke-width:1.5}svg .upf{fill:var(--up-bg);stroke:var(--up);stroke-width:1.5}
+body{background:var(--bg);color:var(--fg);font:16px/1.65 -apple-system,"Helvetica Neue",Arial,sans-serif;margin:0;padding:0 16px 64px}
+main{max-width:840px;margin:0 auto}
+h1{font-size:25px;margin:32px 0 4px}h2{font-size:20px;margin:40px 0 8px;padding-top:12px;border-top:1px solid var(--line)}h3{font-size:17px;margin:20px 0 4px}
+p{margin:8px 0}.mute{color:var(--mute);font-size:14.5px}
+pre{font:14px/1.6 ui-monospace,Menlo,Consolas,monospace;background:var(--code);border-radius:6px;padding:12px 14px;overflow-x:auto;white-space:pre-wrap}
+pre b{color:var(--ours)}pre i{color:var(--mute);font-style:normal}
+.why{background:var(--ours-bg);border-left:4px solid var(--ours);padding:6px 10px;border-radius:0 6px 6px 0;margin:8px 0}
+.f{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:15px;background:var(--code);padding:6px 10px;border-radius:5px;display:inline-block;margin:4px 0}
+figure{margin:8px 0}figcaption{font-size:13.5px;color:var(--mute)}
+svg{width:100%;height:auto;display:block}svg text{font-family:inherit;fill:var(--fg)}svg .m{fill:var(--mute)}
+svg .ln{stroke:var(--fg);stroke-width:1.2;fill:none}svg .o{fill:var(--ours-bg);stroke:var(--ours);stroke-width:1.5}svg .u{fill:var(--up-bg);stroke:var(--up);stroke-width:1.5}
+table{border-collapse:collapse;width:100%;font-size:14.5px;margin:8px 0}td,th{border:1px solid var(--line);padding:5px 8px;text-align:left;vertical-align:top}th{background:var(--code)}
+td.s{font-family:ui-monospace,Menlo,Consolas,monospace;white-space:nowrap}
 </style>
 </head>
 <body><main>
 
-<h1>从 100 张照片到 10 MB 网格：一步一步走</h1>
-<p class="mute">用 Mip-360 的 <b>room</b> 场景、目标 <b>10 MB</b>、v9b 这一行真实日志里的数字贯穿全文。蓝色 = 上游 MeshSplatting 原样的步骤；橙色 = 我们插进去的步骤。先回答字节表的四个问题，再从 iteration 0 走到交付。</p>
+<h1>One 500-step interval, explained from scratch</h1>
+<p class="mute">Scene <b>room</b>, requested size <b>10 MB</b>, the interval from step 9000 to step 9500. Numbers marked <i>(log)</i> are from the real run; numbers marked <i>(est.)</i> are filled in so the arithmetic can be followed end to end.</p>
 
-<h2>0. 先回答你关于字节表的四个问题</h2>
-
-<p class="q">V 和 F 是什么？</p>
-<p><b>V</b> = 顶点表的行数。每个顶点一行：三维坐标 xyz、颜色（SH 系数）、一个不透明度参数。<b>F</b> = 面表的行数。每个面一行：三个整数，指向顶点表里的三行。这就是任何三角网格文件的结构（OBJ、PLY 都一样）。交付文件里，每个顶点要付"属性字节"（坐标 + 颜色），每个面要付"连接字节"（三个索引）。</p>
+<h2>What the system is, in one paragraph</h2>
+<p>You give it photos of a room and one number: <b>"the file must be 10 MB."</b> It gives back a triangle mesh file of about 10 MB. MeshSplatting trains a mesh that <i>grows</i>: every 500 steps it picks some triangles and cuts each into four. The original picks them by a rule of thumb, and the final file size is whatever it turns out to be. We change one thing: <b>every 500 steps, first compute how many vertices the 10 MB can pay for, then how many triangles to cut this round, and only then set the cut-off line λ so that exactly that many triangles pass.</b> λ is not an input. It is computed.</p>
 
 <figure>
-<svg viewBox="0 0 860 170" role="img" aria-label="顶点表与面表">
-<rect x="20" y="20" width="300" height="130" rx="6" class="upf"/>
-<text x="30" y="42" font-size="14" font-weight="600">顶点表（V 行）</text>
-<text x="30" y="66" font-size="13" class="m">#0  x y z | DC 颜色 | SH 索引 ×2</text>
-<text x="30" y="88" font-size="13" class="m">#1  x y z | DC 颜色 | SH 索引 ×2</text>
-<text x="30" y="110" font-size="13" class="m">#2  x y z | DC 颜色 | SH 索引 ×2</text>
-<text x="30" y="132" font-size="13" class="m">…       每行约 b_v = 5.9 字节</text>
-<rect x="360" y="20" width="220" height="130" rx="6" class="upf"/>
-<text x="370" y="42" font-size="14" font-weight="600">面表（F 行）</text>
-<text x="370" y="66" font-size="13" class="m">#0  (0, 1, 2)</text>
-<text x="370" y="88" font-size="13" class="m">#1  (1, 2, 7)</text>
-<text x="370" y="110" font-size="13" class="m">#2  (2, 7, 9)</text>
-<text x="370" y="132" font-size="13" class="m">…  每行约 b_f = 1.8 字节</text>
-<rect x="620" y="20" width="220" height="130" rx="6" class="upf"/>
-<text x="630" y="42" font-size="14" font-weight="600">固定部分（overhead）</text>
-<text x="630" y="66" font-size="13" class="m">SH 主字典 4096 × 45</text>
-<text x="630" y="88" font-size="13" class="m">SH 残差字典 256 × 45</text>
-<text x="630" y="110" font-size="13" class="m">文件头、量化网格参数</text>
-<text x="630" y="132" font-size="13" class="m">≈ 0.65 MB，与 V、F 无关</text>
+<svg viewBox="0 0 840 115" role="img" aria-label="timeline">
+<line x1="30" y1="58" x2="810" y2="58" class="ln"/>
+<g font-size="12" class="m"><text x="30" y="82" text-anchor="middle">0</text><text x="112" y="82" text-anchor="middle">1500</text><text x="336" y="82" text-anchor="middle">9500</text><text x="372" y="82" text-anchor="middle">11k</text><text x="408" y="82" text-anchor="middle">12.5k</text><text x="572" y="82" text-anchor="middle">19.5k</text><text x="810" y="82" text-anchor="middle">30k</text></g>
+<rect x="112" y="28" width="224" height="22" rx="4" class="o"/><text x="224" y="44" font-size="12.5" text-anchor="middle">every 500 steps: how far to go → how many to cut → set λ</text>
+<rect x="408" y="28" width="164" height="22" rx="4" class="o"/><text x="490" y="44" font-size="12.5" text-anchor="middle">every 500 steps: measure, trim if over</text>
+<rect x="294" y="54" width="42" height="9" fill="var(--bad)" opacity="0.7"/><text x="315" y="106" font-size="12.5" text-anchor="middle" fill="var(--bad)">this page: these 500 steps</text>
+<text x="372" y="22" font-size="12" text-anchor="middle" class="m">11k: loose triangles get stitched into a mesh</text>
+<text x="810" y="22" font-size="12" text-anchor="end" class="m">30k: encode to file</text>
 </svg>
-<figcaption>图 0. 交付文件的三块。字节表就是把这三块加起来。</figcaption>
 </figure>
 
-<p class="q">size model 是做什么的？</p>
-<p>它是一个<b>算术公式</b>，回答"如果我现在停下来交付，文件多大"：</p>
-<pre>R(V, F) = b_v · V + b_f · F + overhead</pre>
-<p>三块各自的字节加起来。b_v、b_f、overhead 不是猜的，是让真实编码器编一遍当前网格、读出每条流的字节数后算出来的（b_v = 属性流字节 ÷ V，b_f = 连接流字节 ÷ F）。room 10 MB 在 12500 步测得：b_v = 5.92，b_f = 1.80，overhead = 0.651 MB。</p>
-
-<p class="q">它用在哪里？</p>
+<h2>The symbols, in plain words</h2>
 <table>
-<tr><th>时刻</th><th>用它算什么</th><th>为什么需要</th></tr>
-<tr><td>Phase A 每个生长间隔（1500…9500）</td><td><b>反函数</b>：目标字节 → 目标顶点数 V*</td><td>控制器能动的只有"这一轮分裂多少个三角形"，这是一个<b>顶点数</b>。用户给的是<b>字节数</b>。必须换算</td></tr>
-<tr><td>Phase A 每个间隔</td><td>正向：当前 V → 预计多少 MB（日志里的 "projected 11.15 MB"）</td><td>只是让人看懂进度，不参与决策</td></tr>
-<tr><td>Phase B 每轮（12500…19500）</td><td>一次边折叠省多少字节（b_v + 2 b_f），超出的字节 ÷ 它 = 要折叠多少对</td><td>Phase B 能动的是"折叠多少条边"，又是一个计数，又要换算</td></tr>
+<tr><th>Symbol</th><th>What it is</th><th>Picture it as</th><th>Value here</th></tr>
+<tr><td class="s">V</td><td>Number of vertices (corner points) in the mesh right now</td><td>Number of nails on the board</td><td>919 243 at step 9500 <i>(log)</i></td></tr>
+<tr><td class="s">F</td><td>Number of triangles (faces)</td><td>Number of rubber bands stretched over the nails</td><td>574 749 <i>(log)</i></td></tr>
+<tr><td class="s">b_v</td><td>How many bytes the file spends per vertex (its position, colour, two colour-dictionary indices)</td><td>The price tag on one nail</td><td>6.42 B <i>(log)</i></td></tr>
+<tr><td class="s">b_f</td><td>How many bytes the file spends per face (three integers saying which vertices it connects)</td><td>The price tag on one rubber band</td><td>2.0 B (prior, measured later as 1.8)</td></tr>
+<tr><td class="s">fpv</td><td>Faces per vertex in the finished mesh</td><td>How many bands touch each nail</td><td>2.5 (prior, measured later as 2.0)</td></tr>
+<tr><td class="s">overhead</td><td>Bytes that do not depend on V or F: the two colour dictionaries and the file header</td><td>The box the nails ship in</td><td>0.649 MB <i>(log)</i></td></tr>
+<tr><td class="s">target</td><td>What the user asked for</td><td>The budget</td><td>10 MB</td></tr>
+<tr><td class="s">aim</td><td>What the growth phase actually steers to: target × 1.25</td><td>Pack 25 % extra because customs will take some</td><td>12.5 MB</td></tr>
+<tr><td class="s">V*</td><td>How many vertices the aim can pay for</td><td>How many nails the budget buys</td><td>1 037 451 <i>(log)</i></td></tr>
+<tr><td class="s">ΔD_t</td><td>Error that triangle t is responsible for, summed over the last 500 training steps</td><td>t's bill for the pixels it painted wrong</td><td>per triangle</td></tr>
+<tr><td class="s">ΔR</td><td>Bytes one cut adds to the file: 3 new vertices with their faces</td><td>The price of one cut</td><td>33 B (fixed; only sets the unit of λ)</td></tr>
+<tr><td class="s">ratio_t</td><td>ΔD_t ÷ ΔR</td><td>Error fixed per byte spent: "value for money" of cutting t</td><td>per triangle</td></tr>
+<tr><td class="s">λ</td><td>The cut-off: triangles with ratio_t above λ get cut</td><td>A horizontal line drawn across a bar chart</td><td>1.93 × 10⁻³ <i>(log)</i></td></tr>
+<tr><td class="s">σ</td><td>Fraction of freshly created vertices that survive the next pruning</td><td>Seedlings that make it</td><td>0.46 <i>(log)</i></td></tr>
+<tr><td class="s">remaining</td><td>Growth rounds still to come, this one included</td><td>Paydays left before the deadline</td><td>1 (9500 is the last)</td></tr>
+<tr><td class="s">desired</td><td>How many triangles to cut this round</td><td>This month's instalment</td><td>85 349 <i>(log)</i></td></tr>
+<tr><td class="s">yield</td><td>Of the k triangles the line was set for, the share that actually passed 500 steps later</td><td>RSVPs that show up</td><td>0.88 <i>(log)</i></td></tr>
+<tr><td class="s">k_asked</td><td>How many to set the line for, so that <code>desired</code> actually pass</td><td>Invitations sent</td><td>desired ÷ yield</td></tr>
 </table>
 
-<p class="q">反函数怎么来的？为什么要取反函数？</p>
-<p>交付网格里面数和顶点数成固定比例：F ≈ fpv · V（Delaunay 网格 fpv 在 2.0 到 2.9 之间，room 是 2.01）。代进去：</p>
-<pre>R = b_v·V + b_f·(fpv·V) + overhead = (b_v + fpv·b_f)·V + overhead
-⇒  V* = (R_target − overhead) / (b_v + fpv·b_f)</pre>
-<p>就是一条直线求 x。room 10 MB 在 9500 步：目标 R = 12.5 MB（为什么是 12.5 不是 10，见第 5 节），overhead 0.649 MB，b_v 6.42（soup 上测的），b_f 和 fpv 此时还只能用先验 2.0 和 2.5：</p>
-<pre>V* = (12.5e6 − 0.649e6) / (6.42 + 2.5 × 2.0) = 11.851e6 / 11.42 = 1 037 451 个顶点</pre>
-<p>日志原文：<code>phase-A aim 12.50 MB = 1037451 vertices</code>。为什么要反过来算：因为预算是字节，但生长这个动作只认"分裂几个三角形"。有了 V*，"还差多少顶点、还有几轮、这轮该分裂多少"就都是小学算术。</p>
-
-<h2>1. 输入与初始化（iteration 0）</h2>
-<div class="box up">上游步骤，我们不改。</div>
-<p>输入是 100 多张照片（room 有 311 张，其中 1/8 留作测试）。先跑 COLMAP：得到每张照片的相机位姿，和一个<b>稀疏</b>点云（不是 dense；room 大约十几万个点，每个点带一个 RGB 颜色）。</p>
-<p>MeshSplatting 对<b>每一个</b>点云点造<b>一个</b>三角形：</p>
+<h2>What is in hand at step 9000, right after that round's cut</h2>
 <ul>
-<li>中心放在这个点上；</li>
-<li>大小 = 2.23 × 这个点到最近邻点的距离（点密的地方三角形小）；</li>
-<li>朝向随机；</li>
-<li>三个顶点的颜色都等于这个点的颜色（只填 SH 的 DC 项，高阶 SH 全零）；</li>
-<li>三个顶点各带一个不透明度参数，初值 0.1。</li>
-</ul>
-<p>所以 N 个点 → N 个三角形 → <b>3N 个顶点</b>。每个三角形独占自己的三个顶点，没有任何共享——这叫 <b>triangle soup</b>（"一锅散三角形"）。此时 F = N，V = 3N，V/F = 3。</p>
-
-<figure>
-<svg viewBox="0 0 860 210" role="img" aria-label="点云到三角形 soup">
-<g>
-<text x="20" y="28" font-size="14" font-weight="600">COLMAP 稀疏点</text>
-<circle cx="60" cy="90" r="3" class="upc"/><circle cx="95" cy="70" r="3" class="upc"/><circle cx="130" cy="105" r="3" class="upc"/><circle cx="80" cy="140" r="3" class="upc"/><circle cx="150" cy="150" r="3" class="upc"/><circle cx="180" cy="80" r="3" class="upc"/>
-<text x="20" y="190" font-size="13" class="m">N 个点，各带颜色</text>
-</g>
-<path d="M230 110 L290 110" class="ln" marker-end="url(#a)"/>
-<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="currentColor"/></marker></defs>
-<g>
-<text x="310" y="28" font-size="14" font-weight="600">iteration 0：soup</text>
-<polygon points="340,100 365,70 385,105" class="upf" opacity="0.5"/><polygon points="380,60 410,55 395,85" class="upf" opacity="0.5"/><polygon points="420,110 445,95 450,130" class="upf" opacity="0.5"/><polygon points="355,140 390,135 370,165" class="upf" opacity="0.5"/><polygon points="430,150 470,145 455,175" class="upf" opacity="0.5"/><polygon points="470,80 500,70 495,105" class="upf" opacity="0.5"/>
-<text x="310" y="190" font-size="13" class="m">N 个三角形，3N 个顶点，互不相连，半透明（0.1）</text>
-</g>
-<path d="M540 110 L600 110" class="ln" marker-end="url(#a)"/>
-<g>
-<text x="620" y="28" font-size="14" font-weight="600">11000 步后：网格</text>
-<polygon points="650,100 690,75 700,115" class="upf"/><polygon points="690,75 735,70 700,115" class="upf"/><polygon points="700,115 735,70 760,110" class="upf"/><polygon points="650,100 700,115 670,150" class="upf"/><polygon points="700,115 760,110 740,155" class="upf"/><polygon points="670,150 700,115 740,155" class="upf"/><polygon points="735,70 775,60 760,110" class="upf"/>
-<text x="620" y="190" font-size="13" class="m">顶点共享，F ≈ 2–3 V，全部不透明</text>
-</g>
-</svg>
-<figcaption>图 1. 从点到 soup 到网格。V 和 F 的比例从 3:1 变成 1:2.x，这就是为什么 soup 阶段读不出交付网格的连接字节。</figcaption>
-</figure>
-
-<h3>opacity 和 importance 是两回事</h3>
-<table>
-<tr><th></th><th>opacity（不透明度）</th><th>importance（重要性）</th></tr>
-<tr><td>挂在谁身上</td><td>每个<b>顶点</b>一个</td><td>每个<b>三角形</b>一个</td></tr>
-<tr><td>是不是可学习参数</td><td><b>是</b>。有梯度，Adam 更新</td><td><b>不是</b>。是渲染器顺手记下来的统计量</td></tr>
-<tr><td>怎么算</td><td>sigmoid(参数)。渲染一个像素时，这个像素落在三角形内的位置按三个顶点插值出一个 α，再乘一个软边缘窗（sigma 控制，初始 1.0，到 30k 衰减到 0.0001 变硬边）。然后像 3DGS 一样前后 α 混合</td><td>渲染每张训练图时，这个三角形对<b>任何一个像素</b>贡献的混合权重（α × 前面剩下的透射率）的最大值。跨所有视角、所有像素取 max，持续累积</td></tr>
-<tr><td>直觉</td><td>"这块玻璃有多不透"</td><td>"有没有哪个像素主要是靠它画出来的"。= 1 说明某个像素完全由它决定；≈ 0 说明它永远被别的三角形挡住或自己太透明，没人看见它</td></tr>
-<tr><td>谁用它</td><td>渲染；上游剪枝（顶点不透明度 ≤ 阈值 → 删三角形）</td><td>上游剪枝（importance ≤ 阈值 → 删）；上游决定分裂谁（按 importance 抽样）；<b>最终清理</b>（importance ≤ 0.5 → 删）；<b>我们的 probe</b> 用同一条规则预判哪些面交付时还在</td></tr>
-</table>
-
-<p class="q">数值怎么定？</p>
-<ul>
-<li>opacity 初值 0.1（<code>init_opacity</code>）。从 5000 步起上游给它加一个<b>地板</b>：activation 变成 floor + (1 − floor)·sigmoid，floor 从 0.1 线性抬到 24000 步的 0.9999。意思是：训练前半段三角形可以半透明地"试位置"，后半段被强迫全部变成不透明实心片。交付时所有面都不透明，所以文件里只需一个全局不透明度标量（Yao 批注 #12 问的就是这个）。</li>
-<li>剪枝阈值 <code>prune_triangles_threshold</code> = 0.235，5000 步后每 500 步加 0.01。顶点不透明度或三角形 importance 低于它 → 删。</li>
-<li>最终清理阈值 0.5：训练完后重新渲染所有训练图，importance ≤ 0.5 的面删掉。这一步删得不少（room 的模型 1.03M 顶点，交付时留 0.85–0.92M），而且它发生在 30k，Phase A 结束时看不到。这是后面"为什么瞄 12.5 不瞄 10"的根源之一。</li>
+<li>A pile of loose triangles (each owns its three vertices, nothing shared yet). About 1 010 000 vertices <i>(est.)</i>.</li>
+<li>λ_now = 1.93 × 10⁻³ <i>(log)</i>: the line that will be used at 9500. It was drawn at 9000.</li>
+<li>σ = 0.46, yield = 0.88, b_v = 6.42 B, overhead = 0.649 MB, all measured <i>(log)</i>.</li>
+<li>An error ledger with one row per triangle, just wiped to zero.</li>
 </ul>
 
-<h2>2. 每一步迭代在做什么（0 → 30000）</h2>
-<div class="box up">上游循环。我们只在图中橙色的两个位置插入决策。</div>
-<p>每个 iteration：随机取一张训练照片 → 用当前所有三角形渲染一张图 → 和照片比（L1 + 0.2·D-SSIM，外加法向、深度正则）→ 反传 → Adam 更新顶点坐标、SH、不透明度。渲染器同时顺手更新每个三角形的 importance（取 max）和 image_size（它在屏幕上多大）。</p>
-<p>每 500 步，上游做"结构编辑"（改变 V、F 的操作）：</p>
+<h2>The recursion</h2>
+<pre>
+<i>── steps 9000 → 9500: ordinary training, 500 times ─────────────────────────────</i>
+for each step:
+    take one training photo, render the scene with the current triangles
+    compare render and photo pixel by pixel → an error per pixel
+    <b>charge each pixel's error to the triangle that painted that pixel</b>      ← ΔD_t accumulates
+    backpropagate, Adam updates vertex positions, colours, opacities         ← unchanged upstream
 
-<figure>
-<svg viewBox="0 0 860 300" role="img" aria-label="训练时间轴">
-<line x1="40" y1="120" x2="830" y2="120" class="ln"/>
-<g font-size="12" class="m">
-<text x="40" y="145" text-anchor="middle">0</text>
-<text x="118" y="145" text-anchor="middle">1500</text>
-<text x="320" y="145" text-anchor="middle">9500</text>
-<text x="345" y="162" text-anchor="middle">10k</text>
-<text x="372" y="145" text-anchor="middle">11k</text>
-<text x="410" y="162" text-anchor="middle">12.5k</text>
-<text x="590" y="145" text-anchor="middle">19.5k</text>
-<text x="604" y="162" text-anchor="middle">20k</text>
-<text x="705" y="145" text-anchor="middle">24k</text>
-<text x="730" y="162" text-anchor="middle">25k</text>
-<text x="830" y="145" text-anchor="middle">30k</text>
-</g>
-<g>
-<line x1="40" y1="120" x2="40" y2="110" class="ln"/><line x1="118" y1="120" x2="118" y2="110" class="ln"/><line x1="320" y1="120" x2="320" y2="110" class="ln"/><line x1="345" y1="120" x2="345" y2="110" class="ln"/><line x1="372" y1="120" x2="372" y2="110" class="ln"/><line x1="410" y1="120" x2="410" y2="110" class="ln"/><line x1="590" y1="120" x2="590" y2="110" class="ln"/><line x1="604" y1="120" x2="604" y2="110" class="ln"/><line x1="705" y1="120" x2="705" y2="110" class="ln"/><line x1="730" y1="120" x2="730" y2="110" class="ln"/><line x1="830" y1="120" x2="830" y2="110" class="ln"/>
-</g>
-<rect x="118" y="40" width="202" height="26" rx="4" class="oursf"/>
-<text x="219" y="58" font-size="13" text-anchor="middle" font-weight="600">Phase A：priced split ×17</text>
-<rect x="410" y="40" width="180" height="26" rx="4" class="oursf"/>
-<text x="500" y="58" font-size="13" text-anchor="middle" font-weight="600">Phase B：λ-prune ×15</text>
-<rect x="145" y="74" width="685" height="22" rx="4" class="upf"/>
-<text x="487" y="90" font-size="12" text-anchor="middle">每 500 步上游剪枝（4000 后）；opacity 地板 5000 → 24000 从 0.1 抬到 0.9999</text>
-<g font-size="12.5">
-<text x="345" y="200" text-anchor="middle" class="upc">10k 生长结束</text>
-<text x="372" y="222" text-anchor="middle" class="upc">11k Delaunay 重建</text>
-<text x="604" y="200" text-anchor="middle" class="upc">20k 超采样 2×</text>
-<text x="730" y="222" text-anchor="middle" class="upc">25k 超采样 4×</text>
-<text x="830" y="200" text-anchor="end" class="upc">30k 最终清理 → 编码器交付</text>
-<text x="40" y="200" class="upc">0 soup 初始化</text>
-</g>
-<g font-size="12.5" class="ours">
-<text x="219" y="250" text-anchor="middle">这里是唯一能"加字节"的时段</text>
-<text x="500" y="250" text-anchor="middle">这里只能"减字节"</text>
-</g>
-<text x="40" y="285" font-size="12.5" class="m">→ 两段之间隔着 Delaunay 重建：之前是 soup（看不到交付拓扑），之后是网格（再也不能长了）。所以控制器必然是"先长后剪"的不对称结构。</text>
-</svg>
-<figcaption>图 2. 上游日程与我们的两个插入点。</figcaption>
-</figure>
+<i>── step 9500: the decision ──────────────────────────────────────────────────────</i>
+1  upstream pruning: delete triangles that are too transparent, too big on screen,
+   or that no pixel relies on                                                → V = 919 243
 
-<h3>每 500 步上游做的事（顺序很重要）</h3>
-<ol>
-<li><b>剪枝</b>（只在 <code>start_pruning</code> = 4000 之后，indoor 3000）：三角形满足任一条就删——三个顶点中最低的不透明度 ≤ 0.235(+ramp)；importance ≤ 0.235(+ramp)（训练图 &lt; 500 张时才用）；在屏幕上太大（image_size &gt; 1400 像素）。删完后没人用的顶点也删。注意：第一次剪枝通常删掉 soup 的 70–95 %——初始随机朝向的三角形大部分没用。</li>
-<li><b>生长</b>（每 500 步一次，从 densify_from_iter 之后开始到 10000 之前：室外预设 500 → 1000…9500 共 18 次；室内预设 1000 → 1500…9500 共 17 次）：上游原版是"把顶点数长到 1.23 倍，按 importance 抽样挑三角形，加上 100 个最大的，每个分裂成 4 个（三条边中点加三个新顶点），删掉父三角形"。<span class="ours"><b>我们把"挑谁、挑多少"换掉了</b>（第 4 节），分裂的几何操作不变。</span></li>
-<li><b>抬 opacity 地板</b>（5000 后）。</li>
-</ol>
-<p>上游"长到 1.23 倍"这个限制器（<code>add_percentage</code>）在我们版本里仍然生效：我们每轮分裂的数量不能超过它允许的 0.23 V 个三角形。室内预设是 1.27。</p>
+2  read the ledger:   ratio_t = ΔD_t / ΔR    for every triangle (ΔR = 33 B)
 
-<h2>3. 字节是怎么被"测"出来的：byte probe</h2>
-<div class="box">我们加的东西。它是整个系统的"尺子"。</div>
-<p>问题：训练到第 9500 步，手里是一锅 soup，上游还要做 Delaunay、再训 2 万步、再清理一遍才交付。我现在怎么知道"最后会多大"？</p>
-<p>答案：<b>不猜，模拟交付一次</b>。probe 做四件事，对训练模型零改动：</p>
-<ol>
-<li><b>复制</b>当前网格到一个副本。</li>
-<li>在副本上<b>模拟上游的最终清理</b>：把 opacity 地板临时设成最终值 0.9999、超采样设成最终的 4×，渲染全部训练图，算每个面的 importance，≤ 0.5 的面删掉，没人用的顶点删掉。得到"如果今天交付，哪些顶点、哪些面会在文件里"（kept_v、kept_f 两个掩码）。</li>
-<li>把副本存盘，<b>调用交付时用的同一个编码器</b>（子进程，K4096/R256 字典，room 的坐标精度 q14，DC 7 bit）真的编一遍。</li>
-<li>读回：总字节、每条流各多少字节、留下的 V 和 F。算 b_v、b_f、overhead、fpv。</li>
-</ol>
-<p>room 一次 probe 约 27 秒。一次训练做 7 + 15 次，约加 10 分钟。probe 读数与最终交付文件的误差：0.999 到 1.001（49 次全部）。<b>尺子本身没有误差</b>，有误差的是"今天的网格到 30k 时会变成什么样"。</p>
+3  how many vertices can the aim pay for?
+       V* = (aim − overhead) / (b_v + fpv · b_f)
+          = (12.5 MB − 0.649 MB) / (6.42 + 2.5 × 2.0) B                       → V* = 1 037 451
 
-<figure>
-<svg viewBox="0 0 860 190" role="img" aria-label="probe 流程">
-<rect x="20" y="40" width="150" height="70" rx="6" class="upf"/><text x="95" y="70" font-size="13" text-anchor="middle">训练中的模型</text><text x="95" y="90" font-size="12" text-anchor="middle" class="m">V 个顶点，不动它</text>
-<path d="M170 75 L205 75" class="ln" marker-end="url(#a)"/>
-<rect x="210" y="40" width="170" height="70" rx="6" class="oursf"/><text x="295" y="63" font-size="13" text-anchor="middle">副本：模拟最终清理</text><text x="295" y="82" font-size="12" text-anchor="middle" class="m">地板 0.9999，4×，渲染全部</text><text x="295" y="99" font-size="12" text-anchor="middle" class="m">importance ≤ 0.5 的面删掉</text>
-<path d="M380 75 L415 75" class="ln" marker-end="url(#a)"/>
-<rect x="420" y="40" width="170" height="70" rx="6" class="oursf"/><text x="505" y="63" font-size="13" text-anchor="middle">真实编码器</text><text x="505" y="82" font-size="12" text-anchor="middle" class="m">和交付时同一个程序</text><text x="505" y="99" font-size="12" text-anchor="middle" class="m">K4096 / R256 / q14 / q7</text>
-<path d="M590 75 L625 75" class="ln" marker-end="url(#a)"/>
-<rect x="630" y="25" width="210" height="100" rx="6" class="oursf"/><text x="735" y="48" font-size="13" text-anchor="middle">读数（room, 12500 步）</text>
-<text x="640" y="70" font-size="12.5">留下 853k V，1.72M F</text><text x="640" y="88" font-size="12.5">属性流 ÷ V → b_v = 5.92 B</text><text x="640" y="106" font-size="12.5">连接流 ÷ F → b_f = 1.80 B</text><text x="640" y="122" font-size="12.5">字典+头 → 0.651 MB；总 8.79 MB</text>
-<text x="20" y="165" font-size="12.5" class="m">Phase A 时副本是 soup：只取 b_v 和 overhead（属性成本和网格形态无关），b_f 与 fpv 要等 11k 之后第一次网格 probe 才有意义。</text>
-</svg>
-<figcaption>图 3. probe = 在副本上提前走一遍"清理 + 编码"。</figcaption>
-</figure>
+4  how many triangles to cut this round?
+       growth factor      f = (V* / V) ^ (1 / remaining) = 1 037 451 / 919 243  → f = 1.1286
+       vertices to add        V · (f − 1) = 919 243 × 0.1286                   → 118 208
+       one cut adds 3 vertices, σ of them survive → net per cut 3 · σ = 1.38
+       desired = V · (f − 1) / (3 · σ) = 118 208 / 1.38                         → 85 349
 
-<h2>4. Phase A：room 10 MB 的 17 个生长间隔</h2>
-<div class="box">我们的决策点一。每 500 步一次，1500 到 9500。</div>
+5  cap = min(upstream's own limit, desired) = min(248 195, 85 350)             → 85 350
 
-<p>先说清楚"λ 是什么"。上游原版挑分裂对象是按 importance 抽样。我们换成：每个三角形算一个<b>性价比</b></p>
-<pre>ratio_t = ΔD_t / ΔR_t
-ΔD_t：这 500 步里，所有训练图中"前景是 t"的像素的 L1 误差之和，除以图像的百万像素数，按视角平均。
-      = 把 t 换得更细能最多消掉多少误差。
-ΔR_t：分裂 t 要多付的字节。3 个新顶点 × (b_v + fpv·b_f) = 33 B（这个只定 λ 的单位，见下）。</pre>
-<p>ratio 大 = "这个三角形画得差又便宜，值得切"。<b>λ 就是一条线：ratio &gt; λ 的切，其余不切。</b> λ 高切得少，λ 低切得多。</p>
+6  <b>cut every triangle with ratio_t &gt; λ_now, at most cap of them</b>
+       83 177 pass the line, 83 611 cut (plus upstream's 100 largest)
+       each cut: 3 new vertices at the edge midpoints, 1 triangle → 4           → V = 1 163 690
 
-<p>Draft 1 的做法是人定 λ，网格长到哪算哪。现在的做法反过来：<b>先决定这一轮该切多少个（k），再把 λ 定成"恰好让 k 个通过"的那条线</b>（ratio 排序后第 k 大的值）。这叫 rank price。所以 ΔR_t 里的 33 B 常数并不决定切谁：它同时缩放所有 ratio 和 λ，排序不变。真正进字节预算的 b_v、b_f 是 probe 测的。</p>
+7  set the line for the NEXT round
+       V_exp        = V + σ · (vertices just added)    expected count after the next pruning
+                    = 919 243 + 0.46 × 244 447                                  → 1 031 700 (est.)
+       desired_next = same formula as line 4, from V_exp, with remaining − 1   → 0  (no round left)
+       k_asked      = desired_next / yield                                      → 0
+       <b>λ_next = the k_asked-th largest ratio_t</b>                                → k = 0: keep λ = 1.93e-3
 
-<figure>
-<svg viewBox="0 0 860 230" role="img" aria-label="rank price">
-<text x="20" y="25" font-size="14" font-weight="600">某一轮 574 749 个三角形的 ratio，从大到小排</text>
-<g>
-<rect x="40" y="60" width="4" height="120" class="ours"/><rect x="46" y="75" width="4" height="105" class="ours"/><rect x="52" y="84" width="4" height="96" class="ours"/><rect x="58" y="90" width="4" height="90" class="ours"/><rect x="64" y="95" width="4" height="85" class="ours"/><rect x="70" y="99" width="4" height="81" class="ours"/><rect x="76" y="103" width="4" height="77" class="ours"/><rect x="82" y="106" width="4" height="74" class="ours"/><rect x="88" y="109" width="4" height="71" class="ours"/><rect x="94" y="112" width="4" height="68" class="ours"/><rect x="100" y="114" width="4" height="66" class="ours"/><rect x="106" y="116" width="4" height="64" class="ours"/><rect x="112" y="118" width="4" height="62" class="ours"/><rect x="118" y="120" width="4" height="60" class="ours"/>
-<rect x="124" y="122" width="4" height="58" class="upc"/><rect x="130" y="124" width="4" height="56" class="upc"/><rect x="136" y="126" width="4" height="54" class="upc"/><rect x="142" y="128" width="4" height="52" class="upc"/><rect x="148" y="130" width="4" height="50" class="upc"/><rect x="154" y="132" width="4" height="48" class="upc"/><rect x="160" y="134" width="4" height="46" class="upc"/><rect x="166" y="136" width="4" height="44" class="upc"/><rect x="172" y="138" width="4" height="42" class="upc"/><rect x="178" y="140" width="4" height="40" class="upc"/><rect x="184" y="142" width="4" height="38" class="upc"/><rect x="190" y="144" width="4" height="36" class="upc"/><rect x="196" y="146" width="4" height="34" class="upc"/><rect x="202" y="148" width="4" height="32" class="upc"/><rect x="208" y="150" width="4" height="30" class="upc"/><rect x="214" y="152" width="4" height="28" class="upc"/><rect x="220" y="154" width="4" height="26" class="upc"/><rect x="226" y="156" width="4" height="24" class="upc"/><rect x="232" y="158" width="4" height="22" class="upc"/><rect x="238" y="160" width="4" height="20" class="upc"/><rect x="244" y="162" width="4" height="18" class="upc"/><rect x="250" y="164" width="4" height="16" class="upc"/><rect x="256" y="166" width="4" height="14" class="upc"/><rect x="262" y="168" width="4" height="12" class="upc"/><rect x="268" y="170" width="4" height="10" class="upc"/><rect x="274" y="172" width="4" height="8" class="upc"/><rect x="280" y="174" width="4" height="6" class="upc"/><rect x="286" y="176" width="4" height="4" class="upc"/><rect x="292" y="178" width="4" height="2" class="upc"/>
-</g>
-<line x1="40" y1="180" x2="300" y2="180" class="ln"/>
-<line x1="30" y1="120" x2="310" y2="120" stroke="var(--bad)" stroke-width="1.5" stroke-dasharray="5 3"/>
-<text x="318" y="124" font-size="13" fill="var(--bad)">λ = 第 k 大的 ratio = 1.93e-3</text>
-<line x1="122" y1="185" x2="122" y2="200" class="ln"/><text x="122" y="215" font-size="12.5" text-anchor="middle">k = 85 350 个通过 → 切</text>
-<text x="330" y="60" font-size="13.5">计划说这轮要切 k 个 →</text>
-<text x="330" y="80" font-size="13.5">λ 就定在第 k 个的高度。</text>
-<text x="330" y="100" font-size="13.5" class="m">λ 不是输入，是"计划数量"的另一种写法。</text>
-<text x="330" y="150" font-size="13" class="m">room 9500 步真实日志：pass 83 177 / 574 749，</text>
-<text x="330" y="168" font-size="13" class="m">cap 85 350，lam 1.93e-03。上游限制器允许 248 195，</text>
-<text x="330" y="186" font-size="13" class="m">没有绑住。</text>
-</svg>
-<figcaption>图 4. rank price：先定数量，λ 随之而定。</figcaption>
-</figure>
+8  wipe the ledger, resize it to the new triangle count
 
-<h3>一个间隔里的完整操作（以 9500 步、room 10 MB 为例）</h3>
-<table>
-<tr><th>#</th><th>做什么</th><th>room 10 MB 真实值</th><th>为什么</th></tr>
-<tr><td>1</td><td>上游剪枝先跑，得到现在的 V</td><td>V = 919 243</td><td>上游顺序如此</td></tr>
-<tr><td>2</td><td>量存活率 σ：上一轮新造的顶点，这次剪枝活了多少</td><td>σ_obs = 0.467，最近三次均值 0.46</td><td>新顶点差不多一半会被剪掉；计划切多少时要除以它</td></tr>
-<tr><td>3</td><td>probe（上一次 ≥ 1000 步前才做）：soup 上测 b_v、overhead</td><td>b_v = 6.42，overhead = 0.649 MB</td><td>属性成本随密度变，要实测；拓扑成本看不到，仍用先验 b_f 2.0、fpv 2.5</td></tr>
-<tr><td>4</td><td>反函数：V* = (12.5e6 − 0.649e6)/(6.42 + 2.5×2.0)</td><td>V* = 1 037 451</td><td>字节 → 顶点数</td></tr>
-<tr><td>5</td><td>还剩几轮：ceil((10000 − 9500)/500)</td><td>1 轮（这是最后一轮）</td><td>v9 之前多算了一轮，每次都少长</td></tr>
-<tr><td>6</td><td>几何计划：要从 V 等比长到 V*，这轮切多少？desired = V·((V*/V)^(1/剩余) − 1)/(3σ)</td><td>(1 037 451 − 919 243)/(3 × 0.46) ≈ 85 349</td><td>切一个三角形加 3 个顶点，只有 σ 活下来</td></tr>
-<tr><td>7</td><td>上限 = min(上游限制器 0.27V, desired)</td><td>min(248 195, 85 350) = 85 350</td><td>上游规则仍然生效</td></tr>
-<tr><td>8</td><td>算 ratio，ratio &gt; λ_now 的切，不超过上限</td><td>λ = 1.93e-3，83 177 个通过，切了 83 611 个</td><td>λ 是上一轮为"这一轮计划数"定的价</td></tr>
-<tr><td>9</td><td>切完后 V</td><td>1 163 690（下轮剪枝后约 1.03M）</td><td></td></tr>
-<tr><td>10</td><td>为下一轮定价：算下轮该切多少 k，λ_next = 第 k 大的 ratio。<b>最后一轮 k=0 时保留现在的 λ</b>（v9b）</td><td>k = 0 → λ 保持 1.93e-3 进入 Phase B</td><td>否则 λ 跳到上限 0.1，Phase B 会把所有边都判成该折</td></tr>
-</table>
-<p><b>第 10 行展开（为下一轮定价的四步）：</b></p>
-<pre>V_exp        = V + σ·(切完后的 V − 切前的 V)        预计下轮剪枝后剩多少顶点
-desired_next = plan_splits(V_exp, V*, 剩余轮数 − 1)     下一轮按几何计划该切多少个
-yield        = 最近三轮的 (实际过线数 ÷ 当时申请的 k)   λ 是用这轮分布定的，下轮才用，期间误差下降，过线的比 k 少（room 中位 0.88）
-k_asked      = desired_next ÷ yield                   想要 desired_next 个过线，就多申请一点
-λ_next       = 当前 ratio 分布里第 k_asked 大的值       存起来，下一个间隔当 λ_now 用</pre>
-<p>示意（室内 9000 步，数字为假想）：V 820k 切完 1 010k，σ 0.46 → V_exp 907k；V* 1 037k 剩 1 轮 → 要净增 130k 顶点，每切一个净得 1.38 → desired_next ≈ 94k；÷ 0.88 → k_asked ≈ 107k；λ_next = 第 107k 大的 ratio。到 9500 它实际放行约 83k。9500 本身没有下一轮：desired_next = 0，λ 保持不变进 Phase B。</p>
+<i>── steps 9500 → 10000: repeat the training loop ────────────────────────────────</i>
+</pre>
 
-<figure>
-<svg viewBox="0 0 860 240" role="img" aria-label="几何生长计划">
-<text x="20" y="25" font-size="14" font-weight="600">几何计划：每轮按同一倍数长，到 9500 刚好到 V*（示意，前几轮的 V 是示意值）</text>
-<line x1="60" y1="200" x2="820" y2="200" class="ln"/><line x1="60" y1="200" x2="60" y2="40" class="ln"/>
-<text x="55" y="205" font-size="11" text-anchor="end" class="m">0</text>
-<text x="55" y="70" font-size="11" text-anchor="end" class="m">V* 1.04M</text>
-<line x1="60" y1="66" x2="820" y2="66" stroke="var(--ours)" stroke-dasharray="5 3"/>
-<text x="700" y="60" font-size="12" class="ours">目标顶点数 V*（每轮重算）</text>
-<polyline points="100,190 190,186 280,180 370,170 460,158 550,142 640,122 730,96 800,70" class="ln" stroke="var(--up)" stroke-width="2"/>
-<g class="upc">
-<circle cx="100" cy="190" r="3"/><circle cx="190" cy="186" r="3"/><circle cx="280" cy="180" r="3"/><circle cx="370" cy="170" r="3"/><circle cx="460" cy="158" r="3"/><circle cx="550" cy="142" r="3"/><circle cx="640" cy="122" r="3"/><circle cx="730" cy="96" r="3"/><circle cx="800" cy="70" r="3"/>
-</g>
-<g font-size="11" class="m">
-<text x="100" y="218" text-anchor="middle">1500</text><text x="280" y="218" text-anchor="middle">3500</text><text x="460" y="218" text-anchor="middle">5500</text><text x="640" y="218" text-anchor="middle">7500</text><text x="800" y="218" text-anchor="middle">9500</text>
-</g>
-<text x="400" y="100" font-size="12.5" class="m">V 每轮 × f，f = (V*/V)^(1/剩余轮数)</text>
-<text x="400" y="118" font-size="12.5" class="m">probe 改了 V* → 下一轮的 f 跟着改（闭环）</text>
-<text x="640" y="190" font-size="12" class="m">9500: 919k → 1.16M → 剪后 1.03M ≈ V*</text>
-</svg>
-<figcaption>图 5. 不是一口气长到位，而是等比分摊到剩下的轮次；每轮 probe 更新 V* 后重算。</figcaption>
-</figure>
+<h2>Why each line is there</h2>
 
-<h2>5. 为什么 room 瞄的是 12.5 MB 而不是 10 MB</h2>
-<div class="box">这是整个系统里唯一一个真正"校准"出来的常数（OVER = 1.25）。要向 Yao 如实说。</div>
-<p>9500 步时，V* 的公式里有三个量在 soup 上<b>看不到</b>，都会让最终文件比公式算的小：</p>
-<table>
-<tr><th>看不到的量</th><th>soup 上以为</th><th>交付时实际（room）</th><th>效果</th></tr>
-<tr><td>κ：最终清理保留多少顶点</td><td>全部</td><td>12500 步时 853k / 1.03M = 0.83，到 30k 回升到约 0.9</td><td>文件变小</td></tr>
-<tr><td>b_f × fpv：拓扑字节 / 顶点</td><td>2.0 × 2.5 = 5 B</td><td>1.80 × 2.01 = 3.6 B</td><td>文件变小</td></tr>
-<tr><td>soup 上读的 b_v</td><td>6.42</td><td>网格上 5.92（soup 的坐标残差编得贵一点）</td><td>文件变小</td></tr>
-</table>
-<p>三项乘起来，没有 margin 的话 room 10 MB 会落在 0.80–0.88 × 目标，batch12 实测 0.877。10k 之后<b>没有任何机制能加字节</b>，但 Phase B 可以减。所以把误差故意放在"多了可以剪"的一侧：Phase A 瞄 1.25 × 目标（Mip-360 / T&T），Blender 1.1（它的 κ 是 0.995，拓扑接近先验）。这个 1.25 是从早期 sweep 的三项乘积算出来的，每类数据一个值。它补偿的是原则上在 11k Delaunay 前不可观测的东西；我们试过在副本上提前跑 Delaunay 来"看见"拓扑，但可见面集合在 opacity 地板抬升过程中还在继续长（室内 +10–50 %，室外 +5 %），提前看也看不全，所以没有做。</p>
+<h3>The ledger (the training loop)</h3>
+<figure><svg viewBox="0 0 840 140" role="img">
+<rect x="20" y="14" width="200" height="110" class="u"/>
+<polygon points="60,104 110,30 190,95" class="o"/>
+<g fill="var(--bad)" opacity="0.8"><rect x="100" y="56" width="6" height="6"/><rect x="108" y="62" width="6" height="6"/><rect x="118" y="54" width="6" height="6"/><rect x="130" y="71" width="6" height="6"/><rect x="140" y="81" width="6" height="6"/><rect x="95" y="76" width="6" height="6"/></g>
+<text x="120" y="138" font-size="12.5" text-anchor="middle" class="m">one render; red squares = pixels with large error</text>
+<text x="250" y="45" font-size="14">Those red pixels were painted by triangle t,</text>
+<text x="250" y="68" font-size="14">so their error goes on t's bill. Over 500 steps and a few</text>
+<text x="250" y="91" font-size="14">hundred photos, the bill is ΔD_t.</text>
+<text x="250" y="120" font-size="13" class="m">Large ΔD_t means "t paints badly; cutting it finer may fix it". Divided by megapixels, so resolution does not matter.</text>
+</svg></figure>
 
-<h2>6. 10k → 12.5k：上游的 Delaunay</h2>
-<div class="box up">上游步骤，我们不改。</div>
-<p>11000 步：把 soup 的 1.03M 个顶点当成点集，做 restricted Delaunay：生成一个共享顶点的真正网格，面数约 2× 顶点数。此后<b>顶点数只会减不会加</b>（上游再不分裂）。随后 opacity 地板继续抬，被迫变实心的三角形"摊开"（un-stacking）：原来叠在一起互相遮挡的面，地板抬高后前面的面变不透明，后面的面 importance 掉到 0 被清理；或者反过来，原来半透明没人算它重要的面，现在变成某些像素的唯一贡献者，importance 升上去。<b>净效果是交付集合在 12.5k 到 24k 之间还在变</b>，room 从 8.79 MB 变到 10.29 MB。</p>
+<h3>Line 3: the byte table, and why it is solved backwards</h3>
+<div class="f">file bytes = b_v · V + b_f · F + overhead</div>
+<div class="why">Every vertex costs b_v bytes, every face costs b_f bytes, plus the box. In the finished mesh F ≈ fpv · V, so the file is a straight line in V: <code>(b_v + fpv·b_f) · V + overhead</code>. The user hands us bytes; the only knob the system has is "how many triangles to cut", which is a count. So solve the line for V: that is V*, the number of vertices the budget buys.</div>
+<div class="why">b_v and overhead are not guesses. From step 4500 on, every 1000 steps, the current triangles are copied, cleaned the way step 30k will clean them, and <b>run through the real file encoder</b>. The stream sizes it writes give b_v and overhead. The copy is thrown away; training never notices.</div>
+<div class="why"><b>Why aim at 12.5 and not 10.</b> At step 9500 three things are invisible: the final cleaning at 30k will drop about 10 % of the vertices; once stitched into a mesh the connectivity costs less per vertex than the prior 5 B; and b_v read on loose triangles is slightly high. All three make the final file smaller than the formula says, and after step 10k nothing can ever add bytes again, only remove them. So the growth phase deliberately overshoots by 25 % and the second half trims back with the real encoder measuring every round. This 1.25 is a calibrated number, one value for all Mip-NeRF / T&T scenes, 1.1 for Blender.</div>
 
-<h2>7. Phase B：room 10 MB 的 15 轮 λ-prune</h2>
-<div class="box">我们的决策点二。每 500 步一次，12500 到 19500。</div>
-<p>目的：Phase A 故意多长了 25 %，现在用真实编码器一轮轮量，多了就剪回去，剪的时候用<b>同一个 λ 的反向规则</b>：</p>
-<pre>折叠边 (u,v) iff ΔD_uv / ΔR_uv &lt; λ
-ΔD_uv：u、v 周围一圈面的误差之和 = 把这两个点合成一个会增加多少误差
-ΔR_uv：合并后文件少的字节 = b_v（少一个顶点，仅当 u、v 都在交付集合里）+ b_f × 边上会消失的交付面数</pre>
-<p>和分裂完全对称："分裂"是误差大/字节小的切；"折叠"是误差小/字节小的合。合并时两个顶点的坐标、颜色、不透明度和 <b>Adam 的动量</b>一起平均到一个槽位——这是训练中折叠和训练后折叠的本质区别：优化器不失忆，剩下 1 万多步能把周围修好。</p>
+<h3>Line 4: why grow geometrically instead of cutting everything at once</h3>
+<div class="f">desired = V · ((V*/V)^(1/remaining) − 1) / (3 · σ)</div>
+<div class="why">Freshly cut triangles need training before anyone knows if they are useful, and about half of them (σ = 0.46) are pruned at the next round. Cutting everything at once would dump a huge batch of untrained triangles that die together. So the gap to V* is spread as equal <i>ratios</i> over the remaining rounds: 5 rounds left and V must double → each round grows by 2^(1/5) = 15 %. The plan is recomputed every round, so when the byte table moves, V* moves and the plan follows.</div>
 
-<figure>
-<svg viewBox="0 0 860 200" role="img" aria-label="边折叠">
-<g>
-<polygon points="60,100 110,60 150,100" class="upf"/><polygon points="110,60 190,55 150,100" class="upf"/><polygon points="150,100 190,55 240,95" class="upf"/><polygon points="60,100 150,100 100,150" class="upf"/><polygon points="150,100 240,95 200,150" class="upf"/><polygon points="100,150 150,100 200,150" class="upf"/>
-<circle cx="150" cy="100" r="4" class="ours"/><circle cx="190" cy="55" r="4" class="ours"/>
-<line x1="150" y1="100" x2="190" y2="55" stroke="var(--bad)" stroke-width="3"/>
-<text x="140" y="118" font-size="12">u</text><text x="196" y="52" font-size="12">v</text>
-<text x="60" y="185" font-size="12.5" class="m">折叠前：边 uv 上有 2 个面（红边两侧）</text>
-</g>
-<path d="M290 100 L350 100" class="ln" marker-end="url(#a)"/>
-<text x="320" y="90" font-size="12" text-anchor="middle" class="ours">合到中点</text>
-<g transform="translate(330,0)">
-<polygon points="60,100 110,60 170,78" class="upf"/><polygon points="170,78 240,95 200,150" class="upf"/><polygon points="60,100 170,78 100,150" class="upf"/><polygon points="100,150 170,78 200,150" class="upf"/>
-<circle cx="170" cy="78" r="4" fill="var(--ok)"/>
-<text x="60" y="185" font-size="12.5" class="m">折叠后：−1 顶点，−2 面。ΔR = b_v + 2 b_f = 5.9 + 3.6 = 9.5 B</text>
-</g>
-<text x="640" y="60" font-size="13">每轮规则：</text>
-<text x="640" y="80" font-size="12.5" class="m">score 最小的先；一个顶点一轮只参与一次；</text>
-<text x="640" y="98" font-size="12.5" class="m">会把某个面翻过来的不折；≤ 15 % 顶点/轮</text>
-<text x="640" y="125" font-size="13">v9d：ΔR 只算交付集合里的点和面。</text>
-<text x="640" y="143" font-size="12.5" class="m">没人渲染的面反正会被清理，折它不省字节，</text>
-<text x="640" y="161" font-size="12.5" class="m">不算候选（v9b/c 把大量这类"免费边"折了）。</text>
-</svg>
-<figcaption>图 6. 一次边折叠。省的字节按交付文件真会少的算。</figcaption>
-</figure>
+<h3>Lines 6 and 7: what λ really is</h3>
+<figure><svg viewBox="0 0 840 205" role="img">
+<text x="20" y="22" font-size="14">Step 9500: the 574 749 values of ratio_t, sorted from largest to smallest</text>
+<g fill="var(--ours)"><rect x="40" y="50" width="5" height="120"/><rect x="47" y="66" width="5" height="104"/><rect x="54" y="76" width="5" height="94"/><rect x="61" y="83" width="5" height="87"/><rect x="68" y="89" width="5" height="81"/><rect x="75" y="94" width="5" height="76"/><rect x="82" y="98" width="5" height="72"/><rect x="89" y="102" width="5" height="68"/><rect x="96" y="105" width="5" height="65"/><rect x="103" y="108" width="5" height="62"/><rect x="110" y="111" width="5" height="59"/></g>
+<g fill="var(--up)"><rect x="117" y="114" width="5" height="56"/><rect x="124" y="117" width="5" height="53"/><rect x="131" y="120" width="5" height="50"/><rect x="138" y="123" width="5" height="47"/><rect x="145" y="126" width="5" height="44"/><rect x="152" y="129" width="5" height="41"/><rect x="159" y="132" width="5" height="38"/><rect x="166" y="135" width="5" height="35"/><rect x="173" y="138" width="5" height="32"/><rect x="180" y="141" width="5" height="29"/><rect x="187" y="144" width="5" height="26"/><rect x="194" y="147" width="5" height="23"/><rect x="201" y="150" width="5" height="20"/><rect x="208" y="153" width="5" height="17"/><rect x="215" y="156" width="5" height="14"/><rect x="222" y="159" width="5" height="11"/><rect x="229" y="162" width="5" height="8"/><rect x="236" y="165" width="5" height="5"/><rect x="243" y="167" width="5" height="3"/></g>
+<line x1="40" y1="170" x2="260" y2="170" class="ln"/>
+<line x1="30" y1="112" x2="270" y2="112" stroke="var(--bad)" stroke-width="1.5" stroke-dasharray="5 3"/>
+<text x="278" y="116" font-size="13" fill="var(--bad)">λ = 1.93e-3</text>
+<text x="80" y="190" font-size="12.5" text-anchor="middle" fill="var(--ours)">above the line: cut (83 177)</text>
+<text x="380" y="58" font-size="14">λ is a horizontal line on this chart: bars above it are cut.</text>
+<text x="380" y="84" font-size="14">The original method lets a human draw the line and the</text>
+<text x="380" y="106" font-size="14">mesh grows to wherever that leads.</text>
+<text x="380" y="134" font-size="14" fill="var(--ours)">We do it backwards: compute k (line 4), then draw the</text>
+<text x="380" y="156" font-size="14" fill="var(--ours)">line at the height of the k-th bar.</text>
+<text x="380" y="184" font-size="13" class="m">Line 7 draws, on the 9000 chart, the line 9500 will use. In 500 steps the bars</text>
+<text x="380" y="200" font-size="13" class="m">all shrink a little (training lowers error), so fewer than k pass: hence ÷ yield.</text>
+</svg></figure>
+<div class="f">λ_next = k_asked-th largest ratio_t,&nbsp;&nbsp; k_asked = desired_next / yield</div>
+<div class="why">This is why the user never sees λ: it is just "how many to cut this round" written as a threshold. Redrawn every 500 steps from the scene's own chart.</div>
 
-<h3>一轮里的完整操作，和 room 10 MB 每轮真实发生的事</h3>
-<ol>
-<li><b>probe</b>：真网格上实测 b_v、b_f、fpv、overhead，得到 r_meas = "今天交付多大"，以及 kept 掩码。</li>
-<li><b>外推落点</b>：r_meas 会变（第 6 节的 un-stacking），对历次 probe 做最小二乘，外推到 24000（地板抬完）。v9c 起斜率不允许为负（集合只会长，负斜率是噪声）。</li>
-<li><b>要剪多少</b>：excess = 落点 − 目标；每对折叠省 b_v + 2b_f ≈ 9.5 B（之后用上一轮实测的每对字节）；excess ÷ 9.5 = 总共要折几对；÷ 剩余轮数 = 这轮折几对。</li>
-<li><b>Gate</b>：落点 ≤ 目标 → <b>这轮一对都不折</b>。落点 &gt; 目标 → 折 min(max(计划数, λ 线下的边数), 消掉全部超出所需的对数)。永远不剪过头。</li>
-<li>选独立集、折叠、Adam 平均；如果是数量在约束（而不是 λ 线），λ := 实际折掉的边里最大的 score（shadow price），λ 跟着实际执行的价格走。</li>
-<li>精确记账：这轮真少了多少交付字节，供下轮外推。</li>
-</ol>
+<h3>Line 6: what a cut is</h3>
+<figure><svg viewBox="0 0 840 130" role="img">
+<polygon points="60,110 120,20 180,110" class="u"/>
+<text x="120" y="127" font-size="12.5" text-anchor="middle" class="m">parent, 3 vertices</text>
+<path d="M210 65 L260 65" class="ln"/><polygon points="260,60 270,65 260,70" fill="var(--fg)"/>
+<polygon points="300,110 330,65 360,110" class="o"/><polygon points="330,65 360,20 390,65" class="o"/><polygon points="360,110 390,65 420,110" class="o"/><polygon points="330,65 390,65 360,110" class="o"/>
+<circle cx="330" cy="65" r="4" fill="var(--ours)"/><circle cx="390" cy="65" r="4" fill="var(--ours)"/><circle cx="360" cy="110" r="4" fill="var(--ours)"/>
+<text x="360" y="127" font-size="12.5" text-anchor="middle" class="m">4 children, +3 vertices (edge midpoints)</text>
+<text x="460" y="48" font-size="14">Children inherit the parent's colour and opacity and</text>
+<text x="460" y="72" font-size="14">train on their own from 9500 to 10000, with their own bills.</text>
+<text x="460" y="98" font-size="13" class="m">The parent's error is now shared by four, so each child's ratio is smaller and it is not cut again right away.</text>
+</svg></figure>
 
-<table>
-<tr><th>步</th><th>probe 读数 / 外推落点</th><th>相对 10 MB</th><th>动作</th></tr>
-<tr><td>12500</td><td>8.79 MB（853k V，1.72M F）/ 8.79</td><td>0.879</td><td>不折（低于目标）</td></tr>
-<tr><td>13000</td><td>/ 8.53</td><td>0.853</td><td>不折</td></tr>
-<tr><td>13500</td><td>/ 8.75</td><td></td><td>不折</td></tr>
-<tr><td>14000</td><td>/ 9.05</td><td></td><td>不折（集合在长）</td></tr>
-<tr><td>14500</td><td>/ 9.37</td><td></td><td>不折</td></tr>
-<tr><td>15000</td><td>/ 9.57</td><td></td><td>不折</td></tr>
-<tr><td>15500</td><td>/ 9.80</td><td></td><td>不折</td></tr>
-<tr><td>16000</td><td>/ 9.93</td><td>0.993</td><td>不折（还差 0.07）</td></tr>
-<tr><td>16500 … 19500</td><td>落点 &gt; 10</td><td>&gt; 1</td><td>7 轮开闸，共折 67 765 对；V 1 032 566 → 948 178</td></tr>
-<tr><td>30000 交付</td><td>10.29 MB，918k V，2.26M F</td><td><b>1.029</b></td><td>test PSNR 27.83，固定-λ 曲线在同字节处 27.86（−0.03 dB）</td></tr>
-</table>
-<p>这一行把两个现象都展示了：(a) 12.5k 时读 8.79，比目标还小 12 %，就是第 5 节说的 κ 和拓扑；如果 Phase A 没瞄 12.5 而瞄 10，这里会读 7.0 左右，之后没得救。(b) 从 12.5k 到 16k 什么都没剪，落点自己从 8.8 涨到 9.9——这就是 un-stacking；室内它涨得多（kitchen 10 MB 涨到 11.3），gate 开得晚、每轮只能折 0.4 % 的顶点，追不完，所以室内行普遍落在 1.03–1.13。这是剩余偏差的全部来源，paper 的 limitation 要写它。</p>
+<h2>The second half: the same recursion, run in reverse (step 16000 → 16500)</h2>
+<p class="mute">After 11k the triangles are stitched into a mesh and can no longer grow. Every 500 steps from 12500 to 19500 the following runs. room 10 MB, real numbers unless marked.</p>
+<pre>
+<i>── 16000 → 16500: training, ledger as before (ΔD per face) ──────────────────────</i>
+<i>── step 16500 ─────────────────────────────────────────────────────────────────</i>
+1  copy the mesh, clean it the way 30k will, run the real encoder          → "if delivered today": 9.96 MB (est.)
+       and refresh the byte table: b_v 5.9  b_f 1.8  overhead 0.65 MB         (log)
+2  that number has been rising (14000: 9.05 → 16000: 9.93); extend the trend
+   to step 24000, where opacities stop changing                              → landing ≈ 10.3 MB
+3  excess = landing − target = 0.3 MB
+   one edge collapse saves  b_v + 2·b_f ≈ 9.5 B
+   pairs to collapse = 0.3 MB / 9.5 B ≈ 32 000, spread over the 7 rounds left  → ≈ 4 500 this round
+4  <b>if landing ≤ target: do nothing this round</b>   (true from 12500 to 16000: 8 rounds, no edit)
+5  score every edge (u,v):  score_uv = ΔD_uv / ΔR_uv
+       ΔD_uv = error of all faces touching u or v   (how much the merge would hurt)
+       ΔR_uv = bytes the file loses: b_v if both ends are in the delivered set + b_f per delivered face on the edge
+6  <b>collapse the lowest scores first</b>: merge u and v into their midpoint,
+   average position, colour, opacity and the Adam momentum              → the optimiser keeps its memory
+   one vertex per round, never flip a face, at most 15 % of V
+7  record the bytes actually removed, for the next round's trend
+<i>── repeat to 19500; 20k upstream supersampling, 24k fully opaque, 30k cleaning → encode → 10.29 MB ──</i>
+</pre>
+<div class="f">collapse (u,v) if ΔD_uv / ΔR_uv &lt; λ&nbsp;&nbsp;&nbsp;&nbsp;(the growth rule read backwards: cut if ΔD_t / ΔR_t &gt; λ)</div>
+<div class="why">Growth cuts triangles whose error is large per byte; trimming merges vertices whose error is small per byte. Same λ, same ledger, same price tags. The 25 % packed as margin is removed here while the real encoder measures every round. room ends at 1.029 × target, with picture quality 0.03 dB from the fixed-λ curve at the same bytes.</div>
 
-<h2>8. 20k → 30k → 文件</h2>
-<div class="box up">上游 + 我们的编码器。</div>
-<p>20k 和 25k 上游开 2× / 4× 超采样（渐进式抗锯齿），24k 地板到 0.9999，所有面实心。30k 训练结束：重新渲染所有训练图，importance ≤ 0.5 的面删掉，存模型。然后我们的编码器跑一次：坐标量化到 q14 网格、编残差；连接用 cache-based 算术编码；每个顶点 45 个高阶 SH 系数换成"主字典 4096 选一 + 残差字典 256 选一"两个索引，字典在这个场景上 K-means 后对渲染误差再调 400 步；DC 7 bit。写成一个文件，10.29 MB。解码器独立程序，CPU 几秒，输出标准网格。</p>
-
-<h2>9. 一页总结：谁在什么时候用什么决定什么</h2>
-<table>
-<tr><th>时刻</th><th>决定</th><th>依据</th><th>输入来自</th></tr>
-<tr><td>每 500 步，1500–9500</td><td>这轮切多少、切谁</td><td>几何计划 → k；λ = 第 k 大 ratio；ratio &gt; λ 的切</td><td>V*（字节表反函数）、σ、yield、上游限制器</td></tr>
-<tr><td>每 ≥1000 步，4000–9500</td><td>更新字节表的 b_v、overhead</td><td>soup 副本 → 清理 → 真实编码器</td><td>probe</td></tr>
-<tr><td>每 500 步，12500–19500</td><td>这轮折不折、折多少</td><td>落点 &gt; 目标才折；excess ÷ 每对字节 ÷ 剩余轮</td><td>probe（全部四个量实测）+ 外推</td></tr>
-<tr><td>同上</td><td>折谁</td><td>score = ΔD_uv/ΔR_uv 最小的先，ΔR 只算交付集合</td><td>误差归因 + kept 掩码</td></tr>
-<tr><td>30k</td><td>—</td><td>上游清理 + 我们的编码器</td><td></td></tr>
-</table>
-<p class="mute">用户给的唯一输入是 10 MB。λ、V*、b_v、b_f、σ、yield 全是训练中算出来的。唯一人定的校准量是 Phase A 的 1.25 / 1.1 瞄高系数。</p>
+<h2>One sentence</h2>
+<p>The user gives one number, the megabytes. Every 500 steps the real encoder prices a vertex, the byte table turns the budget into a vertex count, the plan turns that into "cut k triangles this round", and λ is simply the height of the k-th bar. In the second half the same λ is read backwards to merge what the margin over-bought. λ, V*, the prices: all computed during training. The one number a human chose is the 25 % margin.</p>
 
 </main></body></html>
