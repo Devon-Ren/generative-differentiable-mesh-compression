@@ -81,36 +81,36 @@ for each step:
     take one training photo, render the scene with the current triangles
     compare render and photo pixel by pixel → an error per pixel
     <b>charge each pixel's error to the triangle that painted that pixel</b>      ← ΔD_t accumulates
-    backpropagate, Adam updates vertex positions, colours, opacities         ← unchanged upstream
+    backprop; Adam updates positions, colours, opacities              ← upstream, unchanged
 
 <i>── step 9500: the decision ──────────────────────────────────────────────────────</i>
-1  upstream pruning: delete triangles that are too transparent, too big on screen,
-   or that no pixel relies on                                                → V = 919 243
+1  upstream pruning: drop triangles too transparent, too big on screen,
+   or that no pixel relies on                                      → V = 919 243
 
 2  read the ledger:   ratio_t = ΔD_t / ΔR    for every triangle (ΔR = 33 B)
 
 3  how many vertices can the aim pay for?
        V* = (aim − overhead) / (b_v + fpv · b_f)
-          = (12.5 MB − 0.649 MB) / (6.42 + 2.5 × 2.0) B                       → V* = 1 037 451
+          = (12.5 MB − 0.649 MB) / (6.42 + 2.5 × 2.0) B             → V* = 1 037 451
 
 4  how many triangles to cut this round?
-       growth factor      f = (V* / V) ^ (1 / remaining) = 1 037 451 / 919 243  → f = 1.1286
-       vertices to add        V · (f − 1) = 919 243 × 0.1286                   → 118 208
+       growth factor  f = (V*/V)^(1/remaining) = 1 037 451 / 919 243  → f = 1.1286
+       vertices to add    V · (f − 1) = 919 243 × 0.1286            → 118 208
        one cut adds 3 vertices, σ of them survive → net per cut 3 · σ = 1.38
-       desired = V · (f − 1) / (3 · σ) = 118 208 / 1.38                         → 85 349
+       desired = V · (f − 1) / (3 · σ) = 118 208 / 1.38              → 85 349
 
-5  cap = min(upstream's own limit, desired) = min(248 195, 85 350)             → 85 350
+5  cap = min(upstream's own limit, desired) = min(248 195, 85 350)  → 85 350
 
 6  <b>cut every triangle with ratio_t &gt; λ_now, at most cap of them</b>
        83 177 pass the line, 83 611 cut (plus upstream's 100 largest)
-       each cut: 3 new vertices at the edge midpoints, 1 triangle → 4           → V = 1 163 690
+       each cut: 3 new vertices at the edge midpoints, 1 → 4       → V = 1 163 690
 
 7  set the line for the NEXT round
-       V_exp        = V + σ · (vertices just added)    expected count after the next pruning
-                    = 919 243 + 0.46 × 244 447                                  → 1 031 700 (est.)
-       desired_next = same formula as line 4, from V_exp, with remaining − 1   → 0  (no round left)
-       k_asked      = desired_next / yield                                      → 0
-       <b>λ_next = the k_asked-th largest ratio_t</b>                                → k = 0: keep λ = 1.93e-3
+       V_exp        = V + σ · (vertices just added)     count expected after next pruning
+                    = 919 243 + 0.46 × 244 447                      → 1 031 700 (est.)
+       desired_next = line 4 again, from V_exp, remaining − 1        → 0 (no round left)
+       k_asked      = desired_next / yield                           → 0
+       <b>λ_next = the k_asked-th largest ratio_t</b>                     → k = 0: keep λ = 1.93e-3
 
 8  wipe the ledger, resize it to the new triangle count
 
@@ -179,19 +179,20 @@ for each step:
 <pre>
 <i>── 16000 → 16500: training, ledger as before (ΔD per face) ──────────────────────</i>
 <i>── step 16500 ─────────────────────────────────────────────────────────────────</i>
-1  copy the mesh, clean it the way 30k will, run the real encoder          → "if delivered today": 9.96 MB (est.)
-       and refresh the byte table: b_v 5.9  b_f 1.8  overhead 0.65 MB         (log)
+1  copy the mesh, clean it as 30k will, run the real encoder  → "delivered today": 9.96 MB (est.)
+       refresh the byte table: b_v 5.9  b_f 1.8  overhead 0.65 MB  (log)
 2  that number has been rising (14000: 9.05 → 16000: 9.93); extend the trend
-   to step 24000, where opacities stop changing                              → landing ≈ 10.3 MB
+   to step 24000, where opacities stop changing                 → landing ≈ 10.3 MB
 3  excess = landing − target = 0.3 MB
    one edge collapse saves  b_v + 2·b_f ≈ 9.5 B
-   pairs to collapse = 0.3 MB / 9.5 B ≈ 32 000, spread over the 7 rounds left  → ≈ 4 500 this round
-4  <b>if landing ≤ target: do nothing this round</b>   (true from 12500 to 16000: 8 rounds, no edit)
+   pairs = 0.3 MB / 9.5 B ≈ 32 000, over the 7 rounds left      → ≈ 4 500 this round
+4  <b>if landing ≤ target: do nothing this round</b>  (12500–16000: 8 rounds, no edit)
 5  score every edge (u,v):  score_uv = ΔD_uv / ΔR_uv
        ΔD_uv = error of all faces touching u or v   (how much the merge would hurt)
-       ΔR_uv = bytes the file loses: b_v if both ends are in the delivered set + b_f per delivered face on the edge
+       ΔR_uv = bytes the file loses: b_v if both ends are delivered
+               + b_f per delivered face on the edge
 6  <b>collapse the lowest scores first</b>: merge u and v into their midpoint,
-   average position, colour, opacity and the Adam momentum              → the optimiser keeps its memory
+   average position, colour, opacity and Adam momentum   → optimiser keeps its memory
    one vertex per round, never flip a face, at most 15 % of V
 7  record the bytes actually removed, for the next round's trend
 <i>── repeat to 19500; 20k upstream supersampling, 24k fully opaque, 30k cleaning → encode → 10.29 MB ──</i>
