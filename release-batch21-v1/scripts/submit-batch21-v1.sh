@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# submit-batch21-v1.sh (2026-11-09, r2: rd-prune-blender-v5 = the Blender lambda sbatch that exists on HPC; v4 was superseded the same day): the completeness batch, everything at once, last GPU window (reservation ends 11/12 09:35).
+# submit-batch21-v1.sh (2026-11-09, r3: no --reservation flag, per NYU HPC 11/09 22:48: the reservation is MAGNETIC and gl030 has an OS-patch window; jobs run on any free L40S node and return to gl030 automatically; r2: rd-prune-blender-v5 = the Blender lambda sbatch that exists on HPC; v4 was superseded the same day): the completeness batch, everything at once, last GPU window (reservation ends 11/12 09:35).
 # Fills every hole in the main tables so that each claim covers all four datasets, plus redundancy on the controller.
 #   A  G0 (train-at-budget vs post-hoc collapse) on Deep Blending          2 jobs   budget-sweep-v3.sbatch (INDOOR=1, DB originals)
 #   C  NeRF-Synthetic fixed-lambda 1.85e-3 and 1.85e-2 (4-point hull)       8 jobs   rd-prune-blender-v5.sbatch
@@ -37,7 +37,7 @@ for S in $BL; do for L in 0.00185 0.0185; do [ -e /scratch/zr2245/$S-rd3b4-lam$L
 busy=$(squeue -u $USER -h -o "%j" | grep -c "b21"); [ "$busy" = 0 ] || { echo "CHECK FAILED: $busy b21 jobs already in the queue (double submission?)"; squeue -u $USER -o "%.10i %.24j %.2t %.10M"; exit 1; }
 scontrol show node gl030 | grep -o "AllocTRES=[^ ]*"; scontrol show reservation $RES | grep -o "EndTime=[^ ]*"
 echo "CHECK OK"; k=0; declare -A JC JC2
-sb () { j=$(sbatch --parsable --reservation=$RES --account=$ACC --cpus-per-task=6 "$@") && { echo "submitted $j  $(echo "$@" | grep -o 'job-name=[^ ]*' | cut -d= -f2)"; k=$((k+1)); LASTJ=$j; } || { echo "FAILED: sbatch $*"; LASTJ=""; }; }
+sb () { j=$(sbatch --parsable --account=$ACC --cpus-per-task=6 "$@") && { echo "submitted $j  $(echo "$@" | grep -o 'job-name=[^ ]*' | cut -d= -f2)"; k=$((k+1)); LASTJ=$j; } || { echo "FAILED: sbatch $*"; LASTJ=""; }; }
 # --- A: G0 Deep Blending (budgets = lambda asset V / 0.9 from deep-blending-fixed-lambda-2026-11-09: 1232667/478718/200920 and 1080549/396809/171479)
 sb --time=06:00:00 --export=ALL,SCENE=drjohnson,IMAGES=images,XYZ=q15,INDOOR=1,DATA=$D/db/drjohnson,BUDGETS="1370000 532000 224000" --job-name=drjohnson-b21-g0r $AN/budget-sweep-v3.sbatch
 sb --time=06:00:00 --export=ALL,SCENE=playroom,IMAGES=images,XYZ=q15,INDOOR=1,DATA=$D/db/playroom,BUDGETS="1201000 441000 191000" --job-name=playroom-b21-g0r $AN/budget-sweep-v3.sbatch
@@ -63,7 +63,7 @@ m truck 0 images q18 ",DATA=$D/tandt/truck"; m train 0 images q18 ",DATA=$D/tand
 # --- E3: controller v9b on NeRF-Synthetic at 1.5 / 3 / 6 MB (adds three targets to the 2.5/4 table; ficus/mic at 6 MB report the capacity limit)
 for S in $BL; do sb --time=02:30:00 --export=ALL,SCENE=$S,XYZ=q14,INDOOR=1,TARGETS="1.5 3 6",SMOKE=0,SELFCHECK=0 --job-name=$S-b21-adapt9xb $AN/adapt-v9b-blender.sbatch; done
 # --- F: generic codecs on the remaining scenes (room / garden already have rows)
-sb --time=10:00:00 --export=ALL,SCENES="kitchen counter bonsai drjohnson playroom truck" --job-name=b21-genc-a $AN/generic-codecs-b21.sbatch
-sb --time=10:00:00 --export=ALL,SCENES="bicycle stump flowers treehill train" --job-name=b21-genc-b $AN/generic-codecs-b21.sbatch
+sb --time=08:00:00 --export=ALL,SCENES="kitchen counter bonsai drjohnson playroom truck" --job-name=b21-genc-a $AN/generic-codecs-b21.sbatch
+sb --time=08:00:00 --export=ALL,SCENES="bicycle stump flowers treehill train" --job-name=b21-genc-b $AN/generic-codecs-b21.sbatch
 echo "submitted $k of 59 jobs (A 2, C 8, C2 8, D 10, E1 2, B 8, E2 11, E3 8, F 2); dependent jobs wait on their scene's C / C2"
 squeue -u $USER -o "%.10i %.26j %.2t %.10M %.12E" | head -70

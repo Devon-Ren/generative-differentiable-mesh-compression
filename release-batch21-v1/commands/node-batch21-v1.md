@@ -442,3 +442,7 @@ echo "===== FAILED lines"; grep -l "FAILED" $AN/*b21*.out 2>/dev/null | while re
 - Nothing is overwritten: new run directories throughout (`*-budgetb-*`, `*-rd3b4-lam0.00185-*`, `*-adapt9x-t7.5mb`, `*-adapt9xb-t1.5mb`, `drjohnson-adapt9x-*`, `kfan-v1/` inside existing λ dirs, `g0ctrl-*` inside the originals).
 - Order of submission = rough order of execution: core gaps (A, C, D-DB, E1) first; B and the Blender fan wait for their scene's re-delivery; the redundancy runs (E2, E3) and generic codecs fill the GPUs in between.
 - If the reservation runs out before the queue empties, the jobs keep running on the general partition (same account) at normal priority; restartable sbatch files mean a re-submit resumes.
+
+## §1c (11/09 23:00): resubmitted WITHOUT --reservation
+
+NYU HPC (Shenglong, 22:48): OS-patch maintenance windows Mon–Wed; gl030 is held for its window, and `--reservation=yw523-l40s` pins jobs to it. The reservation is magnetic, so jobs without the flag run on any free L40S node and use gl030 when it is up. `scontrol update ReservationName=` is refused for users, so the 59 jobs were cancelled and resubmitted with `submit-batch21-v1.sh` r3 (same script, `--reservation=$RES` removed from the sbatch calls, generic-codec jobs capped at 8 h). Off-reservation the batch competes by fairshare on l40s_public.
