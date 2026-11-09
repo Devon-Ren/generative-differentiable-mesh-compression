@@ -33,3 +33,33 @@ Rows: `g0-refresh-2026-11-09.txt` (budget-sweep-v2.sbatch; train-at-budget = ups
 Why post-hoc collapse loses so much at small counts: the collapsed meshes end with far fewer faces per vertex (stump 310k V: 104k faces post-hoc vs 671k trained; bicycle 380k V: 282k vs 774k) — collapsing a dense soup to a sparse vertex set destroys connectivity that training-to-budget keeps, and the 3000-step finetune cannot regrow it.
 
 Indoor scenes (room, kitchen, counter, bonsai) are not in this refresh: upstream's `--indoor` preset overwrites `--max_points` after parsing; they need the train_ckpt_v4 override path (smoke test first). The October indoor G0 rows (room +1.32/+2.05, bonsai +1.56/+4.30, counter +0.70/+2.71, kitchen +0.32/+1.82, without `--indoor`) remain as the indoor evidence with that caveat.
+
+## Indoor scenes (node-batch20, 2026-11-09): room / kitchen / counter / bonsai × 3 budgets, 12/12
+
+Rows: `g0-refresh-indoor-2026-11-09.txt` (budget-sweep-v3.sbatch = v2 with `--indoor` passed to train-at-budget; the CPU check `indoor_budget_check_v1.py` confirmed upstream's `update_indoor()` leaves `max_points` intact, so no override wrapper was needed; control = the 11/01 `--indoor` originals collapsed to the same vertex count, same 3000-step finetune, same codec). λ-grown reference = rd-hull6-v2 indoor rerun points, log-linear at the budget run's delivered bytes. All four jobs COMPLETED in 2 h 22–30 min.
+
+| scene | V budget | train-at-budget MB / PSNR (faces) | post-hoc MB / PSNR (faces) | Δ budget − collapse | λ-grown at equal bytes | Δ budget − λ |
+|---|---|---|---|---|---|---|
+| bonsai | 0.90 M | 9.55 / 26.74 (1858k) | 9.61 / 23.27 (1689k) | +3.47 | 26.97 | -0.23 |
+| bonsai | 0.49 M | 5.92 / 26.08 (1086k) | 5.47 / 20.64 (856k) | +5.45 | 26.31 | -0.22 |
+| bonsai | 0.27 M | 3.65 / 24.01 (671k) | 3.12 / 18.10 (362k) | +5.92 | 25.43 | -1.42 |
+| counter | 1.02 M | 11.53 / 25.41 (2302k) | 11.94 / 23.92 (2352k) | +1.48 | 25.75 | -0.34 |
+| counter | 0.52 M | 6.37 / 24.98 (1268k) | 6.38 / 21.93 (1175k) | +3.06 | 25.31 | -0.33 |
+| counter | 0.23 M | 3.44 / 24.29 (636k) | 3.12 / 19.57 (433k) | +4.72 | 24.59 | -0.30 |
+| kitchen | 1.05 M | 12.49 / 26.04 (2666k) | 13.57 / 24.68 (2977k) | +1.35 | 26.54 | -0.50 |
+| kitchen | 0.57 M | 7.55 / 25.28 (1600k) | 8.04 / 22.59 (1746k) | +2.69 | 25.87 | -0.58 |
+| kitchen | 0.25 M | 3.87 / 23.95 (793k) | 3.90 / 20.27 (734k) | +3.67 | 24.65 | -0.71 |
+| room | 1.10 M | 11.65 / 27.73 (2484k) | 11.99 / 26.10 (2452k) | +1.63 | 27.97 | -0.23 |
+| room | 0.44 M | 5.42 / 26.94 (1089k) | 5.19 / 23.51 (943k) | +3.43 | 27.30 | -0.36 |
+| room | 0.21 M | 2.99 / 25.80 (544k) | 2.69 / 21.18 (370k) | +4.62 | 26.43 | -0.62 |
+
+budget − collapse: +1.35 .. +5.92, mean +3.46, wins 12/12; tiers (32x/73x/150x counts): +1.98 / +3.66 / +4.73
+budget − λ-grown (equal bytes): -1.42 .. -0.22, mean -0.49, λ wins 12/12
+
+Indoor gaps are larger than outdoor at every tier (+1.98 / +3.66 / +4.73 vs +0.26 / +1.43 / +3.95): the indoor originals are denser relative to the visible surface, so a collapse to the same count destroys more faces (bonsai 266k V: 362k faces post-hoc vs 671k trained). λ-grown beats the fixed cap on all 12 indoor rows at equal bytes (mean −0.49; bonsai 0.27 M −1.42 is the one large gap: the capped run stops at 24.0 dB where the λ curve still has 25.4 at 3.65 MB).
+
+## All 11 Mip-360 / T&T scenes, 33 rows (the number for the paper)
+
+- **Train-at-budget vs post-hoc collapse, equal vertex count: +0.01 to +6.02 dB, mean +2.45, 33 of 33.** By tier (≈32× / 73× / 150× vertex counts): +0.89 / +2.24 / +4.23.
+- **λ-grown vs fixed vertex cap, equal bytes: -1.42 to +0.14 dB for the cap, mean -0.33; λ wins 29 of 33.**
+- Ordering on every scene: post-hoc collapse < fixed vertex cap < byte-priced growth.
