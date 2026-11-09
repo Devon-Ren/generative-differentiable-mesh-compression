@@ -24,3 +24,12 @@ Mean hit 1.083 (1.056–1.117), 4/6 within ±10 %, all within 12 %; mean equal-b
 
 ## What this adds to the paper
 One row "unseen dataset, no changes": size as an input lands within 6–12 % on Deep Blending with quality on the curve; the residual bias is the documented indoor un-stacking. Plus two more scenes for the headline table (FP32 vs 36×/73×/145× points) on the third standard 3DGS-compression dataset.
+
+## Full fixed-λ hull (batch19, 2026-11-09): `deep-blending-fixed-lambda-2026-11-09.txt`
+| scene | FP32 | λ 6.2e-4 | λ 1.85e-3 | λ 6.2e-3 | λ 1.85e-2 |
+|---|---|---|---|---|---|
+| drjohnson | ≈778 MB / 26.74 | 30.7 MB / 26.45 (25×, −0.29) | 16.4 / 26.44 (47×, −0.30) | 6.9 / 25.65 (113×, −1.09) | 3.3 / 24.65 (236×, −2.08) |
+| playroom | ≈765 MB / 27.72 | 29.9 / 27.65 (26×, −0.07) | 14.4 / 27.29 (53×, −0.43) | 5.8 / 26.42 (133×, −1.30) | 2.9 / 25.26 (262×, −2.46) |
+
+## 2.5 MB controller rows (batch19, Mip/T&T, v9d as is)
+room 1.010, kitchen 1.013, counter 0.999, bonsai 0.979, garden **1.180**, bicycle 0.939, stump 0.942, flowers 0.946, treehill 0.946, truck 0.949, train 0.967 (mean 0.988 without garden; outdoor rows 0.94–0.95 because the landing estimate over-reads the final by 4–5 % on this class and the gate closes early). Garden 2.5 MB is a different limit: the initial soup already exceeds the budget (first phase-A probe 3.19 MB at 4500 it, λ pinned at its start value, no split ever admitted), phase B collapsed 77k pairs in 30/30 rounds and still landed 1.18. Targets below the initial soup size cannot be reached by a controller that can only grow before the Delaunay and only trim after it. Document as the low-end limit.
