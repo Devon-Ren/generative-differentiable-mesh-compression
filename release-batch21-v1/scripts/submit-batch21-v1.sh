@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-# submit-batch21-v1.sh (2026-11-09): the completeness batch, everything at once, last GPU window (reservation ends 11/12 09:35).
+# submit-batch21-v1.sh (2026-11-09, r2: rd-prune-blender-v5 = the Blender lambda sbatch that exists on HPC; v4 was superseded the same day): the completeness batch, everything at once, last GPU window (reservation ends 11/12 09:35).
 # Fills every hole in the main tables so that each claim covers all four datasets, plus redundancy on the controller.
 #   A  G0 (train-at-budget vs post-hoc collapse) on Deep Blending          2 jobs   budget-sweep-v3.sbatch (INDOOR=1, DB originals)
-#   C  NeRF-Synthetic fixed-lambda 1.85e-3 and 1.85e-2 (4-point hull)       8 jobs   rd-prune-blender-v4.sbatch
+#   C  NeRF-Synthetic fixed-lambda 1.85e-3 and 1.85e-2 (4-point hull)       8 jobs   rd-prune-blender-v5.sbatch
 #   C2 their val_select_v3 re-delivery (-best3, the hull's protocol)         8 jobs   redeliver-v3-blender.sbatch      afterok C
 #   B  G0 on NeRF-Synthetic at all four lambda vertex counts                 8 jobs   budget-sweep-blender-v1.sbatch   afterok C2
 #   D  lambda x dictionary fan + DC q8 on Deep Blending and NeRF-Synthetic  10 jobs   lambda-k-fan-v3.sbatch           (Blender: afterok C2)
@@ -17,8 +17,8 @@ chk () { n=$(wc -l < $1); [ "$n" = $2 ] || { echo "CHECK FAILED: $1 has $n lines
 chk $AN/budget-sweep-blender-v1.sbatch 105 d720b8ccba85622f90f25ee0b52b77ee
 chk $AN/lambda-k-fan-v3.sbatch 75 5d0dd7ff4012fa9a858c3a0ed1aff8d6
 chk $AN/generic-codecs-b21.sbatch 45 28807d9a2ed0a77d4a29fd4e75f910a3
-for f in $AN/budget-sweep-v3.sbatch $AN/rd-prune-blender-v4.sbatch $AN/redeliver-v3-blender.sbatch $AN/adapt-v9b.sbatch $AN/adapt-v9b-blender.sbatch $AN/budget-sweep-blender-v1.sbatch $AN/lambda-k-fan-v3.sbatch $AN/generic-codecs-b21.sbatch; do [ -f $f ] || { echo "CHECK FAILED: missing $f"; exit 1; }; bash -n $f || { echo "CHECK FAILED: syntax $f"; exit 1; }; done
-grep -q "VERSION g0r-v3" $AN/budget-sweep-v3.sbatch && grep -q "VERSION v4" $AN/rd-prune-blender-v4.sbatch && grep -q "VERSION rd3" $AN/redeliver-v3-blender.sbatch && grep -q "VERSION g0rb-v1" $AN/budget-sweep-blender-v1.sbatch && grep -q "VERSION v3" $AN/lambda-k-fan-v3.sbatch && grep -q "VERSION genc-b21" $AN/generic-codecs-b21.sbatch || { echo "CHECK FAILED: sbatch versions"; exit 1; }
+for f in $AN/budget-sweep-v3.sbatch $AN/rd-prune-blender-v5.sbatch $AN/redeliver-v3-blender.sbatch $AN/adapt-v9b.sbatch $AN/adapt-v9b-blender.sbatch $AN/budget-sweep-blender-v1.sbatch $AN/lambda-k-fan-v3.sbatch $AN/generic-codecs-b21.sbatch; do [ -f $f ] || { echo "CHECK FAILED: missing $f"; exit 1; }; bash -n $f || { echo "CHECK FAILED: syntax $f"; exit 1; }; done
+grep -q "VERSION g0r-v3" $AN/budget-sweep-v3.sbatch && grep -q "VERSION v5" $AN/rd-prune-blender-v5.sbatch && grep -q "VERSION rd3" $AN/redeliver-v3-blender.sbatch && grep -q "VERSION g0rb-v1" $AN/budget-sweep-blender-v1.sbatch && grep -q "VERSION v3" $AN/lambda-k-fan-v3.sbatch && grep -q "VERSION genc-b21" $AN/generic-codecs-b21.sbatch || { echo "CHECK FAILED: sbatch versions"; exit 1; }
 grep -q "train_rd_adapt_v9b.py" $AN/adapt-v9b.sbatch && grep -q "train_rd_adapt_v9b.py" $AN/adapt-v9b-blender.sbatch || { echo "CHECK FAILED: adapt-v9b sbatch files do not reference train_rd_adapt_v9b.py"; exit 1; }
 for f in $AN/rdgrowth/train_rd_adapt_v9b.py $AN/rdgrowth/train_rd_v3.py $AN/rdgrowth/probe_bytes_v1.py $AN/blender/val_select_v3.py $AN/blender/val_select_v2.py $AN/blender/train_ckpt_v2.py $AN/vis_collapse-v12/coarse_vis.py $AN/coarse_finetune.py $AN/generic-v1/run_generic_v1.sh $AN/o3dgc-v1/run_o3dgc_v3.sh; do [ -f $f ] || { echo "CHECK FAILED: missing $f"; exit 1; }; done
 python -m py_compile $AN/rdgrowth/train_rd_adapt_v9b.py $AN/blender/val_select_v3.py $AN/blender/train_ckpt_v2.py || { echo "CHECK FAILED: py_compile"; exit 1; }
@@ -43,7 +43,7 @@ sb --time=06:00:00 --export=ALL,SCENE=drjohnson,IMAGES=images,XYZ=q15,INDOOR=1,D
 sb --time=06:00:00 --export=ALL,SCENE=playroom,IMAGES=images,XYZ=q15,INDOOR=1,DATA=$D/db/playroom,BUDGETS="1201000 441000 191000" --job-name=playroom-b21-g0r $AN/budget-sweep-v3.sbatch
 # --- C: NeRF-Synthetic fixed-lambda 1.85e-3 / 1.85e-2 (same sbatch, prices, schedule, codec as the 11/04 hull points), then C2 re-delivery
 for S in $BL; do
-  sb --time=03:30:00 --export=ALL,SCENE=$S,XYZ=q14,INDOOR=1,LAMS="0.00185 0.0185",BPV=10.0,BPF=2.0,MU=1.0,MAXF=0.15 --job-name=$S-b21-b4-185 $AN/rd-prune-blender-v4.sbatch; JC[$S]=$LASTJ
+  sb --time=03:30:00 --export=ALL,SCENE=$S,XYZ=q14,INDOOR=1,LAMS="0.00185 0.0185",BPV=10.0,BPF=2.0,MU=1.0,MAXF=0.15 --job-name=$S-b21-b4-185 $AN/rd-prune-blender-v5.sbatch; JC[$S]=$LASTJ
   if [ -n "${JC[$S]}" ]; then sb --time=01:30:00 --dependency=afterok:${JC[$S]} --export=ALL,RUNS="$S-rd3b4-lam0.00185-mu1.0 $S-rd3b4-lam0.0185-mu1.0",XYZ=q14 --job-name=$S-b21-redeliv3 $AN/redeliver-v3-blender.sbatch; JC2[$S]=$LASTJ; fi
 done
 # --- D (Deep Blending now; Blender after C2): lambda x dictionary fan + DC q8
