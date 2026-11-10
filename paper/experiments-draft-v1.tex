@@ -161,7 +161,7 @@ Ours (level 1.0) & 1$\times$ & $-0.1$ to $-0.8$ dB & yes \\
 \end{tabular}}
 \end{table}
 \begin{table}[H]\centering\small
-\caption{Mesh-output methods, published numbers (dataset means; sizes as reported by each method). Only \BM{} and \MS{}'s own RGB-only PLY are below 250 MB; \BM{} is the only compressed entry. $^a$RGB-only, no view-dependent appearance (about $-2$ dB vs.\ FP32 on our evaluator).}
+\caption{Mesh-output methods, published numbers (dataset means; sizes as reported by each method). \BM{} rows are means over the 9 Mip-NeRF~360 scenes and the 2 T\&T scenes of the delivered files (PSNR / SSIM / LPIPS on the decoded file; MB = mean file size). Only \BM{} and \MS{}'s own RGB-only PLY are below 250 MB; \BM{} is the only compressed entry. $^a$RGB-only, no view-dependent appearance (about $-2$ dB vs.\ FP32 on our evaluator).}
 \label{tab:meshclass}
 \resizebox{\linewidth}{!}{\begin{tabular}{lrrrrr}
 \toprule
@@ -174,8 +174,9 @@ Binary Opacity Grids (SIGGRAPH 2024) & 25.62 / -- / -- & 913 & -- & -- & 927 (de
 RaDe-GS mesh (2024) & 23.56 / 0.668 / 0.361 & 1100 & 20.51 / 0.659 / 0.344 & -- & OOM on M4 \\
 GOF mesh (2024) & 20.78 / 0.573 / 0.465 & 1500 & 21.69 / 0.690 / 0.326 & -- & OOM on M4 \\
 \midrule
-\BM{}, 20 MB target & 23.75 / \tbd{SSIM} / \tbd{LPIPS} & 19.9 & (in the Mip-360+T\&T mean) & & 145--350 (phone) \\
-\BM{}, 5 MB target & 22.72 / \tbd{} / \tbd{} & 5.0 & & & same \\
+\BM{}, 20 MB target & 24.44 / 0.704 / 0.411 & 20.0 & 20.64 / 0.748 / 0.337 & 19.6 & 145--350 (phone) \\
+\BM{}, 10 MB target & 24.04 / 0.673 / 0.458 & 10.2 & 20.45 / 0.731 / 0.368 & 10.3 & same \\
+\BM{}, 5 MB target & 23.35 / 0.632 / 0.508 & 5.0 & 19.91 / 0.696 / 0.416 & 5.1 & same \\
 \bottomrule
 \end{tabular}}
 \end{table}
