@@ -26,16 +26,34 @@ svg .tri{fill:var(--up-bg);stroke:var(--up);stroke-width:1.4}svg .new{fill:var(-
 <body><main>
 
 <h1>Five triangles, every number: three growth rounds and one collapse round</h1>
-<p class="mute">A toy run of BudgetMesh that follows the real program step for step. Every quantity that is <em>measured</em> in the real run is measured here too, and changes when it is measured: the byte table, the survival of new vertices, the yield of the price, the bytes a collapse actually frees. Boxes in blue mark the moment a measurement replaces a prior. Nothing is skipped. Vocabulary as in the paper: <b>price λ</b>, <b>rate-aware growth</b>, <b>rate-aware collapse</b>, <b>size controller</b>, <b>byte probe</b>.</p>
+<p class="mute">A toy run of BudgetMesh that follows the real program step for step. Every quantity that is <em>measured</em> in the real run is measured here too, and changes when it is measured: the byte table, the survival of new vertices, the pass rate of the last price of the price, the bytes a collapse actually frees. Boxes in blue mark the moment a measurement replaces a prior. Nothing is skipped. Vocabulary as in the paper: <b>price λ</b>, <b>rate-aware growth</b>, <b>rate-aware collapse</b>, <b>size controller</b>, <b>byte probe</b>.</p>
 
 <h2>0. What is fixed, what is a prior, what is measured</h2>
 <table>
 <tr><th>kind</th><th>quantities</th><th>in this toy</th><th>in the real run</th></tr>
 <tr><td><b>Calibrated constant</b> (the only numbers that decide anything and are set by a human)</td><td>the aim factor a: growth aims at a × target</td><td>a = 1.25</td><td>1.25 for Mip-NeRF 360 / T&T / Deep Blending, 1.1 for NeRF-Synthetic. It stands in for what cannot be observed before the mesh is stitched (§5). This is the pair you mean.</td></tr>
-<tr><td><b>Priors</b>: used only until the first measurement, then overwritten</td><td>bytes per vertex b_v, bytes per face b_f, faces per vertex fpv, fixed bytes c; survival σ; yield; the first price λ₁</td><td>b_v 7, b_f 2.5, fpv 2.5, c 120 B; σ 0.5; yield 1; λ₁ 0.25</td><td>10 − 2·2 = 6 B, 2 B, 2.5, 0.6 MB; 0.5; 1; a one-line guess from the target</td></tr>
+<tr><td><b>Priors</b>: used only until the first measurement, then overwritten</td><td>bytes per vertex b_v, bytes per face b_f, faces per vertex fpv, fixed bytes c; survival σ; pass rate of the last price; the first price λ₁</td><td>b_v 7, b_f 2.5, fpv 2.5, c 120 B; σ 0.5; pass rate of the last price 1; λ₁ 0.25</td><td>10 − 2·2 = 6 B, 2 B, 2.5, 0.6 MB; 0.5; 1; a one-line guess from the target</td></tr>
 <tr><td><b>Safety limits</b>: never decide what or how much, only guard against runaway</td><td>λ clamp range; per-round collapse cap; candidate margin for the collapse rank; μ</td><td>[10⁻⁴, 0.1]; 25 % of V (toy); 4×; 1</td><td>[10⁻⁴, 0.1]; 15 % of V; 4×; 1</td></tr>
 <tr><td><b>Codec settings</b>: properties of the file format, fixed by the codec study, not by the controller</td><td>dictionary sizes, position grid bits, DC bits</td><td>not modelled</td><td>4096 + 256, per-scene grid bits, 7-bit DC</td></tr>
 <tr><td><b>Unit only</b></td><td>bytes one split is charged, ΔR</td><td>30 B</td><td>3·(prior b_v + prior fpv·b_f) = 33 B. It scales every ratio and λ by the same factor; the rank of the bars does not change, so it decides nothing. It is not updated because updating it would change nothing.</td></tr>
+</table>
+
+<h2>Variable names used below</h2>
+<table>
+<tr><th>name</th><th>meaning</th></tr>
+<tr><td class="n">V, F</td><td>vertex count, face count right now</td></tr>
+<tr><td class="n">V*</td><td>vertex count the aim size can pay for, from the byte table</td></tr>
+<tr><td class="n">growth_rounds_left</td><td>growth boundaries still to come, this one included</td></tr>
+<tr><td class="n">growth_factor_per_round</td><td>the factor V must grow by at each remaining round to reach V*: (V*/V)^(1/growth_rounds_left)</td></tr>
+<tr><td class="n">vertices_to_add_this_round</td><td>V × (growth_factor_per_round − 1)</td></tr>
+<tr><td class="n">σ</td><td>fraction of newly created vertices that survive the next pruning</td></tr>
+<tr><td class="n">splits_planned_this_round</td><td>vertices_to_add_this_round ÷ (3σ): one split adds 3 vertices, σ of them survive. Its ceiling is the cap: never split more than this</td></tr>
+<tr><td class="n">λ (price)</td><td>the threshold on error-per-byte: a triangle is split only if ΔD/ΔR &gt; λ, and only up to the cap</td></tr>
+<tr><td class="n">vertices_expected_after_next_pruning</td><td>V before the split + σ × vertices just added</td></tr>
+<tr><td class="n">splits_planned_for_next_round</td><td>the same plan formula, started from vertices_expected_after_next_pruning with one round fewer</td></tr>
+<tr><td class="n">pass_rate_of_last_price</td><td>(triangles that cleared the price) ÷ (bar index the price was set at), mean of the last three rounds; below 1 because training lowers errors between setting and using the price</td></tr>
+<tr><td class="n">bar_index_for_next_price</td><td>splits_planned_for_next_round ÷ pass_rate_of_last_price, rounded up</td></tr>
+<tr><td class="n">λ_next</td><td>the error-per-byte of the triangle ranked bar_index_for_next_price-th from the top in this round's chart</td></tr>
 </table>
 
 <h2>1. Setup</h2>
@@ -58,11 +76,11 @@ bytes one split is charged:           ΔR = 30 B (unit only)</pre>
 <h2>2. Growth round 1 (boundary 1)</h2>
 <pre><b>no pruning yet, no probe yet</b> → the byte table is still the prior: b_v 7, b_f 2.5, fpv 2.5, c 120
 V*       = (500 − 120) / (7 + 2.5·2.5) = 380 / 13.25 = <b>28.7</b>
-remaining = 3
+growth_rounds_left = 3
 σ for the vertices created now: they will meet the first pruning at boundary 2 → prior σ = 0.5
-f        = (V*/V)^(1/remaining) = (28.7/15)^(1/3) = 1.913^0.333 = 1.241
-add      = V·(f − 1) = 15 · 0.241 = 3.6 vertices
-desired  = add / (3·σ) = 3.6 / 1.5 = 2.4       → cap = ceil(2.4) = <b>3 splits</b></pre>
+growth_factor_per_round        = (V*/V)^(1/growth_rounds_left) = (28.7/15)^(1/3) = 1.913^0.333 = 1.241
+vertices_to_add_this_round      = V·(growth_factor_per_round − 1) = 15 · 0.241 = 3.6 vertices
+splits_planned_this_round  = vertices_to_add_this_round / (3·σ) = 3.6 / 1.5 = 2.4       → cap = ceil(2.4) = <b>3 splits</b></pre>
 <table>
 <tr><th>triangle</th><th>ΔD</th><th>ratio = ΔD / 30</th><th>&gt; λ₁ = 0.25 ?</th></tr>
 <tr><td>t1</td><td class="n">12</td><td class="n">0.400</td><td class="pass">yes</td></tr>
@@ -82,9 +100,9 @@ desired  = add / (3·σ) = 3.6 / 1.5 = 2.4       → cap = ceil(2.4) = <b>3 spli
 </svg></figure>
 <pre>split t1 and t3:  V = 15 + 2·3 = <b>21</b>,  F = 5 + 2·3 = <b>11</b>
 <b>set the price for round 2</b>
-V_exp        = V_before + σ·added = 15 + 0.5·6 = 18          (half of the new vertices are expected to survive the first pruning)
-desired_next = plan(V_exp 18 → V* 28.7, remaining 2, σ 0.5): f = (28.7/18)^0.5 = 1.263 ; add = 18·0.263 = 4.73 ; desired_next = 4.73 / 1.5 = 3.15
-k_asked      = ceil(desired_next / yield) = ceil(3.15 / 1) = <b>4</b>
+vertices_expected_after_next_pruning        = V_before + σ·added = 15 + 0.5·6 = 18          (half of the new vertices are expected to survive the first pruning)
+splits_planned_for_next_round = plan(vertices_expected_after_next_pruning 18 → V* 28.7, growth_rounds_left 2, σ 0.5): growth_factor_per_round = (28.7/18)^0.5 = 1.263 ; vertices_to_add_this_round = 18·0.263 = 4.73 ; splits_planned_for_next_round = 4.73 / 1.5 = 3.15
+bar_index_for_next_price      = ceil(splits_planned_for_next_round / pass_rate_of_last_price) = ceil(3.15 / 1) = <b>4</b>
 <b>λ₂ = 4th largest ratio of this chart = 0.100</b>        (sorted 0.400 0.300 0.200 <u>0.100</u> 0.033)
 ledger wiped</pre>
 <figure><svg viewBox="0 0 860 210" role="img">
@@ -114,8 +132,8 @@ b_f and fpv stay at their priors (2.5, 2.5): a soup has no shared connectivity, 
 <b>V* = (500 − 100) / (6 + 2.5·2.5) = 400 / 12.25 = 32.7</b>      (was 28.7)</pre>
 <div class="upd">Byte table changed: b_v 7 → 6, c 120 → 100, so V* 28.7 → 32.7. The plan now aims 4 vertices higher.</div>
 <h3>Step 3: the plan</h3>
-<pre>remaining = 2, σ = 0.83
-f = (32.7/20)^(1/2) = 1.635^0.5 = 1.279 ; add = 20·0.279 = 5.6 ; desired = 5.6 / (3·0.83) = 2.24   → cap = <b>3</b></pre>
+<pre>growth_rounds_left = 2, σ = 0.83
+growth_factor_per_round = (32.7/20)^(1/2) = 1.635^0.5 = 1.279 ; vertices_to_add_this_round = 20·0.279 = 5.6 ; splits_planned_this_round = 5.6 / (3·0.83) = 2.24   → cap = <b>3</b></pre>
 <h3>Step 4: the chart (10 triangles) against λ₂ = 0.100</h3>
 <table>
 <tr><th>triangle</th><th>ΔD</th><th>ratio</th><th>&gt; 0.100 ?</th></tr>
@@ -129,12 +147,12 @@ f = (32.7/20)^(1/2) = 1.635^0.5 = 1.279 ; add = 20·0.279 = 5.6 ; desired = 5.6 
 </table>
 <pre>passed = 2 (the line was set for 4; training lowered the errors) ; cap 3 ≥ 2 → split t1a and t5
 V = 20 + 6 = <b>26</b>,  F = 10 + 6 = <b>16</b>
-<b>yield measured = passed / k_asked = 2 / 4 = 0.50</b>       (replaces the prior 1.0)</pre>
-<div class="upd">Yield changed: 1.0 → 0.50. The next price will be set two bars lower than the plan alone would say, because only half of what the line asks for comes through.</div>
+<b>pass_rate_of_last_price measured = passed / bar_index_for_next_price = 2 / 4 = 0.50</b>       (replaces the prior 1.0)</pre>
+<div class="upd">Pass rate changed: 1.0 → 0.50. The next price will be set two bars lower than the plan alone would say, because only half of what the line asks for comes through.</div>
 <h3>Step 5: set the price for round 3</h3>
-<pre>V_exp        = 20 + 0.83·6 = 25
-desired_next = plan(25 → 32.7, remaining 1, σ 0.83): add = 32.7 − 25 = 7.7 ; desired_next = 7.7 / 2.5 = 3.1
-k_asked      = ceil(3.1 / 0.50) = ceil(6.2) = <b>7</b>
+<pre>vertices_expected_after_next_pruning        = 20 + 0.83·6 = 25
+splits_planned_for_next_round = plan(25 → 32.7, growth_rounds_left 1, σ 0.83): vertices_to_add_this_round = 32.7 − 25 = 7.7 ; splits_planned_for_next_round = 7.7 / 2.5 = 3.1
+bar_index_for_next_price      = ceil(3.1 / 0.50) = ceil(6.2) = <b>7</b>
 <b>λ₃ = 7th largest ratio of this chart = 0.067</b>        (sorted .233 .233 .100 .100 .100 .067 <u>.067</u> .067 .033 .033)</pre>
 <figure><svg viewBox="0 0 860 215" role="img">
 <polygon points="60,180 80,150 100,180" class="new"/><polygon points="80,150 100,120 120,150" class="new"/><polygon points="100,180 120,150 140,180" class="new"/><polygon points="80,150 120,150 100,180" class="new"/>
@@ -153,7 +171,7 @@ k_asked      = ceil(3.1 / 0.50) = ceil(6.2) = <b>7</b>
 <b>byte probe</b> (at least one interval since the last one): b_v = <b>5.8</b> (denser point set codes slightly cheaper), c = 100
 V* = (500 − 100) / (5.8 + 6.25) = 400 / 12.05 = <b>33.2</b></pre>
 <div class="upd">b_v changed 6 → 5.8, so V* 32.7 → 33.2. Small, but it moved; the plan uses the new value.</div>
-<pre>plan: remaining 1 → add = 33.2 − 25 = 8.2 ; desired = 8.2 / (3·0.83) = 3.3 → cap = <b>4</b></pre>
+<pre>plan: growth_rounds_left 1 → vertices_to_add_this_round = 33.2 − 25 = 8.2 ; splits_planned_this_round = 8.2 / (3·0.83) = 3.3 → cap = <b>4</b></pre>
 <table>
 <tr><th>triangle (15)</th><th>ΔD</th><th>ratio</th><th>&gt; λ₃ = 0.067 ?</th><th>split?</th></tr>
 <tr><td>t5a</td><td class="n">4</td><td class="n">0.133</td><td class="pass">yes</td><td>yes (1)</td></tr>
@@ -166,8 +184,8 @@ V* = (500 − 100) / (5.8 + 6.25) = 400 / 12.05 = <b>33.2</b></pre>
 </table>
 <pre>passed = 6, cap = 4 → the 4 highest are split
 V = 25 + 4·3 = <b>37</b>,  F = 15 + 12 = 27
-yield = 6 / 7 = 0.86 (logged; no further growth round uses it)
-desired_next = 0 (no rounds left) → k_asked = 0 → <b>λ stays 0.067</b> and is carried into the collapse round</pre>
+pass_rate_of_last_price = 6 / 7 = 0.86 (logged; no further growth round uses it)
+splits_planned_for_next_round = 0 (no rounds left) → bar_index_for_next_price = 0 → <b>λ stays 0.067</b> and is carried into the collapse round</pre>
 
 <h2>5. Stitching, the mesh probe, and why the aim was 25 % high</h2>
 <pre>MeshSplatting stitches the soup into a shared-vertex mesh and the final cleaning removes faces nobody sees:
@@ -182,7 +200,7 @@ desired_next = 0 (no rounds left) → k_asked = 0 → <b>λ stays 0.067</b> and 
 <pre>landing estimate: with earlier probes a trend would be extrapolated to the end of the opacity schedule (never downward); this is the first mesh probe, so estimate = probe = 430 B
 excess                    = 430 − 400 = 30 B
 bytes per collapse (prior, before any collapse is measured) = b_v + 2·b_f = 6 + 4 = 10 B
-pairs that remove the excess = 30 / 10 = 3 ; rounds left = 1 → <b>desired = 3 collapses</b>
+pairs that remove the excess = 30 / 10 = 3 ; rounds left = 1 → <b>splits_planned_this_round = 3 collapses</b>
 gate: estimate 430 &gt; target 400 → this round acts (if it were ≤ 400, nothing would be collapsed)</pre>
 <h3>Step 2: score every edge</h3>
 <div class="f">score(u,v) = ΔD_uv / ΔR_uv,&nbsp; ΔD_uv = sum of the errors of all faces touching u or v,&nbsp; ΔR_uv = b_v·[u and v both in the delivered set] + b_f·(delivered faces on the edge)</div>
@@ -209,8 +227,8 @@ gate: estimate 430 &gt; target 400 → this round acts (if it were ≤ 400, noth
 </table>
 <h3>Step 3: how many, and which</h3>
 <pre>n_λ    = edges with score &lt; 0.067 = 6
-rank threshold = score of the (4·desired = 12)-th cheapest edge = 0.11 ; threshold used = max(0.11, 0.067) = 0.11  (candidate pool only)
-<b>wanted = min( max(desired 3, n_λ 6), pairs that remove the whole excess 3 ) = 3</b>       ← never past the target
+rank threshold = score of the (4·splits_planned_this_round = 12)-th cheapest edge = 0.11 ; threshold used = max(0.11, 0.067) = 0.11  (candidate pool only)
+<b>wanted = min( max(splits_planned_this_round 3, n_λ 6), pairs that remove the whole excess 3 ) = 3</b>       ← never past the target
 per-round cap = 25 % of 33 = 8 (toy; not binding)
 independent set, cheapest first:  e3 ✓ (1)   e1 ✓ (2)   e2 ✓ (3) → 3 reached, stop.  (e4 would have been skipped anyway: it shares u with e1)
 λ unchanged at 0.067: the count was binding, so the shadow price = largest collapsed score / μ = 0.038 is logged, and λ := 0.038 for any later round</pre>
@@ -232,13 +250,13 @@ file = 6·30 + 2·61 + 100 = 180 + 122 + 100 = <b>402 B</b>  = 1.005 × target</
 
 <h2>7. The whole toy run: what was measured when</h2>
 <table>
-<tr><th>boundary</th><th>measured this round</th><th>table → V*</th><th>σ</th><th>yield</th><th>cap</th><th>λ used</th><th>passed → split</th><th>V after</th><th>λ for next</th></tr>
+<tr><th>boundary</th><th>measured this round</th><th>table → V*</th><th>σ</th><th>pass rate of the last price</th><th>cap</th><th>λ used</th><th>passed → split</th><th>V after</th><th>λ for next</th></tr>
 <tr><td>1</td><td>nothing yet (priors)</td><td class="n">7/2.5/2.5/120 → 28.7</td><td class="n">0.5 (prior)</td><td class="n">1 (prior)</td><td class="n">3</td><td class="n">0.250 (guess)</td><td class="n">2 → 2</td><td class="n">21</td><td class="n">0.100 (4th bar)</td></tr>
-<tr><td>2</td><td>σ (pruning), b_v and c (first probe), yield</td><td class="n">6/2.5/2.5/100 → 32.7</td><td class="n">0.83</td><td class="n">0.50</td><td class="n">3</td><td class="n">0.100</td><td class="n">2 → 2</td><td class="n">26</td><td class="n">0.067 (7th bar)</td></tr>
+<tr><td>2</td><td>σ (pruning), b_v and c (first probe), pass rate of the last price</td><td class="n">6/2.5/2.5/100 → 32.7</td><td class="n">0.83</td><td class="n">0.50</td><td class="n">3</td><td class="n">0.100</td><td class="n">2 → 2</td><td class="n">26</td><td class="n">0.067 (7th bar)</td></tr>
 <tr><td>3</td><td>σ, b_v (probe)</td><td class="n">5.8/2.5/2.5/100 → 33.2</td><td class="n">0.83</td><td class="n">0.86</td><td class="n">4</td><td class="n">0.067</td><td class="n">6 → 4</td><td class="n">37</td><td class="n">kept 0.067</td></tr>
 <tr><td>stitch + mesh probe</td><td>b_f, fpv (first time), b_v, c</td><td class="n">6/2.0/2.0/100</td><td colspan="5">V = 33, F = 66, file 430 B</td><td class="n">33</td><td></td></tr>
 <tr><td>collapse</td><td>bytes per collapse (9.3)</td><td></td><td></td><td></td><td class="n">3 wanted</td><td class="n">0.067</td><td class="n">6 below λ → 3 collapsed</td><td class="n">30</td><td class="n">shadow 0.038</td></tr>
 </table>
-<div class="why">What a human set: the aim factor 1.25 (and the safety limits that never bound). What was given once and then overwritten by measurement: the byte table, σ, the yield, λ₁, the bytes per collapse. What the user gave: 400 B. Everything else in every column above was computed by the run from its own measurements.</div>
+<div class="why">What a human set: the aim factor 1.25 (and the safety limits that never bound). What was given once and then overwritten by measurement: the byte table, σ, the pass rate of the last price, λ₁, the bytes per collapse. What the user gave: 400 B. Everything else in every column above was computed by the run from its own measurements.</div>
 
 </main></body></html>
