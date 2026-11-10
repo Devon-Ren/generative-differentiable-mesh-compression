@@ -100,8 +100,10 @@ ledger wiped</pre>
 
 <h2>3. Growth round 2 (boundary 2): first pruning, first byte probe</h2>
 <h3>Step 1: MeshSplatting prunes (first time)</h3>
-<pre>t3d has stayed almost transparent → MeshSplatting deletes it, and its one private vertex with it
-of the 6 vertices created at boundary 1, 1 is gone
+<pre>t3c (a corner child of t3) has stayed almost transparent → MeshSplatting deletes the face; then it deletes every vertex no face uses any more.
+t3c used the old corner vertex of t3 (private to it) and two midpoints (shared with its siblings, so they stay) → 1 vertex gone.
+(Had the middle child t3d been deleted, no vertex would go: all three of its vertices are shared. Vertices only disappear when their last face does.)
+of the 6 vertices created at boundary 1, none died; the vertex that died is an old corner. For σ the program counts cohort survival as (vertices after prune − vertices before the split) / (vertices added): here the toy keeps it simple and books the loss against the new cohort
 <b>σ measured = 1 − 1/6 = 0.83</b>        (replaces the prior 0.5)
 V = 21 − 1 = <b>20</b>,  F = 11 − 1 = <b>10</b></pre>
 <div class="upd">σ changed: 0.5 → 0.83. From now on the plan divides by 3·0.83 = 2.5 instead of 1.5, so it asks for fewer splits for the same growth.</div>
@@ -139,8 +141,8 @@ k_asked      = ceil(3.1 / 0.50) = ceil(6.2) = <b>7</b>
 <polygon points="100,120 140,60 180,120" class="tri"/><polygon points="140,180 180,120 220,180" class="tri"/><polygon points="100,120 180,120 140,180" class="tri"/>
 <text x="150" y="100" font-size="11">t1b</text><text x="185" y="170" font-size="11">t1c</text><text x="140" y="150" font-size="11">t1d</text><text x="68" y="200" font-size="11" class="m">t1a → 4</text>
 <polygon points="250,170 300,70 380,150" class="tri"/><text x="310" y="135" font-size="14" text-anchor="middle">t2</text>
-<polygon points="400,190 430,125 470,180" class="tri"/><polygon points="430,125 460,60 500,115" class="tri"/><polygon points="470,180 500,115 540,170" class="tri"/><polygon points="430,125 500,115 470,180" class="dead"/>
-<text x="425" y="172" font-size="11">t3a</text><text x="455" y="105" font-size="11">t3b</text><text x="500" y="165" font-size="11">t3c</text><text x="440" y="155" font-size="10" fill="var(--bad)">t3d pruned</text>
+<polygon points="400,190 430,125 470,180" class="tri"/><polygon points="430,125 460,60 500,115" class="tri"/><polygon points="470,180 500,115 540,170" class="dead"/><polygon points="430,125 500,115 470,180" class="tri"/>
+<text x="425" y="172" font-size="11">t3a</text><text x="455" y="105" font-size="11">t3b</text><text x="462" y="150" font-size="11">t3d</text><text x="488" y="200" font-size="10" fill="var(--bad)">t3c pruned</text>
 <polygon points="570,160 610,90 680,170" class="tri"/><text x="620" y="145" font-size="14" text-anchor="middle">t4</text>
 <polygon points="700,190 730,130 770,185" class="new"/><polygon points="730,130 760,70 800,125" class="new"/><polygon points="770,185 800,125 840,180" class="new"/><polygon points="730,130 800,125 770,185" class="new"/><text x="745" y="205" font-size="11" class="m">t5 → 4</text>
 <text x="20" y="30" font-size="14">After round 2: V = 26, F = 16. Dashed red = pruned by MeshSplatting; orange = created this round.</text>
