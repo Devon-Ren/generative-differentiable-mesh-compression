@@ -4,7 +4,7 @@
 % the size controller, byte probe, target size, file size, the FP32 model, simplification after training, training with a vertex cap.
 \documentclass[10pt]{article}
 \usepackage[margin=1in]{geometry}
-\usepackage{booktabs,multirow,graphicx,amsmath,xcolor,caption,subcaption}
+\usepackage{booktabs,multirow,graphicx,amsmath,xcolor,caption,subcaption,float,tabularx,array}
 \usepackage[hidelinks]{hyperref}
 \newcommand{\tbd}[1]{\textcolor{red}{[TBD: #1]}}
 \newcommand{\MS}{MeshSplatting}
@@ -30,10 +30,10 @@
 \label{sec:e1}
 \textbf{Claim.} Reducing a trained \MS{} mesh to fewer vertices (collapse edges, then fine-tune) loses far more quality than training a mesh of that vertex count from the start. This is the reason the file size must be decided during training.
 
-\begin{table}[h]\centering\small
+\begin{table}[H]\centering\small
 \caption{Training with a vertex cap vs.\ simplification after training, at the same vertex count, three budgets per scene (the vertex counts of the 32$\times$/73$\times$/150$\times$ operating points). PSNR gain of the trained mesh over the simplified one, after our codec. Source: g0-refresh-analysis-2026-11-09.md, batch21-analysis-2026-11-10.md.}
 \label{tab:e1}
-\begin{tabular}{lrrrrr}
+\resizebox{\linewidth}{!}{\begin{tabular}{lrrrrr}
 \toprule
 Dataset & pairs & mean gain (dB) & range (dB) & trained better & gain at largest / mid / smallest budget \\
 \midrule
@@ -43,7 +43,7 @@ NeRF-Synthetic & 32 & $+1.27$ & $+0.03$ to $+4.32$ & 32 / 32 & $+0.58$ / $+0.67$
 \midrule
 all & 71 & $+1.94$ & $+0.01$ to $+6.02$ & 71 / 71 & \\
 \bottomrule
-\end{tabular}
+\end{tabular}}
 \end{table}
 
 \noindent\textbf{Why.} Every pixel is covered by exactly one opaque triangle; when vertices are removed from a trained mesh the optimizer does not re-place the survivors, and the simplified mesh keeps far fewer faces per vertex (room at 486k vertices: 1.09M faces trained vs 0.94M simplified; bonsai at 266k: 671k vs 362k). The gap grows as the budget shrinks. Figure~\ref{fig:g0} shows it on one view.
@@ -55,10 +55,10 @@ all & 71 & $+1.94$ & $+0.01$ to $+6.02$ & 71 / 71 & \\
 \label{sec:e2}
 \textbf{Claim.} At the same vertex count, and before any entropy coding, a mesh grown with the rate-aware rule reaches higher PSNR than \MS{} trained with a vertex cap. After the codec the advantage carries over at the same file size.
 
-\begin{table}[h]\centering\small
+\begin{table}[H]\centering\small
 \caption{\BM{} (rate-aware growth) vs.\ \MS{} with a vertex cap. Left: same vertex count, FP32 meshes, no codec. Right: same file size after our codec (the capped mesh is encoded with the same codec). Source: no-codec-equal-vertices-2026-11-09.md, g0-refresh-analysis-2026-11-09.md, batch21-analysis-2026-11-10.md.}
 \label{tab:e2}
-\begin{tabular}{lrrrrrr}
+\resizebox{\linewidth}{!}{\begin{tabular}{lrrrrrr}
 \toprule
  & \multicolumn{3}{c}{same vertex count, no codec} & \multicolumn{3}{c}{same file size, after codec} \\
 \cmidrule(lr){2-4}\cmidrule(lr){5-7}
@@ -69,7 +69,7 @@ Mip-NeRF 360 + T\&T & 25 & $+0.40$ dB & 23 / 25 & 33 & $+0.33$ dB & 29 / 33 \\
 Deep Blending & 6 & $+0.15$ dB & 5 / 6 & 6 & $+0.19$ dB & 5 / 6 \\
 NeRF-Synthetic & 14 & $+0.18$ dB & 13 / 14 & 32 & $+0.14$ dB & 28 / 32 \\
 \bottomrule
-\end{tabular}
+\end{tabular}}
 \end{table}
 
 \noindent The ``pairs'' on the left are the budget runs whose final vertex count is within $\pm15\%$ of the \BM{} mesh they are compared with. The two halves separate the growth rule from the codec: the gain exists before any compression, and the codec compresses both meshes equally well.
@@ -81,10 +81,10 @@ NeRF-Synthetic & 14 & $+0.18$ dB & 13 / 14 & 32 & $+0.14$ dB & 28 / 32 \\
 \label{sec:e3}
 \textbf{Claim.} Given a target size, \BM{} delivers a file within about 10\% of it, with the same quality per byte as a constant-price run, on all four datasets with one setting.
 
-\begin{table}[h]\centering\small
+\begin{table}[H]\centering\small
 \caption{Size error and quality of \BM{} per dataset and target. Size error $=$ (file size $-$ target)$/$target; mean and range over scenes. $\Delta$PSNR is against the FP32 model. Rows at the capacity limit (the scene has no triangle left worth splitting; the price reaches its floor) are counted separately. Source: adapt-v9b sweep analysis, batch21-analysis-2026-11-10.md, budgetmesh-rd-table-2026-11-10.md.}
 \label{tab:e3}
-\begin{tabular}{llrrrrr}
+\resizebox{\linewidth}{!}{\begin{tabular}{llrrrrr}
 \toprule
 Dataset & target & scenes & mean file size & size error mean & size error range & $\Delta$PSNR vs FP32 \\
 \midrule
@@ -107,10 +107,10 @@ Dataset & target & scenes & mean file size & size error mean & size error range 
 \multicolumn{7}{l}{$^\dagger$NeRF-Synthetic reference = the fine-tuned FP32 original (val-selected checkpoint), so small positive values occur.}\\
 \multicolumn{7}{l}{Overall: 89 rows not at the capacity limit, 83 within $\pm10\%$; quality at the same file size vs.\ a constant-price run: $-0.05$ dB mean (Table~\ref{tab:e7}).}\\
 \bottomrule
-\end{tabular}
+\end{tabular}}
 \end{table}
 
-\begin{figure}[h]\centering
+\begin{figure}[H]\centering
 \includegraphics[width=\linewidth]{figures/fig_rd_per_dataset.pdf}
 \caption{Rate--distortion of \BM{} per dataset: mean PSNR vs.\ mean file size over the dataset's scenes at each target (orange), \MS{} trained with a vertex cap and encoded with the same codec (blue), and the FP32 model (star). NeRF-Synthetic uses the five objects that are below their capacity limit at every target. Per-scene curves in the appendix.}
 \label{fig:rd}
@@ -123,7 +123,7 @@ Dataset & target & scenes & mean file size & size error mean & size error range 
 %==================================================================
 \section{Compression results [main]}
 \label{sec:e4}
-\begin{table}[h]\centering\small
+\begin{table}[H]\centering\small
 \caption{Compression against the FP32 model, means over scenes; per scene in the appendix. Source: budgetmesh-rd-table-2026-11-10.md.}
 \label{tab:e4}
 \begin{tabular}{lrrrr}
@@ -144,10 +144,10 @@ Target & scenes & mean ratio & mean $\Delta$PSNR & $\Delta$PSNR range \\
 \label{sec:e5}
 \textbf{Claim.} Standard mesh codecs cannot reach our sizes while keeping view-dependent appearance; the only generic routes near our size drop it and still produce larger files.
 
-\begin{table}[h]\centering\small
+\begin{table}[H]\centering\small
 \caption{The same FP32 mesh through generic codecs vs.\ ours (our level-1.0 delivery of that mesh). Ratios are generic file size divided by ours, over 11 Mip-NeRF~360 / T\&T scenes (MPEG: 10). Source: generic-codecs-all-scenes-2026-11-10.md.}
 \label{tab:e5}
-\begin{tabular}{lrrl}
+\resizebox{\linewidth}{!}{\begin{tabular}{lrrl}
 \toprule
 Route & size vs.\ ours (Deep Blending) & $\Delta$PSNR vs FP32 & keeps view dependence \\
 \midrule
@@ -158,14 +158,14 @@ Draco, positions + faces + 8-bit RGB & 1.8--2.4$\times$ & $-0.7$ to $-4.4$ dB & 
 Baked $4096^2$ texture + Draco geometry & $\approx$2.5--3.5$\times$ & $-0.7$ to $-4.4$ dB & no \\
 Ours (level 1.0) & 1$\times$ & $-0.1$ to $-0.8$ dB & yes \\
 \bottomrule
-\end{tabular}
+\end{tabular}}
 \end{table}
 \noindent\textbf{Caveat stated in the text.} The generic rows are near-lossless and ours loses 0.1--0.8 dB at this point, so this is ``bytes each codec needs for essentially the same mesh'', not an RD curve; the RD comparison with 3DGS-class codecs is in the appendix (Section~\ref{sec:appendix}, A5) and shows the representation gap honestly.
 
 %==================================================================
 \section{Where the bytes go, and what is redundant [main, short]}
 \label{sec:e6}
-\begin{figure}[h]\centering
+\begin{figure}[H]\centering
 \includegraphics[width=0.75\linewidth]{figures/fig_bytes_per_stream.pdf}
 \caption{Bytes per stream. Connectivity is 39--43\% of the file and lossless; positions 20\%; appearance indices 17--20\%; DC colour 11--13\%; the dictionaries are a fixed 0.65 MB, 3\% of a 20 MB file and 12\% of a 5 MB one.}
 \label{fig:bytes}
@@ -175,10 +175,11 @@ Ours (level 1.0) & 1$\times$ & $-0.1$ to $-0.8$ dB & yes \\
 %==================================================================
 \section{Ablations [main, one table]}
 \label{sec:e7}
-\begin{table}[h]\centering\small
+Table~\ref{tab:e7} removes one part of the training rule at a time and reports what happens to the size and to the quality at the same file size. The constant-price row is the only place where constant-$\lambda$ runs appear in the paper.
+\begin{table}[H]\centering\small
 \caption{What each part of the training rule contributes. Source: adapt-v9b sweep analysis (constant price), adapt-v7b sweep (prices from constants), rd-ctrl-v1 (matched count), v6 Blender tests (collapse off).}
 \label{tab:e7}
-\begin{tabular}{lll}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{4.2cm}XX}
 \toprule
 Variant & size & quality at the same file size \\
 \midrule
@@ -188,18 +189,19 @@ prices from fixed constants instead of the byte probe & mean 0.83$\times$ target
 no in-training collapse & lands at the growth aim: $+25\%$ by construction (nothing removes bytes after growth) & $-0.3$ / $-0.5$ dB (lego / chair at 4 MB, v6 tests) \\
 \MS{}'s own split selection at the same split count & same & $-0.12$ dB (room) \tbd{one more scene optional} \\
 \bottomrule
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 %==================================================================
 \section{Qualitative results [main]}
 \label{sec:e8}
-\begin{figure}[h]\centering
+Figure~\ref{fig:qual} shows decoded files at the three main targets next to the ground truth and the FP32 model, with an enlarged crop and the error map per column; Figure~\ref{fig:g0} shows the same vertex count reached three ways (the experiment of Section~\ref{sec:e1}) on one view.
+\begin{figure}[H]\centering
 \includegraphics[width=\linewidth]{figures/fig_qualitative.jpg}
 \caption{Decoded \BM{} files at three target sizes next to the ground truth and the FP32 model (room, truck). Per column: full view with its PSNR, the yellow-box crop enlarged, and the error map ($|$render $-$ GT$|\times4$). Draft version from quarter-resolution montages; the camera-ready crops will be cut from the full-resolution renders.}
 \label{fig:qual}
 \end{figure}
-\begin{figure}[h]\centering
+\begin{figure}[H]\centering
 \includegraphics[width=\linewidth]{figures/fig_g0_triptych.jpg}
 \caption{The same vertex count reached three ways. Simplification after training loses 3 dB on this view and shows holes and speckle; training to the budget does not.}
 \label{fig:g0}
@@ -208,10 +210,10 @@ no in-training collapse & lands at the growth aim: $+25\%$ by construction (noth
 %==================================================================
 \section{Properties of the size controller [main, short]}
 \label{sec:e9}
-Two statements hold by construction. (1) The collapse rounds never move the file size below the target: each round removes at most the estimated excess and only while the estimate is above the target, so the size error from trimming is one-sided. (2) With $R$ rounds, a per-round cap of $c$ of the vertices and $b$ bytes freed per collapse, the trimming capacity is at most $R\,c\,V\,b$; the final overshoot is bounded by the excess at the first round minus this capacity, plus whatever the visible set grows after the last round. The growth plan re-spreads the remaining gap over the rounds left at every boundary, so a shortfall in one round is corrected in the next; only the last round's shortfall is not. Figure~\ref{fig:traces} shows the landing-estimate traces of all runs; Figure~\ref{fig:hist} the size-error histogram per dataset.
-\begin{figure}[h]\centering\includegraphics[width=\linewidth]{figures/fig_controller_traces.pdf}
+Two statements hold by construction. (1) The collapse rounds never move the file size below the target: each round removes at most the estimated excess and only while the estimate is above the target, so the size error from trimming is one-sided. (2) With $R$ rounds, a per-round cap of $c$ of the vertices and $b$ bytes freed per collapse, the trimming capacity is at most $R\,c\,V\,b$; the final overshoot is bounded by the excess at the first round minus this capacity, plus whatever the visible set grows after the last round. The growth plan re-spreads the remaining gap over the rounds left at every boundary, so a shortfall in one round is corrected in the next; only the last round's shortfall is not. Figure~\ref{fig:traces} shows the landing-estimate traces of all runs; Figure~\ref{fig:hist} the size error of every run by dataset and target.
+\begin{figure}[H]\centering\includegraphics[width=\linewidth]{figures/fig_controller_traces.pdf}
 \caption{Size controller traces for all 101 runs: the estimated landing size divided by the target at each collapse round (orange), continued as a dotted line to the delivered file. Grey band: $\pm10\%$. Indoor scenes start above the target (the growth aim) and are trimmed down; outdoor scenes start below and drift up as the visible set grows; the NeRF-Synthetic runs below 0.8 are objects at the capacity limit.}\label{fig:traces}\end{figure}
-\begin{figure}[h]\centering\includegraphics[width=\linewidth]{figures/fig_size_error_strip.pdf}
+\begin{figure}[H]\centering\includegraphics[width=\linewidth]{figures/fig_size_error_strip.pdf}
 \caption{Size error of every run, one dot per scene, by dataset and target; black bar: median; grey band: $\pm10\%$. Grey triangles are objects at the capacity limit (the price reached its floor; the file cannot grow to the target).}\label{fig:hist}\end{figure}
 
 %==================================================================
@@ -227,7 +229,7 @@ The growth aim ($1.25\times$ / $1.1\times$) is one calibrated constant per captu
 \item[A3] Per-scene tables for Sections~\ref{sec:e1}--\ref{sec:e4} (71 + 33 + 89 rows), including the capacity-limited NeRF-Synthetic rows.
 \item[A4] Full generic-codec table (13 scenes, all routes, MB and PSNR).
 \item[A5] Cross-representation figure (Figure~\ref{fig:cross}): \BM{}'s Mip-NeRF~360 curve with the published points of other mesh-output methods (MeshSplatting's own RGB-only file, MiLo, BakedSDF, Binary Opacity Grids, RaDe-GS and GOF meshes) and of 3DGS-class codecs (3DGS, Scaffold-GS, Compact3DGS, LightGaussian, RDO-Gaussian, HAC, HAC++, CompGS; HAC++ Table II). Honest reading: within the mesh class ours is the only entry below 100 MB and is 5--100$\times$ smaller than the others at comparable or better PSNR; against 3DGS codecs we are 3--4 dB lower at the same size, a gap already present between FP32 \MS{} (24.8) and 3DGS (27.5) on the same scenes, i.e.\ the representation's, not the codec's. Their output needs a splat renderer; ours is a standard mesh.
-\begin{figure}[h]\centering\includegraphics[width=0.85\linewidth]{figures/fig_cross_methods_mip360.pdf}
+\begin{figure}[H]\centering\includegraphics[width=0.85\linewidth]{figures/fig_cross_methods_mip360.pdf}
 \caption{Mip-NeRF~360 means: \BM{} (curve) against published single points of mesh-output methods (squares) and 3DGS-class codecs (triangles). BakedSDF and Binary Opacity Grids report the 7-scene subset. Sizes are the methods' own reported asset sizes.}\label{fig:cross}\end{figure}
 \item[A6] Dictionary $\times$ price sweep, all 21 scenes; DC 8-bit rows; the $K$-should-follow-$V$ observation with the mic/ficus numbers.
 \item[A7] Byte-probe accuracy (probe / delivered 0.999--1.001 on 49 runs), per-run overhead (+8--15 min), the price schedule $\lambda$ per boundary for one scene.
