@@ -111,8 +111,8 @@ Dataset & target & scenes & mean file size & size error mean & size error range 
 \end{table}
 
 \begin{figure}[h]\centering
-\fbox{\parbox{0.95\linewidth}{\centering\vspace{3cm}\textbf{Figure 1 (to draw): RD curves of \BM{}.}\\ One panel per dataset. x: file size (MB, log scale), y: mean PSNR over the dataset's scenes. Curve 1: \BM{} at the five targets (points joined). Curve 2: \MS{} with a vertex cap, encoded with our codec, at the three budgets of Table~\ref{tab:e2}. Point: the FP32 model (mean size, mean PSNR) at the right edge. Per-scene curves in the appendix.\vspace{3cm}}}
-\caption{Rate--distortion of \BM{} per dataset, averaged over scenes, with \MS{} under a vertex cap and the FP32 model on the same axes.}
+\includegraphics[width=\linewidth]{figures/fig_rd_per_dataset.pdf}
+\caption{Rate--distortion of \BM{} per dataset: mean PSNR vs.\ mean file size over the dataset's scenes at each target (orange), \MS{} trained with a vertex cap and encoded with the same codec (blue), and the FP32 model (star). NeRF-Synthetic uses the five objects that are below their capacity limit at every target. Per-scene curves in the appendix.}
 \label{fig:rd}
 \end{figure}
 
@@ -166,7 +166,7 @@ Ours (level 1.0) & 1$\times$ & $-0.1$ to $-0.8$ dB & yes \\
 \section{Where the bytes go, and what is redundant [main, short]}
 \label{sec:e6}
 \begin{figure}[h]\centering
-\fbox{\parbox{0.95\linewidth}{\centering\vspace{2cm}\textbf{Figure 4 (to draw): stacked bars of bytes per stream} for room at 20 and 5 MB: positions, connectivity, appearance indices (main + residual), DC colour, dictionaries + header. Numbers from the asset's codec report (room 20 MB / 5 MB): connectivity 43.1 / 39.3\%, positions 20.4 / 20.4\%, DC colour 13.0 / 10.8\%, appearance indices 20.3 / 17.2\%, dictionaries + header 3.2 / 12.2\%.\vspace{2cm}}}
+\includegraphics[width=0.75\linewidth]{figures/fig_bytes_per_stream.pdf}
 \caption{Bytes per stream. Connectivity is 39--43\% of the file and lossless; positions 20\%; appearance indices 17--20\%; DC colour 11--13\%; the dictionaries are a fixed 0.65 MB, 3\% of a 20 MB file and 12\% of a 5 MB one.}
 \label{fig:bytes}
 \end{figure}
@@ -208,7 +208,11 @@ no in-training collapse & lands at the growth aim: $+25\%$ by construction (noth
 %==================================================================
 \section{Properties of the size controller [main, short]}
 \label{sec:e9}
-Two statements hold by construction. (1) The collapse rounds never move the file size below the target: each round removes at most the estimated excess and only while the estimate is above the target, so the size error from trimming is one-sided. (2) With $R$ rounds, a per-round cap of $c$ of the vertices and $b$ bytes freed per collapse, the trimming capacity is at most $R\,c\,V\,b$; the final overshoot is bounded by the excess at the first round minus this capacity, plus whatever the visible set grows after the last round. The growth plan re-spreads the remaining gap over the rounds left at every boundary, so a shortfall in one round is corrected in the next; only the last round's shortfall is not. The appendix shows the landing-estimate traces of all runs (A1) and the size-error histogram per dataset (A2).
+Two statements hold by construction. (1) The collapse rounds never move the file size below the target: each round removes at most the estimated excess and only while the estimate is above the target, so the size error from trimming is one-sided. (2) With $R$ rounds, a per-round cap of $c$ of the vertices and $b$ bytes freed per collapse, the trimming capacity is at most $R\,c\,V\,b$; the final overshoot is bounded by the excess at the first round minus this capacity, plus whatever the visible set grows after the last round. The growth plan re-spreads the remaining gap over the rounds left at every boundary, so a shortfall in one round is corrected in the next; only the last round's shortfall is not. Figure~\ref{fig:traces} shows the landing-estimate traces of all runs; Figure~\ref{fig:hist} the size-error histogram per dataset.
+\begin{figure}[h]\centering\includegraphics[width=\linewidth]{figures/fig_controller_traces.pdf}
+\caption{Size controller traces for all 101 runs: the estimated landing size divided by the target at each collapse round (orange), continued as a dotted line to the delivered file. Grey band: $\pm10\%$. Indoor scenes start above the target (the growth aim) and are trimmed down; outdoor scenes start below and drift up as the visible set grows; the NeRF-Synthetic runs below 0.8 are objects at the capacity limit.}\label{fig:traces}\end{figure}
+\begin{figure}[h]\centering\includegraphics[width=\linewidth]{figures/fig_size_error_hist.pdf}
+\caption{Size error per dataset over all runs not at the capacity limit.}\label{fig:hist}\end{figure}
 
 %==================================================================
 \section{Limitations}
