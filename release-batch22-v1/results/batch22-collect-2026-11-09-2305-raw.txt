@@ -1,0 +1,249 @@
+===== sacct
+JobID                     JobName      State    Elapsed ExitCode 
+22484393               b22-genc-a  COMPLETED   01:40:16      0:0 
+22484394               b22-genc-b  COMPLETED   01:25:22      0:0 
+===== generic-codecs.txt (all scenes)
+room original | V 3193592 F 6452971 | test 28.263 / 0.8833 / 0.3389
+room fp32_minimal | 741.703 MB | test n/a | xyz + 48 SH + weight float32, int32 faces
+room ply_zstd19 | 632.609 MB | test n/a | zstd19
+room quant_ply_zstd19 | 158.537 MB | test 28.092 / 0.8756 / 0.3517 (-0.172 dB) | xyz uint16 q14 + SH uint8 + int32 faces, zstd19
+room draco_geo | 32.82 MB | decoded V 14357649 | test n/a | positions + faces only
+room draco_full_sh8 | 456.058 MB | decoded V 14357649 | test 28.092 / 0.8756 / 0.3517 (-0.172 dB) | positions q14 + faces + 48-ch uint8 SH generic attribute
+room draco_full_sh16 | 1126.698 MB | decoded V 14357649 | test 28.101 / 0.8769 / 0.3504 (-0.162 dB) | positions q14 + faces + 48-ch uint16 SH generic attribute
+room draco_rgb8 | 62.183 MB | decoded V 14357649 | test 25.287 / 0.7941 / 0.4412 (-2.977 dB) | positions + faces + uint8 RGB (SH0 only, no view dependence)
+room texture_atlas | None MB | test n/a | xatlas UV parametrisation (vertices duplicated at chart seams)
+room texture_draco_geo_uv | 59.929 MB | test n/a | Draco positions + faces + 12-bit UV on the atlas mesh
+room texture_4096 | 82.119 MB | PNG total 105.26 MB | test 25.287 / 0.7941 / 0.4412 (-2.977 dB) | baked vertex colour, 4096x4096, JPEG q90; quality = draco_rgb8 row (vertex colours only, no SH)
+room texture_8192 | 136.821 MB | PNG total 144.517 MB | test 25.287 / 0.7941 / 0.4412 (-2.977 dB) | baked vertex colour, 8192x8192, JPEG q90; quality = draco_rgb8 row (vertex colours only, no SH)
+garden original | V 3171988 F 6667681 | test 24.732 / 0.7624 / 0.2485
+garden fp32_minimal | 739.786 MB | test n/a | xyz + 48 SH + weight float32, int32 faces
+garden ply_zstd19 | 626.416 MB | test n/a | zstd19
+garden quant_ply_zstd19 | 171.979 MB | test 24.594 / 0.7529 / 0.2575 (-0.138 dB) | xyz uint16 q15 + SH uint8 + int32 faces, zstd19
+garden draco_geo | 35.569 MB | decoded V 14709855 | test n/a | positions + faces only
+garden draco_full_sh8 | 544.445 MB | decoded V 14709855 | test 24.594 / 0.7529 / 0.2575 (-0.139 dB) | positions q15 + faces + 48-ch uint8 SH generic attribute
+garden draco_full_sh16 | 1228.08 MB | decoded V 14709855 | test 24.599 / 0.7536 / 0.2565 (-0.133 dB) | positions q15 + faces + 48-ch uint16 SH generic attribute
+garden draco_rgb8 | 72.995 MB | decoded V 14709855 | test 21.062 / 0.6458 / 0.3323 (-3.670 dB) | positions + faces + uint8 RGB (SH0 only, no view dependence)
+garden texture_atlas | None MB | test n/a | xatlas UV parametrisation (vertices duplicated at chart seams)
+garden texture_draco_geo_uv | 63.478 MB | test n/a | Draco positions + faces + 12-bit UV on the atlas mesh
+garden texture_4096 | 84.33 MB | PNG total 111.919 MB | test 21.062 / 0.6458 / 0.3323 (-3.670 dB) | baked vertex colour, 4096x4096, JPEG q90; quality = draco_rgb8 row (vertex colours only, no SH)
+garden texture_8192 | 138.304 MB | PNG total 152.739 MB | test 21.062 / 0.6458 / 0.3323 (-3.670 dB) | baked vertex colour, 8192x8192, JPEG q90; quality = draco_rgb8 row (vertex colours only, no SH)
+kitchen o3dgc_tfan_sh8int | 74.182 MB | decoded V 1943662 | test 26.202 / 0.8231 / 0.3258 (-0.064 dB) | MPEG-4 SC3DMC TFAN (Open3DGC): positions q16 parallelogram + 48-ch uint8 SH as 6x8-dim int attributes (lossless; same grid as quant_ply_zstd19)
+kitchen o3dgc_tfan_sh8f | 73.056 MB | decoded V 1943662 | test 26.192 / 0.8220 / 0.3275 (-0.075 dB) | MPEG-4 SC3DMC TFAN (Open3DGC): positions q16 + 48-ch SH as 6x8-dim float attributes, Open3DGC 8-bit quantisation
+kitchen o3dgc_tfan_geo | 14.06 MB | decoded V 1943662 | test n/a | MPEG-4 SC3DMC TFAN (Open3DGC): positions q16 + faces only, no attributes (geometry budget)
+bicycle o3dgc_tfan_sh8int | 108.405 MB | decoded V 2972065 | test 22.857 / 0.6306 / 0.4040 (-0.176 dB) | MPEG-4 SC3DMC TFAN (Open3DGC): positions q16 parallelogram + 48-ch uint8 SH as 6x8-dim int attributes (lossless; same grid as quant_ply_zstd19)
+bicycle o3dgc_tfan_sh8f | 107.051 MB | decoded V 2972065 | test 22.850 / 0.6299 / 0.4050 (-0.183 dB) | MPEG-4 SC3DMC TFAN (Open3DGC): positions q16 + 48-ch SH as 6x8-dim float attributes, Open3DGC 8-bit quantisation
+bicycle o3dgc_tfan_geo | 16.715 MB | decoded V 2972065 | test n/a | MPEG-4 SC3DMC TFAN (Open3DGC): positions q16 + faces only, no attributes (geometry budget)
+counter o3dgc_tfan_sh8int | 90.685 MB | decoded V 2481356 | test 25.908 / 0.8381 / 0.3611 (-0.036 dB) | MPEG-4 SC3DMC TFAN (Open3DGC): positions q15 parallelogram + 48-ch uint8 SH as 6x8-dim int attributes (lossless; same grid as quant_ply_zstd19)
+counter o3dgc_tfan_sh8f | 88.671 MB | decoded V 2481356 | test 25.896 / 0.8365 / 0.3644 (-0.048 dB) | MPEG-4 SC3DMC TFAN (Open3DGC): positions q15 + 48-ch SH as 6x8-dim float attributes, Open3DGC 8-bit quantisation
+counter o3dgc_tfan_geo | 16.487 MB | decoded V 2481356 | test n/a | MPEG-4 SC3DMC TFAN (Open3DGC): positions q15 + faces only, no attributes (geometry budget)
+stump o3dgc_tfan_sh8int | 113.997 MB | decoded V 3044901 | test 24.736 / 0.6740 / 0.3667 (-0.192 dB) | MPEG-4 SC3DMC TFAN (Open3DGC): positions q16 parallelogram + 48-ch uint8 SH as 6x8-dim int attributes (lossless; same grid as quant_ply_zstd19)
+stump o3dgc_tfan_sh8f | 111.518 MB | decoded V 3044901 | test 24.724 / 0.6730 / 0.3683 (-0.204 dB) | MPEG-4 SC3DMC TFAN (Open3DGC): positions q16 + 48-ch SH as 6x8-dim float attributes, Open3DGC 8-bit quantisation
+stump o3dgc_tfan_geo | 17.493 MB | decoded V 3044901 | test n/a | MPEG-4 SC3DMC TFAN (Open3DGC): positions q16 + faces only, no attributes (geometry budget)
+flowers o3dgc_tfan_sh8int | 106.012 MB | decoded V 2939570 | test 18.882 / 0.4732 / 0.4629 (-0.209 dB) | MPEG-4 SC3DMC TFAN (Open3DGC): positions q15 parallelogram + 48-ch uint8 SH as 6x8-dim int attributes (lossless; same grid as quant_ply_zstd19)
+flowers o3dgc_tfan_sh8f | 103.665 MB | decoded V 2939570 | test 18.881 / 0.4729 / 0.4635 (-0.211 dB) | MPEG-4 SC3DMC TFAN (Open3DGC): positions q15 + 48-ch SH as 6x8-dim float attributes, Open3DGC 8-bit quantisation
+flowers o3dgc_tfan_geo | 14.577 MB | decoded V 2939570 | test n/a | MPEG-4 SC3DMC TFAN (Open3DGC): positions q15 + faces only, no attributes (geometry budget)
+bonsai o3dgc_tfan_sh8int | 97.616 MB | decoded V 2923381 | test 27.206 / 0.8638 / 0.3745 (-0.085 dB) | MPEG-4 SC3DMC TFAN (Open3DGC): positions q15 parallelogram + 48-ch uint8 SH as 6x8-dim int attributes (lossless; same grid as quant_ply_zstd19)
+bonsai o3dgc_tfan_sh8f | 94.399 MB | decoded V 2923381 | test 27.190 / 0.8622 / 0.3781 (-0.101 dB) | MPEG-4 SC3DMC TFAN (Open3DGC): positions q15 + 48-ch SH as 6x8-dim float attributes, Open3DGC 8-bit quantisation
+bonsai o3dgc_tfan_geo | 15.549 MB | decoded V 2923381 | test n/a | MPEG-4 SC3DMC TFAN (Open3DGC): positions q15 + faces only, no attributes (geometry budget)
+treehill o3dgc_tfan_sh8int | 113.253 MB | decoded V 3031201 | test 20.266 / 0.5286 / 0.4984 (-0.053 dB) | MPEG-4 SC3DMC TFAN (Open3DGC): positions q16 parallelogram + 48-ch uint8 SH as 6x8-dim int attributes (lossless; same grid as quant_ply_zstd19)
+treehill o3dgc_tfan_sh8f | 111.729 MB | decoded V 3031201 | test 20.265 / 0.5280 / 0.4998 (-0.054 dB) | MPEG-4 SC3DMC TFAN (Open3DGC): positions q16 + 48-ch SH as 6x8-dim float attributes, Open3DGC 8-bit quantisation
+treehill o3dgc_tfan_geo | 16.523 MB | decoded V 3031201 | test n/a | MPEG-4 SC3DMC TFAN (Open3DGC): positions q16 + faces only, no attributes (geometry budget)
+train o3dgc_tfan_sh8int | 81.08 MB | decoded V 2089049 | test 18.794 / 0.7086 / 0.3696 (-0.021 dB) | MPEG-4 SC3DMC TFAN (Open3DGC): positions q18 parallelogram + 48-ch uint8 SH as 6x8-dim int attributes (lossless; same grid as quant_ply_zstd19)
+train o3dgc_tfan_sh8f | 79.432 MB | decoded V 2089049 | test 18.792 / 0.7077 / 0.3717 (-0.023 dB) | MPEG-4 SC3DMC TFAN (Open3DGC): positions q18 + 48-ch SH as 6x8-dim float attributes, Open3DGC 8-bit quantisation
+train o3dgc_tfan_geo | 14.113 MB | decoded V 2089049 | test n/a | MPEG-4 SC3DMC TFAN (Open3DGC): positions q18 + faces only, no attributes (geometry budget)
+drjohnson original | V 3254127 F 8461723 | test 26.471 / 0.8305 / 0.4513
+drjohnson fp32_minimal | 778.399 MB | test n/a | xyz + 48 SH + weight float32, int32 faces
+drjohnson ply_zstd19 | 662.644 MB | test n/a | zstd19
+drjohnson quant_ply_zstd19 | 182.653 MB | test 26.447 / 0.8281 / 0.4548 (-0.024 dB) | xyz uint16 q15 + SH uint8 + int32 faces, zstd19
+drjohnson draco_geo | 60.765 MB | decoded V 18422469 | test n/a | positions + faces only
+drjohnson draco_full_sh8 | 654.937 MB | decoded V 18422469 | test 26.447 / 0.8281 / 0.4548 (-0.024 dB) | positions q15 + faces + 48-ch uint8 SH generic attribute
+drjohnson draco_full_sh16 | 1518.212 MB | decoded V 18422469 | test 26.469 / 0.8305 / 0.4515 (-0.002 dB) | positions q15 + faces + 48-ch uint16 SH generic attribute
+drjohnson draco_rgb8 | 102.933 MB | decoded V 18422469 | test 24.342 / 0.7851 / 0.5112 (-2.129 dB) | positions + faces + uint8 RGB (SH0 only, no view dependence)
+drjohnson texture_atlas | None MB | test n/a | xatlas UV parametrisation (vertices duplicated at chart seams)
+drjohnson texture_draco_geo_uv | 95.938 MB | test n/a | Draco positions + faces + 12-bit UV on the atlas mesh
+drjohnson texture_4096 | 115.521 MB | PNG total 145.401 MB | test 24.342 / 0.7851 / 0.5112 (-2.129 dB) | baked vertex colour, 4096x4096, JPEG q90; quality = draco_rgb8 row (vertex colours only, no SH)
+drjohnson o3dgc_tfan_sh8int | 130.624 MB | decoded V 3254127 | test 26.447 / 0.8281 / 0.4548 (-0.024 dB) | MPEG-4 SC3DMC TFAN (Open3DGC): positions q15 parallelogram + 48-ch uint8 SH as 6x8-dim int attributes (lossless; same grid as quant_ply_zstd19)
+drjohnson o3dgc_tfan_sh8f | 128.004 MB | decoded V 3254127 | test 26.389 / 0.8234 / 0.4626 (-0.082 dB) | MPEG-4 SC3DMC TFAN (Open3DGC): positions q15 + 48-ch SH as 6x8-dim float attributes, Open3DGC 8-bit quantisation
+drjohnson o3dgc_tfan_geo | 28.662 MB | decoded V 3254127 | test n/a | MPEG-4 SC3DMC TFAN (Open3DGC): positions q15 + faces only, no attributes (geometry budget)
+drjohnson o3dgc_texture_4096 | 132.408 MB | decoded V - | test n/a | texture route with MPEG geometry: o3dgc_texture_geo_uv + JPEG of texture_4096; quality = draco_rgb8 row (vertex colours only, no SH)
+playroom original | V 3219509 F 7947988 | test 27.381 / 0.8525 / 0.3818
+playroom fp32_minimal | 765.034 MB | test n/a | xyz + 48 SH + weight float32, int32 faces
+playroom ply_zstd19 | 641.651 MB | test n/a | zstd19
+playroom quant_ply_zstd19 | 179.649 MB | test 27.358 / 0.8506 / 0.3834 (-0.022 dB) | xyz uint16 q15 + SH uint8 + int32 faces, zstd19
+playroom draco_geo | 52.783 MB | decoded V 17356880 | test n/a | positions + faces only
+playroom draco_full_sh8 | 594.831 MB | decoded V 17356880 | test 27.358 / 0.8506 / 0.3834 (-0.022 dB) | positions q15 + faces + 48-ch uint8 SH generic attribute
+playroom draco_full_sh16 | 1396.093 MB | decoded V 17356880 | test 27.377 / 0.8524 / 0.3821 (-0.004 dB) | positions q15 + faces + 48-ch uint16 SH generic attribute
+playroom draco_rgb8 | 91.7 MB | decoded V 17356880 | test 24.532 / 0.8120 / 0.4451 (-2.849 dB) | positions + faces + uint8 RGB (SH0 only, no view dependence)
+playroom texture_atlas | None MB | test n/a | xatlas UV parametrisation (vertices duplicated at chart seams)
+playroom texture_draco_geo_uv | 85.656 MB | test n/a | Draco positions + faces + 12-bit UV on the atlas mesh
+playroom texture_4096 | 112.359 MB | PNG total 133.343 MB | test 24.532 / 0.8120 / 0.4451 (-2.849 dB) | baked vertex colour, 4096x4096, JPEG q90; quality = draco_rgb8 row (vertex colours only, no SH)
+playroom o3dgc_tfan_sh8int | 123.644 MB | decoded V 3219509 | test 27.358 / 0.8506 / 0.3834 (-0.022 dB) | MPEG-4 SC3DMC TFAN (Open3DGC): positions q15 parallelogram + 48-ch uint8 SH as 6x8-dim int attributes (lossless; same grid as quant_ply_zstd19)
+playroom o3dgc_tfan_sh8f | 121.799 MB | decoded V 3219509 | test 27.329 / 0.8490 / 0.3872 (-0.052 dB) | MPEG-4 SC3DMC TFAN (Open3DGC): positions q15 + 48-ch SH as 6x8-dim float attributes, Open3DGC 8-bit quantisation
+playroom o3dgc_tfan_geo | 26.205 MB | decoded V 3219509 | test n/a | MPEG-4 SC3DMC TFAN (Open3DGC): positions q15 + faces only, no attributes (geometry budget)
+playroom o3dgc_texture_4096 | 126.301 MB | decoded V - | test n/a | texture route with MPEG geometry: o3dgc_texture_geo_uv + JPEG of texture_4096; quality = draco_rgb8 row (vertex colours only, no SH)
+truck o3dgc_tfan_sh8int | 68.683 MB | decoded V 1877757 | test 22.339 / 0.8037 / 0.2704 (-0.023 dB) | MPEG-4 SC3DMC TFAN (Open3DGC): positions q18 parallelogram + 48-ch uint8 SH as 6x8-dim int attributes (lossless; same grid as quant_ply_zstd19)
+truck o3dgc_tfan_sh8f | 67.64 MB | decoded V 1877757 | test 22.333 / 0.8020 / 0.2728 (-0.029 dB) | MPEG-4 SC3DMC TFAN (Open3DGC): positions q18 + 48-ch SH as 6x8-dim float attributes, Open3DGC 8-bit quantisation
+truck o3dgc_tfan_geo | 12.087 MB | decoded V 1877757 | test n/a | MPEG-4 SC3DMC TFAN (Open3DGC): positions q18 + faces only, no attributes (geometry budget)
+kitchen original | V 1943662 F 4350857 | test 26.266 / 0.8269 / 0.3213
+kitchen o3dgc_tfan_sh8int | 74.182 MB | decoded V 1943662 | test 26.202 / 0.8231 / 0.3258 (-0.064 dB) | MPEG-4 SC3DMC TFAN (Open3DGC): positions q16 parallelogram + 48-ch uint8 SH as 6x8-dim int attributes (lossless; same grid as quant_ply_zstd19)
+kitchen o3dgc_tfan_sh8f | 73.056 MB | decoded V 1943662 | test 26.192 / 0.8220 / 0.3275 (-0.075 dB) | MPEG-4 SC3DMC TFAN (Open3DGC): positions q16 + 48-ch SH as 6x8-dim float attributes, Open3DGC 8-bit quantisation
+kitchen o3dgc_tfan_geo | 14.06 MB | decoded V 1943662 | test n/a | MPEG-4 SC3DMC TFAN (Open3DGC): positions q16 + faces only, no attributes (geometry budget)
+kitchen fp32_minimal | 456.492 MB | test n/a | xyz + 48 SH + weight float32, int32 faces
+kitchen ply_zstd19 | 387.358 MB | test n/a | zstd19
+kitchen quant_ply_zstd19 | 107.623 MB | test 26.202 / 0.8231 / 0.3258 (-0.064 dB) | xyz uint16 q16 + SH uint8 + int32 faces, zstd19
+kitchen draco_geo | 26.782 MB | decoded V 9445517 | test n/a | positions + faces only
+kitchen draco_full_sh8 | 352.144 MB | decoded V 9445517 | test 26.202 / 0.8231 / 0.3258 (-0.064 dB) | positions q16 + faces + 48-ch uint8 SH generic attribute
+kitchen draco_full_sh16 | 791.057 MB | decoded V 9445517 | test 26.209 / 0.8240 / 0.3247 (-0.057 dB) | positions q16 + faces + 48-ch uint16 SH generic attribute
+kitchen draco_rgb8 | 49.086 MB | decoded V 9445517 | test 21.891 / 0.6956 / 0.4297 (-4.376 dB) | positions + faces + uint8 RGB (SH0 only, no view dependence)
+kitchen texture_atlas | None MB | test n/a | xatlas UV parametrisation (vertices duplicated at chart seams)
+kitchen texture_draco_geo_uv | 45.595 MB | test n/a | Draco positions + faces + 12-bit UV on the atlas mesh
+kitchen texture_4096 | 69.186 MB | PNG total 85.769 MB | test 21.891 / 0.6956 / 0.4297 (-4.376 dB) | baked vertex colour, 4096x4096, JPEG q90; quality = draco_rgb8 row (vertex colours only, no SH)
+kitchen o3dgc_tfan_sh8int | 74.182 MB | decoded V 1943662 | test 26.202 / 0.8231 / 0.3258 (-0.064 dB) | MPEG-4 SC3DMC TFAN (Open3DGC): positions q16 parallelogram + 48-ch uint8 SH as 6x8-dim int attributes (lossless; same grid as quant_ply_zstd19)
+kitchen o3dgc_tfan_sh8f | 73.056 MB | decoded V 1943662 | test 26.192 / 0.8220 / 0.3275 (-0.075 dB) | MPEG-4 SC3DMC TFAN (Open3DGC): positions q16 + 48-ch SH as 6x8-dim float attributes, Open3DGC 8-bit quantisation
+kitchen o3dgc_tfan_geo | 14.06 MB | decoded V 1943662 | test n/a | MPEG-4 SC3DMC TFAN (Open3DGC): positions q16 + faces only, no attributes (geometry budget)
+kitchen o3dgc_texture_4096 | 77.09 MB | decoded V - | test n/a | texture route with MPEG geometry: o3dgc_texture_geo_uv + JPEG of texture_4096; quality = draco_rgb8 row (vertex colours only, no SH)
+bicycle original | V 2972065 F 5191667 | test 23.033 / 0.6399 / 0.3971
+bicycle o3dgc_tfan_sh8int | 108.405 MB | decoded V 2972065 | test 22.857 / 0.6306 / 0.4040 (-0.176 dB) | MPEG-4 SC3DMC TFAN (Open3DGC): positions q16 parallelogram + 48-ch uint8 SH as 6x8-dim int attributes (lossless; same grid as quant_ply_zstd19)
+bicycle o3dgc_tfan_sh8f | 107.051 MB | decoded V 2972065 | test 22.850 / 0.6299 / 0.4050 (-0.183 dB) | MPEG-4 SC3DMC TFAN (Open3DGC): positions q16 + 48-ch SH as 6x8-dim float attributes, Open3DGC 8-bit quantisation
+bicycle o3dgc_tfan_geo | 16.715 MB | decoded V 2972065 | test n/a | MPEG-4 SC3DMC TFAN (Open3DGC): positions q16 + faces only, no attributes (geometry budget)
+bicycle fp32_minimal | 680.49 MB | test n/a | xyz + 48 SH + weight float32, int32 faces
+bicycle ply_zstd19 | 595.711 MB | test n/a | zstd19
+bicycle quant_ply_zstd19 | 141.587 MB | test 22.857 / 0.6306 / 0.4040 (-0.176 dB) | xyz uint16 q16 + SH uint8 + int32 faces, zstd19
+bicycle draco_geo | 30.875 MB | decoded V 11587543 | test n/a | positions + faces only
+bicycle draco_full_sh8 | 416.13 MB | decoded V 11587543 | test 22.857 / 0.6306 / 0.4040 (-0.176 dB) | positions q16 + faces + 48-ch uint8 SH generic attribute
+bicycle draco_full_sh16 | 961.803 MB | decoded V 11587543 | test 22.860 / 0.6311 / 0.4033 (-0.173 dB) | positions q16 + faces + 48-ch uint16 SH generic attribute
+bicycle draco_rgb8 | 57.708 MB | decoded V 11587543 | test 21.217 / 0.5479 / 0.4552 (-1.816 dB) | positions + faces + uint8 RGB (SH0 only, no view dependence)
+bicycle texture_atlas | None MB | test n/a | xatlas UV parametrisation (vertices duplicated at chart seams)
+bicycle texture_draco_geo_uv | 52.688 MB | test n/a | Draco positions + faces + 12-bit UV on the atlas mesh
+bicycle texture_4096 | 69.782 MB | PNG total 93.908 MB | test 21.217 / 0.5479 / 0.4552 (-1.816 dB) | baked vertex colour, 4096x4096, JPEG q90; quality = draco_rgb8 row (vertex colours only, no SH)
+bicycle o3dgc_tfan_sh8int | 108.405 MB | decoded V 2972065 | test 22.857 / 0.6306 / 0.4040 (-0.176 dB) | MPEG-4 SC3DMC TFAN (Open3DGC): positions q16 parallelogram + 48-ch uint8 SH as 6x8-dim int attributes (lossless; same grid as quant_ply_zstd19)
+bicycle o3dgc_tfan_sh8f | 107.051 MB | decoded V 2972065 | test 22.850 / 0.6299 / 0.4050 (-0.183 dB) | MPEG-4 SC3DMC TFAN (Open3DGC): positions q16 + 48-ch SH as 6x8-dim float attributes, Open3DGC 8-bit quantisation
+bicycle o3dgc_tfan_geo | 16.715 MB | decoded V 2972065 | test n/a | MPEG-4 SC3DMC TFAN (Open3DGC): positions q16 + faces only, no attributes (geometry budget)
+bicycle o3dgc_texture_4096 | 78.318 MB | decoded V - | test n/a | texture route with MPEG geometry: o3dgc_texture_geo_uv + JPEG of texture_4096; quality = draco_rgb8 row (vertex colours only, no SH)
+counter original | V 2481356 F 4911893 | test 25.944 / 0.8413 / 0.3571
+counter o3dgc_tfan_sh8int | 90.685 MB | decoded V 2481356 | test 25.908 / 0.8381 / 0.3611 (-0.036 dB) | MPEG-4 SC3DMC TFAN (Open3DGC): positions q15 parallelogram + 48-ch uint8 SH as 6x8-dim int attributes (lossless; same grid as quant_ply_zstd19)
+counter o3dgc_tfan_sh8f | 88.671 MB | decoded V 2481356 | test 25.896 / 0.8365 / 0.3644 (-0.048 dB) | MPEG-4 SC3DMC TFAN (Open3DGC): positions q15 + 48-ch SH as 6x8-dim float attributes, Open3DGC 8-bit quantisation
+counter o3dgc_tfan_geo | 16.487 MB | decoded V 2481356 | test n/a | MPEG-4 SC3DMC TFAN (Open3DGC): positions q15 + faces only, no attributes (geometry budget)
+counter fp32_minimal | 575.065 MB | test n/a | xyz + 48 SH + weight float32, int32 faces
+counter ply_zstd19 | 492.961 MB | test n/a | zstd19
+counter quant_ply_zstd19 | 131.992 MB | test 25.908 / 0.8381 / 0.3611 (-0.036 dB) | xyz uint16 q15 + SH uint8 + int32 faces, zstd19
+counter draco_geo | 31.237 MB | decoded V 10889571 | test n/a | positions + faces only
+counter draco_full_sh8 | 385.746 MB | decoded V 10889571 | test 25.908 / 0.8381 / 0.3611 (-0.036 dB) | positions q15 + faces + 48-ch uint8 SH generic attribute
+counter draco_full_sh16 | 894.827 MB | decoded V 10889571 | test 25.915 / 0.8394 / 0.3599 (-0.029 dB) | positions q15 + faces + 48-ch uint16 SH generic attribute
+counter draco_rgb8 | 55.463 MB | decoded V 10889571 | test 22.325 / 0.7331 / 0.4514 (-3.618 dB) | positions + faces + uint8 RGB (SH0 only, no view dependence)
+counter texture_atlas | None MB | test n/a | xatlas UV parametrisation (vertices duplicated at chart seams)
+counter texture_draco_geo_uv | 52.35 MB | test n/a | Draco positions + faces + 12-bit UV on the atlas mesh
+counter texture_4096 | 75.136 MB | PNG total 93.186 MB | test 22.325 / 0.7331 / 0.4514 (-3.618 dB) | baked vertex colour, 4096x4096, JPEG q90; quality = draco_rgb8 row (vertex colours only, no SH)
+counter o3dgc_tfan_sh8int | 90.685 MB | decoded V 2481356 | test 25.908 / 0.8381 / 0.3611 (-0.036 dB) | MPEG-4 SC3DMC TFAN (Open3DGC): positions q15 parallelogram + 48-ch uint8 SH as 6x8-dim int attributes (lossless; same grid as quant_ply_zstd19)
+counter o3dgc_tfan_sh8f | 88.671 MB | decoded V 2481356 | test 25.896 / 0.8365 / 0.3644 (-0.048 dB) | MPEG-4 SC3DMC TFAN (Open3DGC): positions q15 + 48-ch SH as 6x8-dim float attributes, Open3DGC 8-bit quantisation
+counter o3dgc_tfan_geo | 16.487 MB | decoded V 2481356 | test n/a | MPEG-4 SC3DMC TFAN (Open3DGC): positions q15 + faces only, no attributes (geometry budget)
+counter o3dgc_texture_4096 | 84.226 MB | decoded V - | test n/a | texture route with MPEG geometry: o3dgc_texture_geo_uv + JPEG of texture_4096; quality = draco_rgb8 row (vertex colours only, no SH)
+stump original | V 3044901 F 5351862 | test 24.928 / 0.6861 / 0.3584
+stump o3dgc_tfan_sh8int | 113.997 MB | decoded V 3044901 | test 24.736 / 0.6740 / 0.3667 (-0.192 dB) | MPEG-4 SC3DMC TFAN (Open3DGC): positions q16 parallelogram + 48-ch uint8 SH as 6x8-dim int attributes (lossless; same grid as quant_ply_zstd19)
+stump o3dgc_tfan_sh8f | 111.518 MB | decoded V 3044901 | test 24.724 / 0.6730 / 0.3683 (-0.204 dB) | MPEG-4 SC3DMC TFAN (Open3DGC): positions q16 + 48-ch SH as 6x8-dim float attributes, Open3DGC 8-bit quantisation
+stump o3dgc_tfan_geo | 17.493 MB | decoded V 3044901 | test n/a | MPEG-4 SC3DMC TFAN (Open3DGC): positions q16 + faces only, no attributes (geometry budget)
+stump fp32_minimal | 697.562 MB | test n/a | xyz + 48 SH + weight float32, int32 faces
+stump ply_zstd19 | 609.646 MB | test n/a | zstd19
+stump quant_ply_zstd19 | 152.572 MB | test 24.736 / 0.6740 / 0.3668 (-0.192 dB) | xyz uint16 q16 + SH uint8 + int32 faces, zstd19
+stump draco_geo | 30.524 MB | decoded V 11948748 | test n/a | positions + faces only
+stump draco_full_sh8 | 431.306 MB | decoded V 11948748 | test 24.736 / 0.6740 / 0.3667 (-0.192 dB) | positions q16 + faces + 48-ch uint8 SH generic attribute
+stump draco_full_sh16 | 993.481 MB | decoded V 11948748 | test 24.743 / 0.6746 / 0.3659 (-0.185 dB) | positions q16 + faces + 48-ch uint16 SH generic attribute
+stump draco_rgb8 | 59.065 MB | decoded V 11948748 | test 23.248 / 0.5979 / 0.4236 (-1.681 dB) | positions + faces + uint8 RGB (SH0 only, no view dependence)
+stump texture_atlas | None MB | test n/a | xatlas UV parametrisation (vertices duplicated at chart seams)
+stump texture_draco_geo_uv | 52.744 MB | test n/a | Draco positions + faces + 12-bit UV on the atlas mesh
+stump texture_4096 | 70.043 MB | PNG total 96.718 MB | test 23.248 / 0.5979 / 0.4236 (-1.681 dB) | baked vertex colour, 4096x4096, JPEG q90; quality = draco_rgb8 row (vertex colours only, no SH)
+stump o3dgc_tfan_sh8int | 113.997 MB | decoded V 3044901 | test 24.736 / 0.6740 / 0.3667 (-0.192 dB) | MPEG-4 SC3DMC TFAN (Open3DGC): positions q16 parallelogram + 48-ch uint8 SH as 6x8-dim int attributes (lossless; same grid as quant_ply_zstd19)
+stump o3dgc_tfan_sh8f | 111.518 MB | decoded V 3044901 | test 24.724 / 0.6730 / 0.3683 (-0.204 dB) | MPEG-4 SC3DMC TFAN (Open3DGC): positions q16 + 48-ch SH as 6x8-dim float attributes, Open3DGC 8-bit quantisation
+stump o3dgc_tfan_geo | 17.493 MB | decoded V 3044901 | test n/a | MPEG-4 SC3DMC TFAN (Open3DGC): positions q16 + faces only, no attributes (geometry budget)
+stump o3dgc_texture_4096 | 78.496 MB | decoded V - | test n/a | texture route with MPEG geometry: o3dgc_texture_geo_uv + JPEG of texture_4096; quality = draco_rgb8 row (vertex colours only, no SH)
+bonsai original | V 2923381 F 4508348 | test 27.291 / 0.8674 / 0.3706
+bonsai o3dgc_tfan_sh8int | 97.616 MB | decoded V 2923381 | test 27.206 / 0.8638 / 0.3745 (-0.085 dB) | MPEG-4 SC3DMC TFAN (Open3DGC): positions q15 parallelogram + 48-ch uint8 SH as 6x8-dim int attributes (lossless; same grid as quant_ply_zstd19)
+bonsai o3dgc_tfan_sh8f | 94.399 MB | decoded V 2923381 | test 27.190 / 0.8622 / 0.3781 (-0.101 dB) | MPEG-4 SC3DMC TFAN (Open3DGC): positions q15 + 48-ch SH as 6x8-dim float attributes, Open3DGC 8-bit quantisation
+bonsai o3dgc_tfan_geo | 15.549 MB | decoded V 2923381 | test n/a | MPEG-4 SC3DMC TFAN (Open3DGC): positions q15 + faces only, no attributes (geometry budget)
+bonsai fp32_minimal | 662.163 MB | test n/a | xyz + 48 SH + weight float32, int32 faces
+bonsai ply_zstd19 | 572.854 MB | test n/a | zstd19
+bonsai quant_ply_zstd19 | 144.672 MB | test 27.206 / 0.8638 / 0.3745 (-0.085 dB) | xyz uint16 q15 + SH uint8 + int32 faces, zstd19
+bonsai draco_geo | 29.671 MB | decoded V 10198494 | test n/a | positions + faces only
+bonsai draco_full_sh8 | 347.128 MB | decoded V 10198494 | test 27.206 / 0.8638 / 0.3745 (-0.085 dB) | positions q15 + faces + 48-ch uint8 SH generic attribute
+bonsai draco_full_sh16 | 824.299 MB | decoded V 10198494 | test 27.214 / 0.8649 / 0.3735 (-0.077 dB) | positions q15 + faces + 48-ch uint16 SH generic attribute
+bonsai draco_rgb8 | 52.027 MB | decoded V 10198494 | test 23.516 / 0.7551 / 0.4794 (-3.775 dB) | positions + faces + uint8 RGB (SH0 only, no view dependence)
+bonsai texture_atlas | None MB | test n/a | xatlas UV parametrisation (vertices duplicated at chart seams)
+bonsai texture_draco_geo_uv | 48.785 MB | test n/a | Draco positions + faces + 12-bit UV on the atlas mesh
+bonsai texture_4096 | 68.475 MB | PNG total 88.586 MB | test 23.516 / 0.7551 / 0.4794 (-3.775 dB) | baked vertex colour, 4096x4096, JPEG q90; quality = draco_rgb8 row (vertex colours only, no SH)
+bonsai o3dgc_tfan_sh8int | 97.616 MB | decoded V 2923381 | test 27.206 / 0.8638 / 0.3745 (-0.085 dB) | MPEG-4 SC3DMC TFAN (Open3DGC): positions q15 parallelogram + 48-ch uint8 SH as 6x8-dim int attributes (lossless; same grid as quant_ply_zstd19)
+bonsai o3dgc_tfan_sh8f | 94.399 MB | decoded V 2923381 | test 27.190 / 0.8622 / 0.3781 (-0.101 dB) | MPEG-4 SC3DMC TFAN (Open3DGC): positions q15 + 48-ch SH as 6x8-dim float attributes, Open3DGC 8-bit quantisation
+bonsai o3dgc_tfan_geo | 15.549 MB | decoded V 2923381 | test n/a | MPEG-4 SC3DMC TFAN (Open3DGC): positions q15 + faces only, no attributes (geometry budget)
+bonsai o3dgc_texture_4096 | 77.209 MB | decoded V - | test n/a | texture route with MPEG geometry: o3dgc_texture_geo_uv + JPEG of texture_4096; quality = draco_rgb8 row (vertex colours only, no SH)
+flowers original | V 2939570 F 4692329 | test 19.091 / 0.4911 / 0.4550
+flowers o3dgc_tfan_sh8int | 106.012 MB | decoded V 2939570 | test 18.882 / 0.4732 / 0.4629 (-0.209 dB) | MPEG-4 SC3DMC TFAN (Open3DGC): positions q15 parallelogram + 48-ch uint8 SH as 6x8-dim int attributes (lossless; same grid as quant_ply_zstd19)
+flowers o3dgc_tfan_sh8f | 103.665 MB | decoded V 2939570 | test 18.881 / 0.4729 / 0.4635 (-0.211 dB) | MPEG-4 SC3DMC TFAN (Open3DGC): positions q15 + 48-ch SH as 6x8-dim float attributes, Open3DGC 8-bit quantisation
+flowers o3dgc_tfan_geo | 14.577 MB | decoded V 2939570 | test n/a | MPEG-4 SC3DMC TFAN (Open3DGC): positions q15 + faces only, no attributes (geometry budget)
+flowers fp32_minimal | 667.739 MB | test n/a | xyz + 48 SH + weight float32, int32 faces
+flowers ply_zstd19 | 589.688 MB | test n/a | zstd19
+flowers quant_ply_zstd19 | 142.562 MB | test 18.882 / 0.4732 / 0.4629 (-0.209 dB) | xyz uint16 q15 + SH uint8 + int32 faces, zstd19
+flowers draco_geo | 25.521 MB | decoded V 10631049 | test n/a | positions + faces only
+flowers draco_full_sh8 | 382.927 MB | decoded V 10631049 | test 18.882 / 0.4732 / 0.4629 (-0.209 dB) | positions q15 + faces + 48-ch uint8 SH generic attribute
+flowers draco_full_sh16 | 884.347 MB | decoded V 10631049 | test 18.884 / 0.4735 / 0.4625 (-0.207 dB) | positions q15 + faces + 48-ch uint16 SH generic attribute
+flowers draco_rgb8 | 51.692 MB | decoded V 10631049 | test 18.236 / 0.4078 / 0.5040 (-0.855 dB) | positions + faces + uint8 RGB (SH0 only, no view dependence)
+flowers texture_atlas | None MB | test n/a | xatlas UV parametrisation (vertices duplicated at chart seams)
+flowers texture_draco_geo_uv | 45.312 MB | test n/a | Draco positions + faces + 12-bit UV on the atlas mesh
+flowers texture_4096 | 68.779 MB | PNG total 83.406 MB | test 18.236 / 0.4078 / 0.5040 (-0.855 dB) | baked vertex colour, 4096x4096, JPEG q90; quality = draco_rgb8 row (vertex colours only, no SH)
+flowers o3dgc_tfan_sh8int | 106.012 MB | decoded V 2939570 | test 18.882 / 0.4732 / 0.4629 (-0.209 dB) | MPEG-4 SC3DMC TFAN (Open3DGC): positions q15 parallelogram + 48-ch uint8 SH as 6x8-dim int attributes (lossless; same grid as quant_ply_zstd19)
+flowers o3dgc_tfan_sh8f | 103.665 MB | decoded V 2939570 | test 18.881 / 0.4729 / 0.4635 (-0.211 dB) | MPEG-4 SC3DMC TFAN (Open3DGC): positions q15 + 48-ch SH as 6x8-dim float attributes, Open3DGC 8-bit quantisation
+flowers o3dgc_tfan_geo | 14.577 MB | decoded V 2939570 | test n/a | MPEG-4 SC3DMC TFAN (Open3DGC): positions q15 + faces only, no attributes (geometry budget)
+flowers o3dgc_texture_4096 | 76.494 MB | decoded V - | test n/a | texture route with MPEG geometry: o3dgc_texture_geo_uv + JPEG of texture_4096; quality = draco_rgb8 row (vertex colours only, no SH)
+truck original | V 1877757 F 3482376 | test 22.362 / 0.8068 / 0.2665
+truck o3dgc_tfan_sh8int | 68.683 MB | decoded V 1877757 | test 22.339 / 0.8037 / 0.2704 (-0.023 dB) | MPEG-4 SC3DMC TFAN (Open3DGC): positions q18 parallelogram + 48-ch uint8 SH as 6x8-dim int attributes (lossless; same grid as quant_ply_zstd19)
+truck o3dgc_tfan_sh8f | 67.64 MB | decoded V 1877757 | test 22.333 / 0.8020 / 0.2728 (-0.029 dB) | MPEG-4 SC3DMC TFAN (Open3DGC): positions q18 + 48-ch SH as 6x8-dim float attributes, Open3DGC 8-bit quantisation
+truck o3dgc_tfan_geo | 12.087 MB | decoded V 1877757 | test n/a | MPEG-4 SC3DMC TFAN (Open3DGC): positions q18 + faces only, no attributes (geometry budget)
+truck fp32_minimal | 432.362 MB | test n/a | xyz + 48 SH + weight float32, int32 faces
+truck ply_zstd19 | 375.613 MB | test n/a | zstd19
+truck quant_ply_zstd19 | 94.822 MB | test 22.339 / 0.8037 / 0.2705 (-0.024 dB) | xyz uint16 q18 + SH uint8 + int32 faces, zstd19
+truck draco_geo | 23.518 MB | decoded V 7810284 | test n/a | positions + faces only
+truck draco_full_sh8 | 269.306 MB | decoded V 7810284 | test 22.339 / 0.8037 / 0.2705 (-0.023 dB) | positions q18 + faces + 48-ch uint8 SH generic attribute
+truck draco_full_sh16 | 636.654 MB | decoded V 7810284 | test 22.343 / 0.8052 / 0.2692 (-0.020 dB) | positions q18 + faces + 48-ch uint16 SH generic attribute
+truck draco_rgb8 | 42.128 MB | decoded V 7810284 | test 20.636 / 0.7288 / 0.3501 (-1.726 dB) | positions + faces + uint8 RGB (SH0 only, no view dependence)
+truck texture_atlas | None MB | test n/a | xatlas UV parametrisation (vertices duplicated at chart seams)
+truck texture_draco_geo_uv | 38.556 MB | test n/a | Draco positions + faces + 12-bit UV on the atlas mesh
+truck texture_4096 | 60.383 MB | PNG total 75.637 MB | test 20.636 / 0.7288 / 0.3501 (-1.726 dB) | baked vertex colour, 4096x4096, JPEG q90; quality = draco_rgb8 row (vertex colours only, no SH)
+truck o3dgc_tfan_sh8int | 68.683 MB | decoded V 1877757 | test 22.339 / 0.8037 / 0.2704 (-0.023 dB) | MPEG-4 SC3DMC TFAN (Open3DGC): positions q18 parallelogram + 48-ch uint8 SH as 6x8-dim int attributes (lossless; same grid as quant_ply_zstd19)
+truck o3dgc_tfan_sh8f | 67.64 MB | decoded V 1877757 | test 22.333 / 0.8020 / 0.2728 (-0.029 dB) | MPEG-4 SC3DMC TFAN (Open3DGC): positions q18 + 48-ch SH as 6x8-dim float attributes, Open3DGC 8-bit quantisation
+truck o3dgc_tfan_geo | 12.087 MB | decoded V 1877757 | test n/a | MPEG-4 SC3DMC TFAN (Open3DGC): positions q18 + faces only, no attributes (geometry budget)
+truck o3dgc_texture_4096 | 66.42 MB | decoded V - | test n/a | texture route with MPEG geometry: o3dgc_texture_geo_uv + JPEG of texture_4096; quality = draco_rgb8 row (vertex colours only, no SH)
+treehill original | V 3031201 F 5107447 | test 20.319 / 0.5377 / 0.4915
+treehill o3dgc_tfan_sh8int | 113.253 MB | decoded V 3031201 | test 20.266 / 0.5286 / 0.4984 (-0.053 dB) | MPEG-4 SC3DMC TFAN (Open3DGC): positions q16 parallelogram + 48-ch uint8 SH as 6x8-dim int attributes (lossless; same grid as quant_ply_zstd19)
+treehill o3dgc_tfan_sh8f | 111.729 MB | decoded V 3031201 | test 20.265 / 0.5280 / 0.4998 (-0.054 dB) | MPEG-4 SC3DMC TFAN (Open3DGC): positions q16 + 48-ch SH as 6x8-dim float attributes, Open3DGC 8-bit quantisation
+treehill o3dgc_tfan_geo | 16.523 MB | decoded V 3031201 | test n/a | MPEG-4 SC3DMC TFAN (Open3DGC): positions q16 + faces only, no attributes (geometry budget)
+treehill fp32_minimal | 691.779 MB | test n/a | xyz + 48 SH + weight float32, int32 faces
+treehill ply_zstd19 | 606.316 MB | test n/a | zstd19
+treehill quant_ply_zstd19 | 149.462 MB | test 20.266 / 0.5286 / 0.4984 (-0.053 dB) | xyz uint16 q16 + SH uint8 + int32 faces, zstd19
+treehill draco_geo | 29.477 MB | decoded V 11457763 | test n/a | positions + faces only
+treehill draco_full_sh8 | 416.478 MB | decoded V 11457763 | test 20.266 / 0.5286 / 0.4984 (-0.052 dB) | positions q16 + faces + 48-ch uint8 SH generic attribute
+treehill draco_full_sh16 | 955.648 MB | decoded V 11457763 | test 20.269 / 0.5291 / 0.4970 (-0.050 dB) | positions q16 + faces + 48-ch uint16 SH generic attribute
+treehill draco_rgb8 | 56.482 MB | decoded V 11457763 | test 19.574 / 0.4798 / 0.5418 (-0.745 dB) | positions + faces + uint8 RGB (SH0 only, no view dependence)
+treehill texture_atlas | None MB | test n/a | xatlas UV parametrisation (vertices duplicated at chart seams)
+treehill texture_draco_geo_uv | 50.81 MB | test n/a | Draco positions + faces + 12-bit UV on the atlas mesh
+treehill texture_4096 | 68.538 MB | PNG total 92.586 MB | test 19.574 / 0.4798 / 0.5418 (-0.745 dB) | baked vertex colour, 4096x4096, JPEG q90; quality = draco_rgb8 row (vertex colours only, no SH)
+treehill o3dgc_tfan_sh8int | 113.253 MB | decoded V 3031201 | test 20.266 / 0.5286 / 0.4984 (-0.053 dB) | MPEG-4 SC3DMC TFAN (Open3DGC): positions q16 parallelogram + 48-ch uint8 SH as 6x8-dim int attributes (lossless; same grid as quant_ply_zstd19)
+treehill o3dgc_tfan_sh8f | 111.729 MB | decoded V 3031201 | test 20.265 / 0.5280 / 0.4998 (-0.054 dB) | MPEG-4 SC3DMC TFAN (Open3DGC): positions q16 + 48-ch SH as 6x8-dim float attributes, Open3DGC 8-bit quantisation
+treehill o3dgc_tfan_geo | 16.523 MB | decoded V 3031201 | test n/a | MPEG-4 SC3DMC TFAN (Open3DGC): positions q16 + faces only, no attributes (geometry budget)
+treehill o3dgc_texture_4096 | 76.55 MB | decoded V - | test n/a | texture route with MPEG geometry: o3dgc_texture_geo_uv + JPEG of texture_4096; quality = draco_rgb8 row (vertex colours only, no SH)
+train original | V 2089049 F 4179180 | test 18.815 / 0.7115 / 0.3662
+train o3dgc_tfan_sh8int | 81.08 MB | decoded V 2089049 | test 18.794 / 0.7086 / 0.3696 (-0.021 dB) | MPEG-4 SC3DMC TFAN (Open3DGC): positions q18 parallelogram + 48-ch uint8 SH as 6x8-dim int attributes (lossless; same grid as quant_ply_zstd19)
+train o3dgc_tfan_sh8f | 79.432 MB | decoded V 2089049 | test 18.792 / 0.7077 / 0.3717 (-0.023 dB) | MPEG-4 SC3DMC TFAN (Open3DGC): positions q18 + 48-ch SH as 6x8-dim float attributes, Open3DGC 8-bit quantisation
+train o3dgc_tfan_geo | 14.113 MB | decoded V 2089049 | test n/a | MPEG-4 SC3DMC TFAN (Open3DGC): positions q18 + faces only, no attributes (geometry budget)
+train fp32_minimal | 484.672 MB | test n/a | xyz + 48 SH + weight float32, int32 faces
+train ply_zstd19 | 413.302 MB | test n/a | zstd19
+train quant_ply_zstd19 | 112.238 MB | test 18.793 / 0.7085 / 0.3696 (-0.022 dB) | xyz uint16 q18 + SH uint8 + int32 faces, zstd19
+train draco_geo | 26.542 MB | decoded V 9323398 | test n/a | positions + faces only
+train draco_full_sh8 | 341.298 MB | decoded V 9323398 | test 18.794 / 0.7086 / 0.3696 (-0.021 dB) | positions q18 + faces + 48-ch uint8 SH generic attribute
+train draco_full_sh16 | 776.663 MB | decoded V 9323398 | test 18.796 / 0.7095 / 0.3684 (-0.019 dB) | positions q18 + faces + 48-ch uint16 SH generic attribute
+train draco_rgb8 | 49.367 MB | decoded V 9323398 | test 17.073 / 0.6298 / 0.4447 (-1.741 dB) | positions + faces + uint8 RGB (SH0 only, no view dependence)
+train texture_atlas | None MB | test n/a | xatlas UV parametrisation (vertices duplicated at chart seams)
+train texture_draco_geo_uv | 44.526 MB | test n/a | Draco positions + faces + 12-bit UV on the atlas mesh
+train texture_4096 | 66.541 MB | PNG total 83.172 MB | test 17.073 / 0.6298 / 0.4447 (-1.741 dB) | baked vertex colour, 4096x4096, JPEG q90; quality = draco_rgb8 row (vertex colours only, no SH)
+train o3dgc_tfan_sh8int | 81.08 MB | decoded V 2089049 | test 18.794 / 0.7086 / 0.3696 (-0.021 dB) | MPEG-4 SC3DMC TFAN (Open3DGC): positions q18 parallelogram + 48-ch uint8 SH as 6x8-dim int attributes (lossless; same grid as quant_ply_zstd19)
+train o3dgc_tfan_sh8f | 79.432 MB | decoded V 2089049 | test 18.792 / 0.7077 / 0.3717 (-0.023 dB) | MPEG-4 SC3DMC TFAN (Open3DGC): positions q18 + 48-ch SH as 6x8-dim float attributes, Open3DGC 8-bit quantisation
+train o3dgc_tfan_geo | 14.113 MB | decoded V 2089049 | test n/a | MPEG-4 SC3DMC TFAN (Open3DGC): positions q18 + faces only, no attributes (geometry budget)
+train o3dgc_texture_4096 | 73.836 MB | decoded V - | test n/a | texture route with MPEG geometry: o3dgc_texture_geo_uv + JPEG of texture_4096; quality = draco_rgb8 row (vertex colours only, no SH)
+===== FAILED
