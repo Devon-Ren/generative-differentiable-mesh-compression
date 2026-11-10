@@ -44,12 +44,14 @@ for ax, (name, scenes) in zip(axes, DS4.items()):
     ax.plot([fx], [fy], '*', color='k', ms=11, label='MeshSplatting FP32 (our reproduction)'); ax.annotate(f'{fx:.0f} MB', (fx, fy), textcoords='offset points', xytext=(-6, 6), ha='right', fontsize=8)
     for i, (k, (x, y)) in enumerate(MESHPTS.get(name, {}).items()):
         ax.scatter([x], [y], marker='D', s=40, color='#7a5c99', zorder=4, label='other mesh methods (published)' if i == 0 else None)
-        ax.annotate(k, (x, y), textcoords='offset points', xytext=(-5, 5 if i % 2 == 0 else -11), ha='right', fontsize=7, color='#5a4273')
-    ax.set_xscale('log'); ax.set_title(name + (' (5 objects)' if name in PLOT else '')); ax.set_xlabel('file size (MB, log)'); ax.grid(alpha=.3)
+        right = x < 300
+        ax.annotate(k, (x, y), textcoords='offset points', xytext=(6 if right else -6, 5 if i % 2 == 1 else -11), ha='left' if right else 'right', fontsize=7, color='#5a4273')
+    ax.margins(y=0.12); ax.set_xscale('log'); ax.set_title(name + (' (5 objects)' if name in PLOT else '')); ax.set_xlabel('file size (MB, log)'); ax.grid(alpha=.3)
     import matplotlib.ticker as mt; ax.xaxis.set_major_locator(mt.LogLocator(base=10, subs=(1, 2, 5))); ax.xaxis.set_major_formatter(mt.FuncFormatter(lambda v, _: f'{v:g}')); ax.xaxis.set_minor_formatter(mt.NullFormatter())
     for x, y in zip(xs, ys): ax.annotate(f'{y:.2f}', (x, y), textcoords='offset points', xytext=(0, 6), ha='center', fontsize=7, color='#d9822b')
-axes[0].set_ylabel('PSNR (dB), mean over scenes'); axes[0].legend(fontsize=7, loc='lower right')
-fig.tight_layout(); fig.savefig(OUT + 'fig_rd_per_dataset.pdf'); fig.savefig(OUT + 'fig_rd_per_dataset.png', dpi=160); plt.close(fig)
+axes[0].set_ylabel('PSNR (dB), mean over scenes')
+h, l = axes[0].get_legend_handles_labels(); fig.legend(h, l, loc='lower center', ncol=4, fontsize=8, frameon=False, bbox_to_anchor=(0.5, -0.02))
+fig.tight_layout(rect=(0, 0.06, 1, 1)); fig.savefig(OUT + 'fig_rd_per_dataset.pdf', bbox_inches='tight'); fig.savefig(OUT + 'fig_rd_per_dataset.png', dpi=160, bbox_inches='tight'); plt.close(fig)
 # ---------- Figure 2: size-error histogram per dataset
 fig, axes = plt.subplots(1, 3, figsize=(13, 3.2), sharey=False)
 for ax, (name, scenes) in zip(axes, DS.items()):
