@@ -133,7 +133,7 @@ SBEOF_REND23
 cat > $AN/submit-batch23-v2.sh <<'SHEOF_B23R2'
 AN=/scratch/zr2245/analysis; RES=yw523-l40s; mkdir -p $AN/render /scratch/zr2245/renders-b23
 chk () { n=$(wc -l < $1); [ "$n" = $2 ] || { echo "CHECK FAILED: $1 has $n lines, expected $2"; exit 1; }; m=$(md5sum < $1 | cut -c1-32); [ "$m" = $3 ] || { echo "CHECK FAILED: $1 md5 $m != $3"; exit 1; }; }
-chk $AN/render/decode_asset_v2.py 67 49735f842b1cd7ef7745cbd315dcef57
+chk $AN/render/decode_asset_v2.py 75 74796a7c09bac6ee7e6e1878be0a4f97
 chk $AN/render/render_ckpt_v1.py 75 dca70c1012c838dc025555149c8e11a1
 chk $AN/render-b23.sbatch 45 1e5d32e68cf7b5c5adb97afe97549805
 source /scratch/zr2245/anaconda3/etc/profile.d/conda.sh; conda activate /scratch/zr2245/conda-envs/pmsh-cu126; source /scratch/zr2245/meshsplatting-original-lossless-v1/.venv/bin/activate
