@@ -22,28 +22,33 @@ for f in ['release-g0-refresh-v1/results/g0-refresh-2026-11-09.txt', 'release-g0
     for l in open(f):
         m = re.match(r'(\w+) budget (\d+) TRAIN-AT-BUDGET(?:-BLENDER)? \| .*?\| delivered ([\d.]+) MB test ([\d.]+)', l)
         if m and m[1] in FP: capr.setdefault(m[1], []).append((float(m[3]), float(m[4])))
-# ---------- Figure 1: RD per dataset (means over scenes)
-fig, axes = plt.subplots(1, 3, figsize=(13, 3.9))
-PLOT = {'NeRF-Synthetic': (['chair', 'drums', 'hotdog', 'lego', 'ship'], [1.5, 2.5, 3, 4])}   # same scene set at every target (objects at the capacity limit and the missing materials-3 MB run excluded)
-for ax, (name, scenes) in zip(axes, DS.items()):
+# ---------- Figure 1: RD per dataset (means over scenes) + published mesh-class points on the Mip-360 and T&T panels
+DS4 = {'Mip-NeRF 360': MIP[:9], 'T&T': ['truck', 'train'], 'Deep Blending': DB, 'NeRF-Synthetic': BL}
+MESHPTS = {'Mip-NeRF 360': {'MeshSplatting (paper, RGB-only PLY)': (100, 24.78), 'MiLo': (253, 24.09), 'Binary Opacity Grids (7 scenes)': (913, 25.62), 'RaDe-GS mesh': (1100, 23.56), 'GOF mesh': (1500, 20.78)},
+           'T&T': {'MiLo': (253, 21.46), 'RaDe-GS mesh': (1100, 20.51), 'GOF mesh': (1500, 21.69)}}
+PLOT = {'NeRF-Synthetic': (['chair', 'drums', 'hotdog', 'lego', 'ship'], [1.5, 2.5, 3, 4])}
+fig, axes = plt.subplots(1, 4, figsize=(16, 4.1))
+for ax, (name, scenes) in zip(axes, DS4.items()):
     scenes, targets = PLOT.get(name, (scenes, sorted({t for (s, t) in ctrl if s in scenes})))
     xs, ys = [], []
     for t in targets:
         pts = [ctrl[(s, t)] for s in scenes if (s, t) in ctrl and not ctrl[(s, t)]['capped']]
-        if len(pts) >= max(2, len(scenes) // 2): xs.append(statistics.mean(p['mb'] for p in pts)); ys.append(statistics.mean(p['psnr'] for p in pts))
-    ax.plot(xs, ys, 'o-', color='#d9822b', lw=2, label='BudgetMesh (target sizes)')
-    # cap curve: tiers = sorted budgets per scene, averaged by rank
+        if len(pts) >= max(1, len(scenes) // 2): xs.append(statistics.mean(p['mb'] for p in pts)); ys.append(statistics.mean(p['psnr'] for p in pts))
+    ax.plot(xs, ys, 'o-', color='#d9822b', lw=2, label='BudgetMesh (target sizes)', zorder=5)
     K = max(len(v) for s, v in capr.items() if s in scenes); cx, cy = [], []
     for k in range(K):
         pts = [sorted(capr[s], reverse=True)[k] for s in scenes if s in capr and len(capr[s]) > k]
-        if len(pts) >= max(2, len(scenes) // 2): cx.append(statistics.mean(p[0] for p in pts)); cy.append(statistics.mean(p[1] for p in pts))
+        if len(pts) >= max(1, len(scenes) // 2): cx.append(statistics.mean(p[0] for p in pts)); cy.append(statistics.mean(p[1] for p in pts))
     ax.plot(cx, cy, 's--', color='#5b7a99', lw=1.6, label='MeshSplatting, vertex cap + our codec')
     fx = statistics.mean(FP[s][0] for s in scenes); fy = statistics.mean(FP[s][1] for s in scenes)
-    ax.plot([fx], [fy], '*', color='k', ms=11, label='FP32 model'); ax.annotate(f'{fx:.0f} MB', (fx, fy), textcoords='offset points', xytext=(-6, 6), ha='right', fontsize=8)
+    ax.plot([fx], [fy], '*', color='k', ms=11, label='MeshSplatting FP32 (our reproduction)'); ax.annotate(f'{fx:.0f} MB', (fx, fy), textcoords='offset points', xytext=(-6, 6), ha='right', fontsize=8)
+    for i, (k, (x, y)) in enumerate(MESHPTS.get(name, {}).items()):
+        ax.scatter([x], [y], marker='D', s=40, color='#7a5c99', zorder=4, label='other mesh methods (published)' if i == 0 else None)
+        ax.annotate(k, (x, y), textcoords='offset points', xytext=(-5, 5 if i % 2 == 0 else -11), ha='right', fontsize=7, color='#5a4273')
     ax.set_xscale('log'); ax.set_title(name + (' (5 objects)' if name in PLOT else '')); ax.set_xlabel('file size (MB, log)'); ax.grid(alpha=.3)
     import matplotlib.ticker as mt; ax.xaxis.set_major_locator(mt.LogLocator(base=10, subs=(1, 2, 5))); ax.xaxis.set_major_formatter(mt.FuncFormatter(lambda v, _: f'{v:g}')); ax.xaxis.set_minor_formatter(mt.NullFormatter())
     for x, y in zip(xs, ys): ax.annotate(f'{y:.2f}', (x, y), textcoords='offset points', xytext=(0, 6), ha='center', fontsize=7, color='#d9822b')
-axes[0].set_ylabel('PSNR (dB), mean over scenes'); axes[0].legend(fontsize=8, loc='lower right')
+axes[0].set_ylabel('PSNR (dB), mean over scenes'); axes[0].legend(fontsize=7, loc='lower right')
 fig.tight_layout(); fig.savefig(OUT + 'fig_rd_per_dataset.pdf'); fig.savefig(OUT + 'fig_rd_per_dataset.png', dpi=160); plt.close(fig)
 # ---------- Figure 2: size-error histogram per dataset
 fig, axes = plt.subplots(1, 3, figsize=(13, 3.2), sharey=False)

@@ -112,7 +112,7 @@ Dataset & target & scenes & mean file size & size error mean & size error range 
 
 \begin{figure}[H]\centering
 \includegraphics[width=\linewidth]{figures/fig_rd_per_dataset.pdf}
-\caption{Rate--distortion of \BM{} per dataset: mean PSNR vs.\ mean file size over the dataset's scenes at each target (orange), \MS{} trained with a vertex cap and encoded with the same codec (blue), and the FP32 model (star). NeRF-Synthetic uses the five objects that are below their capacity limit at every target. Per-scene curves in the appendix.}
+\caption{Rate--distortion of \BM{} per dataset: mean PSNR vs.\ mean file size over the dataset's scenes at each target (orange), \MS{} trained with a vertex cap and encoded with the same codec (blue), the FP32 model (star), and, on Mip-NeRF~360 and T\&T, the published single points of other mesh-output methods (diamonds; their own reported asset sizes; Binary Opacity Grids on the 7-scene subset). NeRF-Synthetic uses the five objects below their capacity limit at every target. Per-scene curves in the appendix.}
 \label{fig:rd}
 \end{figure}
 
@@ -160,6 +160,26 @@ Ours (level 1.0) & 1$\times$ & $-0.1$ to $-0.8$ dB & yes \\
 \bottomrule
 \end{tabular}}
 \end{table}
+\begin{table}[H]\centering\small
+\caption{Mesh-output methods, published numbers (dataset means; sizes as reported by each method). Only \BM{} and \MS{}'s own RGB-only PLY are below 250 MB; \BM{} is the only compressed entry. $^a$RGB-only, no view-dependent appearance (about $-2$ dB vs.\ FP32 on our evaluator).}
+\label{tab:meshclass}
+\resizebox{\linewidth}{!}{\begin{tabular}{lrrrrr}
+\toprule
+method & Mip-360 PSNR / SSIM / LPIPS & MB & T\&T PSNR / SSIM / LPIPS & MB & FPS \\
+\midrule
+\MS{}, paper (2025) & 24.78 / 0.728 / 0.310 & 100$^a$ & 20.52 / 0.745 / 0.287 & -- & 220 / 190 (M4) \\
+\MS{} FP32, our reproduction & 24.81 / 0.731 / 0.309 & 642 & 20.64 / 0.760 / 0.272 & 459 & -- \\
+MiLo (SIGGRAPH Asia 2025) & 24.09 / 0.688 / 0.323 & 253 & 21.46 / 0.706 / 0.348 & -- & 170 / 160 (M4) \\
+Binary Opacity Grids (SIGGRAPH 2024) & 25.62 / -- / -- & 913 & -- & -- & 927 (desktop) \\
+RaDe-GS mesh (2024) & 23.56 / 0.668 / 0.361 & 1100 & 20.51 / 0.659 / 0.344 & -- & OOM on M4 \\
+GOF mesh (2024) & 20.78 / 0.573 / 0.465 & 1500 & 21.69 / 0.690 / 0.326 & -- & OOM on M4 \\
+\midrule
+\BM{}, 20 MB target & 23.75 / \tbd{SSIM} / \tbd{LPIPS} & 19.9 & (in the Mip-360+T\&T mean) & & 145--350 (phone) \\
+\BM{}, 5 MB target & 22.72 / \tbd{} / \tbd{} & 5.0 & & & same \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
 \noindent\textbf{Caveat stated in the text.} The generic rows are near-lossless and ours loses 0.1--0.8 dB at this point, so this is ``bytes each codec needs for essentially the same mesh'', not an RD curve; the RD comparison with 3DGS-class codecs is in the appendix (Section~\ref{sec:appendix}, A5) and shows the representation gap honestly.
 
 %==================================================================
