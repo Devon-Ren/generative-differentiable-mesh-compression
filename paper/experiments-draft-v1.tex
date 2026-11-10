@@ -195,12 +195,12 @@ no in-training collapse & lands at the growth aim: $+25\%$ by construction (noth
 \section{Qualitative results [main]}
 \label{sec:e8}
 \begin{figure}[h]\centering
-\fbox{\parbox{0.95\linewidth}{\centering\vspace{2.5cm}\textbf{Figure 2 (from renders-b23r2):} two rows (room view DSCF4747, truck view 000081), columns GT $|$ FP32 $|$ 20 MB $|$ 10 MB $|$ 5 MB, with crops of the table top / truck rim and the error map strip beneath. Per-view PSNR: room DSCF4747 31.28 / 30.36 / 29.91 / 29.32; truck 000081 22.68 / 22.44 / 22.24 / 21.57 (FP32 / 20 / 10 / 5 MB). Garden, Deep Blending (view IMG\_6382) and lego rows in the appendix. Decoded files (batch23 v2).\vspace{2.5cm}}}
-\caption{Decoded \BM{} files at three target sizes next to the ground truth and the FP32 model.}
+\includegraphics[width=\linewidth]{figures/fig_qualitative.jpg}
+\caption{Decoded \BM{} files at three target sizes next to the ground truth and the FP32 model (room, truck). Per column: full view with its PSNR, the yellow-box crop enlarged, and the error map ($|$render $-$ GT$|\times4$). Draft version from quarter-resolution montages; the camera-ready crops will be cut from the full-resolution renders.}
 \label{fig:qual}
 \end{figure}
 \begin{figure}[h]\centering
-\fbox{\parbox{0.95\linewidth}{\centering\vspace{2cm}\textbf{Figure 3 (from renders-b23r2/room-g0):} same vertex count (486k), three ways: \BM{} grown to 5 MB $|$ \MS{} trained with a vertex cap $|$ FP32 mesh simplified after training. Crop of the floor and table edge where the simplified mesh shows speckle. PSNR 28.6 / 28.6 / 25.8 on this view (DSCF4683).  \textbf{Decoded files (batch23 v2), no fallback.}\vspace{2cm}}}
+\includegraphics[width=\linewidth]{figures/fig_g0_triptych.jpg}
 \caption{The same vertex count reached three ways. Simplification after training loses 3 dB on this view and shows holes and speckle; training to the budget does not.}
 \label{fig:g0}
 \end{figure}
