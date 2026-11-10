@@ -23,7 +23,7 @@
 
 \textbf{Protocol.} \MS{} training is unchanged (30k iterations, its own schedule); images\_2 for indoor scenes, images\_4 for outdoor, the standard test split (every 8th view), black background for NeRF-Synthetic. Quality is PSNR/SSIM/LPIPS of the \emph{decoded file} rendered at the renderer's supersampling; all sizes are bytes of the single delivered file. The \emph{FP32 model} is the trained \MS{} mesh in 32-bit floats; its size and PSNR per scene are the reference for compression ratios and quality loss. ``At the same vertex count'' means after \MS{}'s final cleaning.
 
-\textbf{Settings.} One configuration for all scenes: appearance dictionary $4096+256$, per-scene position grid (14--18 bits by scene extent), 7-bit DC colour; size controller with a growth aim of $1.25\times$ the target (Mip-NeRF~360, T\&T, Deep Blending) and $1.1\times$ (NeRF-Synthetic); collapse rounds every 500 iterations from 12.5k to 19.5k.
+\textbf{Settings.} One configuration for all scenes: appearance dictionary $4096+256$, per-scene position grid (14--18 bits by scene extent), 7-bit DC colour (quantised, then entropy-coded with zstd); size controller with a growth aim of $1.25\times$ the target (Mip-NeRF~360, T\&T, Deep Blending) and $1.1\times$ (NeRF-Synthetic); collapse rounds every 500 iterations from 12.5k to 19.5k.
 
 %==================================================================
 \section{A trained mesh cannot be simplified afterwards [main]}
@@ -218,7 +218,7 @@ Two statements hold by construction. (1) The collapse rounds never move the file
 
 %==================================================================
 \section{Limitations}
-The growth aim ($1.25\times$ / $1.1\times$) is one calibrated constant per capture class; it stands in for the growth of the visible-face set after the growth phase, which cannot be observed before \MS{} stitches the mesh. Indoor scenes land 5--12\% above the target; outdoor scenes at 20 MB up to 7\% below. Small objects cannot fill large targets (model capacity; reported, not hidden). Opaque meshes are about 3 dB below Gaussian-splat codecs at the same file size (A5); that gap is the representation's, and this paper is about what the mesh class can do per byte. The entropy coder is fixed, not learned.
+The growth aim ($1.25\times$ / $1.1\times$) is one calibrated constant per capture class; it stands in for the growth of the visible-face set after the growth phase, which cannot be observed before \MS{} stitches the mesh. Indoor scenes land 5--12\% above the target; outdoor scenes at 20 MB up to 7\% below. Small objects cannot fill large targets (model capacity; reported, not hidden). Opaque meshes are about 3 dB below Gaussian-splat codecs at the same file size (A5); that gap is the representation's, and this paper is about what the mesh class can do per byte. The entropy coders are fixed, not learned: the two appearance-index streams use a neighbour-context adaptive arithmetic coder, the position residuals and the 7-bit DC colour use zstd. A learned entropy model would act on the 30--35\% of the file those two streams occupy and is left to future work.
 
 %==================================================================
 \section{Appendix items}
