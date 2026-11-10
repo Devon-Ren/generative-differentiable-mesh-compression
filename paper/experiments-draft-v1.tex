@@ -38,8 +38,8 @@
 Dataset & pairs & mean gain (dB) & range (dB) & trained better & gain at largest / mid / smallest budget \\
 \midrule
 Mip-NeRF 360 + T\&T & 33 & $+2.45$ & $+0.01$ to $+6.02$ & 33 / 33 & $+0.89$ / $+2.24$ / $+4.23$ \\
-Deep Blending & 6 & $+2.71$ & $+1.39$ to $+4.72$ & 6 / 6 & \tbd{tiers} \\
-NeRF-Synthetic & 32 & $+1.27$ & $+0.03$ to $+4.32$ & 32 / 32 & \tbd{tiers} \\
+Deep Blending & 6 & $+2.71$ & $+1.39$ to $+4.72$ & 6 / 6 & $+1.48$ / $+2.91$ / $+3.75$ \\
+NeRF-Synthetic & 32 & $+1.27$ & $+0.03$ to $+4.32$ & 32 / 32 & $+0.58$ / $+0.67$ / $+1.43$ / $+2.41$ (four budgets) \\
 \midrule
 all & 71 & $+1.94$ & $+0.01$ to $+6.02$ & 71 / 71 & \\
 \bottomrule
@@ -66,8 +66,8 @@ Dataset & pairs & mean gain & \BM{} better & pairs & mean gain & \BM{} better \\
 \midrule
 Mip-NeRF 360 + T\&T & 25 & $+0.40$ dB & 23 / 25 & 33 & $+0.33$ dB & 29 / 33 \\
 \quad indoor only & 12 & $+0.58$ dB & 12 / 12 & & & \\
-Deep Blending & \tbd{derive} & & & 6 & $+0.19$ dB & 5 / 6 \\
-NeRF-Synthetic & \tbd{derive} & & & 32 & $+0.14$ dB & 28 / 32 \\
+Deep Blending & \tbd{needs the pre-codec PSNR of the DB price runs; fetch block} & & & 6 & $+0.19$ dB & 5 / 6 \\
+NeRF-Synthetic & 14 & $+0.18$ dB & 13 / 14 & 32 & $+0.14$ dB & 28 / 32 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -94,15 +94,15 @@ Dataset & target & scenes & mean file size & size error mean & size error range 
  & 15 MB & 11 & 15.2 MB & $+1.0\%$ & $-5.4$ to $+11.4\%$ & $-0.4$ dB \\
  & 20 MB & 11 & 19.9 MB & $-0.5\%$ & $-6.6$ to $+10.0\%$ & $-0.25$ dB \\
 \midrule
-\multirow{3}{*}{Deep Blending} & 5 MB & 2 & 5.4 MB & $+7.9\%$ & $+4.7$ to $+11.1\%$ & \tbd{} \\
- & 10 MB & 2 & 11.0 MB & $+10.2\%$ & $+8.3$ to $+12.0\%$ & \tbd{} \\
- & 20 MB & 2 & 21.3 MB & $+6.7\%$ & $+3.6$ to $+9.7\%$ & \tbd{} \\
+\multirow{3}{*}{Deep Blending} & 5 MB & 2 & 5.4 MB & $+7.9\%$ & $+4.7$ to $+11.1\%$ & $-1.04$ dB \\
+ & 10 MB & 2 & 11.0 MB & $+10.2\%$ & $+8.3$ to $+12.0\%$ & $-0.39$ dB \\
+ & 20 MB & 2 & 21.3 MB & $+6.7\%$ & $+3.6$ to $+9.7\%$ & $+0.02$ dB \\
 \midrule
-\multirow{5}{*}{NeRF-Synthetic} & 1.5 MB & 8 & 1.56 MB & $+4.0\%$ & $+1.0$ to $+9.0\%$ & \tbd{} \\
+\multirow{5}{*}{NeRF-Synthetic} & 1.5 MB & 8 & 1.56 MB & $+4.0\%$ & $+1.0$ to $+9.0\%$ & \tbd{Blender FP32 PSNR table; fetch block} \\
  & 2.5 MB & 7 (+1 cap.) & 2.56 MB & $+2.6\%$ & $-6.6$ to $+9.2\%$ & \tbd{} \\
- & 3 MB & 6 (+2 cap.) & \tbd{} & \tbd{} & \tbd{} & \tbd{} \\
+ & 3 MB & 5 (+2 cap.; materials run missing) & 3.05 MB & $+1.8\%$ & $-4.6$ to $+7.0\%$ & \tbd{} \\
  & 4 MB & 6 (+2 cap.) & 3.9 MB & $-2.9\%$ & $-10.3$ to $+3.4\%$ & \tbd{} \\
- & 6 MB & 1 (+7 cap.) & 6.1 MB & $+1.5\%$ & & \tbd{} \\
+ & 6 MB & 2 (+6 cap.) & 5.7 MB & $-5.0\%$ & $-11.5$ to $+1.5\%$ & \tbd{} \\
 \midrule
 \multicolumn{7}{l}{Overall: 89 rows not at the capacity limit, 83 within $\pm10\%$; quality at the same file size vs.\ a constant-price run: $-0.05$ dB mean (Table~\ref{tab:e7}).}\\
 \bottomrule
@@ -137,7 +137,7 @@ Target & scenes & mean ratio & mean $\Delta$PSNR & $\Delta$PSNR range \\
 \bottomrule
 \end{tabular}
 \end{table}
-\noindent The decoder is a standalone program (no access to training data) that reconstructs a standard indexed mesh in 2.3--6.4 s on one CPU core (0.4--1.1M vertices); the decoded mesh renders with an ordinary vertex shader (\tbd{fps numbers from table2-deployability}).
+\noindent The decoder is a standalone program (no access to training data) that reconstructs a standard indexed mesh in 2.3--6.4 s on one CPU core (0.4--1.1M vertices); the decoded mesh renders with an ordinary vertex shader at 145--350 fps on a phone (iPhone 17 Pro, full capture resolution; table2-deployability-v1).
 
 \section{Against generic mesh codecs [main, one table; full data appendix]}
 \label{sec:e5}
@@ -184,7 +184,7 @@ Variant & size & quality at the same file size \\
 full \BM{} & within $\pm10\%$ on 83/89 & reference \\
 constant price (controller off) & unpredictable: one price lands at 15--100\% of the dense vertex count depending on the scene & $+0.05$ dB (33 rows) \\
 prices from fixed constants instead of the byte probe & mean 0.83$\times$ target, 8/33 within $\pm10\%$ & $-0.05$ dB \\
-no in-training collapse & \tbd{hit from v7b-style runs} & \tbd{} \\
+no in-training collapse & lands at the growth aim: $+25\%$ by construction (nothing removes bytes after growth) & $-0.3$ / $-0.5$ dB (lego / chair at 4 MB, v6 tests) \\
 \MS{}'s own split selection at the same split count & same & $-0.12$ dB (room) \tbd{one more scene optional} \\
 \bottomrule
 \end{tabular}
@@ -194,12 +194,12 @@ no in-training collapse & \tbd{hit from v7b-style runs} & \tbd{} \\
 \section{Qualitative results [main]}
 \label{sec:e8}
 \begin{figure}[h]\centering
-\fbox{\parbox{0.95\linewidth}{\centering\vspace{2.5cm}\textbf{Figure 2 (from renders-b23r2):} two rows (room view DSCF4747, truck view 000081), columns GT $|$ FP32 $|$ 20 MB $|$ 10 MB $|$ 5 MB, with crops of the table top / truck rim and the error map strip beneath. Per-view PSNR in the caption. Garden, Deep Blending and lego rows in the appendix.\vspace{2.5cm}}}
+\fbox{\parbox{0.95\linewidth}{\centering\vspace{2.5cm}\textbf{Figure 2 (from renders-b23r2):} two rows (room view DSCF4747, truck view 000081), columns GT $|$ FP32 $|$ 20 MB $|$ 10 MB $|$ 5 MB, with crops of the table top / truck rim and the error map strip beneath. Per-view PSNR: room DSCF4747 31.28 / 30.36 / 29.91 / 29.32; truck 000081 22.68 / 22.44 / 22.24 / 21.57 (FP32 / 20 / 10 / 5 MB). Garden, Deep Blending (view IMG\_6382) and lego rows in the appendix. Decoded files (batch23 v2).\vspace{2.5cm}}}
 \caption{Decoded \BM{} files at three target sizes next to the ground truth and the FP32 model.}
 \label{fig:qual}
 \end{figure}
 \begin{figure}[h]\centering
-\fbox{\parbox{0.95\linewidth}{\centering\vspace{2cm}\textbf{Figure 3 (from renders-b23r2/room-g0):} same vertex count (486k), three ways: \BM{} grown to 5 MB $|$ \MS{} trained with a vertex cap $|$ FP32 mesh simplified after training. Crop of the floor and table edge where the simplified mesh shows speckle. PSNR 28.7 / 28.8 / 25.9 on this view.\vspace{2cm}}}
+\fbox{\parbox{0.95\linewidth}{\centering\vspace{2cm}\textbf{Figure 3 (from renders-b23r2/room-g0):} same vertex count (486k), three ways: \BM{} grown to 5 MB $|$ \MS{} trained with a vertex cap $|$ FP32 mesh simplified after training. Crop of the floor and table edge where the simplified mesh shows speckle. PSNR 28.6 / 28.6 / 25.8 on this view (DSCF4683).  \textbf{Decoded files (batch23 v2), no fallback.}\vspace{2cm}}}
 \caption{The same vertex count reached three ways. Simplification after training loses 3 dB on this view and shows holes and speckle; training to the budget does not.}
 \label{fig:g0}
 \end{figure}
