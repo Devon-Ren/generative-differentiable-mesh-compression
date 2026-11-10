@@ -78,3 +78,42 @@ for ax, (name, sel) in zip(axes, groups.items()):
     ax.axhline(1.0, color='k', lw=.9); ax.axhspan(.9, 1.1, color='gray', alpha=.12); ax.set_ylim(.6, 1.6); ax.set_title(f'{name} ({n} runs)'); ax.set_xlabel('training iteration (k)'); ax.grid(alpha=.3)
 axes[0].set_ylabel('estimated landing size / target'); fig.tight_layout(); fig.savefig(OUT + 'fig_controller_traces.pdf'); fig.savefig(OUT + 'fig_controller_traces.png', dpi=160); plt.close(fig)
 print('figures written')
+
+# ---------- Figure 2b: size error as a strip plot (replaces the histogram)
+fig, axes = plt.subplots(1, 3, figsize=(13, 3.4), sharey=True, gridspec_kw=dict(width_ratios=[5, 3, 5]))
+import random; random.seed(0)
+for ax, (name, scenes) in zip(axes, DS.items()):
+    targets = sorted({t for (s, t) in ctrl if s in scenes})
+    for i, t in enumerate(targets):
+        e = [100 * (ctrl[(s, t)]['hit'] - 1) for s in scenes if (s, t) in ctrl and not ctrl[(s, t)]['capped']]
+        ec = [100 * (ctrl[(s, t)]['hit'] - 1) for s in scenes if (s, t) in ctrl and ctrl[(s, t)]['capped']]
+        ax.scatter([i + random.uniform(-.12, .12) for _ in e], e, s=22, color='#d9822b', alpha=.8, edgecolor='white', lw=.5, zorder=3)
+        if ec: ax.scatter([i + random.uniform(-.12, .12) for _ in ec], [max(v, -32) for v in ec], s=22, marker='v', color='#9a9a94', alpha=.8, zorder=3)
+        if e: ax.plot([i - .22, i + .22], [statistics.median(e)] * 2, color='k', lw=1.6, zorder=4)
+    ax.axhspan(-10, 10, color='gray', alpha=.12); ax.axhline(0, color='k', lw=.7)
+    ax.set_xticks(range(len(targets))); ax.set_xticklabels([f'{t:g} MB' for t in targets]); ax.set_title(name); ax.grid(axis='y', alpha=.3); ax.set_ylim(-32, 20)
+axes[0].set_ylabel('size error (%)\n(file − target) / target')
+axes[0].scatter([], [], s=22, color='#d9822b', label='one scene'); axes[0].plot([], [], color='k', lw=1.6, label='median'); axes[0].scatter([], [], marker='v', color='#9a9a94', label='capacity limit (price at floor)'); axes[0].legend(fontsize=7.5, loc='lower left')
+fig.tight_layout(); fig.savefig(OUT + 'fig_size_error_strip.pdf'); fig.savefig(OUT + 'fig_size_error_strip.png', dpi=160); plt.close(fig)
+
+# ---------- Figure 5: cross-representation points, Mip-NeRF 360 means (published numbers; baselines-v2.md)
+mip9 = MIP[:9]
+xs, ys = [], []
+for t in [5, 7.5, 10, 15, 20]:
+    pts = [ctrl[(s, t)] for s in mip9 if (s, t) in ctrl]; xs.append(statistics.mean(p['mb'] for p in pts)); ys.append(statistics.mean(p['psnr'] for p in pts))
+fx = statistics.mean(FP[s][0] for s in mip9); fy = statistics.mean(FP[s][1] for s in mip9)
+mesh_pts = {'MeshSplatting (paper, RGB-only PLY)': (100, 24.78), 'MeshSplatting FP32 (our reproduction)': (fx, fy), 'MiLo': (253, 24.09), 'RaDe-GS mesh': (1100, 23.56), 'GOF mesh': (1500, 20.78), 'BakedSDF (7-scene set)': (434, 25.09), 'Binary Opacity Grids (7-scene set)': (870, 26.09)}
+gs_pts = {'3DGS': (750.9, 27.46), 'Scaffold-GS': (253.9, 27.50), 'Compact3DGS': (48.8, 27.08), 'LightGaussian': (44.54, 27.00), 'RDO-Gaussian': (23.46, 27.05), 'HAC': (15.26, 27.53), 'HAC (high)': (21.87, 27.77), 'HAC++': (8.34, 27.60), 'HAC++ (high)': (18.48, 27.82), 'CompGS': (8.83, 26.37), 'CompGS (high)': (16.5, 27.26)}
+fig, ax = plt.subplots(figsize=(8.5, 4.6))
+ax.plot(xs, ys, 'o-', color='#d9822b', lw=2.2, ms=6, label='BudgetMesh (ours), 5 … 20 MB targets', zorder=5)
+for i, (k, (x, y)) in enumerate(mesh_pts.items()):
+    off = {'MeshSplatting (paper, RGB-only PLY)': (-6, 5, 'right'), 'BakedSDF (7-scene set)': (6, 7, 'left'), 'MeshSplatting FP32 (our reproduction)': (6, -11, 'left'), 'GOF mesh': (-6, 4, 'right'), 'MiLo': (6, -11, 'left'), 'RaDe-GS mesh': (6, -4, 'left'), 'Binary Opacity Grids (7-scene set)': (-6, 4, 'right')}.get(k, (6, 4, 'left'))
+    ax.scatter([x], [y], marker='s', s=55, color='#5b7a99', zorder=4, label='mesh class (published, single points)' if i == 0 else None); ax.annotate(k, (x, y), textcoords='offset points', xytext=off[:2], ha=off[2], fontsize=7.5, color='#3f5566')
+for i, (k, (x, y)) in enumerate(gs_pts.items()):
+    ax.scatter([x], [y], marker='^', s=50, color='#2f8a5b', zorder=4, label='3DGS class (published, not a mesh)' if i == 0 else None)
+    if '(high)' not in k: ax.annotate(k, (x, y), textcoords='offset points', xytext=(6, 4 if i % 2 else -9), fontsize=7.5, color='#2f8a5b')
+ax.set_xscale('log'); ax.set_xlabel('file size (MB, log; Mip-NeRF 360 mean)'); ax.set_ylabel('PSNR (dB, Mip-NeRF 360 mean)'); ax.grid(alpha=.3); ax.legend(fontsize=8, loc='lower left')
+import matplotlib.ticker as mt; ax.xaxis.set_major_locator(mt.LogLocator(base=10, subs=(1, 2, 5))); ax.xaxis.set_major_formatter(mt.FuncFormatter(lambda v, _: f'{v:g}')); ax.xaxis.set_minor_formatter(mt.NullFormatter())
+ax.set_ylim(20, 28.6); ax.set_xlim(3.5, 3000)
+fig.tight_layout(); fig.savefig(OUT + 'fig_cross_methods_mip360.pdf'); fig.savefig(OUT + 'fig_cross_methods_mip360.png', dpi=160); plt.close(fig)
+print('strip + cross-method figures written')
