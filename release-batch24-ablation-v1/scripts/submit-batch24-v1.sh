@@ -11,7 +11,7 @@ AN=/scratch/zr2245/analysis; RES=yw523-l40s; D=/scratch/zr2245/datasets
 # in PUBLIC go to the public L40S partition (same account, fairshare cost, 16+ run concurrently); the rest go to the reservation.  Default split:
 # reservation = the four-variant ablation runs that use the new code on Mip/T&T + the Blender nocollapse/matched/constants (~135 GPU-h);
 # public = constlam (fixed price, no controller) and the vertex-cap reruns (standard MeshSplatting) on both datasets (~145 GPU-h).  Override: PUBLIC="..." bash submit-batch24-v1.sh
-PUBLIC=${PUBLIC:-"mip-constlam mip-cap bl-constlam bl-cap"}
+PUBLIC=${PUBLIC:-"mip-constlam mip-cap bl-constlam bl-cap db-cap"}
 ro () { case " $PUBLIC " in *" $1 "*) RESOPT="";; *) RESOPT="--reservation=$RES";; esac; }
 chk () { n=$(wc -l < $1); [ "$n" = $2 ] || { echo "CHECK FAILED: $1 has $n lines, expected $2"; exit 1; }; m=$(md5sum < $1 | cut -c1-32); [ "$m" = $3 ] || { echo "CHECK FAILED: $1 md5 $m != $3"; exit 1; }; }
 chk $AN/rdgrowth/train_rd_adapt_v9b_abl.py 934 2ae0a46b27aa135a02c1b56194e52e6d
@@ -26,9 +26,10 @@ for f in $AN/rdgrowth/train_rd_adapt_v9b.py $AN/rdgrowth/rd_growth_v2.py $AN/rdg
 grep -q "if acc.mode == 'importance'" $AN/rdgrowth/rd_growth_v2.py || { echo "CHECK FAILED: rd_growth_v2.py has no importance mode (matched variant needs it)"; exit 1; }
 for S in room kitchen counter bonsai garden bicycle stump flowers treehill; do [ -f $D/m360/$S/sparse/0/cameras.bin ] || { echo "CHECK FAILED: no dataset for $S"; exit 1; }; done
 for S in truck train; do [ -f $D/tandt/$S/sparse/0/cameras.bin ] || { echo "CHECK FAILED: no dataset for $S"; exit 1; }; done
+for S in drjohnson playroom; do [ -f $D/db/$S/sparse/0/cameras.bin ] || { echo "CHECK FAILED: no dataset for $S"; exit 1; }; done
 for S in lego chair drums ficus hotdog materials mic ship; do [ -f $D/nerf_synthetic/$S/transforms_train.json ] || { echo "CHECK FAILED: no dataset for $S"; exit 1; }; [ -f /scratch/zr2245/$S-blender4-best/original/point_cloud/iteration_30000/point_cloud_state_dict.pt ] || { echo "CHECK FAILED: no val-selected FP32 original for $S (Blender cap job needs it)"; exit 1; }; done
 for f in $AN/blender/val_select_v3.py $AN/blender/train_ckpt_v2.py; do [ -f $f ] || { echo "CHECK FAILED: missing $f"; exit 1; }; done
-for S in room kitchen counter bonsai; do [ -f /scratch/zr2245/$S-indoor/original/point_cloud/iteration_30000/point_cloud_state_dict.pt ] || { echo "CHECK FAILED: no --indoor FP32 original for $S (cap job needs it)"; exit 1; }; done
+for S in room kitchen counter bonsai drjohnson playroom; do [ -f /scratch/zr2245/$S-indoor/original/point_cloud/iteration_30000/point_cloud_state_dict.pt ] || { echo "CHECK FAILED: no --indoor FP32 original for $S (cap job needs it)"; exit 1; }; done
 for S in garden bicycle stump flowers treehill truck train; do [ -f /scratch/zr2245/$S-vis-collapse/original/point_cloud/iteration_30000/point_cloud_state_dict.pt ] || { echo "CHECK FAILED: no FP32 original for $S (cap job needs it)"; exit 1; }; done
 source /scratch/zr2245/anaconda3/etc/profile.d/conda.sh; conda activate /scratch/zr2245/conda-envs/pmsh-cu126; source /scratch/zr2245/meshsplatting-original-lossless-v1/.venv/bin/activate
 python $AN/indoor_budget_check_v1.py || { echo "CHECK FAILED: the indoor preset overwrites max_points on this upstream"; exit 1; }
@@ -64,5 +65,9 @@ for S in lego chair drums ficus hotdog materials mic ship; do
   else echo "SKIP matched $S: nocollapse job not accepted"; fi
   ro bl-cap; j4=$(sb --time=04:00:00 --export=ALL,SCENE=$S,XYZ=q14,INDOOR=1,LAMS_AUTO=" ",BUDGETS="$BUD" --job-name=$S-g0rb24 $AN/budget-sweep-blender-v1.sbatch); acc $j4
 done
-echo "submitted $k jobs (expected 95: 11 Mip/T&T scenes x 5 + 8 NeRF-Synthetic objects x 5)"
+# Deep Blending (transfer set): only the vertex-cap rerun at the controller counts, so that Table E2 is controller-based on all four datasets
+ro db-cap
+j5=$(sb --time=06:00:00 --export=ALL,SCENE=drjohnson,IMAGES=images,XYZ=q15,INDOOR=1,DATA=$D/db/drjohnson,BUDGETS="1772000 927000 393000" --job-name=drjohnson-g0r24 $AN/budget-sweep-v3.sbatch); acc $j5
+j5=$(sb --time=06:00:00 --export=ALL,SCENE=playroom,IMAGES=images,XYZ=q15,INDOOR=1,DATA=$D/db/playroom,BUDGETS="1918000 906000 436000" --job-name=playroom-g0r24 $AN/budget-sweep-v3.sbatch); acc $j5
+echo "submitted $k jobs (expected 97: 11 Mip/T&T scenes x 5 + 8 NeRF-Synthetic objects x 5 + 2 Deep Blending cap jobs)"
 squeue -u $USER -o "%.10i %.22j %.2t %.10M %.6D %R" | head -60
