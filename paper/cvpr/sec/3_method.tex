@@ -1,0 +1,38 @@
+\section{Method}
+\label{sec:method}
+
+\BM takes posed images and a target file size in megabytes and returns one file that a standalone decoder turns into a standard indexed mesh. It keeps \MS's renderer, losses and 30k-iteration schedule and changes three things: which triangles are split (Sec.~\ref{sec:growth}), how many (Sec.~\ref{sec:controller}), and what happens after growth ends (Sec.~\ref{sec:collapse}). The encoder it targets is described in Sec.~\ref{sec:codec}.
+
+\subsection{Preliminaries: how \MS grows a mesh}
+\label{sec:prelim}
+\MS~\cite{meshsplatting2025} starts from a soup of small triangles placed at the COLMAP points, each vertex carrying a position, a DC color and 45 SH coefficients (52 floats). Every 500 iterations until 15k it \emph{densifies}: triangles are sampled by an importance score and each chosen triangle is split into four by inserting its edge midpoints (three new vertices, the children share them), and the triangles that cover little or render with low opacity are pruned. At 11k iterations the soup is stitched into a connected mesh by a restricted Delaunay step; the opacity floor is then raised so that every surviving triangle becomes opaque, and a final importance-based cleaning removes the triangles that never cover a pixel. We keep all of this. What \MS does not control is how many vertices come out: the count is whatever the importance sampling and the pruning produce, and it is only loosely bounded by an optional cap on the number of vertices.
+
+\subsection{Rate-aware growth}
+\label{sec:growth}
+Let $D_t$ be the \emph{error of triangle} $t$: the sum, over the training views rendered since the last growth step and normalised per megapixel, of the per-pixel $L_1$ residual of the pixels $t$ covers. A split of $t$ adds three vertices and three faces, so it adds a byte cost $\Delta R$ to the encoded file. \BM splits $t$ at a growth step if and only if
+\begin{equation}
+\frac{D_t}{\Delta R} > \lambda ,
+\label{eq:split}
+\end{equation}
+where $\lambda$ is the \emph{price} of a byte in error units. Within one growth step every split costs the same $\Delta R$, so Eq.~\eqref{eq:split} ranks triangles by error and the price decides how many of them are split; this replaces \MS's importance sampling. The byte term matters through that count, which the controller sets from the target size, and through the collapse rule of Sec.~\ref{sec:collapse}, where the bytes freed differ from edge to edge. The triangles \MS always splits for being large are still split.
+
+\subsection{The size controller}
+\label{sec:controller}
+The controller converts a target size $T$ (bytes) into the price used at each growth step. It relies on a \emph{byte table} of the file,
+\begin{equation}
+R(V, F) = b_v V + b_f F + c ,
+\label{eq:bytes}
+\end{equation}
+with $b_v$ the bytes per vertex (positions, DC, appearance indices), $b_f$ the bytes per face (connectivity) and $c$ the fixed cost of the dictionaries and headers. These are not constants: $b_v$ moves between 8 and 13 bytes with the scene and the operating point. The controller therefore \emph{measures} them with a \textbf{byte probe}: every 1000 iterations once \MS starts pruning (4000 it.), a copy of the current mesh is cleaned exactly as the final mesh will be and passed through the real encoder; the probe returns the file size, the three coefficients of Eq.~\eqref{eq:bytes}, the number of faces per vertex $f$ and the share of vertices that survive cleaning. Before the first probe the table holds initial constants that the first probe replaces.
+
+\noindent\textbf{Plan.} The vertex count the target buys is $V^\star = (\alpha T - c)/(b_v + f\,b_f)$. The factor $\alpha$ (1.25 for captured scenes, 1.1 for synthetic objects) is the one calibrated constant of the controller: after the mesh is stitched at 11k iterations the set of visible faces keeps growing while the opacity floor rises, by 5--40\% depending on the capture class, and nothing can be observed about this growth before the stitching; the plan therefore aims above the target and leaves the correction to the collapse rounds, which can only remove bytes. At each growth step the controller spreads the remaining growth geometrically over the growth steps left, $V \to V^\star$, correcting for the fraction $\sigma$ of new vertices that \MS's own pruning removes at the next step ($\sigma$ is measured from the previous cohort), and asks for $k$ splits.
+
+\noindent\textbf{Price.} The price is set so that the next step admits $k$ triangles: $\lambda$ is the $k$-th largest ratio $D_t/\Delta R$ of the current step, corrected by the \emph{yield} of the previous step (how many of the asked splits actually passed, since the errors are re-measured between steps). The user never sees $\lambda$; it is an internal variable logged for inspection.
+
+\subsection{Rate-aware collapse}
+\label{sec:collapse}
+From 12.5k to 19.5k iterations, every 500 iterations, the controller probes the mesh, extrapolates the measured size to the end of the opacity ramp with a least-squares fit of the probe history, and computes the excess over $T$. If there is an excess, it collapses edges: each candidate edge $(u,v)$ is scored by the error of the faces around it divided by the bytes the collapse frees (one vertex, and the one or two faces that disappear, counted only if they survive cleaning), and the lowest-scoring edges are collapsed until the excess is removed, at most 15\% of the vertices per round, never past the target. The two endpoints are merged at their midpoint and their optimizer state is averaged, so training continues without a restart. This is Eq.~\eqref{eq:split} run backwards with the same error and the same byte accounting. When there is no excess nothing is collapsed, so the trimming error is one-sided: it can leave a file above the target when the rounds run out of authority, but it never pushes it below.
+
+\subsection{Codec}
+\label{sec:codec}
+After \MS's final cleaning the mesh is encoded into one file. \emph{Positions} are quantised on a per-scene grid of 14--18 bits per axis set from the scene extent. \emph{Connectivity} is coded losslessly by a context-based arithmetic coder over the face list, with the edges of already coded faces cached as contexts; it is 39--43\% of the file. \emph{Appearance}: the 45 SH coefficients of all vertices are clustered into a per-scene dictionary of 4096 entries, the residual into a second dictionary of 256 entries, and each vertex stores two indices, context-coded along the connectivity traversal; the dictionaries cost 0.65~MB per scene. \emph{DC color} is quantised to 7 bits per channel and entropy-coded with zstd. The decoder is a standalone program (no training data, no GPU) that rebuilds the indexed mesh with per-vertex color and SH in 2--6~s on one CPU core; the result renders with an ordinary vertex shader. During training, the byte probe runs this very encoder, so the controller's byte table is the file's, not a model of it.
