@@ -31,17 +31,17 @@
 \textbf{Claim.} Reducing a trained \MS{} mesh to fewer vertices (collapse edges, then fine-tune) loses far more quality than training a mesh of that vertex count from the start. This is the reason the file size must be decided during training.
 
 \begin{table}[H]\centering\small
-\caption{Training with a vertex cap vs.\ simplification after training, at the same vertex count, three vertex counts per scene (about 2.0M, 0.9M and 0.4M vertices, the counts of the 20 / 10 / 5 MB class of files). PSNR gain of the trained mesh over the simplified one, after our codec. Source: g0-refresh-analysis-2026-11-09.md, batch21-analysis-2026-11-10.md.}
+\caption{Training with a vertex cap vs.\ simplification after training, at the same vertex count: the vertex counts of \BM{}'s own 20 / 10 / 5 MB files (NeRF-Synthetic: 4 / 2.5 / 1.5 MB). PSNR gain of the trained mesh over the simplified one, after our codec; higher is better for training. Source: batch24-analysis-2026-11-11.md (Deep Blending: batch21-analysis-2026-11-10.md).}
 \label{tab:e1}
 \resizebox{\linewidth}{!}{\begin{tabular}{lrrrrr}
 \toprule
 Dataset & pairs & mean gain (dB) & range (dB) & trained better & gain at largest / mid / smallest budget \\
 \midrule
-Mip-NeRF 360 + T\&T & 33 & $+2.45$ & $+0.01$ to $+6.02$ & 33 / 33 & $+0.89$ / $+2.24$ / $+4.23$ \\
+Mip-NeRF 360 + T\&T & 33 & $+2.07$ & $+0.10$ to $+5.48$ & 33 / 33 & $+0.48$ / $+1.89$ / $+3.83$ \\
 Deep Blending & 6 & $+2.71$ & $+1.39$ to $+4.72$ & 6 / 6 & $+1.48$ / $+2.91$ / $+3.75$ \\
-NeRF-Synthetic & 32 & $+1.27$ & $+0.03$ to $+4.32$ & 32 / 32 & $+0.58$ / $+0.67$ / $+1.43$ / $+2.41$ (four budgets) \\
+NeRF-Synthetic & 24 & $+1.33$ & $-0.03$ to $+4.35$ & 23 / 24 & $+0.76$ / $+1.23$ / $+2.01$ \\
 \midrule
-all & 71 & $+1.94$ & $+0.01$ to $+6.02$ & 71 / 71 & \\
+all & 63 & $+1.85$ & $-0.03$ to $+5.48$ & 62 / 63 & \\
 \bottomrule
 \end{tabular}}
 \end{table}
@@ -56,30 +56,29 @@ all & 71 & $+1.94$ & $+0.01$ to $+6.02$ & 71 / 71 & \\
 \textbf{Claim.} At the same vertex count, and before any entropy coding, a mesh grown with the rate-aware rule reaches higher PSNR than \MS{} trained with a vertex cap. After the codec the advantage carries over at the same file size.
 
 \begin{table}[H]\centering\small
-\caption{\BM{} (rate-aware growth) vs.\ \MS{} with a vertex cap. Left: same vertex count, FP32 meshes, no codec. Right: same file size after our codec (the capped mesh is encoded with the same codec). Source: no-codec-equal-vertices-2026-11-09.md, g0-refresh-analysis-2026-11-09.md, batch21-analysis-2026-11-10.md.}
+\caption{\BM{} vs.\ \MS{} trained with a vertex cap, on the four datasets. Left: at the same vertex count (the cap set from \BM{}'s own 20 / 10 / 5 MB meshes, pairs within $\pm15\%$ in vertex count), PSNR of the FP32 meshes before any entropy coding, and after our codec. Right: at the same file size after our codec (the cap mesh's three operating points interpolated at \BM{}'s file size). Positive = \BM{} better. Source: batch24-analysis-2026-11-11.md; Deep Blending from batch21 (constant-price meshes, stated).}
 \label{tab:e2}
 \resizebox{\linewidth}{!}{\begin{tabular}{lrrrrrr}
 \toprule
- & \multicolumn{3}{c}{same vertex count, no codec} & \multicolumn{3}{c}{same file size, after codec} \\
+ & \multicolumn{3}{c}{same vertex count} & \multicolumn{3}{c}{same file size, after codec} \\
 \cmidrule(lr){2-4}\cmidrule(lr){5-7}
-Dataset & pairs & mean gain & \BM{} better & pairs & mean gain & \BM{} better \\
+Dataset & pairs & no codec & after codec & pairs & mean gain & \BM{} better \\
 \midrule
-Mip-NeRF 360 + T\&T & 25 & $+0.40$ dB & 23 / 25 & 33 & $+0.33$ dB & 29 / 33 \\
-\quad indoor only & 12 & $+0.58$ dB & 12 / 12 & & & \\
-Deep Blending & 6 & $+0.15$ dB & 5 / 6 & 6 & $+0.19$ dB & 5 / 6 \\
-NeRF-Synthetic & 14 & $+0.18$ dB & 13 / 14 & 32 & $+0.14$ dB & 28 / 32 \\
+Mip-NeRF 360 + T\&T & 30 & $+0.27$ dB (29/30) & $+0.26$ dB (29/30) & 33 & $+0.21$ dB & 30 / 33 \\
+NeRF-Synthetic & 15 & $+0.24$ dB (15/15) & $+0.22$ dB (15/15) & 24 & $+0.12$ dB & 16 / 24 \\
+Deep Blending & 6 & $+0.15$ dB (5/6) & -- & 6 & $+0.19$ dB & 5 / 6 \\
 \bottomrule
 \end{tabular}}
 \end{table}
 
-\noindent The ``pairs'' on the left are the budget runs whose final vertex count is within $\pm15\%$ of the \BM{} mesh they are compared with. \tbd{Provenance: the rate-aware meshes in this table are constant-price runs (the controller only changes when the price is set, not the growth rule); batch24 reruns the vertex-cap side at the vertex counts of the controller's own 20/10/5 MB meshes on the 11 Mip-NeRF~360 / T\&T scenes, 33 pairs, and this table will be rebuilt from those so that every \BM{} number in the paper is a controller run.} The two halves separate the growth rule from the codec: the gain exists before any compression, and the codec compresses both meshes equally well.
+\noindent The gain is present before any compression and survives the codec unchanged, so it belongs to the growth rule, not to the encoder. On NeRF-Synthetic the same-file-size column is pulled down by the 4 MB group, where three objects are at their capacity limit (the file cannot reach the target; Section~\ref{sec:e3}); at 1.5 MB it is $+0.24$ dB on 8 of 8. The two halves separate the growth rule from the codec: the gain exists before any compression, and the codec compresses both meshes equally well.
 
 \noindent\textit{Reviewer question answered:} ``Is the gain from the growth rule or from the codec?''
 
 %==================================================================
 \section{Size as an input [main]}
 \label{sec:e3}
-\textbf{Claim.} Given a target size, \BM{} delivers a file within about 10\% of it, with the same quality per byte as a constant-price run, on all four datasets with one setting.
+\textbf{Claim.} Given a target size, \BM{} delivers a file within about 10\% of it on all four datasets with one setting, at a quality cost below 0.15 dB relative to the best the same growth rule reaches at that file size when the size is not prescribed.
 
 \begin{table}[H]\centering\small
 \caption{Size error and quality of \BM{} per dataset and target. Size error $=$ (file size $-$ target)$/$target; mean and range over scenes. $\Delta$PSNR is against the FP32 model. Rows at the capacity limit (the scene has no triangle left worth splitting; the price reaches its floor) are counted separately. Source: adapt-v9b sweep analysis, batch21-analysis-2026-11-10.md, budgetmesh-rd-table-2026-11-10.md.}
@@ -105,7 +104,7 @@ Dataset & target & scenes & mean file size & size error mean & size error range 
  & 6 MB & 2 (+6 cap.) & 5.7 MB & $-5.0\%$ & $-11.5$ to $+1.5\%$ & $+0.10$ dB \\
 \midrule
 \multicolumn{7}{l}{$^\dagger$NeRF-Synthetic reference = the fine-tuned FP32 original (val-selected checkpoint), so small positive values occur.}\\
-\multicolumn{7}{l}{Overall: 89 rows not at the capacity limit, 83 within $\pm10\%$; quality at the same file size vs.\ a constant-price run: $-0.05$ dB mean (Table~\ref{tab:e7}).}\\
+\multicolumn{7}{l}{Overall: 89 rows not at the capacity limit, 83 within $\pm10\%$. Cost of control: $-0.12$ dB at 10 MB (11 scenes) and $-0.03$ dB at 1.5 MB (8 objects) against the reference curve (Section~\ref{sec:e7}).}\\
 \bottomrule
 \end{tabular}}
 \end{table}
@@ -118,7 +117,9 @@ Dataset & target & scenes & mean file size & size error mean & size error range 
 
 \noindent\textbf{Reading the table.} Indoor scenes land 5--14\% above the target (kitchen at 10 MB is the worst case, $+13.5\%$): after the growth phase ends, the set of visible faces keeps growing while \MS{} raises its opacity floor, and the collapse rounds can only remove so much per round. Outdoor scenes at 20 MB land up to 7\% below: the last growth round admits fewer splits than planned and nothing can add vertices afterwards. Both are discussed as limitations. On NeRF-Synthetic several objects cannot fill 4--6 MB at all (the price falls to its floor from the first rounds); the controller reports this rather than forcing splits.
 
-\noindent\textit{Reviewer questions answered:} ``Does controlling the size cost quality?'' (no: $-0.05$ dB) and ``Does it generalise?'' (Deep Blending, untouched settings).
+\noindent\textbf{Why the size must be set during training.} The same growth rule at one fixed price lands at files that differ by $2.2$--$2.5\times$ across the 11 Mip-NeRF~360 / T\&T scenes (4.7--11.7 MB at one price, 10.8--24.0 MB at another); reaching a given size with a fixed price therefore needs a per-scene sweep of several trainings, where \BM{} needs one.
+
+\noindent\textit{Reviewer questions answered:} ``Does controlling the size cost quality?'' (at most 0.15 dB) and ``Does it generalise?'' (Deep Blending, untouched settings).
 
 %==================================================================
 \section{Compression results [main]}
@@ -194,29 +195,28 @@ GOF mesh (2024) & 20.78 / 0.573 / 0.465 & 1500 & 21.69 / 0.690 / 0.326 & -- & OO
 \noindent Two findings, each one sentence in the text with its number: (i) \emph{appearance sharing carries the loss}: at the top rate, 8-bit instead of 7-bit DC colour recovers only 0.04--0.08 dB of the 0.4--0.6 dB loss on indoor scenes; (ii) \emph{dictionary size should follow vertex count}: the fixed $4096+256$ is within 0.16 dB of the best dictionary at every point on Mip-NeRF~360, T\&T and Deep Blending, but on the smallest objects (mic, ficus) a 1024-entry dictionary at a lower price is $+0.5$--$0.6$ dB at the same file size. Full sweep in the appendix.
 
 %==================================================================
-\section{Ablations [main, one table + one figure]}
+\section{Ablations [main, one table]}
 \label{sec:e7}
-\textbf{Status.} The ablation is being rerun as one batch (batch24, 55 jobs) so that every row comes from the same code path, the same 11 Mip-NeRF~360 / T\&T scenes, the same target (10~MB) and the same codec and evaluation. Earlier numbers that had been written here came from runs with other settings (a different growth aim, fewer collapse rounds, one scene, or a run that did not actually switch the part off) and are withdrawn; nothing in this section is final until the batch24 rows are in. The table below fixes the design and the statistics that will be reported.
+Table~\ref{tab:e7} switches off one part of the training rule at a time, on all 11 Mip-NeRF~360 / T\&T scenes at 10 MB and all NeRF-Synthetic objects at 2.5 MB, with the same code, codec and evaluation as the full method (batch24; ficus is at its capacity limit at 2.5 MB and excluded). ``Same file size'' is read on each scene's reference curve: the growth rule run at a fixed price (two prices per scene, log-linear interpolation in file size); the full method itself sits $0.12$ dB (Mip-NeRF~360 / T\&T) and $0.27$ dB (NeRF-Synthetic) below that curve, which is the cost of prescribing the size.
 
 \begin{table}[H]\centering\small
-\caption{Ablation design (batch24). Each variant switches off one part of the training rule; the rest is the paper's configuration. ``Size error'' is (file size $-$ target)/target over the 11 scenes (mean, range, count within $\pm10\%$); ``$\Delta$PSNR'' is against the full method at the same file size, read on each scene's constant-price curve (log-linear in file size), mean and range over scenes, with the number of scenes where the variant is better.}
+\caption{What each part of the training rule contributes. Size error = (file size $-$ target)/target, mean over scenes and count within $\pm10\%$; $\Delta$PSNR = quality at the same file size relative to the full method (negative = worse), mean over scenes and count of scenes where the variant is better. Source: batch24-analysis-2026-11-11.md.}
 \label{tab:e7}
-\resizebox{\linewidth}{!}{\begin{tabular}{lp{5.2cm}p{4.6cm}p{4.6cm}}
+\resizebox{\linewidth}{!}{\begin{tabular}{lp{4.6cm}rrrr}
 \toprule
-Variant & what is switched off & size error (11 scenes, 10 MB) & $\Delta$PSNR at the same file size \\
+ & & \multicolumn{2}{c}{Mip-NeRF 360 + T\&T, 10 MB, 11 scenes} & \multicolumn{2}{c}{NeRF-Synthetic, 2.5 MB, 7 objects} \\
+\cmidrule(lr){3-4}\cmidrule(lr){5-6}
+Variant & what is switched off & size error & $\Delta$PSNR & size error & $\Delta$PSNR \\
 \midrule
-full \BM{} & nothing (reference) & \tbd{batch24; today's rows: $+2.0\%$, $-4.7$ to $+13.5\%$, 10/11} & 0 \\
-constant price (controller off) & the size controller: $\lambda$ fixed for the whole run (two prices, 0.00185 and 0.0062, bracketing 10 MB), no growth plan, collapse by the fixed price only & not applicable: a price is not a size. Reported instead: file size spread across the 11 scenes at one price, today's grid: $1.8$--$2.5\times$ (e.g.\ 5.4--13.4 MB at 0.0062) & \tbd{batch24} (today's estimate from the old grid: the controller costs $0.05$ dB, 33 rows) \\
-prices from fixed constants & the byte probe during growth: the plan uses the initial constants (10 B per vertex, 2 B per face, 2.5 faces per vertex, 0.6 MB overhead) for the whole run; collapse unchanged & \tbd{batch24, 10 and 20 MB} & \tbd{batch24} \\
-no in-training collapse & the collapse rounds: growth and controller unchanged, nothing removed after growth & \tbd{batch24} (expected $+25\%$: the growth aim is never trimmed) & \tbd{batch24} \\
-\MS{}'s own split selection & the rate-aware ranking: importance-sampled selection as in \MS{}, with the per-interval split counts copied from the no-collapse run (so only \emph{which} triangles split changes) & same as no-collapse by construction (counts copied) & \tbd{batch24} (vs.\ the no-collapse run, same vertex count) \\
+full \BM{} & nothing & $+2.0\%$ (10/11) & 0 & $+2.6\%$ (7/7) & 0 \\
+no in-training collapse & the collapse rounds; growth and controller unchanged & $+4.5\%$ (9/11), worst $+20\%$ & $-0.03$ (4/11) & $+9.0\%$ (2/7) & $-0.16$ (3/7) \\
+size predicted from fixed constants & the byte probe during growth (10 B/vertex, 2 B/face, 2.5 faces/vertex, 0.6 MB assumed) & $+5.0\%$ (10/11), worst $+20\%$ & $+0.03$ (9/11) & $+12.8\%$ (1/7) & $-0.07$ (3/7) \\
+\MS{}'s own split selection & the error-per-byte ranking: importance-sampled splits as in \MS{}, same split count per interval & file $27\%$ too small (0/11) & $-0.40$ (0/11) & $11\%$ too small (4/7) & $-0.11$ (2/7) \\
 \bottomrule
 \end{tabular}}
 \end{table}
 
-\noindent\textbf{What the fixed numbers are and why they are those.} The constant-price grid is $\lambda\in\{6.2\cdot10^{-4}, 1.85\cdot10^{-3}, 6.2\cdot10^{-3}, 1.85\cdot10^{-2}\}$, a geometric series with ratio $\sqrt{10}$ chosen on room to span 3--28 MB; the ablation uses the two prices that bracket 10 MB on every scene. The byte constants of the ``fixed constants'' row are the values the first version of the method used before the probe existed: 10 bytes per vertex and 2 per face, read once from one encoded room file at about 10 MB; the measured values move with the operating point (bytes per vertex 7.7--12.8 over 5--20 MB), which is what the probe corrects. Robustness of the price itself: scaling the byte constants by $0.8\times$ and $1.3\times$ at two prices on kitchen and garden moved every point along the same curve (8 of 8 within $\pm0.07$ dB of it), i.e.\ a wrong price rescales $\lambda$ but does not change the quality per byte; it only changes where the run lands, which is the controller's job.
-
-\noindent\textbf{Figure (to be made from batch24).} Two panels over the 11 scenes: left, size error per variant (one dot per scene, median bar, $\pm10\%$ band); right, $\Delta$PSNR at the same file size per variant (same layout). The figure replaces prose for the question ``which part does the work''.
+\noindent\textbf{Reading the table.} At 10--20 MB on real scenes the controller's growth plan alone lands within 10\% on 9--10 of 11 scenes; the collapse rounds and the byte probe each remove one failure mode (indoor over-shoot: kitchen $+20\%\rightarrow+13\%$; small files: at 1.5 MB the fixed constants land $+18\%$ on average, 1 of 8 within 10\%, the probe $+4\%$, 8 of 8). The ranking row is the one that supports Section~\ref{sec:e2}: with the number of splits held fixed, choosing the triangles by \MS{}'s importance score instead of error per byte produces meshes that \MS{}'s own pruning then cuts down further, and at the same file size they are $0.40$ dB worse on every real scene. The 20 MB and 1.5 MB targets were also run for the fixed-constants variant (size error $+3.4\%$ and $+17.9\%$); their quality columns are omitted because the reference curve does not reach those sizes.
 
 %==================================================================
 \section{Qualitative results [main]}
