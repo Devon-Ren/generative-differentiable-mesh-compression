@@ -99,18 +99,18 @@ rate-aware ranking vs MeshSplatting importance sampling at the same split counts
 
 ## E2 at the controller counts: BudgetMesh (controller run) vs MeshSplatting with a vertex cap
 
-Right half (same file size, after codec): the cap mesh encoded with the same codec; the cap curve of each scene (its 3 budgets, log-linear in file size) read at the controller file size. Same vertex count: the cap run whose budget was set from this controller mesh (V within the stated band). Left half (no codec) needs the pre-codec test PSNR of the controller meshes (CPU collect, see below).
+Right half (same file size, after codec): the cap mesh encoded with the same codec; the cap curve of each scene (its 3 budgets, log-linear in file size) read at the controller file size. Same vertex count: the cap run whose budget was set from this controller mesh (V within the stated band). No-codec column: pre-codec test PSNR (3000-step fine-tuned FP32 meshes, same evaluator) of the controller mesh minus the cap mesh at the same vertex count (within 15 %).
 
-| dataset | target | pairs (file size / vertex count within 15 %) | V_cap / V_ctrl range of the vertex-count pairs | same file size: mean gain (range), BudgetMesh better | same vertex count, after codec: mean gain (range), better |
-|---|---|---|---|---|---|
-| Mip-NeRF 360 / T&T | 20 MB | 11 / 8 | 0.86 .. 1.05 | +0.12 (-0.21 .. +0.32), 10/11 | +0.22 (+0.04 .. +0.35), 8/8 |
-| Mip-NeRF 360 / T&T | 10 MB | 11 / 11 | 0.90 .. 1.11 | +0.23 (-0.02 .. +0.55), 10/11 | +0.27 (+0.03 .. +0.77), 11/11 |
-| Mip-NeRF 360 / T&T | 5 MB | 11 / 11 | 0.94 .. 1.14 | +0.28 (-0.15 .. +0.51), 10/11 | +0.27 (-0.16 .. +0.53), 10/11 |
-| Mip-NeRF 360 / T&T | all | 33 / 30 | | +0.21, 30/33 | +0.26, 29/30 |
-| NeRF-Synthetic | 4 MB | 8 / 3 | 0.88 .. 1.00 | -0.01 (-0.32 .. +0.25), 3/8 | +0.15 (+0.08 .. +0.20), 3/3 |
-| NeRF-Synthetic | 2.5 MB | 8 / 6 | 0.92 .. 1.01 | +0.14 (-0.10 .. +0.48), 5/8 | +0.23 (+0.02 .. +0.59), 6/6 |
-| NeRF-Synthetic | 1.5 MB | 8 / 6 | 0.97 .. 1.14 | +0.24 (+0.08 .. +0.55), 8/8 | +0.26 (+0.11 .. +0.36), 6/6 |
-| NeRF-Synthetic | all | 24 / 15 | | +0.12, 16/24 | +0.22, 15/15 |
+| dataset | target | pairs (file size / vertex count within 15 %) | V_cap / V_ctrl range of the vertex-count pairs | same vertex count, NO codec (FP32, fine-tuned): mean gain (range), better | same vertex count, after codec: mean gain (range), better | same file size: mean gain (range), BudgetMesh better |
+|---|---|---|---|---|---|---|
+| Mip-NeRF 360 / T&T | 20 MB | 11 / 8 | 0.86 .. 1.05 | +0.24 (+0.04 .. +0.33), 8/8 | +0.22 (+0.04 .. +0.35), 8/8 | +0.12 (-0.21 .. +0.32), 10/11 |
+| Mip-NeRF 360 / T&T | 10 MB | 11 / 11 | 0.90 .. 1.11 | +0.28 (+0.01 .. +0.76), 11/11 | +0.27 (+0.03 .. +0.77), 11/11 | +0.23 (-0.02 .. +0.55), 10/11 |
+| Mip-NeRF 360 / T&T | 5 MB | 11 / 11 | 0.94 .. 1.14 | +0.29 (-0.17 .. +0.55), 10/11 | +0.27 (-0.16 .. +0.53), 10/11 | +0.28 (-0.15 .. +0.51), 10/11 |
+| Mip-NeRF 360 / T&T | all | 33 / 30 | | +0.27, 29/30 | +0.26, 29/30 | +0.21, 30/33 |
+| NeRF-Synthetic | 4 MB | 8 / 3 | 0.88 .. 1.00 | +0.17 (+0.04 .. +0.27), 3/3 | +0.15 (+0.08 .. +0.20), 3/3 | -0.01 (-0.32 .. +0.25), 3/8 |
+| NeRF-Synthetic | 2.5 MB | 8 / 6 | 0.92 .. 1.01 | +0.26 (+0.04 .. +0.59), 6/6 | +0.23 (+0.02 .. +0.59), 6/6 | +0.14 (-0.10 .. +0.48), 5/8 |
+| NeRF-Synthetic | 1.5 MB | 8 / 6 | 0.97 .. 1.14 | +0.25 (+0.10 .. +0.36), 6/6 | +0.26 (+0.11 .. +0.36), 6/6 | +0.24 (+0.08 .. +0.55), 8/8 |
+| NeRF-Synthetic | all | 24 / 15 | | +0.24, 15/15 | +0.22, 15/15 | +0.12, 16/24 |
 
 ### per-scene cap rows (controller: MB / PSNR / V; cap: budget -> V / MB / PSNR / pre-codec test; simplified: PSNR)
 

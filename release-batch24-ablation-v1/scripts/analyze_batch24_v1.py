@@ -7,6 +7,14 @@ Quality at the same file size: each scene's constant-price curve = log-linear in
 import re, sys, math, statistics as st, collections
 MIP = ['room', 'kitchen', 'counter', 'bonsai', 'garden', 'bicycle', 'stump', 'flowers', 'treehill', 'truck', 'train']; BL = ['lego', 'chair', 'drums', 'ficus', 'hotdog', 'materials', 'mic', 'ship']
 R = re.compile(r'^(\w+)(?: abl24-(\S+))? \| target ([\d.]+) MB \|.*?lam_final \(shadow\) ([\d.e+-]+) \|.*?delivered ([\d.]+) MB \(hit ([\d.]+).*?\| test ([\d.]+) ([\d.]+) ([\d.]+).*?growth-capped (\w+)')
+pre = {}
+args = sys.argv[1:]
+if '--precodec' in args:
+    i = args.index('--precodec'); pf = args[i + 1]; args = args[:i] + args[i + 2:]
+    for l in open(pf):
+        m = re.match(r'ctrl (\w+) ([\d.]+) precodec_test ([\d.]+)', l)
+        if m: pre[(m[1], float(m[2]))] = float(m[3])
+sys.argv[1:] = args
 rows = collections.defaultdict(dict)   # (scene, target) -> variant -> dict
 for f in sys.argv[1:] + ['release-adapt-v9b/results/adapt-v9b-2026-11-08.txt', 'release-adapt-v9b/results/adapt-v9b-blender-2026-11-08.txt', 'release-batch21-v1/results/batch21-collect-2026-11-09-2110-raw.txt']:
     for l in open(f):
@@ -108,17 +116,19 @@ for name, scenes, targets in [('Mip-NeRF 360 / T&T', MIP, [20.0, 10.0, 5.0]), ('
     allg = [x for t in targets for x in g[t]]
     if allg: out.append(f"| {name} | {len(allg)} | {fmt(st.mean(allg))} | {fmt(min(allg))} .. {fmt(max(allg))} | {sum(1 for x in allg if x > 0)}/{len(allg)} | " + ' / '.join(fmt(st.mean(g[t])) if g[t] else '-' for t in targets) + ' |')
 out.append('\n## E2 at the controller counts: BudgetMesh (controller run) vs MeshSplatting with a vertex cap\n')
-out.append('Right half (same file size, after codec): the cap mesh encoded with the same codec; the cap curve of each scene (its 3 budgets, log-linear in file size) read at the controller file size. Same vertex count: the cap run whose budget was set from this controller mesh (V within the stated band). Left half (no codec) needs the pre-codec test PSNR of the controller meshes (CPU collect, see below).\n')
-out.append('| dataset | target | pairs (file size / vertex count within 15 %) | V_cap / V_ctrl range of the vertex-count pairs | same file size: mean gain (range), BudgetMesh better | same vertex count, after codec: mean gain (range), better |'); out.append('|---|---|---|---|---|---|')
+out.append('Right half (same file size, after codec): the cap mesh encoded with the same codec; the cap curve of each scene (its 3 budgets, log-linear in file size) read at the controller file size. Same vertex count: the cap run whose budget was set from this controller mesh (V within the stated band). No-codec column: pre-codec test PSNR (3000-step fine-tuned FP32 meshes, same evaluator) of the controller mesh minus the cap mesh at the same vertex count (within 15 %).\n')
+out.append('| dataset | target | pairs (file size / vertex count within 15 %) | V_cap / V_ctrl range of the vertex-count pairs | same vertex count, NO codec (FP32, fine-tuned): mean gain (range), better | same vertex count, after codec: mean gain (range), better | same file size: mean gain (range), BudgetMesh better |'); out.append('|---|---|---|---|---|---|---|')
 for name, scenes, targets in [('Mip-NeRF 360 / T&T', MIP, [20.0, 10.0, 5.0]), ('NeRF-Synthetic', BL, [4.0, 2.5, 1.5])]:
-    tot_fs = []; tot_v = []
+    tot_fs = []; tot_v = []; tot_nc = []
     for t in targets:
-        fs = []; vv = []; vr = []
+        fs = []; vv = []; vr = []; nc = []
         for sc in scenes:
             if (sc, t) not in rows or 'full' not in rows[(sc, t)] or (sc, t) not in cap or 'TRAIN-AT-BUDGET' not in cap[(sc, t)]: continue
             c = rows[(sc, t)]['full']; k = cap[(sc, t)]['TRAIN-AT-BUDGET']
             ratio_v = k['V'] / ctrlV[(sc, t)]
-            if abs(ratio_v - 1) <= 0.15: vr.append(ratio_v); vv.append(c['psnr'] - k['psnr'])
+            if abs(ratio_v - 1) <= 0.15:
+                vr.append(ratio_v); vv.append(c['psnr'] - k['psnr'])
+                if (sc, t) in pre: nc.append(pre[(sc, t)] - k['pre'])
             pts = sorted((cap[(sc, tt)]['TRAIN-AT-BUDGET']['mb'], cap[(sc, tt)]['TRAIN-AT-BUDGET']['psnr']) for tt in targets if (sc, tt) in cap and 'TRAIN-AT-BUDGET' in cap[(sc, tt)])
             if len(pts) >= 2:
                 mb = c['mb']; (x0, y0), (x1, y1) = pts[0], pts[-1]
@@ -126,9 +136,10 @@ for name, scenes, targets in [('Mip-NeRF 360 / T&T', MIP, [20.0, 10.0, 5.0]), ('
                     if a[0] <= mb <= b[0]: (x0, y0), (x1, y1) = a, b
                 yc = y0 + (math.log(mb) - math.log(x0)) / (math.log(x1) - math.log(x0)) * (y1 - y0); fs.append(c['psnr'] - yc)
         if vv or fs:
-            out.append(f"| {name} | {t:g} MB | {len(fs)} / {len(vv)} | {min(vr):.2f} .. {max(vr):.2f} | {fmt(st.mean(fs))} ({fmt(min(fs))} .. {fmt(max(fs))}), {sum(1 for x in fs if x > 0)}/{len(fs)} | {fmt(st.mean(vv))} ({fmt(min(vv))} .. {fmt(max(vv))}), {sum(1 for x in vv if x > 0)}/{len(vv)} |")
-            tot_fs += fs; tot_v += vv
-    if tot_v: out.append(f"| {name} | all | {len(tot_fs)} / {len(tot_v)} | | {fmt(st.mean(tot_fs))}, {sum(1 for x in tot_fs if x > 0)}/{len(tot_fs)} | {fmt(st.mean(tot_v))}, {sum(1 for x in tot_v if x > 0)}/{len(tot_v)} |")
+            ncc = f"{fmt(st.mean(nc))} ({fmt(min(nc))} .. {fmt(max(nc))}), {sum(1 for x in nc if x > 0)}/{len(nc)}" if nc else '-'
+            out.append(f"| {name} | {t:g} MB | {len(fs)} / {len(vv)} | {min(vr):.2f} .. {max(vr):.2f} | {ncc} | {fmt(st.mean(vv))} ({fmt(min(vv))} .. {fmt(max(vv))}), {sum(1 for x in vv if x > 0)}/{len(vv)} | {fmt(st.mean(fs))} ({fmt(min(fs))} .. {fmt(max(fs))}), {sum(1 for x in fs if x > 0)}/{len(fs)} |")
+            tot_fs += fs; tot_v += vv; tot_nc += nc
+    if tot_v: out.append(f"| {name} | all | {len(tot_fs)} / {len(tot_v)} | | {(fmt(st.mean(tot_nc)) + ', ' + str(sum(1 for x in tot_nc if x > 0)) + '/' + str(len(tot_nc))) if tot_nc else '-'} | {fmt(st.mean(tot_v))}, {sum(1 for x in tot_v if x > 0)}/{len(tot_v)} | {fmt(st.mean(tot_fs))}, {sum(1 for x in tot_fs if x > 0)}/{len(tot_fs)} |")
 out.append('\n### per-scene cap rows (controller: MB / PSNR / V; cap: budget -> V / MB / PSNR / pre-codec test; simplified: PSNR)\n')
 for (sc, t) in sorted(cap, key=lambda k: (k[0] not in MIP, (MIP + BL).index(k[0]), -k[1])):
     d = cap[(sc, t)]; c = rows.get((sc, t), {}).get('full'); k = d.get('TRAIN-AT-BUDGET'); ph = d.get('POST-HOC-COLLAPSE')
