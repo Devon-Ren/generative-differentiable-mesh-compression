@@ -3,6 +3,25 @@
 \maketitlesupplementary
 \section{Per-scene results}
 \TODO{per-scene tables: compression (13 scenes $\times$ 5 targets, from budgetmesh-rd-table-2026-11-10.md), vertex-cap pairs (batch24-analysis), ablation rows (batch24-analysis), capacity-limited NeRF-Synthetic rows}
+\section{Deep Blending against Gaussian codecs}
+\begin{table}[h]\centering\footnotesize
+\caption{Deep Blending means, published numbers from the HAC++ benchmark; no mesh-output method reports Deep Blending.}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+method & PSNR & SSIM & LPIPS & MB \\
+\midrule
+3DGS & 29.42 & 0.899 & 0.247 & 663.9 \\
+Scaffold-GS & 30.21 & 0.906 & 0.254 & 66.0 \\
+Compact3DGS & 29.79 & 0.901 & 0.258 & 43.2 \\
+LightGaussian & 27.01 & 0.872 & 0.308 & 33.9 \\
+HAC, low / high rate & 29.98 / 30.34 & 0.902 / 0.906 & 0.269 / 0.258 & 4.4 / 6.4 \\
+CompGS, low / high rate & 29.30 / 29.69 & 0.895 / 0.901 & 0.293 / 0.279 & 6.0 / 8.8 \\
+HAC++, low / high rate & 30.16 / 30.34 & 0.907 / 0.911 & 0.266 / 0.254 & 2.9 / 5.3 \\
+\MS FP32 (our reproduction) & 27.23 & 0.842 & 0.337 & 772 \\
+\BM, $T = 20$ / 10 / 5 MB & 26.94 / 26.54 / 25.89 & 0.838 / 0.830 / 0.817 & 0.452 / 0.478 / 0.502 & 21.3 / 11.0 / 5.4 \\
+\bottomrule
+\end{tabular}
+\end{table}
 \section{Size controller}
 \begin{figure}[h]\centering\includegraphics[width=\linewidth]{figures/fig_controller_traces.pdf}
 \caption{Size controller traces for all 101 runs (89 below the capacity limit and 12 at it): the estimated landing size divided by the target at each collapse round, continued to the delivered file. Grey band: $\pm10\%$. Indoor scenes start above the target (the growth aim) and are trimmed down; outdoor scenes start below and drift up as the visible set grows; the NeRF-Synthetic runs below 0.8 are objects at the capacity limit.}\end{figure}
