@@ -60,39 +60,37 @@ dataset & target $T$ & scenes & file size & size error & range & within $\pm10\%
 Table~\ref{tab:cap} answers the two questions a reader will ask first. \emph{Why not decimate a trained mesh?} For each scene and three vertex counts (those of \BM's own 20 / 10 / 5~MB files; 4 / 2.5 / 1.5~MB on NeRF-Synthetic) we compare \MS trained with that count as a vertex cap against the FP32 model simplified to the same count by edge collapse (quadric error with an appearance term) followed by the same 3000-step fine-tuning, both through our codec. Training to the count wins on 62 of 63 pairs, by 1.85\dB on average and by up to 5.5\dB; the gap grows as the budget shrinks (0.5\dB at the largest, 3.8\dB at the smallest count on real scenes). The simplified meshes keep fewer faces per vertex and show holes and speckle (supplement). \emph{Is the growth rule itself better than a vertex cap?} Against \MS trained with the cap set from \BM's own vertex count (pairs within $\pm15\%$), rate-aware growth is better on 44 of 45 pairs, by 0.27\dB on real scenes and 0.24\dB on objects, measured on the FP32 meshes \emph{before any entropy coding}; the margin is unchanged after the codec, so it belongs to the growth rule, not to the encoder. At the same file size after the codec the margin is 0.21\dB on real scenes (30/33); on NeRF-Synthetic it is 0.12\dB (16/24) because the 4~MB group contains three objects at their capacity limit (Sec.~\ref{sec:e3}); at 1.5~MB it is 0.24\dB on 8 of 8. On Deep Blending the vertex-cap runs exist only at other vertex counts, so we report the same-file-size comparison alone: $+0.08$\dB, 4 of 6.
 
 \begin{table*}[t]\centering\small
-\setlength{\tabcolsep}{3.4pt}
-\caption{\textbf{Against Gaussian codecs and mesh-output methods}, dataset means; size in MB. Gaussian rows are the published HAC++ benchmark~\cite{hacpp2025}; mesh rows are published numbers from~\cite{meshsplatting2025} (MiLo, RaDe-GS, GOF; one asset size reported, for Mip-NeRF~360), \cite{mobilenerf2023} and~\cite{nerf2mesh2023}; n/r: not reported by the authors. \MS FP32 is our reproduction; \BM rows use the targets 20 / 10 / 5~MB on real scenes and 4 / 2.5 / 1.5~MB on objects (all 8 objects). $^\ddagger$Our NeRF-Synthetic numbers use a black background, the published ones a white background.}
+\setlength{\tabcolsep}{4.6pt}
+\caption{\textbf{Against Gaussian codecs and mesh-output methods on captured scenes}, dataset means; size in MB. Gaussian rows are the published HAC++ benchmark~\cite{hacpp2025}; mesh rows are published numbers collected in~\cite{meshsplatting2025}, where MiLo, RaDe-GS and GOF report one asset size, for Mip-NeRF~360 (n/r: not reported). \MS FP32 is our reproduction; \BM rows are means over the decoded files. NeRF-Synthetic is in Table~\ref{tab:synthetic}, Deep Blending in the supplement.}
 \label{tab:cross}
-\begin{tabular}{@{}llcccccccccccc@{}}
+\begin{tabular}{@{}llcccccccc@{}}
 \toprule
- & & \multicolumn{4}{c}{Mip-NeRF 360} & \multicolumn{4}{c}{Tanks and Temples} & \multicolumn{4}{c}{NeRF-Synthetic$^\ddagger$} \\
-\cmidrule(lr){3-6}\cmidrule(lr){7-10}\cmidrule(lr){11-14}
- & method & PSNR & SSIM & LPIPS & MB & PSNR & SSIM & LPIPS & MB & PSNR & SSIM & LPIPS & MB \\
+ & & \multicolumn{4}{c}{Mip-NeRF 360} & \multicolumn{4}{c}{Tanks and Temples} \\
+\cmidrule(lr){3-6}\cmidrule(lr){7-10}
+ & method & PSNR & SSIM & LPIPS & MB & PSNR & SSIM & LPIPS & MB \\
 \midrule
 \multirow{10}{*}{\rotatebox{90}{Gaussian splats}}
- & 3DGS~\cite{kerbl2023gaussians} & 27.46 & 0.812 & 0.222 & 750.9 & 23.69 & 0.844 & 0.178 & 431.0 & 33.80 & 0.970 & 0.031 & 68.46 \\
- & Scaffold-GS~\cite{scaffold2024} & 27.50 & 0.806 & 0.252 & 253.9 & 23.96 & 0.853 & 0.177 & 86.50 & 33.41 & 0.966 & 0.035 & 19.36 \\
- & Compact3DGS~\cite{compact3dgs2024} & 27.08 & 0.798 & 0.247 & 48.80 & 23.32 & 0.831 & 0.201 & 39.43 & 33.33 & 0.968 & 0.034 & 5.54 \\
- & LightGaussian~\cite{lightgaussian2024} & 27.00 & 0.799 & 0.249 & 44.54 & 22.83 & 0.822 & 0.242 & 22.43 & 32.73 & 0.965 & 0.037 & 7.84 \\
- & HAC~\cite{hac2024}, low rate & 27.53 & 0.807 & 0.238 & 15.26 & 24.04 & 0.846 & 0.187 & 8.10 & 33.24 & 0.967 & 0.037 & 1.18 \\
- & HAC, high rate & 27.77 & 0.811 & 0.230 & 21.87 & 24.40 & 0.853 & 0.177 & 11.24 & 33.71 & 0.968 & 0.034 & 1.86 \\
- & ContextGS~\cite{contextgs2024}, low rate & 27.62 & 0.808 & 0.237 & 12.68 & 24.20 & 0.852 & 0.184 & 7.05 & 32.79 & 0.965 & 0.040 & 1.01 \\
- & ContextGS, high rate & 27.75 & 0.811 & 0.231 & 18.41 & 24.29 & 0.855 & 0.176 & 11.80 & 33.51 & 0.968 & 0.035 & 1.56 \\
- & HAC++~\cite{hacpp2025}, low rate & 27.60 & 0.803 & 0.253 & 8.34 & 24.22 & 0.849 & 0.190 & 5.18 & 33.03 & 0.966 & 0.039 & 0.88 \\
- & HAC++, high rate & 27.82 & 0.811 & 0.231 & 18.48 & 24.32 & 0.854 & 0.178 & 8.63 & 33.76 & 0.969 & 0.033 & 1.84 \\
+ & 3DGS~\cite{kerbl2023gaussians} & 27.46 & 0.812 & 0.222 & 750.9 & 23.69 & 0.844 & 0.178 & 431.0 \\
+ & Scaffold-GS~\cite{scaffold2024} & 27.50 & 0.806 & 0.252 & 253.9 & 23.96 & 0.853 & 0.177 & 86.50 \\
+ & Compact3DGS~\cite{compact3dgs2024} & 27.08 & 0.798 & 0.247 & 48.80 & 23.32 & 0.831 & 0.201 & 39.43 \\
+ & LightGaussian~\cite{lightgaussian2024} & 27.00 & 0.799 & 0.249 & 44.54 & 22.83 & 0.822 & 0.242 & 22.43 \\
+ & HAC~\cite{hac2024}, low rate & 27.53 & 0.807 & 0.238 & 15.26 & 24.04 & 0.846 & 0.187 & 8.10 \\
+ & HAC, high rate & 27.77 & 0.811 & 0.230 & 21.87 & 24.40 & 0.853 & 0.177 & 11.24 \\
+ & ContextGS~\cite{contextgs2024}, low rate & 27.62 & 0.808 & 0.237 & 12.68 & 24.20 & 0.852 & 0.184 & 7.05 \\
+ & ContextGS, high rate & 27.75 & 0.811 & 0.231 & 18.41 & 24.29 & 0.855 & 0.176 & 11.80 \\
+ & HAC++~\cite{hacpp2025}, low rate & 27.60 & 0.803 & 0.253 & 8.34 & 24.22 & 0.849 & 0.190 & 5.18 \\
+ & HAC++, high rate & 27.82 & 0.811 & 0.231 & 18.48 & 24.32 & 0.854 & 0.178 & 8.63 \\
 \midrule
-\multirow{6}{*}{\rotatebox{90}{meshes}}
- & GOF mesh~\cite{gof2024} & 20.78 & 0.573 & 0.465 & 1500 & 21.69 & 0.690 & 0.326 & n/r & n/r & n/r & n/r & n/r \\
- & RaDe-GS mesh~\cite{rade2024} & 23.56 & 0.668 & 0.361 & 1100 & 20.51 & 0.659 & 0.344 & n/r & n/r & n/r & n/r & n/r \\
- & MiLo~\cite{milo2025} & 24.09 & 0.688 & 0.323 & 253 & 21.46 & 0.706 & 0.348 & n/r & n/r & n/r & n/r & n/r \\
- & MobileNeRF~\cite{mobilenerf2023} & n/r & n/r & n/r & n/r & n/r & n/r & n/r & n/r & 30.90 & 0.947 & 0.062 & 125.8 \\
- & NeRF2Mesh~\cite{nerf2mesh2023} & n/r & n/r & n/r & n/r & n/r & n/r & n/r & n/r & 29.76 & 0.940 & 0.072 & 73.5 \\
- & \MS FP32~\cite{meshsplatting2025} & 24.81 & 0.731 & 0.309 & 642 & 20.64 & 0.760 & 0.272 & 459 & 31.24 & \TODO{} & \TODO{} & 65.7 \\
+\multirow{4}{*}{\rotatebox{90}{meshes}}
+ & GOF mesh~\cite{gof2024} & 20.78 & 0.573 & 0.465 & 1500 & 21.69 & 0.690 & 0.326 & n/r \\
+ & RaDe-GS mesh~\cite{rade2024} & 23.56 & 0.668 & 0.361 & 1100 & 20.51 & 0.659 & 0.344 & n/r \\
+ & MiLo~\cite{milo2025} & 24.09 & 0.688 & 0.323 & 253 & 21.46 & 0.706 & 0.348 & n/r \\
+ & \MS FP32~\cite{meshsplatting2025} & 24.81 & 0.731 & 0.309 & 642 & 20.64 & 0.760 & 0.272 & 459 \\
 \midrule
 \multirow{3}{*}{\rotatebox{90}{ours}}
- & \BM, large target & 24.44 & 0.704 & 0.411 & 20.0 & 20.64 & 0.748 & 0.337 & 19.6 & 31.13 & 0.951 & 0.070 & 3.49 \\
- & \BM, medium target & 24.04 & 0.673 & 0.458 & 10.2 & 20.45 & 0.731 & 0.368 & 10.3 & 30.97 & 0.950 & 0.072 & 2.49 \\
- & \BM, small target & 23.35 & 0.632 & 0.508 & 5.0 & 19.91 & 0.696 & 0.416 & 5.1 & 30.36 & 0.944 & 0.080 & 1.56 \\
+ & \BM, $T=20$ MB & 24.44 & 0.704 & 0.411 & 20.0 & 20.64 & 0.748 & 0.337 & 19.6 \\
+ & \BM, $T=10$ MB & 24.04 & 0.673 & 0.458 & 10.2 & 20.45 & 0.731 & 0.368 & 10.3 \\
+ & \BM, $T=5$ MB & 23.35 & 0.632 & 0.508 & 5.0 & 19.91 & 0.696 & 0.416 & 5.1 \\
 \bottomrule
 \end{tabular}
 \end{table*}
@@ -105,7 +103,7 @@ Table~\ref{tab:size} reports, per dataset and target, the mean file size, the si
 
 \subsection{Compression and other representations}
 \label{sec:e4}
-Against the FP32 model the 20, 10 and 5~MB files are 31$\times$, 60$\times$ and 122$\times$ smaller at $-0.30$, $-0.66$ and $-1.32$\dB on real scenes (Table~\ref{tab:size}); against the same meshes written as a quantized PLY and compressed with zstd they are 7$\times$, 14$\times$ and 27$\times$ smaller. The ratio splits into two factors: the file holds fewer vertices (1.4$\times$, 3.0$\times$ and 6.7$\times$ fewer than the 1.9--3.2M of the FP32 model), the growth rule's share, and each vertex costs 11--13 bytes instead of 231, the codec's share. Within the mesh class (Table~\ref{tab:cross}, bottom) \BM is the only entry below 250~MB, 0.4\dB below its own FP32 model at 20~MB and above MiLo, RaDe-GS and GOF at 13--75$\times$ smaller files; Binary Opacity Grids reports 25.62\dB at 913~MB on a 7-scene subset, without SSIM or LPIPS. Against compressed Gaussians (Table~\ref{tab:cross}, top), at 5--20~MB HAC++ and HAC are 3.3--4\dB higher in PSNR on Mip-NeRF~360 and Tanks and Temples (Deep Blending in the supplement), 0.10--0.11 higher in SSIM and 0.16--0.21 lower in LPIPS; on NeRF-Synthetic the gap is 2.5--3\dB, with the caveat that our objects are rendered on black and the published ones on white. Within the mesh class on NeRF-Synthetic, \BM at 2.5~MB matches MobileNeRF's PSNR at 1/50 of its size and is 1.2\dB above NeRF2Mesh at 1/30 of its size. That gap is the representation's: opaque triangles against anisotropic Gaussians. What the mesh buys is a standard indexed mesh that renders at 145--350~fps on an iPhone~17~Pro at capture resolution and decodes in 2.3--6.4~s on one CPU core. LPIPS degrades faster than PSNR as $T$ shrinks; Sec.~\ref{sec:e6} traces this to the appearance dictionary.
+Against the FP32 model the 20, 10 and 5~MB files are 31$\times$, 60$\times$ and 122$\times$ smaller at $-0.30$, $-0.66$ and $-1.32$\dB on real scenes (Table~\ref{tab:size}); against the same meshes written as a quantized PLY and compressed with zstd they are 7$\times$, 14$\times$ and 27$\times$ smaller. The ratio splits into two factors: the file holds fewer vertices (1.4$\times$, 3.0$\times$ and 6.7$\times$ fewer than the 1.9--3.2M of the FP32 model), the growth rule's share, and each vertex costs 11--13 bytes instead of 231, the codec's share. Within the mesh class (Table~\ref{tab:cross}, bottom) \BM is the only entry below 250~MB, 0.4\dB below its own FP32 model at 20~MB and above MiLo, RaDe-GS and GOF at 13--75$\times$ smaller files; Binary Opacity Grids reports 25.62\dB at 913~MB on a 7-scene subset, without SSIM or LPIPS. Against compressed Gaussians (Table~\ref{tab:cross}, top), at 5--20~MB HAC++ and HAC are 3.3--4\dB higher in PSNR on Mip-NeRF~360 and Tanks and Temples (Deep Blending in the supplement), 0.10--0.11 higher in SSIM and 0.16--0.21 lower in LPIPS; on NeRF-Synthetic (Table~\ref{tab:synthetic}) the gap is 2.5--3\dB, with the caveat that our objects are rendered on black and the published ones on white. Within the mesh class on NeRF-Synthetic, \BM at 2.5~MB matches MobileNeRF's PSNR at 1/50 of its size and is 1.2\dB above NeRF2Mesh at 1/30 of its size. That gap is the representation's: opaque triangles against anisotropic Gaussians. What the mesh buys is a standard indexed mesh that renders at 145--350~fps on an iPhone~17~Pro at capture resolution and decodes in 2.3--6.4~s on one CPU core. LPIPS degrades faster than PSNR as $T$ shrinks; Sec.~\ref{sec:e6} traces this to the appearance dictionary.
 
 \begin{table}[t]\centering\footnotesize
 \setlength{\tabcolsep}{3.5pt}
@@ -128,6 +126,36 @@ baked texture + Draco & 2.7$\times$ & 2.4--3.2 & 4.4 \\
 ours & 1$\times$ & -- & 0.8 \\
 \bottomrule
 \multicolumn{4}{@{}l}{\scriptsize $^\ast$10 scenes. RGB-only routes drop view dependence.}
+\end{tabular}
+\end{table}
+
+\begin{table}[t]\centering\footnotesize
+\setlength{\tabcolsep}{4pt}
+\caption{\textbf{NeRF-Synthetic}, means over the 8 objects; size in MB. Gaussian rows from the HAC++ benchmark~\cite{hacpp2025}; MobileNeRF and NeRF2Mesh as published (their mesh assets); \MS FP32 is our reproduction (\MS reports no NeRF-Synthetic results); \BM at $T$ = 4 / 2.5 / 1.5~MB. $^\ddagger$Black background; the published rows use white.}
+\label{tab:synthetic}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+method & PSNR & SSIM & LPIPS & MB \\
+\midrule
+3DGS~\cite{kerbl2023gaussians} & 33.80 & 0.970 & 0.031 & 68.46 \\
+Scaffold-GS~\cite{scaffold2024} & 33.41 & 0.966 & 0.035 & 19.36 \\
+Compact3DGS~\cite{compact3dgs2024} & 33.33 & 0.968 & 0.034 & 5.54 \\
+LightGaussian~\cite{lightgaussian2024} & 32.73 & 0.965 & 0.037 & 7.84 \\
+HAC~\cite{hac2024}, low & 33.24 & 0.967 & 0.037 & 1.18 \\
+HAC, high & 33.71 & 0.968 & 0.034 & 1.86 \\
+ContextGS~\cite{contextgs2024}, low & 32.79 & 0.965 & 0.040 & 1.01 \\
+ContextGS, high & 33.51 & 0.968 & 0.035 & 1.56 \\
+HAC++~\cite{hacpp2025}, low & 33.03 & 0.966 & 0.039 & 0.88 \\
+HAC++, high & 33.76 & 0.969 & 0.033 & 1.84 \\
+\midrule
+MobileNeRF~\cite{mobilenerf2023} & 30.90 & 0.947 & 0.062 & 125.8 \\
+NeRF2Mesh~\cite{nerf2mesh2023} & 29.76 & 0.940 & 0.072 & 73.5 \\
+\MS FP32$^\ddagger$ & 31.24 & \TODO{} & \TODO{} & 65.7 \\
+\midrule
+\BM$^\ddagger$, $T=4$ MB & 31.13 & 0.951 & 0.070 & 3.49 \\
+\BM$^\ddagger$, $T=2.5$ MB & 30.97 & 0.950 & 0.072 & 2.49 \\
+\BM$^\ddagger$, $T=1.5$ MB & 30.36 & 0.944 & 0.080 & 1.56 \\
+\bottomrule
 \end{tabular}
 \end{table}
 
