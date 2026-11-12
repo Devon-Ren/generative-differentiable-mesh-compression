@@ -44,7 +44,7 @@ for name, scenes, targets in [('Mip-NeRF 360 / T&T', MIP, [10.0, 20.0]), ('NeRF-
     for t in targets:
         capped_sc = [s for s in scenes if (s, t) in rows and any(r.get('capped') for r in rows[(s, t)].values())]
         have = [s for s in scenes if (s, t) in rows and 'full' in rows[(s, t)] and s not in capped_sc]
-        variants = ['full', 'nocollapse', 'constants', 'matched']
+        variants = ['full', 'nocollapse', 'constants', 'matched']  # repeat-s* rows are reported in their own section
         out.append(f'\n## {name}, target {t:g} MB ({len(have)} scenes; capacity-limited and excluded: {", ".join(capped_sc) or "none"})\n')
         out.append('| variant | scenes | size error mean | range | within 10 % | dPSNR vs constant-price curve: mean (range) | vs full: mean (range), better |')
         out.append('|---|---|---|---|---|---|---|')
@@ -144,4 +144,23 @@ out.append('\n### per-scene cap rows (controller: MB / PSNR / V; cap: budget -> 
 for (sc, t) in sorted(cap, key=lambda k: (k[0] not in MIP, (MIP + BL).index(k[0]), -k[1])):
     d = cap[(sc, t)]; c = rows.get((sc, t), {}).get('full'); k = d.get('TRAIN-AT-BUDGET'); ph = d.get('POST-HOC-COLLAPSE')
     out.append(f"- {sc} {t:g} MB: controller {c['mb']:.2f} / {c['psnr']:.2f} / {ctrlV[(sc, t)]}" + (f" | cap {budget_of[(sc, t)]} -> {k['V']} / {k['mb']:.2f} / {k['psnr']:.2f} / pre {k['pre']:.2f}" if k else ' | cap missing') + (f" | simplified {ph['psnr']:.2f}" if ph else ''))
+
+# ---------------- round 2: seed repeats of the full method ----------------
+out.append('\n## Run-to-run variance of the full method (seed 0 = the paper run, seeds 1 and 2 = batch24 round 2)\n')
+out.append('| scene | target | file size MB (3 seeds) | spread | PSNR (3 seeds) | spread |'); out.append('|---|---|---|---|---|---|')
+for (sc, t), d in sorted(rows.items(), key=lambda k: (k[0][0], k[0][1])):
+    reps = [d[v] for v in sorted(d) if v.startswith('repeat-s')]
+    if len(reps) >= 2 and 'full' in d:
+        allr = [d['full']] + reps; mbs = [r['mb'] for r in allr]; ps = [r['psnr'] for r in allr]
+        out.append(f"| {sc} | {t:g} MB | {' / '.join(f'{m:.2f}' for m in mbs)} | {100 * (max(mbs) - min(mbs)) / t:.1f} % of target | {' / '.join(f'{x:.2f}' for x in ps)} | {max(ps) - min(ps):.2f} dB |")
+# ---------------- round 2: reference-curve interpolation error (3 fixed prices per scene) ----------------
+out.append('\n## Reference curve: interpolation error with three prices per scene (middle point vs the log-linear chord of the outer two)\n')
+errs = {}
+for sc, pts in sorted(curve.items()):
+    if len(pts) >= 3:
+        (x0, y0), (x1, y1), (x2, y2) = pts[0], pts[len(pts) // 2], pts[-1]
+        chord = y0 + (math.log(x1) - math.log(x0)) / (math.log(x2) - math.log(x0)) * (y2 - y0); errs[sc] = y1 - chord
+        out.append(f'- {sc}: prices at {x0:.1f} / {x1:.1f} / {x2:.1f} MB, PSNR {y0:.2f} / {y1:.2f} / {y2:.2f}; middle point minus chord {y1 - chord:+.2f} dB')
+if errs:
+    e = list(errs.values()); out.append(f'\nmean {st.mean(e):+.2f} dB, range {min(e):+.2f} .. {max(e):+.2f} over {len(e)} scenes (a positive value means the chord under-reads the curve: the two-point reading of the cost of control was pessimistic by this much)')
 print('\n'.join(out))
