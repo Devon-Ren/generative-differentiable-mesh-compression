@@ -1,0 +1,17 @@
+# batch28 collect (2026-11-12), rows as pasted by the user; the three 'aim 1.25' rows are cut after the summary fields (full rows: $AN/ablation-b24-blender.txt on the cluster)
+PASS2 chair cap1 178000 delivered 2.634 MB (target 2.5 MB, error +5.4%): within 10%, no second training
+PASS2 kitchen cap1 1086000 delivered 11.634 MB (target 10 MB, error +16.3%, fixed bytes 2.08 MB) -> cap2 900000
+PASS2 lego cap1 183000 delivered 2.791 MB (target 2.5 MB, error +11.6%, fixed bytes 0.95 MB) -> cap2 154000
+garden budget 1106000 TRAIN-AT-BUDGET | vertices 877885 faces 1980500 | val0 24.064 val 24.064 worst 20.59 | test 23.49 | delivered 10.146 MB test 23.488 0.6649 0.3957 | K4096 R256 q15/q7 | images_4
+garden budget 1104000 TRAIN-AT-BUDGET | vertices 1170284 faces 2628891 | val0 24.422 val 24.422 worst 20.79 | test 23.811 | delivered 13.299 MB test 23.785 0.6882 0.3652 | K4096 R256 q15/q7 | images_4
+garden budget 1074000 TRAIN-AT-BUDGET | vertices 999506 faces 2277913 | val0 24.206 val 24.206 worst 20.63 | test 23.627 | delivered 11.607 MB test 23.622 0.6744 0.3825 | K4096 R256 q15/q7 | images_4
+playroom budget 1080000 TRAIN-AT-BUDGET | vertices 830815 faces 2368063 | val0 32.479 val 32.479 worst 27.14 | test 27.116 | delivered 10.372 MB test 26.989 0.8414 0.4516 | K4096 R256 q15/q7 | images | --indoor
+playroom budget 1082000 TRAIN-AT-BUDGET | vertices 845753 faces 2403234 | val0 32.485 val 32.485 worst 26.51 | test 27.204 | delivered 11.073 MB test 27.105 0.8439 0.4471 | K4096 R256 q15/q7 | images | --indoor
+kitchen budget 1086000 TRAIN-AT-BUDGET | vertices 956939 faces 2495983 | val0 27.308 val 27.273 worst 23.88 | test 26.503 | delivered 11.634 MB test 25.928 0.7959 0.3791 | K4096 R256 q16/q7 | images_2 | --indoor
+lego budget 183000 TRAIN-AT-BUDGET-BLENDER | vertices 156040 faces 452009 | val0 34.85 val 34.968 worst 32.81 | test 32.653 | delivered 2.791 MB test 32.314 0.962 0.0535 | K4096 R256 q14/q7 | train | blackbg --indoor | max_points 183000
+lego budget 154000 TRAIN-AT-BUDGET-BLENDER | vertices 156438 faces 461649 | val0 34.757 val 34.91 worst 32.82 | test 32.634 | delivered 2.792 MB test 32.28 0.9612 0.0549 | K4096 R256 q14/q7 | train | blackbg --indoor | max_points 154000
+chair budget 178000 TRAIN-AT-BUDGET-BLENDER | vertices 146157 faces 400498 | val0 33.679 val 33.912 worst 29.86 | test 32.408 | delivered 2.634 MB test 32.07 0.9668 0.0464 | K4096 R256 q14/q7 | train | blackbg --indoor | max_points 178000
+lego abl24-repeat-s0 (aim 1.25) | target 2.5 MB | best iter 21000 val 34.001 | final probe 2.866 MB | trained V 148675 F 491863 | delivered 2.784 MB (hit 1.114 x target, probe/delivered 1.030) | test 32.741 0.9652 0.0482 | prune rounds 15 active 15 collapsed 32611 (V 183068 -> 149411)
+hotdog abl24-repeat-s0 (aim 1.25) | target 2.5 MB | best iter 26000 val 36.146 | final probe 3.000 MB | trained V 151478 F 607931 | delivered 3.015 MB (hit 1.206 x target, probe/delivered 0.995) | test 35.474 0.9737 0.0623 | prune rounds 15 active 14 collapsed 18940 (V 172039 -> 152634)
+mic abl24-repeat-s0 (aim 1.25) | target 2.5 MB | best iter 21000 val 33.191 | final probe 2.508 MB | trained V 129555 F 345344 | delivered 2.345 MB (hit 0.938 x target, probe/delivered 1.069) | test 33.347 0.9834 0.0265 | prune rounds 15 active 11 collapsed 9139 (V 143660 -> 132079)
+# sacct: all COMPLETED except 22847084 kitchen-cap2-b28 TIMEOUT after 00:20:24 (cap 900000; no row)
