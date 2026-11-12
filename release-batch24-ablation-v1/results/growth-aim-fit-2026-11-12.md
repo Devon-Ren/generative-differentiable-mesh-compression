@@ -47,3 +47,31 @@ Data: the 19 no-collapse runs of batch24 (growth plan + byte probe, nothing trim
 - all 18 together: correlation of aim needed with FINAL faces per vertex r = -0.97; if that one number were known during growth, a leave-one-out linear fit gives size error sd 2.8%, range -3.7..+6.7%, within 10%: 18/18 (no collapse; not run)
 
 The faces per vertex of the final mesh exist only after the restricted Delaunay stitch at 11k, i.e. after growth has ended; the controller plans with a fixed 2.5 until then. So the aim is a stand-in for one unobserved number per scene, and a single relation (aim as a function of faces per vertex) covers captured scenes and synthetic objects alike.
+
+## CPU check (2026-11-12): can a quantity measured DURING growth predict the final faces per vertex, and with it the aim?
+
+82 runs read from rd_log.jsonl (19 no-collapse, 63 full). Growth-time quantities are taken at the last growth probe (iteration 9500).
+
+**Mip-NeRF 360 / T&T (11), no-collapse runs**
+- faces per vertex of the cleaned soup: correlation with the final faces per vertex r = -0.70; with the aim needed r = +0.79; leave-one-out aim from it -> size error sd 5.0%, range -8.5..+12.1%, within 10%: 10/11
+- faces per vertex of the raw soup: correlation with the final faces per vertex r = -0.74; with the aim needed r = +0.80; leave-one-out aim from it -> size error sd 5.0%, range -8.6..+11.3%, within 10%: 10/11
+- kept share: correlation with the final faces per vertex r = -0.51; with the aim needed r = +0.66; leave-one-out aim from it -> size error sd 6.0%, range -6.4..+14.7%, within 10%: 10/11
+- reference, one constant: size error sd 7.4%, range -8.4..+17.0%, within 10%: 10/11
+
+**NeRF-Synthetic (7), no-collapse runs**
+- faces per vertex of the cleaned soup: correlation with the final faces per vertex r = +0.04; with the aim needed r = -0.36; leave-one-out aim from it -> size error sd 10.0%, range -17.1..+18.9%, within 10%: 5/7
+- faces per vertex of the raw soup: correlation with the final faces per vertex r = +0.10; with the aim needed r = -0.29; leave-one-out aim from it -> size error sd 10.2%, range -16.1..+21.6%, within 10%: 5/7
+- kept share: correlation with the final faces per vertex r = +0.37; with the aim needed r = -0.73; leave-one-out aim from it -> size error sd 9.6%, range -21.9..+10.5%, within 10%: 5/7
+- reference, one constant: size error sd 7.0%, range -15.7..+6.4%, within 10%: 6/7
+
+**all 18, no-collapse runs**
+- faces per vertex of the cleaned soup: correlation with the final faces per vertex r = -0.39; with the aim needed r = +0.40; leave-one-out aim from it -> size error sd 11.1%, range -13.9..+19.1%, within 10%: 10/18
+- faces per vertex of the raw soup: correlation with the final faces per vertex r = -0.32; with the aim needed r = +0.34; leave-one-out aim from it -> size error sd 11.4%, range -14.0..+18.1%, within 10%: 10/18
+- kept share: correlation with the final faces per vertex r = -0.27; with the aim needed r = +0.23; leave-one-out aim from it -> size error sd 12.7%, range -24.7..+17.8%, within 10%: 7/18
+- reference, one constant: size error sd 11.3%, range -14.0..+18.5%, within 10%: 8/18
+
+**Is the mesh right after stitching (first probe at 12.5k) already the final one?**
+- captured scenes (Mip-360, T&T, Deep Blending), 39 full runs: final faces per vertex / faces per vertex at 12.5k = 0.96..1.56 (mean 1.17); correlation between the two r = +0.70
+- NeRF-Synthetic, 24 full runs: final faces per vertex / faces per vertex at 12.5k = 0.99..1.48 (mean 1.24); correlation between the two r = +0.46
+
+indoor example (soup faces per vertex at 9500 -> final): room 0.564 -> 2.39, kitchen 0.565 -> 3.11, counter 0.567 -> 2.67, bonsai 0.565 -> 2.34
