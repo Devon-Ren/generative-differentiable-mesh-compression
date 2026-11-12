@@ -34,6 +34,7 @@ import numpy as np
 DS4 = {'Mip-NeRF 360': MIP[:9], 'T&T': ['truck', 'train'], 'Deep Blending': DB, 'NeRF-Synthetic': BL}
 MESHPTS = {'Mip-NeRF 360': {'MiLo': (253, 24.09), 'BOG (7 sc.)': (913, 25.62)}, 'T&T': {'MiLo': (253, 21.46)}}
 GSPTS = {'HAC++': [(8.34, 27.60), (18.48, 27.82)], 'HAC': [(15.26, 27.53), (21.87, 27.77)], 'CompGS': [(8.83, 26.37), (16.5, 27.26)], 'Compact3DGS': [(48.8, 27.08)]}
+SHOW_CAP = False   # 2026-11-12: the vertex-cap curve (0.2 dB under ours) is reported in the tables, not drawn
 PLOT = {'NeRF-Synthetic': (['chair', 'drums', 'hotdog', 'lego', 'ship'], [1.5, 2.5, 3, 4])}
 def smooth(xs, ys):
     d = {}
@@ -56,27 +57,27 @@ for ax, (name, scenes) in zip(axes, DS4.items()):
     for k in range(K):
         pts = [sorted(capr[s], reverse=True)[k] for s in scenes if s in capr and len(capr[s]) > k]
         if len(pts) >= max(1, len(scenes) // 2): cx.append(statistics.mean(p[0] for p in pts)); cy.append(statistics.mean(p[1] for p in pts))
-    cxs, cys = smooth(cx, cy); ax.plot(cxs, cys, '--', color='#5b7a99', lw=1.3); ax.plot(cx, cy, 's', color='#5b7a99', ms=3.5, label='MeshSplatting, vertex cap + our codec')
+    if SHOW_CAP: cxs, cys = smooth(cx, cy); ax.plot(cxs, cys, '--', color='#5b7a99', lw=1.3); ax.plot(cx, cy, 's', color='#5b7a99', ms=3.5, label='MeshSplatting, vertex cap + our codec')
     Ks = min(len(v) for s_, v in simp.items() if s_ in scenes) if any(s_ in simp for s_ in scenes) else 0; gx, gy = [], []
     for k in range(Ks):
         pts = [sorted(simp[s_], reverse=True)[k] for s_ in scenes if s_ in simp and len(simp[s_]) > k]
         if len(pts) >= max(1, len(scenes) // 2): gx.append(statistics.mean(p[0] for p in pts)); gy.append(statistics.mean(p[1] for p in pts))
-    if gx: gxs, gys = smooth(gx, gy); ax.plot(gxs, gys, ':', color='#9a9a9a', lw=1.3); ax.plot(gx, gy, 'x', color='#9a9a9a', ms=4, label='MeshSplatting FP32, simplified after training + our codec')
+    if gx: gxs, gys = smooth(gx, gy); ax.plot(gxs, gys, ':', color='#9a9a9a', lw=1.3); ax.plot(gx, gy, 'x', color='#9a9a9a', ms=4, label='FP32 model simplified after training + our codec')
     fx = statistics.mean(FP[s][0] for s in scenes); fy = statistics.mean(FP[s][1] for s in scenes)
-    ax.plot([fx], [fy], '*', color='k', ms=8, label='MeshSplatting FP32 (our reproduction)'); ax.annotate(f'{fx:.0f} MB', (fx, fy), textcoords='offset points', xytext=(-4, 4), ha='right', fontsize=6.5)
+    ax.plot([fx], [fy], '*', color='k', ms=8, label='MeshSplatting FP32 model (our reproduction)'); ax.annotate(f'{fx:.0f} MB', (fx, fy), textcoords='offset points', xytext=(0, -10), ha='center', fontsize=6.5)
     for i, (k, (x, y)) in enumerate(MESHPTS.get(name, {}).items()):
         ax.scatter([x], [y], marker='D', s=18, color='#7a5c99', zorder=4, label='other mesh methods (published)' if i == 0 else None)
-        ax.annotate(k, (x, y), textcoords='offset points', xytext={'MeshSplatting (paper)': (0, -9), 'MiLo': (0, -9), 'BOG (7 sc.)': (0, 5)}.get(k, (0, 5)), ha='center', fontsize=6.5, color='#5a4273')
+        ax.annotate(k, (x, y), textcoords='offset points', xytext={'MeshSplatting (paper)': (0, -9), 'MiLo': (0, 5), 'BOG (7 sc.)': (0, 5)}.get(k, (0, 5)), ha='center', fontsize=6.5, color='#5a4273')
     if name == 'Mip-NeRF 360':
         for i, (k, pts) in enumerate(GSPTS.items()):
             px = [p[0] for p in pts]; py = [p[1] for p in pts]
             ax.plot(px, py, '^-', color='#8a8a8a', ms=3.5, lw=0.8, label='3DGS-class codecs (published)' if i == 0 else None, zorder=3)
-            off = {'HAC++': (4, 1), 'HAC': (4, -4), 'CompGS': (-4, -8), 'Compact3DGS': (4, -3)}[k]
+            off = {'HAC++': (4, 1), 'HAC': (4, -4), 'CompGS': (-3, -9), 'Compact3DGS': (4, -3)}[k]
             ax.annotate(k, (px[-1], py[-1]), textcoords='offset points', xytext=off, ha='left' if off[0] >= 0 else 'right', fontsize=6, color='#6a6a6a')
-    ax.margins(y=0.12); ax.set_xscale('log'); ax.set_title(name + (' (5 objects)' if name in PLOT else '')); ax.set_xlabel('file size (MB, log)'); ax.grid(alpha=.3); ax.tick_params(length=2, pad=1.5)
+    ax.margins(y=0.2); ax.set_xscale('log'); ax.set_title(name + (' (5 objects)' if name in PLOT else '')); ax.set_xlabel('file size (MB, log)'); ax.grid(alpha=.3); ax.tick_params(length=2, pad=1.5)
     import matplotlib.ticker as mt; ax.xaxis.set_major_locator(mt.LogLocator(base=10, subs=(1, 2, 5))); ax.xaxis.set_major_formatter(mt.FuncFormatter(lambda v, _: f'{v:g}' if v in (1, 2, 5, 10, 20, 50, 100, 200, 500, 1000) else '')); ax.xaxis.set_minor_formatter(mt.NullFormatter())
     if name == 'Mip-NeRF 360': ax.set_xlim(3.5, 1100)
-axes[0].set_ylabel('PSNR (dB), mean over scenes'); axes[2].set_ylabel('PSNR (dB), mean over scenes')
+axes[0].set_ylabel('PSNR (dB)'); axes[2].set_ylabel('PSNR (dB)')
 h, l = axes[0].get_legend_handles_labels(); fig.legend(h, l, loc='lower center', ncol=3, fontsize=7, frameon=False, bbox_to_anchor=(0.5, -0.01), handlelength=1.8, columnspacing=1.2)
 fig.tight_layout(rect=(0, 0.085, 1, 1), w_pad=1.0, h_pad=0.6); fig.savefig(OUT + 'fig_rd_per_dataset.pdf', bbox_inches='tight'); fig.savefig(OUT + 'fig_rd_per_dataset.png', dpi=160, bbox_inches='tight'); plt.close(fig)
 # ---------- Figure 2: size-error histogram per dataset
