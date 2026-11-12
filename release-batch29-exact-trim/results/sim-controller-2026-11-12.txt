@@ -1,0 +1,71 @@
+logged linear predictor: predicted final / true final - 1 (%), median [min .. max] by round
+  mip360/t&t 83 runs
+    it 13000: median -13.1  [ -36.4 ..  +32.4]
+    it 14000: median  -9.8  [ -21.3 ..   +5.2]
+    it 15000: median  -6.9  [ -18.6 ..   +3.1]
+    it 16000: median  -4.5  [ -15.6 ..   +3.9]
+    it 17000: median  -2.9  [ -12.8 ..   +4.3]
+    it 18000: median  -1.6  [ -10.4 ..   +4.6]
+    it 19000: median  -0.8  [  -8.1 ..   +4.8]
+    it 19500: median  -0.5  [  -7.3 ..   +4.9]
+  deep blending 6 runs
+    it 13000: median -10.3  [ -34.8 ..  +17.0]
+    it 14000: median -12.3  [ -26.2 ..   +5.2]
+    it 15000: median  -5.7  [ -17.9 ..   +3.7]
+    it 16000: median  -1.5  [ -12.4 ..   +3.6]
+    it 17000: median  -0.6  [  -5.7 ..   +3.6]
+    it 18000: median  +1.5  [  -4.4 ..   +2.5]
+    it 19000: median  +1.4  [  -0.7 ..   +3.3]
+    it 19500: median  +1.0  [  -3.0 ..   +3.3]
+  objects 57 runs
+    it 13000: median  -1.0  [ -17.4 ..  +27.5]
+    it 14000: median  -1.4  [ -16.2 ..  +21.0]
+    it 15000: median  +0.7  [ -14.9 ..  +16.2]
+    it 16000: median  +0.3  [ -12.0 ..  +12.9]
+    it 17000: median  +0.9  [  -8.8 ..  +10.3]
+    it 18000: median  +1.0  [  -7.1 ..   +8.0]
+    it 19000: median  +1.0  [  -5.9 ..   +6.3]
+    it 19500: median  +0.5  [  -5.7 ..   +6.3]
+
+what the logged runs did (main runs, all 100 incl. capacity-limited):
+  current method (as run)                                    n 100 | mean abs  8.1% | within 5%:  58  within 10%:  83 | worst  -67.3% /  +13.5%
+
+simulated exact execution on the same 100 growth trajectories:
+  excess/rounds left | linear (logged) | from it 12500       n 100 | mean abs  6.7% | within 5%:  74  within 10%:  87 | worst  -67.3% /   +5.1%
+
+
+untouched file would end at 1.15 x target (every run needs trimming)
+  removal acts additively    , controller add   | excess / rounds left, from 12,500  | mean abs  2.8% | within 5%:  85/100  within 10%: 100/100 | range   -7.3% ..  +7.5%
+  removal acts additively    , controller add   | excess / rounds left, from 16,000  | mean abs  2.7% | within 5%:  88/100  within 10%: 100/100 | range   -7.3% ..  +7.5%
+  removal acts additively    , controller add   | excess / rounds left, from 17,500  | mean abs  2.7% | within 5%:  88/100  within 10%: 100/100 | range   -7.3% ..  +7.5%
+  removal acts additively    , controller add   | last round only                    | mean abs  2.2% | within 5%:  96/100  within 10%: 100/100 | range   +0.4% ..  +7.5%
+  removal acts additively    , controller ratio | excess / rounds left, from 12,500  | mean abs  2.7% | within 5%:  91/100  within 10%: 100/100 | range   -5.7% ..  +7.9%
+  removal acts additively    , controller ratio | excess / rounds left, from 16,000  | mean abs  2.7% | within 5%:  91/100  within 10%: 100/100 | range   -5.7% ..  +7.9%
+  removal acts additively    , controller ratio | excess / rounds left, from 17,500  | mean abs  2.7% | within 5%:  91/100  within 10%: 100/100 | range   -5.7% ..  +7.9%
+  removal acts additively    , controller ratio | last round only                    | mean abs  2.4% | within 5%:  93/100  within 10%: 100/100 | range   +0.4% ..  +7.9%
+  removal acts proportionally, controller add   | excess / rounds left, from 12,500  | mean abs  2.6% | within 5%:  85/100  within 10%: 100/100 | range   -8.3% ..  +6.6%
+  removal acts proportionally, controller add   | excess / rounds left, from 16,000  | mean abs  2.4% | within 5%:  89/100  within 10%: 100/100 | range   -8.3% ..  +6.6%
+  removal acts proportionally, controller add   | excess / rounds left, from 17,500  | mean abs  2.4% | within 5%:  89/100  within 10%: 100/100 | range   -8.3% ..  +6.6%
+  removal acts proportionally, controller add   | last round only                    | mean abs  1.7% | within 5%:  97/100  within 10%: 100/100 | range   +1.2% ..  +6.6%
+  removal acts proportionally, controller ratio | excess / rounds left, from 12,500  | mean abs  2.4% | within 5%:  92/100  within 10%: 100/100 | range   -5.9% ..  +7.0%
+  removal acts proportionally, controller ratio | excess / rounds left, from 16,000  | mean abs  2.3% | within 5%:  92/100  within 10%: 100/100 | range   -5.9% ..  +7.0%
+  removal acts proportionally, controller ratio | excess / rounds left, from 17,500  | mean abs  2.3% | within 5%:  92/100  within 10%: 100/100 | range   -5.9% ..  +7.0%
+  removal acts proportionally, controller ratio | last round only                    | mean abs  1.9% | within 5%:  97/100  within 10%: 100/100 | range   +1.2% ..  +7.0%
+
+untouched file would end at 1.35 x target (every run needs trimming)
+  removal acts additively    , controller add   | excess / rounds left, from 12,500  | mean abs  3.2% | within 5%:  81/100  within 10%: 100/100 | range   -8.5% ..  +8.8%
+  removal acts additively    , controller add   | excess / rounds left, from 16,000  | mean abs  3.2% | within 5%:  81/100  within 10%: 100/100 | range   -8.5% ..  +8.8%
+  removal acts additively    , controller add   | excess / rounds left, from 17,500  | mean abs  3.2% | within 5%:  81/100  within 10%: 100/100 | range   -8.5% ..  +8.8%
+  removal acts additively    , controller add   | last round only                    | mean abs 19.5% | within 5%:   0/100  within 10%:   0/100 | range  +17.9% .. +21.1%
+  removal acts additively    , controller ratio | excess / rounds left, from 12,500  | mean abs  3.5% | within 5%:  77/100  within 10%:  99/100 | range   -6.7% .. +10.1%
+  removal acts additively    , controller ratio | excess / rounds left, from 16,000  | mean abs  3.5% | within 5%:  77/100  within 10%:  99/100 | range   -6.7% .. +10.1%
+  removal acts additively    , controller ratio | excess / rounds left, from 17,500  | mean abs  3.5% | within 5%:  77/100  within 10%:  99/100 | range   -6.7% .. +10.1%
+  removal acts additively    , controller ratio | last round only                    | mean abs 19.5% | within 5%:   0/100  within 10%:   0/100 | range  +17.9% .. +21.1%
+  removal acts proportionally, controller add   | excess / rounds left, from 12,500  | mean abs  2.8% | within 5%:  82/100  within 10%:  98/100 | range  -10.6% ..  +5.5%
+  removal acts proportionally, controller add   | excess / rounds left, from 16,000  | mean abs  2.8% | within 5%:  82/100  within 10%:  98/100 | range  -10.6% ..  +5.5%
+  removal acts proportionally, controller add   | excess / rounds left, from 17,500  | mean abs  2.8% | within 5%:  82/100  within 10%:  98/100 | range  -10.6% ..  +5.5%
+  removal acts proportionally, controller add   | last round only                    | mean abs 18.8% | within 5%:   0/100  within 10%:   0/100 | range  +18.8% .. +18.8%
+  removal acts proportionally, controller ratio | excess / rounds left, from 12,500  | mean abs  2.3% | within 5%:  92/100  within 10%: 100/100 | range   -5.9% ..  +7.0%
+  removal acts proportionally, controller ratio | excess / rounds left, from 16,000  | mean abs  2.3% | within 5%:  92/100  within 10%: 100/100 | range   -5.9% ..  +7.0%
+  removal acts proportionally, controller ratio | excess / rounds left, from 17,500  | mean abs  2.3% | within 5%:  92/100  within 10%: 100/100 | range   -5.9% ..  +7.0%
+  removal acts proportionally, controller ratio | last round only                    | mean abs 18.8% | within 5%:   0/100  within 10%:   0/100 | range  +18.8% .. +18.8%
