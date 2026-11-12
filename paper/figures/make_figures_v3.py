@@ -41,7 +41,7 @@ def smooth(xs, ys):
     xs = np.array(sorted(d)); ys = np.array([np.mean(d[x]) for x in xs])
     if len(xs) < 3: return xs, ys
     lx = np.log(xs); f = PchipInterpolator(lx, ys); g = np.linspace(lx[0], lx[-1], 60); return np.exp(g), f(g)
-fig, axes2 = plt.subplots(2, 2, figsize=(7.0, 4.6)); axes = axes2.ravel()
+fig, axes2 = plt.subplots(2, 2, figsize=(7.0, 3.55)); axes = axes2.ravel()
 for ax, (name, scenes) in zip(axes, DS4.items()):
     scenes, targets = PLOT.get(name, (scenes, sorted({t for (s, t) in ctrl if s in scenes})))
     xs, ys, lo, hi = [], [], [], []
@@ -78,7 +78,7 @@ for ax, (name, scenes) in zip(axes, DS4.items()):
     if name == 'Mip-NeRF 360': ax.set_xlim(3.5, 1100)
 axes[0].set_ylabel('PSNR (dB), mean over scenes'); axes[2].set_ylabel('PSNR (dB), mean over scenes')
 h, l = axes[0].get_legend_handles_labels(); fig.legend(h, l, loc='lower center', ncol=3, fontsize=7, frameon=False, bbox_to_anchor=(0.5, -0.01), handlelength=1.8, columnspacing=1.2)
-fig.tight_layout(rect=(0, 0.07, 1, 1), w_pad=1.0, h_pad=1.2); fig.savefig(OUT + 'fig_rd_per_dataset.pdf', bbox_inches='tight'); fig.savefig(OUT + 'fig_rd_per_dataset.png', dpi=160, bbox_inches='tight'); plt.close(fig)
+fig.tight_layout(rect=(0, 0.085, 1, 1), w_pad=1.0, h_pad=0.6); fig.savefig(OUT + 'fig_rd_per_dataset.pdf', bbox_inches='tight'); fig.savefig(OUT + 'fig_rd_per_dataset.png', dpi=160, bbox_inches='tight'); plt.close(fig)
 # ---------- Figure 2: size-error histogram per dataset
 fig, axes = plt.subplots(1, 3, figsize=(7.0, 2.4), sharey=False)
 for ax, (name, scenes) in zip(axes, DS.items()):
