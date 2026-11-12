@@ -9,6 +9,13 @@
 \begin{figure}[h]\centering\includegraphics[width=\linewidth]{figures/fig_size_error_strip.pdf}
 \caption{Size error of every run, one dot per scene, by dataset and target; black bar: median; grey band: $\pm10\%$; grey triangles: capacity-limited objects.}\end{figure}
 \TODO{byte-probe accuracy (probe / delivered 0.999--1.001 on 49 runs), per-run overhead (+8--15 min), the price per growth step for one scene, growth aim 1.0 vs 1.25 on the same 33 pairs}
+\section{Qualitative results}
+\begin{figure*}[h]\centering
+\includegraphics[width=\textwidth]{figures/fig_qualitative.jpg}\\[2pt]
+\includegraphics[width=\textwidth]{figures/fig_g0_triptych.jpg}
+\caption{\textbf{Top:} decoded \BM files at three target sizes next to the ground truth and the FP32 model (room, truck): full view with PSNR, the crop enlarged, and the error map ($|$render $-$ GT$|\times4$). \textbf{Bottom:} the same vertex count reached three ways; simplification after training loses 3\dB on this view and shows holes and speckle.}
+\label{fig:qual}
+\end{figure*}
 \section{Where the bytes go}
 \begin{figure}[h]\centering\includegraphics[width=0.9\linewidth]{figures/fig_bytes_per_stream.pdf}
 \caption{Bytes per stream of a 20~MB and a 5~MB file. Connectivity and the dictionaries are lossless; the loss sits in the appearance indices and the DC color.}\label{fig:bytes}\end{figure}
