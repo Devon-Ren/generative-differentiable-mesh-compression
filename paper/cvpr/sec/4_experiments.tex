@@ -34,7 +34,7 @@ Deep Blending & $+0.15$ (5/6) & -- & $+0.19$ (5/6) \\
 \label{sec:e3}
 Table~\ref{tab:size} reports, per dataset and target, the mean file size, the size error $(\text{file size}-\text{target})/\text{target}$ and the count of scenes within $\pm10\%$; Fig.~\ref{fig:rd} draws the same runs as rate--distortion curves, with the per-scene spread of the landing as whiskers at each target. Across the four datasets 83 of 89 runs land within $\pm10\%$ with one setting per capture class. The misses are systematic and we report them: indoor scenes land 5--14\% above the target (kitchen at 10~MB is the worst, $+13.5\%$), because the visible-face set keeps growing after the growth phase and the collapse rounds can remove only so much per round; outdoor scenes at 20~MB land up to 7\% below, because the last growth step admits fewer splits than planned and nothing can add vertices afterwards. On NeRF-Synthetic several objects cannot fill 3--6~MB at all: the price falls to its floor from the first steps and the file stays small (ficus, mic; six of eight objects at 6~MB). These \emph{capacity-limited} runs are counted separately and never hidden. Deep Blending, untouched during development, lands at $+7$ to $+10\%$ on average: the same indoor behaviour as Mip-NeRF~360, no retuning.
 
-\noindent\textbf{Cost of control.} The best a growth rule can do at a given file size is what it reaches when the size is \emph{not} prescribed: the same rule run at a fixed price, several trainings per scene, the size read off afterwards. Against that reference curve (three prices per scene \TODO{third price running; today two}), \BM at 10~MB is $0.12$\dB lower on real scenes and $0.03$\dB lower at 1.5~MB on objects. That is the price of getting the size in one training. The reference also shows why a price is not a size: at one fixed price the file size varies by $2.2$--$2.5\times$ across the 11 real scenes (4.7--11.7~MB at one price, 10.8--24.0~MB at another).
+\noindent\textbf{Cost of control.} The best a growth rule can do at a given file size is what it reaches when the size is \emph{not} prescribed: the same rule run at a fixed price, several trainings per scene, the size read off afterwards. Against that reference curve (three fixed prices per scene, landing at about 5, 12 and 25~MB on real scenes and 1.5, 2.5 and 4~MB on objects), \BM is $0.04$\dB lower at 20~MB, $0.06$\dB at 2.5~MB and $0.02$\dB at 1.5~MB, where a fixed-price run lands at about the same size as the target, and $0.13$\dB lower at 10~MB, where the curve is read between two prices (the curve is concave, so this chord reading under-estimates the cost; the three points bound the error at $0.19$\dB on average over a span twice as wide). The cost of getting the size in one training is therefore below $0.1$\dB where it can be measured directly and below about $0.3$\dB everywhere. Run-to-run variance of the full method, three seeds on four scenes: the file size moves by 0.5--5\% of the target and the PSNR by 0.01--0.14\dB. The reference also shows why a price is not a size: at one fixed price the file size varies by $2.2$--$2.5\times$ across the 11 real scenes (4.7--11.7~MB at one price, 10.8--24.0~MB at another).
 
 \begin{table}[t]\centering\small
 \caption{\textbf{Size error and quality per dataset and target.} Mean file size, size error (mean, range), scenes within $\pm10\%$, and PSNR / SSIM / LPIPS of the decoded files (means over the scenes below the capacity limit; capacity-limited objects in parentheses). $\Delta$PSNR is against the FP32 model.}
@@ -86,8 +86,8 @@ Table~\ref{tab:cross} puts \BM next to published mesh-output methods and 3DGS-cl
  & Binary Opacity Grids (7 sc.) & 913 & 25.62 & -- & -- \\
  & RaDe-GS mesh / GOF mesh & 1100 / 1500 & 23.56 / 20.78 & 0.668 / 0.573 & 0.361 / 0.465 \\
 \midrule
-\multirow{5}{*}{\rotatebox{90}{3DGS}} & 3DGS & 751 & 27.46 & \TODO{} & \TODO{} \\
- & Scaffold-GS & 254 & 27.50 & \TODO{} & \TODO{} \\
+\multirow{5}{*}{\rotatebox{90}{3DGS}} & 3DGS & 751 & 27.46 & 0.812 & 0.222 \\
+ & Scaffold-GS & 254 & 27.50 & 0.806 & 0.252 \\
  & Compact3DGS / LightGaussian & 48.8 / 44.5 & 27.08 / 27.00 & \TODO{} & \TODO{} \\
  & HAC++ (two points) & 8.3 / 18.5 & 27.60 / 27.82 & \TODO{} & \TODO{} \\
  & CompGS (two points) & 8.8 / 16.5 & 26.37 / 27.26 & \TODO{} & \TODO{} \\
@@ -101,7 +101,7 @@ Table~\ref{tab:cross} puts \BM next to published mesh-output methods and 3DGS-cl
 
 \subsection{Against generic mesh codecs}
 \label{sec:e5}
-Could an off-the-shelf mesh codec replace ours? Table~\ref{tab:generic} runs the same FP32 meshes through Draco~\cite{draco}, the MPEG SC3DMC/TFAN coder~\cite{mamou2009tfan} and zstd, and compares bytes with our file for the same mesh (our encoder at its top operating point, $-0.1$ to $-0.8$\dB). Keeping view dependence as 8-bit SH attributes, Draco needs 12--18$\times$ and MPEG 3--4$\times$ our bytes; the only generic routes near our size drop the SH altogether (RGB-only vertex colors, or a baked texture) and lose 0.7--4.4\dB. The generic rows are near-lossless and ours is not, so the table measures the bytes each coder needs for essentially the same mesh rather than a rate--distortion curve; the fair generic point, Draco carrying exactly our appearance payload (the two dictionary indices and the 7-bit DC color as a generic attribute), is \TODO{running on CPU; row to be filled}. Our meshes are triangle soups stitched late in training and are not manifold, which is what the Edgebreaker-style coders pay for; the mesh statistics are in the supplement.
+Could an off-the-shelf mesh codec replace ours? Table~\ref{tab:generic} runs the same FP32 meshes through Draco~\cite{draco}, the MPEG SC3DMC/TFAN coder~\cite{mamou2009tfan} and zstd, and compares bytes with our file for the same mesh (our encoder at its top operating point, $-0.1$ to $-0.8$\dB). Keeping view dependence as 8-bit SH attributes, Draco needs 12--18$\times$ and MPEG 3--4$\times$ our bytes; the only generic routes near our size drop the SH altogether (RGB-only vertex colors, or a baked texture) and lose 0.7--4.4\dB. The generic rows are near-lossless and ours is not, so the table measures the bytes each coder needs for essentially the same mesh rather than a rate--distortion curve; The fair generic point is Draco carrying exactly our appearance payload, the two dictionary indices and the 7-bit DC color as one generic attribute on the same positions and faces: its file is $2.7$--$3.5\times$ ours on every asset, and Draco's geometry alone, positions and connectivity with no appearance at all, already weighs $0.85$--$1.24\times$ our whole file. Our appearance streams cost 18--42\% of our file; coded by Draco's attribute predictor they cost two to three files. Our meshes are triangle soups stitched late in training and are not manifold, which is what the Edgebreaker-style coders pay for; the mesh statistics are in the supplement.
 
 \begin{table}[t]\centering\small
 \caption{\textbf{Generic codecs on the same mesh.} File size of each route divided by ours, range over the 11 Mip-NeRF~360 / T\&T scenes (mean); quality loss against FP32. ``Ours'' is the top operating point of our encoder on the same mesh.}
@@ -114,7 +114,9 @@ Route & size $\div$ ours & $\Delta$PSNR & view dep. \\
 Draco, positions + faces + 8-bit SH & 12.3--17.7$\times$ (15.0) & $-0.02$ to $-0.21$ & yes \\
 MPEG SC3DMC/TFAN + 8-bit SH (10 sc.) & 3.0--4.2$\times$ (3.7) & $-0.02$ to $-0.21$ & yes \\
 Quantised PLY + zstd-19 & 4.4--6.2$\times$ (5.2) & $-0.02$ to $-0.21$ & yes \\
-Draco + our dictionary indices and DC & \TODO{} & $=$ ours & yes \\
+Draco + our dictionary indices and DC (generic attr.) & 2.7--3.5$\times$ (3.0) & $=$ ours & yes \\
+Draco geometry + our indices and DC through zstd & 1.3--1.6$\times$ (1.4) & $=$ ours & yes \\
+Draco geometry only (positions + faces, no appearance) & 0.85--1.24$\times$ (1.05) & -- & no \\
 Draco, positions + faces + 8-bit RGB & 1.8--2.4$\times$ (2.1) & $-0.7$ to $-4.4$ & no \\
 Baked $4096^2$ texture + Draco geometry & 2.4--3.2$\times$ (2.7) & $-0.7$ to $-4.4$ & no \\
 Ours & 1$\times$ & $-0.1$ to $-0.8$ & yes \\
@@ -134,10 +136,10 @@ Fig.~\ref{fig:bytes} splits a file into its streams: connectivity is 39--43\% an
 
 \subsection{Ablation}
 \label{sec:e7}
-Table~\ref{tab:abl} switches off one part of the training rule at a time on all 11 real scenes at 10~MB and all NeRF-Synthetic objects at 2.5~MB, same code, codec and evaluation (ficus is capacity-limited at 2.5~MB and excluded). At 10--20~MB on real scenes the growth plan alone lands within 10\% on 9--10 of 11 scenes; the collapse rounds and the byte probe each remove one failure mode: the collapse trims the indoor overshoot (kitchen $+20\%\rightarrow+13\%$), the probe is what makes small files land (at 1.5~MB the fixed constants give $+18\%$ on average, 1 of 8 within 10\%; the probe $+4\%$, 8 of 8). The last row is the one that supports Sec.~\ref{sec:e1}: with the number of splits per step copied from the full run, choosing the triangles by \MS's importance score instead of error per byte gives meshes that \MS's own pruning then cuts further, and at the same file size they are 0.40\dB worse on every real scene. Run-to-run variance of the full method: \TODO{seed repeats running; file size and PSNR spread over 3 seeds on 4 scenes}.
+Table~\ref{tab:abl} switches off one part of the training rule at a time on all 11 real scenes at 10~MB and all NeRF-Synthetic objects at 2.5~MB, same code, codec and evaluation (ficus is capacity-limited at 2.5~MB and excluded). At 10--20~MB on real scenes the growth plan alone lands within 10\% on 9--10 of 11 scenes and none of the parts changes the quality at the same file size by more than 0.03\dB; the collapse rounds and the byte probe each remove one failure mode. The collapse trims the indoor overshoot (kitchen $+20\%\rightarrow+13\%$; on objects it takes the hit rate from 2/7 to 7/7). The probe is what makes small files land: with the fixed constants the 1.5~MB objects land $+18\%$ on average, 1 of 8 within 10\%, against $+4\%$ and 8 of 8 with the probe, while at 20~MB the constants are within 10\% on 10 of 11. The last row is the one that supports Sec.~\ref{sec:e1}: with the number of splits per step copied from the full run, choosing the triangles by \MS's importance score instead of error per byte gives meshes that \MS's own pruning then cuts further, and at the same file size they are 0.42\dB worse on every real scene and 0.24\dB worse on objects.
 
 \begin{table}[t]\centering\small
-\caption{\textbf{Ablation.} Size error (mean; scenes within $\pm10\%$) and quality at the same file size relative to the full method, read on each scene's reference curve ($\Delta$PSNR; scenes where the variant is better). Mip-NeRF~360 / T\&T at 10~MB (11 scenes), NeRF-Synthetic at 2.5~MB (7 objects).}
+\caption{\textbf{Ablation.} Size error (mean; scenes within $\pm10\%$) and quality at the same file size relative to the full method, read on each scene's reference curve of three fixed prices ($\Delta$PSNR; scenes where the variant is better). Mip-NeRF~360 / T\&T at 10~MB (11 scenes), NeRF-Synthetic at 2.5~MB (7 objects; ficus is capacity-limited). The fixed-constants variant was also run at 20~MB ($+3.4\%$, 10/11, $+0.03$\dB) and 1.5~MB ($+17.9\%$, 1/8, $+0.05$\dB).}
 \label{tab:abl}
 \setlength{\tabcolsep}{3pt}
 \resizebox{\linewidth}{!}{\begin{tabular}{lrrrr}
@@ -147,9 +149,9 @@ Table~\ref{tab:abl} switches off one part of the training rule at a time on all 
 Variant & size error & $\Delta$PSNR & size error & $\Delta$PSNR \\
 \midrule
 full \BM & $+2.0\%$ (10/11) & 0 & $+2.6\%$ (7/7) & 0 \\
-no in-training collapse & $+4.5\%$ (9/11) & $-0.03$ (4/11) & $+9.0\%$ (2/7) & $-0.16$ (3/7) \\
-no byte probe (fixed constants) & $+5.0\%$ (10/11) & $+0.03$ (9/11) & $+12.8\%$ (1/7) & $-0.07$ (3/7) \\
-\MS's split selection, same counts & $-27\%$ (0/11) & $-0.40$ (0/11) & $-11\%$ (4/7) & $-0.11$ (2/7) \\
+no in-training collapse & $+4.5\%$ (9/11) & $-0.03$ (4/11) & $+9.0\%$ (2/7) & $-0.05$ (3/7) \\
+no byte probe (fixed constants) & $+5.0\%$ (10/11) & $+0.03$ (9/11) & $+12.8\%$ (1/7) & $+0.07$ (6/7) \\
+\MS's split selection, same counts & $-27\%$ (0/11) & $-0.42$ (0/11) & $-11\%$ (4/7) & $-0.24$ (1/7) \\
 \bottomrule
 \end{tabular}}
 \end{table}
