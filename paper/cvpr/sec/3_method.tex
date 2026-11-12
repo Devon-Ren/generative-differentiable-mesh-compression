@@ -1,43 +1,53 @@
 \section{Method}
 \label{sec:method}
 
-\BM keeps \MS's renderer, losses and schedule and changes how the mesh grows and shrinks so that the encoded file meets a target size $T$. Sec.~\ref{sec:prelim} fixes notation, Sec.~\ref{sec:rd} gives the rule that decides every split and collapse, Sec.~\ref{sec:controller} explains how the price in that rule is obtained from $T$ (Alg.~\ref{alg:bm}), and Sec.~\ref{sec:codec} describes the codec whose bytes the rule counts.
+\BM keeps \MS's renderer, losses and schedule and changes how the mesh grows and shrinks so that the encoded file meets a target size $T$. The logic follows from the goal. To hit a size we must know what the mesh costs in bytes while it is still being trained (Sec.~\ref{sec:probe}); the cost turns $T$ into a vertex count and a growth plan (Sec.~\ref{sec:growth}); whatever the plan could not foresee is removed by edge collapse during training (Sec.~\ref{sec:trim}). Alg.~\ref{alg:bm} gives the loop and Sec.~\ref{sec:codec} the codec whose bytes are counted.
 
 \subsection{Preliminaries}
 \label{sec:prelim}
-\MS~\cite{meshsplatting2025} represents a scene by $V$ vertices, each with a position $\mathbf{x}\in\mathbb{R}^3$, a DC color $\mathbf{c}\in\mathbb{R}^3$ and 45 spherical-harmonic (SH) coefficients $\mathbf{h}$ of degrees 1--3, and $F$ triangles over them. Training runs 30k iterations. Every 500 iterations until 15k it \emph{densifies}: it samples triangles by an importance score and replaces each by four, inserting the three edge midpoints as new vertices; it also prunes triangles that render with low opacity. At 11k a restricted Delaunay step stitches the soup into a connected mesh, an opacity floor then rises until every triangle is opaque, and a final cleaning removes triangles that cover no pixel. We keep all of this. Let $R$ be the size of the encoded file in bytes and $D$ the rendering error on the training views. We write $D_t$ for the \emph{error of triangle} $t$: the per-pixel $L_1$ residual summed over the pixels whose front-most triangle is $t$ (the rasterizer returns this id), averaged over the views rendered since the last decision and normalized per megapixel.
+\MS~\cite{meshsplatting2025} represents a scene by $V$ vertices, each with a position $\mathbf{x}\in\mathbb{R}^3$, a DC color $\mathbf{c}\in\mathbb{R}^3$ and 45 spherical-harmonic (SH) coefficients $\mathbf{h}$ of degrees 1--3, and $F$ triangles over them. Training runs 30k iterations. Every 500 iterations until 15k it \emph{densifies}: it samples triangles by an importance score and replaces each by four, inserting the three edge midpoints as new vertices; it also prunes triangles that render with low opacity. A vertex cap stops densification once $V$ reaches the cap. At 11k a restricted Delaunay step stitches the soup into a connected mesh, an opacity floor then rises until every triangle is opaque, and a final cleaning removes triangles that cover no pixel. We keep all of this. Let $R$ be the size of the encoded file in bytes. We write $D_t$ for the \emph{error of triangle} $t$: the per-pixel $L_1$ residual summed over the pixels whose front-most triangle is $t$ (the rasterizer returns this id), averaged over the views rendered since the last decision and normalized per megapixel.
 
-\subsection{One price for splits and collapses}
-\label{sec:rd}
-We want the mesh that minimizes $D + \lambda R$ for a price $\lambda$ (error units per byte). A local change is worth making when it lowers this sum, which gives two rules with the same $\lambda$.
-
-\noindent\textbf{Split.} Splitting $t$ adds three vertices and three faces, so it adds $\Delta R_{\mathrm{split}} = 3(b_v + b_f)$ bytes, where $b_v$ and $b_f$ are the file's bytes per vertex and per face. We use $D_t$ as the error the split can remove and split $t$ iff
+\subsection{Measuring the file during training}
+\label{sec:probe}
+\noindent\textbf{Byte probe.} Every 1000 iterations once \MS starts pruning (4k), a copy of the mesh is cleaned exactly as the final mesh will be and passed through the real encoder of Sec.~\ref{sec:codec}. The file size is affine in the mesh,
 \begin{equation}
-D_t \,/\, \Delta R_{\mathrm{split}} > \lambda .
-\label{eq:split}
+R = b_v V + b_f F + c ,
+\label{eq:bytes}
 \end{equation}
-Since $\Delta R_{\mathrm{split}}$ is the same for every triangle at one step, Eq.~\eqref{eq:split} ranks triangles by error and $\lambda$ sets how many are split. This replaces \MS's importance sampling: a triangle is refined because it is wrong, not because it is visible.
+where $c$ covers the dictionaries and the header. The probe returns $R$, the bytes per vertex $b_v$ and per face $b_f$, $c$, and the fraction of vertices that survive cleaning; these replace the previous values. Measuring matters because the costs are not constants: $b_v$ ranges from 8 to 13 bytes across scenes and operating points, and with fixed costs small files land 18\% too large (Sec.~\ref{sec:e7}).
 
-\noindent\textbf{Collapse.} Collapsing edge $(u,v)$ merges $u$ and $v$ into one vertex and deletes the faces on the edge. It frees $\Delta R_{uv} = b_v\,[\,u,v \text{ survive cleaning}\,] + b_f\, n_{uv}$ bytes, with $n_{uv}$ the deleted faces that would survive cleaning, and it risks the error $D_{uv}$ of the faces around $u$ and $v$. We collapse the edges with the lowest $D_{uv}/\Delta R_{uv}$, all of them below $\lambda$, as an independent set (no two collapses share a vertex) with a fold-over check. The merged vertex is placed at the midpoint and takes the average of the two attribute vectors and of their optimizer moments, so training continues without a restart. This is what simplification after training cannot offer: the survivors keep being optimized.
-
-\subsection{From a target size to the price}
-\label{sec:controller}
-A fixed $\lambda$ does not determine a file size: across our scenes one price lands at files $2.5\times$ apart. \BM therefore sets $\lambda$ at every step from $T$ (Alg.~\ref{alg:bm}).
-
-\noindent\textbf{Byte probe.} The file size is affine in the mesh, $R = b_v V + b_f F + c$, where $c$ covers the dictionaries and the header; $b_v$ and $b_f$ vary between scenes and operating points (8--13 bytes per vertex), so they are measured, not assumed. Every 1000 iterations once \MS starts pruning (4k), a copy of the mesh is cleaned exactly as the final mesh will be and passed through the real encoder of Sec.~\ref{sec:codec}. The probe returns $R$, the coefficients $b_v$, $b_f$, $c$, the faces per vertex $f$, and the fraction of vertices that survive cleaning; these replace the previous values.
-
-\noindent\textbf{Growth plan.} The vertex count the target buys is
+\noindent\textbf{Vertex count.} With $f$ faces per vertex, Eq.~\eqref{eq:bytes} gives the vertex count that the target buys:
 \begin{equation}
 V^\star = (\alpha T - c)\,/\,(b_v + f\, b_f).
 \label{eq:vstar}
 \end{equation}
-With $m$ growth steps left, the plan raises $V$ geometrically, $V \rightarrow V\,(V^\star/V)^{1/m}$, which asks for $k = V\big((V^\star/V)^{1/m}-1\big)/(3\sigma)$ splits now: each split adds three vertices, of which a fraction $\sigma$ survives \MS's pruning at the next step ($\sigma$ is measured from the previous cohort). The plan is recomputed at every step, so errors in one step are spread over the steps that remain.
+During growth the mesh is an unstitched soup whose face-to-vertex ratio says little about the final mesh, so we fix $f = 2.5$; the factor $\alpha$ is discussed in Sec.~\ref{sec:trim}.
 
-\noindent\textbf{Price.} $\lambda$ is set to the $k$-th largest ratio $D_t/\Delta R_{\mathrm{split}}$, so that Eq.~\eqref{eq:split} admits $k$ triangles. Because the errors are re-measured between steps, the number that actually passes differs from $k$; we divide $k$ by the measured yield $y$ (passed over asked) of the last steps before taking the rank.
+\subsection{Growing toward the vertex count}
+\label{sec:growth}
+\noindent\textbf{How many.} With $m$ growth steps left, the plan raises $V$ geometrically, $V \rightarrow V\,(V^\star/V)^{1/m}$, which asks for
+\begin{equation}
+k = V\big((V^\star/V)^{1/m}-1\big)\,/\,(3\sigma)
+\label{eq:k}
+\end{equation}
+splits now: each split adds three vertices, of which a fraction $\sigma$ survives \MS's pruning at the next step ($\sigma$ is measured from the previous cohort). The plan is recomputed at every step with the latest probe, so an error in one step is spread over the steps that remain.
 
-\noindent\textbf{Trimming.} From 12.5k to 19.5k, every 500 iterations, the probe measures $R$ and a least-squares fit of the probe history extrapolates it to the end of the opacity ramp. If the estimate exceeds $T$, edges are collapsed by the rule of Sec.~\ref{sec:rd} until the excess is removed, at most 15\% of the vertices per round, and $\lambda$ becomes the score of the last edge collapsed. If it does not, nothing is collapsed, so trimming never pushes the file below the target.
+\noindent\textbf{Which.} \MS samples the triangles to split by an importance score that favours visible triangles. We split the $k$ triangles with the largest error $D_t$: a triangle is refined because it is rendered wrongly. Written as a threshold, triangle $t$ is split iff
+\begin{equation}
+D_t \,/\, \Delta R_{\mathrm{split}} > \lambda ,\qquad \Delta R_{\mathrm{split}} = 3(b_v + b_f),
+\label{eq:split}
+\end{equation}
+with $\lambda$ set to the $k$-th largest ratio. A split costs the same bytes for every triangle, so Eq.~\eqref{eq:split} is a ranking by error and $\lambda$ is a result of the plan, not a parameter; we keep the form because the same quantity, error per byte, also decides collapses (Sec.~\ref{sec:trim}), where the bytes do differ. Because the errors are re-measured between steps, the number of triangles that actually passes differs from $k$; we divide $k$ by the measured yield $y$ (passed over asked) of the last steps before taking the rank. Running Eq.~\eqref{eq:split} with a fixed $\lambda$ instead gives training without a size target, which serves as the reference in Sec.~\ref{sec:e3}; one such $\lambda$ lands at files $2.5\times$ apart across scenes.
 
-\noindent\textbf{Growth aim.} After the mesh is stitched at 11k, the set of visible faces keeps growing as the opacity floor rises, by 5--40\% depending on the capture class, and none of it can be observed before 11k. The plan therefore aims above the target by a factor $\alpha$ (1.25 for captured scenes, 1.1 for synthetic objects) and leaves the correction to trimming, which can only remove bytes. $\alpha$ is the one calibrated constant of \BM.
+\subsection{Trimming by collapse}
+\label{sec:trim}
+\noindent\textbf{What growth cannot see.} After the mesh is stitched at 11k, the set of visible faces keeps changing as the opacity floor rises, and the stitched mesh has its own faces per vertex (2.0 to 3.5 on our scenes), none of which exists before 11k. The size reached by growth alone is therefore off by a scene-dependent amount, and the remainder is corrected on the stitched mesh.
+
+\noindent\textbf{Collapse rule.} Collapsing edge $(u,v)$ merges $u$ and $v$ into one vertex and deletes the faces on the edge. It frees $\Delta R_{uv} = b_v\,[\,u,v \text{ survive cleaning}\,] + b_f\, n_{uv}$ bytes, with $n_{uv}$ the deleted faces that would survive cleaning, and it risks the error $D_{uv}$ of the faces around $u$ and $v$. Edges are collapsed in increasing order of $D_{uv}/\Delta R_{uv}$, as an independent set (no two collapses share a vertex) with a fold-over check. The merged vertex is placed at the midpoint and takes the average of the two attribute vectors and of their optimizer moments, so training continues without a restart and the survivors keep being optimized.
+
+\noindent\textbf{When and how much.} From 12.5k to 19.5k, every 500 iterations, the probe measures $R$ and a least-squares fit of the probe history extrapolates it to the end of the opacity ramp. If the estimate exceeds $T$, edges are collapsed until the excess is removed, at most 15\% of the vertices per round. If it does not, nothing is collapsed: trimming removes bytes and cannot add them.
+
+\noindent\textbf{Growth aim.} Since trimming is one-sided, the plan aims above the target by the factor $\alpha$ of Eq.~\eqref{eq:vstar}. $\alpha$ stands for one number per scene that growth cannot observe, the faces per vertex of the final mesh: over 18 runs without trimming, the aim that would have landed exactly on the target correlates with it at $r=-0.97$, and no quantity available during growth predicts it on both captured scenes and objects (supplement). We therefore use one value per capture class, 1.25 for captured scenes and 1.1 for synthetic objects, chosen on Mip-NeRF~360 and NeRF-Synthetic, and let trimming absorb the per-scene remainder. The other settings are fixed for all runs: $f=2.5$ during growth, a probe every 1000 iterations, trimming rounds as above; the initial byte costs are overwritten by the first probe.
 
 \begin{algorithm}[t]
 \caption{\BM training for a target size $T$}
@@ -45,21 +55,19 @@ With $m$ growth steps left, the plan raises $V$ geometrically, $V \rightarrow V\
 \small
 \begin{algorithmic}[1]
 \Require images, target $T$, aim $\alpha$
-\State initialize \MS; byte table $(b_v, b_f, f, c)$ from defaults
+\State initialize \MS; byte costs $(b_v, b_f, c)$ from defaults
 \For{iteration $i = 1 \dots 30\text{k}$}
   \State \MS optimization step; accumulate $D_t$ \Comment{per-triangle error}
   \If{growth step ($i \le 15\text{k}$)}
-    \State probe every 1k: encode a cleaned copy $\rightarrow$ update table
+    \State probe every 1k: encode a cleaned copy $\rightarrow$ $b_v, b_f, c$
     \State $V^\star \gets (\alpha T - c)/(b_v + f b_f)$ \Comment{Eq.~\ref{eq:vstar}}
-    \State $k \gets$ geometric plan toward $V^\star$, survival $\sigma$
-    \State $\lambda \gets$ $(k/y)$-th largest $D_t/\Delta R_{\mathrm{split}}$
-    \State split all $t$ with $D_t/\Delta R_{\mathrm{split}} > \lambda$ \Comment{Eq.~\ref{eq:split}}
+    \State $k \gets$ geometric plan toward $V^\star$, survival $\sigma$ \Comment{Eq.~\ref{eq:k}}
+    \State split the $k/y$ triangles with the largest $D_t$ \Comment{Eq.~\ref{eq:split}}
   \EndIf
   \If{trimming step ($12.5\text{k} \le i \le 19.5\text{k}$)}
     \State $\hat R \gets$ probe, extrapolated to end of ramp
     \If{$\hat R > T$}
       \State collapse lowest $D_{uv}/\Delta R_{uv}$ until $\hat R \le T$
-      \State $\lambda \gets$ score of last collapsed edge
     \EndIf
   \EndIf
 \EndFor

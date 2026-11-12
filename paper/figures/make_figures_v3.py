@@ -32,7 +32,7 @@ for f in ['release-g0-refresh-v1/results/g0-refresh-2026-11-09.txt', 'release-g0
 from scipy.interpolate import PchipInterpolator
 import numpy as np
 DS4 = {'Mip-NeRF 360': MIP[:9], 'T&T': ['truck', 'train'], 'Deep Blending': DB, 'NeRF-Synthetic': BL}
-MESHPTS = {'Mip-NeRF 360': {'MeshSplatting (paper)': (100, 24.78), 'MiLo': (253, 24.09), 'BOG (7 sc.)': (913, 25.62)}, 'T&T': {'MiLo': (253, 21.46)}}
+MESHPTS = {'Mip-NeRF 360': {'MiLo': (253, 24.09), 'BOG (7 sc.)': (913, 25.62)}, 'T&T': {'MiLo': (253, 21.46)}}
 GSPTS = {'HAC++': [(8.34, 27.60), (18.48, 27.82)], 'HAC': [(15.26, 27.53), (21.87, 27.77)], 'CompGS': [(8.83, 26.37), (16.5, 27.26)], 'Compact3DGS': [(48.8, 27.08)]}
 PLOT = {'NeRF-Synthetic': (['chair', 'drums', 'hotdog', 'lego', 'ship'], [1.5, 2.5, 3, 4])}
 def smooth(xs, ys):
