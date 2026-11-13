@@ -36,14 +36,20 @@ for l in open('release-batch22-v1/results/generic-codecs-all-scenes-2026-11-10.m
         gen['Draco, RGB only'][s] = cell(c[7]); gen['baked texture + Draco'][s] = cell(c[8])
 def mean(d): return (st.mean(v[0] for v in d.values()), st.mean(v[1] for v in d.values()), len(d))
 # ---------------------------------------------------------------- figure 1
+import numpy as np
+from scipy.interpolate import PchipInterpolator
+def smooth(xs_, ys_, n=80):   # monotone (PCHIP) curve through the points, in log size
+    o = np.argsort(xs_); lx = np.log(np.asarray(xs_, float)[o]); yy = np.asarray(ys_, float)[o]
+    if len(lx) < 3: return np.exp(lx), yy
+    g = np.linspace(lx[0], lx[-1], n); return np.exp(g), PchipInterpolator(lx, yy)(g)
 fig, ax = plt.subplots(figsize=(7.0, 3.7))
 xs, ys = zip(*[(st.mean(ctrl[(s, t)][0] for s in MIP), st.mean(ctrl[(s, t)][1] for s in MIP)) for t in (5, 7.5, 10, 15, 20)])
-ax.plot(xs, ys, '-', color=BLUE, lw=2, zorder=5); ax.plot(xs, ys, 'o', color=BLUE, ms=6, mec=SURF, mew=1.2, zorder=6, label='BudgetMesh (target 5 to 20 MB)')
+ax.plot(*smooth(xs, ys), '-', color=BLUE, lw=2, zorder=5); ax.plot(xs, ys, 'o', color=BLUE, ms=6, mec=SURF, mew=1.2, zorder=6, label='BudgetMesh (target 5 to 20 MB)')
 ax.annotate('BudgetMesh', (xs[1], ys[1]), textcoords='offset points', xytext=(0, 9), ha='center', fontsize=8, color=INK, fontweight='bold')
 K = min(len(v) for v in simp.values()); gx, gy = [], []
 for k in range(K): pts = [sorted(simp[s], reverse=True)[k] for s in MIP]; gx.append(st.mean(p[0] for p in pts)); gy.append(st.mean(p[1] for p in pts))
 x0, y0, _ = mean(gen['our codec, all vertices'])  # the same FP32 model with no vertex removed: the end point of this family
-ax.plot([x0] + gx, [y0] + gy, '-', color=AQUA, lw=2, zorder=4); ax.plot(gx, gy, 's', color=AQUA, ms=5.5, mec=SURF, mew=1.2, zorder=4, label='FP32 model + our codec: simplified after training (ring: no vertices removed)')
+ax.plot(*smooth([x0] + gx, [y0] + gy), '-', color=AQUA, lw=2, zorder=4); ax.plot(gx, gy, 's', color=AQUA, ms=5.5, mec=SURF, mew=1.2, zorder=4, label='FP32 model + our codec: simplified after training (ring: no vertices removed)')
 ax.annotate('simplified after\ntraining + our codec', (gx[4], gy[4]), textcoords='offset points', xytext=(-8, 2), ha='right', va='center', fontsize=7.5, color=INK)
 fx, fy = st.mean(FP[s][0] for s in MIP), st.mean(FP[s][1] for s in MIP)
 ax.plot([fx], [fy], '*', color=INK, ms=11, zorder=6); ax.annotate('FP32 model\n%.0f MB' % fx, (fx, fy), textcoords='offset points', xytext=(0, 8), ha='center', va='bottom', fontsize=7.5, color=INK)
@@ -62,7 +68,9 @@ HULL = {}
 for codec, name, ls, mk in (('tfan', 'MPEG TFAN', '-', 'D'), ('zstd', 'quantized PLY + zstd', (0, (5, 2)), '^'), ('draco', 'Draco', (0, (1.5, 1.8)), 'v')):
     allp = [(v[codec], v['psnr']) for v in G33.values()]; h = upper_hull(allp); HULL[codec] = h
     ax.plot([q[0] for q in allp], [q[1] for q in allp], mk, color=ORANGE, ms=3.0, mec='none', alpha=0.35, zorder=2)
-    ax.plot([q[0] for q in h], [q[1] for q in h], ls=ls, marker=mk, color=ORANGE, lw=1.6, ms=4.6, mec=SURF, mew=0.8, zorder=3, label=name + ' (generic codec)')
+    ax.plot(*smooth([q[0] for q in h], [q[1] for q in h]), ls=ls, color=ORANGE, lw=1.6, zorder=3)
+    ax.plot([q[0] for q in h], [q[1] for q in h], ls='none', marker=mk, color=ORANGE, ms=4.6, mec=SURF, mew=0.8, zorder=3)
+    ax.plot([], [], ls=ls, marker=mk, color=ORANGE, lw=1.6, ms=4.6, mec=SURF, mew=0.8, label=name + ' (generic codec)')
 ax.set_xscale('log'); ax.set_xlim(3.2, 900)
 import matplotlib.ticker as mt
 ax.xaxis.set_major_locator(mt.FixedLocator([5, 10, 20, 50, 100, 200, 500])); ax.xaxis.set_major_formatter(mt.FuncFormatter(lambda v, _: '%g' % v)); ax.xaxis.set_minor_formatter(mt.NullFormatter())
