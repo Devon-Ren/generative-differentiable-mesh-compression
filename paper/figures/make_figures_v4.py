@@ -42,35 +42,35 @@ def smooth(xs_, ys_, n=80):   # monotone (PCHIP) curve through the points, in lo
     o = np.argsort(xs_); lx = np.log(np.asarray(xs_, float)[o]); yy = np.asarray(ys_, float)[o]
     if len(lx) < 3: return np.exp(lx), yy
     g = np.linspace(lx[0], lx[-1], n); return np.exp(g), PchipInterpolator(lx, yy)(g)
-fig, ax = plt.subplots(figsize=(7.0, 3.7))
-xs, ys = zip(*[(st.mean(ctrl[(s, t)][0] for s in MIP), st.mean(ctrl[(s, t)][1] for s in MIP)) for t in (5, 7.5, 10, 15, 20)])
-ax.plot(*smooth(xs, ys), '-', color=BLUE, lw=2, zorder=5); ax.plot(xs, ys, 'o', color=BLUE, ms=6, mec=SURF, mew=1.2, zorder=6, label='BudgetMesh (target 5 to 20 MB)')
-ax.annotate('BudgetMesh', (xs[1], ys[1]), textcoords='offset points', xytext=(0, 9), ha='center', fontsize=8, color=INK, fontweight='bold')
-K = min(len(v) for v in simp.values()); gx, gy = [], []
-for k in range(K): pts = [sorted(simp[s], reverse=True)[k] for s in MIP]; gx.append(st.mean(p[0] for p in pts)); gy.append(st.mean(p[1] for p in pts))
-x0, y0, _ = mean(gen['our codec, all vertices'])  # the same FP32 model with no vertex removed: the end point of this family
-ax.plot(*smooth([x0] + gx, [y0] + gy), '-', color=AQUA, lw=2, zorder=4); ax.plot(gx, gy, 's', color=AQUA, ms=5.5, mec=SURF, mew=1.2, zorder=4, label='FP32 model + our codec: simplified after training (ring: no vertices removed)')
-ax.annotate('simplified after\ntraining + our codec', (gx[4], gy[4]), textcoords='offset points', xytext=(-8, 2), ha='right', va='center', fontsize=7.5, color=INK)
-fx, fy = st.mean(FP[s][0] for s in MIP), st.mean(FP[s][1] for s in MIP)
-ax.plot([fx], [fy], '*', color=INK, ms=11, zorder=6); ax.annotate('FP32 model\n%.0f MB' % fx, (fx, fy), textcoords='offset points', xytext=(0, 8), ha='center', va='bottom', fontsize=7.5, color=INK)
-x0, y0, _ = mean(gen['our codec, all vertices'])
-ax.plot([x0], [y0], 'o', color=SURF, ms=6.5, mec=AQUA, mew=1.8, zorder=6)
-ax.annotate('no vertices removed, %.0f MB' % x0, (x0, y0), textcoords='offset points', xytext=(4, 9), ha='center', va='bottom', fontsize=7, color=INK)
-import json
-G33 = json.load(open('release-batch33-generic-rd/results/batch33-collect-2026-11-13-0109-means.json'))['points']
-def upper_hull(pts):   # operational RD curve: upper convex hull in (log size, PSNR), the most favourable reading of the 12 operating points
+fig, ax = plt.subplots(figsize=(7.0, 3.9))
+C5 = ['#2a78d6', '#eb6834', '#1baf7a', '#eda100', '#e87ba4']   # palette slots 1-5 in order, assigned left to right (validated: adjacent pairs pass; low-contrast hues carry direct labels and their own marker and line style)
+def upper_hull(pts):   # operational RD curve: upper convex hull in (log size, PSNR)
     P = sorted((math.log(x), y) for x, y in pts); H = []
     for q in P:
         while len(H) >= 2 and (H[-1][0] - H[-2][0]) * (q[1] - H[-2][1]) - (H[-1][1] - H[-2][1]) * (q[0] - H[-2][0]) >= 0: H.pop()
         H.append(q)
     k = max(range(len(H)), key=lambda t: H[t][1]); return [(math.exp(a), b) for a, b in H[:k + 1]]
-HULL = {}
-for codec, name, ls, mk in (('tfan', 'MPEG TFAN', '-', 'D'), ('zstd', 'quantized PLY + zstd', (0, (5, 2)), '^'), ('draco', 'Draco', (0, (1.5, 1.8)), 'v')):
-    allp = [(v[codec], v['psnr']) for v in G33.values()]; h = upper_hull(allp); HULL[codec] = h
-    ax.plot([q[0] for q in allp], [q[1] for q in allp], mk, color=ORANGE, ms=3.0, mec='none', alpha=0.35, zorder=2)
-    ax.plot(*smooth([q[0] for q in h], [q[1] for q in h]), ls=ls, color=ORANGE, lw=1.6, zorder=3)
-    ax.plot([q[0] for q in h], [q[1] for q in h], ls='none', marker=mk, color=ORANGE, ms=4.6, mec=SURF, mew=0.8, zorder=3)
-    ax.plot([], [], ls=ls, marker=mk, color=ORANGE, lw=1.6, ms=4.6, mec=SURF, mew=0.8, label=name + ' (generic codec)')
+def curve(pts, color, ls, mk, label, lw=1.8, ms=5.0, z=4, ring=None):
+    h = upper_hull(pts); rest = [q for q in pts if q not in h]
+    ax.plot(*smooth([q[0] for q in h], [q[1] for q in h]), ls=ls, color=color, lw=lw, zorder=z)
+    if rest: ax.plot([q[0] for q in rest], [q[1] for q in rest], ls='none', marker=mk, color=color, ms=ms - 1.6, mec='none', alpha=0.45, zorder=z - 1)
+    ax.plot([q[0] for q in h if q != ring], [q[1] for q in h if q != ring], ls='none', marker=mk, color=color, ms=ms, mec=SURF, mew=0.9, zorder=z + 1)
+    ax.plot([], [], ls=ls, marker=mk, color=color, lw=lw, ms=ms, mec=SURF, mew=0.9, label=label); return h
+xs, ys = zip(*[(st.mean(ctrl[(s, t)][0] for s in MIP), st.mean(ctrl[(s, t)][1] for s in MIP)) for t in (5, 7.5, 10, 15, 20)])
+HULL = {'BudgetMesh': curve(list(zip(xs, ys)), C5[0], '-', 'o', 'BudgetMesh (target 5 to 20 MB)', lw=2.2, ms=6, z=7)}
+ax.annotate('BudgetMesh', (xs[1], ys[1]), textcoords='offset points', xytext=(0, 9), ha='center', fontsize=8, color=INK, fontweight='bold')
+K = min(len(v) for v in simp.values()); gx, gy = [], []
+for k in range(K): pts = [sorted(simp[s], reverse=True)[k] for s in MIP]; gx.append(st.mean(p[0] for p in pts)); gy.append(st.mean(p[1] for p in pts))
+x0, y0, _ = mean(gen['our codec, all vertices'])
+HULL['FP32 + our codec'] = curve([(x0, y0)] + list(zip(gx, gy)), C5[1], '-', 's', 'FP32 model + our codec: simplified after training (ring: no vertices removed)', lw=2.0, ms=5.5, z=5, ring=(x0, y0))
+ax.plot([x0], [y0], 'o', color=SURF, ms=6.5, mec=C5[1], mew=1.8, zorder=7); ax.annotate('no vertices removed, %.0f MB' % x0, (x0, y0), textcoords='offset points', xytext=(6, 8), ha='center', va='bottom', fontsize=7, color=INK)
+ax.annotate('simplified after\ntraining + our codec', (gx[4], gy[4]), textcoords='offset points', xytext=(-8, 2), ha='right', va='center', fontsize=7.5, color=INK)
+fx, fy = st.mean(FP[s][0] for s in MIP), st.mean(FP[s][1] for s in MIP)
+ax.plot([fx], [fy], '*', color=INK, ms=11, zorder=6); ax.annotate('FP32 model\n%.0f MB' % fx, (fx, fy), textcoords='offset points', xytext=(0, 8), ha='center', va='bottom', fontsize=7.5, color=INK)
+import json
+G33 = json.load(open('release-batch33-generic-rd/results/batch33-collect-2026-11-13-0109-means.json'))['points']
+for (codec, name, ls, mk), col in zip((('tfan', 'MPEG TFAN', '-', 'D'), ('zstd', 'quantized PLY + zstd', (0, (5, 2)), '^'), ('draco', 'Draco', (0, (1.5, 1.8)), 'v')), C5[2:]):
+    HULL[codec] = curve([(v[codec], v['psnr']) for v in G33.values()], col, ls, mk, name + ' (generic codec)')
 ax.set_xscale('log'); ax.set_xlim(3.2, 900)
 import matplotlib.ticker as mt
 ax.xaxis.set_major_locator(mt.FixedLocator([5, 10, 20, 50, 100, 200, 500])); ax.xaxis.set_major_formatter(mt.FuncFormatter(lambda v, _: '%g' % v)); ax.xaxis.set_minor_formatter(mt.NullFormatter())
