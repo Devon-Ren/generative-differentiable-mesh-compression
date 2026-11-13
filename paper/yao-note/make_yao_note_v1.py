@@ -17,5 +17,6 @@ def plots(scenes):
     return '\n'.join(out)
 def band(scenes, lo, hi): v = [mb for s in scenes for c, mb in cap[s].items() if lo <= c <= hi]; n = len({s for s in scenes if any(lo <= c <= hi for c in cap[s])}); return n, min(v), max(v)
 print('captured band', band(CAPT, 1069000, 1086000), 'objects band', band(OBJ, 170000, 183000))
-tex = open('paper/yao-note/yao-note-template.tex').read().replace('%%CAPTURED%%', plots(CAPT)).replace('%%OBJECTS%%', plots(OBJ))
+import subprocess, sys; subprocess.run([sys.executable, 'paper/yao-note/make_cap_onefig_v2.py', 'paper/yao-note/cap-onefig-block.tex'], check=True)
+tex = open('paper/yao-note/yao-note-template.tex').read().replace('%%CAPFIG%%', open('paper/yao-note/cap-onefig-block.tex').read())
 open('paper/yao-note/yao-note-2026-11-13.tex', 'w').write(tex); print('written')

@@ -1,0 +1,33 @@
+\begin{figure}[H]\centering
+\begin{tikzpicture}
+\begin{groupplot}[group style={group size=2 by 1, horizontal sep=13mm}, width=0.52\textwidth, height=64mm,
+  axis lines=left, axis line style={gridc}, tick style={gridc}, tick align=outside, tick label style={font=\scriptsize, text=muted, /pgf/number format/assume math mode=true},
+  title style={font=\scriptsize\bfseries, text=ink, at={(0,1)}, anchor=south west, inner sep=1pt, yshift=2pt},
+  label style={font=\scriptsize, text=muted}, ymajorgrids, grid style={gridc, line width=0.3pt}, clip=true, clip marker paths=true,
+  xlabel={vertex cap (thousands)}, scaled ticks=false, /pgf/number format/1000 sep={,}]
+\nextgroupplot[title={13 captured scenes, target 10 MB}, xmin=500, xmax=1400, ymin=5, ymax=15, ylabel={file size (MB)}, xtick={600,800,1000,1200,1400}, ytick={5,6,...,15}]
+\path[fill=bandc] (axis cs:500,9) rectangle (axis cs:1400,11);
+\path[fill=otherc, fill opacity=0.28] (axis cs:591,5) rectangle (axis cs:609,15);
+\path[fill=otherc, fill opacity=0.28] (axis cs:1069,5) rectangle (axis cs:1086,15);
+\draw[muted, line width=0.5pt, dash pattern=on 3pt off 2pt] (axis cs:500,10) -- (axis cs:1400,10);
+%%CAPTURED%%
+\node[font=\scriptsize, text=muted, anchor=north east] at (axis cs:1398,8.95) {target $\pm$10\%};
+\node[font=\scriptsize, text=ink, anchor=east] at (axis cs:1097,13.30) {garden};
+\node[font=\scriptsize, text=ink, anchor=north east] at (axis cs:1071,8.25) {bonsai};
+\node[font=\scriptsize, text=ink, anchor=west] at (axis cs:1207,14.55) {playroom};
+\node[font=\scriptsize, text=ink, anchor=south west, align=left] at (axis cs:1092,5.05) {cap 1.08 million:\\8.3 to 11.6 MB};
+\node[font=\scriptsize, text=ink, anchor=north west, align=left] at (axis cs:614,14.9) {cap 600,000:\\5.8 to 7.5 MB};
+\nextgroupplot[title={8 objects, target 2.5 MB}, xmin=30, xmax=360, ymin=0.9, ymax=4.3, xtick={50,100,150,200,250,300,350}, ytick={1,1.5,...,4}]
+\path[fill=bandc] (axis cs:30,2.25) rectangle (axis cs:360,2.75);
+\path[fill=otherc, fill opacity=0.28] (axis cs:170,0.9) rectangle (axis cs:183,4.3);
+\draw[muted, line width=0.5pt, dash pattern=on 3pt off 2pt] (axis cs:30,2.5) -- (axis cs:360,2.5);
+%%OBJECTS%%
+\node[font=\scriptsize, text=muted, anchor=south west] at (axis cs:32,2.75) {target $\pm$10\%};
+\node[font=\scriptsize, text=ink, anchor=south east] at (axis cs:256,3.84) {lego};
+\node[font=\scriptsize, text=ink, anchor=north] at (axis cs:290,2.02) {mic};
+\node[font=\scriptsize, text=ink, anchor=north] at (axis cs:290,1.47) {ficus};
+\node[font=\scriptsize, text=ink, anchor=south west, align=left] at (axis cs:187,0.93) {cap 176 thousand:\\1.5 to 2.8 MB};
+\end{groupplot}
+\end{tikzpicture}
+\caption{File size (with our codec) against vertex cap, one line per scene, every cap run in the plotted range. Three scenes per panel are coloured, the others are grey. Dashed line and light band: target and $\pm$10\%. Dark vertical strips: caps at which every scene of the panel was trained.}\label{fig:cap}
+\end{figure}

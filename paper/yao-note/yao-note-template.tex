@@ -11,6 +11,7 @@
 \definecolor{ink}{HTML}{0B0B0B}\definecolor{muted}{HTML}{52514E}\definecolor{gridc}{HTML}{DDDCD6}\definecolor{bandc}{HTML}{EEEDE8}
 \definecolor{otherc}{HTML}{A3A29B}\definecolor{cA}{HTML}{2A78D6}\definecolor{cB}{HTML}{EB6834}\definecolor{cC}{HTML}{1BAF7A}
 \pgfplotsset{
+  ds/.style={line width=0.7pt, mark=*, mark size=1.25pt},
   other/.style={otherc, line width=0.5pt, mark=*, mark size=1.1pt, mark options={fill=otherc, draw=white, line width=0.2pt}},
   hi/.style={line width=1.1pt, mark=*, mark size=1.9pt, mark options={draw=white, line width=0.4pt}},
   sA/.style={cA, mark options={fill=cA, draw=white, line width=0.4pt}},
@@ -53,41 +54,10 @@
 \item So the vertex cap is not a baseline. It is one row in the ablation and it answers one question: \emph{how much better is the controller than tuning the cap by hand?}
 \end{itemize}
 
-\begin{figure}[H]\centering
-\begin{tikzpicture}
-\begin{groupplot}[group style={group size=2 by 1, horizontal sep=13mm}, width=0.52\textwidth, height=64mm,
-  axis lines=left, axis line style={gridc}, tick style={gridc}, tick align=outside, tick label style={font=\scriptsize, text=muted, /pgf/number format/assume math mode=true},
-  title style={font=\scriptsize\bfseries, text=ink, at={(0,1)}, anchor=south west, inner sep=1pt, yshift=2pt},
-  label style={font=\scriptsize, text=muted}, ymajorgrids, grid style={gridc, line width=0.3pt}, clip=true, clip marker paths=true,
-  xlabel={vertex cap (thousands)}, scaled ticks=false, /pgf/number format/1000 sep={,}]
-\nextgroupplot[title={13 captured scenes, target 10 MB}, xmin=500, xmax=1400, ymin=5, ymax=15, ylabel={file size (MB)}, xtick={600,800,1000,1200,1400}, ytick={5,6,...,15}]
-\path[fill=bandc] (axis cs:500,9) rectangle (axis cs:1400,11);
-\path[fill=otherc, fill opacity=0.28] (axis cs:591,5) rectangle (axis cs:609,15);
-\path[fill=otherc, fill opacity=0.28] (axis cs:1069,5) rectangle (axis cs:1086,15);
-\draw[muted, line width=0.5pt, dash pattern=on 3pt off 2pt] (axis cs:500,10) -- (axis cs:1400,10);
-%%CAPTURED%%
-\node[font=\scriptsize, text=muted, anchor=north east] at (axis cs:1398,8.95) {target $\pm$10\%};
-\node[font=\scriptsize, text=ink, anchor=east] at (axis cs:1097,13.30) {garden};
-\node[font=\scriptsize, text=ink, anchor=north east] at (axis cs:1071,8.25) {bonsai};
-\node[font=\scriptsize, text=ink, anchor=west] at (axis cs:1207,14.55) {playroom};
-\node[font=\scriptsize, text=ink, anchor=south west, align=left] at (axis cs:1092,5.05) {cap 1.08 million:\\8.3 to 11.6 MB};
-\node[font=\scriptsize, text=ink, anchor=north west, align=left] at (axis cs:614,14.9) {cap 600,000:\\5.8 to 7.5 MB};
-\nextgroupplot[title={8 objects, target 2.5 MB}, xmin=30, xmax=360, ymin=0.9, ymax=4.3, xtick={50,100,150,200,250,300,350}, ytick={1,1.5,...,4}]
-\path[fill=bandc] (axis cs:30,2.25) rectangle (axis cs:360,2.75);
-\path[fill=otherc, fill opacity=0.28] (axis cs:170,0.9) rectangle (axis cs:183,4.3);
-\draw[muted, line width=0.5pt, dash pattern=on 3pt off 2pt] (axis cs:30,2.5) -- (axis cs:360,2.5);
-%%OBJECTS%%
-\node[font=\scriptsize, text=muted, anchor=south west] at (axis cs:32,2.75) {target $\pm$10\%};
-\node[font=\scriptsize, text=ink, anchor=south east] at (axis cs:256,3.84) {lego};
-\node[font=\scriptsize, text=ink, anchor=north] at (axis cs:290,2.02) {mic};
-\node[font=\scriptsize, text=ink, anchor=north] at (axis cs:290,1.47) {ficus};
-\node[font=\scriptsize, text=ink, anchor=south west, align=left] at (axis cs:187,0.93) {cap 176 thousand:\\1.5 to 2.8 MB};
-\end{groupplot}
-\end{tikzpicture}
-\caption{File size (with our codec) against vertex cap, one line per scene, every cap run in the plotted range. Three scenes per panel are coloured, the others are grey. Dashed line and light band: target and $\pm$10\%. Dark vertical strips: caps at which every scene of the panel was trained.}\label{fig:cap}
-\end{figure}
+%%CAPFIG%%
 
 \begin{itemize}
+\item \textbf{No single rule turns a cap into a size.} Even the best common rule, fitted on these very runs, misses by more than 10\% in 64 of 178 runs. With one rule per dataset it is still 27 of 109 runs on captured scenes and 29 of 69 on objects.
 \item \textbf{Same cap, different scenes, different sizes.} With a cap of exactly 600,000 the 13 captured scenes give files from 5.8 to 7.5\,MB. With a cap of about 1.08 million they give 8.3 to 11.6\,MB. With a cap of about 176 thousand the 8 objects give files from 1.5 to 2.8\,MB.
 \item \textbf{Same scene, almost the same cap, different sizes.} Garden: a cap of 1,104,000 gives 13.3\,MB, a cap of 1,105,000 gives 10.3\,MB.
 \item \textbf{A larger cap can give a smaller file.} Bonsai: 1,005,000 gives 9.6\,MB, 1,073,000 gives 8.3\,MB.
