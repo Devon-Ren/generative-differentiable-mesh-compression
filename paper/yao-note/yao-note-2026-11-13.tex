@@ -56,54 +56,71 @@
 
 \begin{figure}[H]\centering
 \begin{tikzpicture}
-\begin{axis}[width=\textwidth, height=68mm, xmode=log, log ticks with fixed point,
-  xmin=30, xmax=3300, ymin=-82, ymax=48, xtick={50,100,200,500,1000,2000}, ytick={-80,-60,-40,-20,0,20,40},
-  xticklabels={50,100,200,500,{1,000},{2,000}}, yticklabels={$-$80\%,$-$60\%,$-$40\%,$-$20\%,0,+20\%,+40\%}, minor tick style={draw=none},
+\begin{axis}[width=\textwidth, height=66mm, xmin=0, xmax=4.62, ymin=0, ymax=43, xtick={0,1,2,3,4}, ytick={0,10,20,30,40},
   axis lines=left, axis line style={gridc}, tick style={gridc}, tick align=outside, tick label style={font=\scriptsize, text=muted},
   label style={font=\scriptsize, text=muted}, ymajorgrids, grid style={gridc, line width=0.3pt}, clip=true, clip marker paths=true,
-  xlabel={vertex cap (thousands, log scale)}, ylabel={file size, relative to the common rule},
-  legend style={font=\scriptsize, text=ink, draw=none, fill=none, at={(0.015,0.03)}, anchor=south west, row sep=-1pt}, legend cell align=left]
-\path[fill=bandc] (axis cs:30,-10) rectangle (axis cs:3300,10);
-\draw[muted, line width=0.5pt, dash pattern=on 3pt off 2pt] (axis cs:30,0) -- (axis cs:3300,0);
+  xlabel={vertex cap (millions)}, ylabel={file size (MB)},
+  legend style={font=\scriptsize, text=ink, draw=none, fill=none, at={(0.27,0.985)}, anchor=north west, row sep=-1pt}, legend cell align=left]
+\path[fill=otherc, fill opacity=0.28] (axis cs:0.585,0) rectangle (axis cs:0.615,43);
+\path[fill=otherc, fill opacity=0.28] (axis cs:1.062,0) rectangle (axis cs:1.093,43);
+\path[fill=otherc, fill opacity=0.28] (axis cs:3.985,0) rectangle (axis cs:4.015,43);
 \addlegendimage{ds, cA, mark options={fill=cA, draw=white, line width=0.2pt}}\addlegendentry{Mip-NeRF 360 and Tanks and Temples, 11 scenes}
 \addlegendimage{ds, cB, mark options={fill=cB, draw=white, line width=0.2pt}}\addlegendentry{Deep Blending, 2 scenes}
 \addlegendimage{ds, cC, mark options={fill=cC, draw=white, line width=0.2pt}}\addlegendentry{NeRF-Synthetic objects, 8 scenes}
-\addplot[ds, cA, mark options={fill=cA, draw=white, line width=0.2pt}, forget plot] coordinates {(220.000,-4.9) (477.000,-8.2) (486.000,-4.1) (600.000,1.4) (1020.000,1.5) (1078.000,4.9) (1215.000,4.9) (2198.000,2.8)}; % room
-\addplot[ds, cA, mark options={fill=cA, draw=white, line width=0.2pt}, forget plot] coordinates {(272.000,5.1) (409.000,5.4) (600.000,10.8) (622.000,11.4) (900.000,1.4) (928.000,2.8) (1086.000,13.8) (1349.000,4.1) (1895.000,6.4)}; % kitchen
-\addplot[ds, cA, mark options={fill=cA, draw=white, line width=0.2pt}, forget plot] coordinates {(245.000,0.8) (449.000,-0.7) (526.000,6.4) (600.000,1.9) (978.000,-0.2) (1083.000,-8.7) (1162.000,7.2) (2040.000,5.9)}; % counter
-\addplot[ds, cA, mark options={fill=cA, draw=white, line width=0.2pt}, forget plot] coordinates {(290.000,-5.5) (473.000,-1.9) (557.000,-5.2) (600.000,5.7) (1005.000,-0.9) (1073.000,-17.9) (1328.000,-19.5) (1367.000,-18.6) (2090.000,3.5)}; % bonsai
-\addplot[ds, cA, mark options={fill=cA, draw=white, line width=0.2pt}, forget plot] coordinates {(405.000,8.3) (414.000,11.7) (600.000,-3.4) (919.000,17.4) (936.000,19.9) (1073.000,14.9) (1074.000,14.5) (1104.000,28.5) (1105.000,-0.6) (1106.000,-2.1) (2015.000,27.8) (2346.000,19.2)}; % garden
-\addplot[ds, cA, mark options={fill=cA, draw=white, line width=0.2pt}, forget plot] coordinates {(440.000,-10.0) (474.000,-17.7) (600.000,1.7) (986.000,3.8) (1080.000,-1.4) (1201.000,0.9) (2029.000,14.0) (2886.000,5.7)}; % bicycle
-\addplot[ds, cA, mark options={fill=cA, draw=white, line width=0.2pt}, forget plot] coordinates {(344.000,-9.7) (440.000,-13.2) (600.000,-8.3) (888.000,-18.1) (983.000,0.2) (1069.000,1.1) (2015.000,3.7) (2292.000,-7.7)}; % stump
-\addplot[ds, cA, mark options={fill=cA, draw=white, line width=0.2pt}, forget plot] coordinates {(447.000,-6.4) (522.000,-8.4) (600.000,-12.8) (992.000,-7.1) (1071.000,-7.0) (1227.000,-3.8) (2068.000,5.7) (2639.000,-8.1)}; % flowers
-\addplot[ds, cA, mark options={fill=cA, draw=white, line width=0.2pt}, forget plot] coordinates {(449.000,-5.2) (482.000,-9.6) (600.000,-2.4) (1002.000,-4.3) (1079.000,4.1) (1245.000,2.1) (2054.000,14.2) (3053.000,3.6)}; % treehill
-\addplot[ds, cA, mark options={fill=cA, draw=white, line width=0.2pt}, forget plot] coordinates {(354.000,-1.3) (421.000,2.2) (600.000,-2.5) (853.000,1.0) (929.000,0.3) (1078.000,-2.1) (1083.000,-2.0) (1853.000,-1.2) (1934.000,-0.4)}; % truck
-\addplot[ds, cA, mark options={fill=cA, draw=white, line width=0.2pt}, forget plot] coordinates {(436.000,1.9) (553.000,-0.5) (600.000,3.4) (975.000,2.8) (1085.000,1.4) (1270.000,6.3) (2040.000,4.1) (2546.000,11.9)}; % train
-\addplot[ds, cB, mark options={fill=cB, draw=white, line width=0.2pt}, forget plot] coordinates {(224.000,0.6) (532.000,18.6) (600.000,5.5) (902.000,31.2) (1081.000,13.5) (1370.000,19.7)}; % drjohnson
-\addplot[ds, cB, mark options={fill=cB, draw=white, line width=0.2pt}, forget plot] coordinates {(191.000,3.0) (441.000,9.5) (600.000,14.1) (986.000,22.2) (1080.000,1.9) (1081.000,7.6) (1082.000,8.6) (1201.000,32.6)}; % playroom
-\addplot[ds, cC, mark options={fill=cC, draw=white, line width=0.2pt}, forget plot] coordinates {(66.000,24.6) (78.124,19.2) (91.000,19.8) (130.000,17.3) (142.000,5.1) (154.000,15.4) (167.656,14.5) (183.000,1.6) (259.000,7.6) (372.025,3.0) (543.482,-3.6)}; % lego
-\addplot[ds, cC, mark options={fill=cC, draw=white, line width=0.2pt}, forget plot] coordinates {(66.755,26.2) (67.000,26.1) (137.117,2.0) (142.000,5.4) (178.000,-2.1) (238.956,1.3) (262.000,-5.5) (313.435,-21.6)}; % chair
-\addplot[ds, cC, mark options={fill=cC, draw=white, line width=0.2pt}, forget plot] coordinates {(68.000,22.4) (97.992,8.0) (159.000,3.6) (175.593,2.2) (176.000,2.6) (258.000,-9.0) (269.192,-11.9) (312.716,-21.2)}; % drums
-\addplot[ds, cC, mark options={fill=cC, draw=white, line width=0.2pt}, forget plot] coordinates {(35.557,25.0) (67.614,1.3) (75.000,-5.2) (97.082,-13.4) (104.589,-17.9) (113.000,-21.3) (115.000,-23.0) (171.000,-42.2) (515.000,-74.6)}; % ficus
-\addplot[ds, cC, mark options={fill=cC, draw=white, line width=0.2pt}, forget plot] coordinates {(47.578,36.3) (69.000,16.9) (100.090,8.2) (146.000,5.5) (177.000,2.5) (179.024,2.8) (222.000,-10.5) (240.925,-16.5)}; % hotdog
-\addplot[ds, cC, mark options={fill=cC, draw=white, line width=0.2pt}, forget plot] coordinates {(68.793,14.0) (75.000,8.7) (125.118,-0.7) (165.000,-4.7) (176.000,-5.0) (211.349,-9.3) (259.000,-8.7) (283.400,-14.6)}; % materials
-\addplot[ds, cC, mark options={fill=cC, draw=white, line width=0.2pt}, forget plot] coordinates {(46.659,25.4) (69.000,10.9) (83.900,3.9) (133.718,-5.1) (145.000,-12.0) (170.000,-21.1) (170.724,-21.3) (174.000,-22.9) (247.000,-40.2)}; % mic
-\addplot[ds, cC, mark options={fill=cC, draw=white, line width=0.2pt}, forget plot] coordinates {(74.000,16.4) (113.638,15.4) (164.000,1.2) (177.000,-4.0) (223.635,1.3) (294.000,1.3) (348.124,-7.4) (428.970,-20.7)}; % ship
-\node[font=\scriptsize, text=muted, anchor=south east] at (axis cs:3200,10) {$\pm$10\%};
-\node[font=\scriptsize, text=ink, anchor=west] at (axis cs:535,-75) {ficus};
-\node[font=\scriptsize, text=ink, anchor=west] at (axis cs:256,-40) {mic};
+\addplot[ds, cA, mark options={fill=cA, draw=white, line width=0.2pt}, forget plot] coordinates {(0.2200,2.992) (0.4770,5.116) (0.4860,5.418) (0.6000,6.694) (1.0200,9.909) (1.0780,10.671) (1.2150,11.648) (2.1980,17.678)}; % room
+\addplot[ds, cA, dash pattern=on 2.5pt off 2pt, mark options={solid, fill=cA, draw=white, line width=0.2pt}, forget plot] coordinates {(2.1980,17.678) (4.0000,25.700)}; % room, last capped run to the default
+\addplot[ds, cA, mark options={fill=cA, draw=white, line width=0.2pt}, forget plot] coordinates {(0.2720,3.870) (0.4090,5.243) (0.6000,7.311) (0.6220,7.552) (0.9000,9.022) (0.9280,9.361) (1.0860,11.634) (1.3490,12.489) (1.8950,16.409)}; % kitchen
+\addplot[ds, cA, dash pattern=on 2.5pt off 2pt, mark options={solid, fill=cA, draw=white, line width=0.2pt}, forget plot] coordinates {(1.8950,16.409) (4.0000,24.300)}; % kitchen, last capped run to the default
+\addplot[ds, cA, mark options={fill=cA, draw=white, line width=0.2pt}, forget plot] coordinates {(0.2450,3.435) (0.4490,5.290) (0.5260,6.372) (0.6000,6.724) (0.9780,9.442) (1.0830,9.311) (1.1620,11.525) (2.0400,17.247)}; % counter
+\addplot[ds, cA, dash pattern=on 2.5pt off 2pt, mark options={solid, fill=cA, draw=white, line width=0.2pt}, forget plot] coordinates {(2.0400,17.247) (4.0000,23.600)}; % counter, last capped run to the default
+\addplot[ds, cA, mark options={fill=cA, draw=white, line width=0.2pt}, forget plot] coordinates {(0.2900,3.646) (0.4730,5.431) (0.5570,5.919) (0.6000,6.972) (1.0050,9.571) (1.0730,8.315) (1.3280,9.550) (1.3670,9.861) (2.0900,17.157)}; % bonsai
+\addplot[ds, cA, dash pattern=on 2.5pt off 2pt, mark options={solid, fill=cA, draw=white, line width=0.2pt}, forget plot] coordinates {(2.0900,17.157) (4.0000,28.200)}; % bonsai, last capped run to the default
+\addplot[ds, cA, mark options={fill=cA, draw=white, line width=0.2pt}, forget plot] coordinates {(0.4050,5.347) (0.4140,5.606) (0.6000,6.377) (0.9190,10.608) (0.9360,10.986) (1.0730,11.641) (1.0740,11.607) (1.1040,13.299) (1.1050,10.298) (1.1060,10.146) (2.0150,20.618) (2.3460,21.514)}; % garden
+\addplot[ds, cA, dash pattern=on 2.5pt off 2pt, mark options={solid, fill=cA, draw=white, line width=0.2pt}, forget plot] coordinates {(2.3460,21.514) (4.0000,32.500)}; % garden, last capped run to the default
+\addplot[ds, cA, mark options={fill=cA, draw=white, line width=0.2pt}, forget plot] coordinates {(0.4400,4.722) (0.4740,4.563) (0.6000,6.711) (0.9860,9.880) (1.0800,10.042) (1.2010,11.110) (2.0290,18.482) (2.8860,22.230)}; % bicycle
+\addplot[ds, cA, dash pattern=on 2.5pt off 2pt, mark options={solid, fill=cA, draw=white, line width=0.2pt}, forget plot] coordinates {(2.8860,22.230) (4.0000,28.400)}; % bicycle, last capped run to the default
+\addplot[ds, cA, mark options={fill=cA, draw=white, line width=0.2pt}, forget plot] coordinates {(0.3440,3.954) (0.4400,4.555) (0.6000,6.048) (0.8880,7.218) (0.9830,9.522) (1.0690,10.212) (2.0150,16.727) (2.2920,16.373)}; % stump
+\addplot[ds, cA, dash pattern=on 2.5pt off 2pt, mark options={solid, fill=cA, draw=white, line width=0.2pt}, forget plot] coordinates {(2.2920,16.373) (4.0000,29.200)}; % stump, last capped run to the default
+\addplot[ds, cA, mark options={fill=cA, draw=white, line width=0.2pt}, forget plot] coordinates {(0.4470,4.970) (0.5220,5.457) (0.6000,5.756) (0.9920,8.883) (1.0710,9.416) (1.2270,10.762) (2.0680,17.388) (2.6390,18.086)}; % flowers
+\addplot[ds, cA, dash pattern=on 2.5pt off 2pt, mark options={solid, fill=cA, draw=white, line width=0.2pt}, forget plot] coordinates {(2.6390,18.086) (4.0000,26.900)}; % flowers, last capped run to the default
+\addplot[ds, cA, mark options={fill=cA, draw=white, line width=0.2pt}, forget plot] coordinates {(0.4490,5.049) (0.4820,5.073) (0.6000,6.439) (1.0020,9.219) (1.0790,10.596) (1.2450,11.544) (2.0540,18.694) (3.0530,22.709)}; % treehill
+\addplot[ds, cA, dash pattern=on 2.5pt off 2pt, mark options={solid, fill=cA, draw=white, line width=0.2pt}, forget plot] coordinates {(3.0530,22.709) (4.0000,28.500)}; % treehill, last capped run to the default
+\addplot[ds, cA, mark options={fill=cA, draw=white, line width=0.2pt}, forget plot] coordinates {(0.3540,4.412) (0.4210,5.191) (0.6000,6.435) (0.8530,8.640) (0.9290,9.142) (1.0780,9.951) (1.0830,10.001) (1.8530,14.980) (1.9340,15.585)}; % truck
+\addplot[ds, cA, dash pattern=on 2.5pt off 2pt, mark options={solid, fill=cA, draw=white, line width=0.2pt}, forget plot] coordinates {(1.9340,15.585) (4.0000,20.000)}; % truck, last capped run to the default
+\addplot[ds, cA, mark options={fill=cA, draw=white, line width=0.2pt}, forget plot] coordinates {(0.4360,5.311) (0.5530,6.181) (0.6000,6.820) (0.9750,9.702) (1.0850,10.357) (1.2700,12.197) (2.0400,16.946) (2.5460,21.447)}; % train
+\addplot[ds, cA, dash pattern=on 2.5pt off 2pt, mark options={solid, fill=cA, draw=white, line width=0.2pt}, forget plot] coordinates {(2.5460,21.447) (4.0000,22.300)}; % train, last capped run to the default
+\addplot[ds, cB, mark options={fill=cB, draw=white, line width=0.2pt}, forget plot] coordinates {(0.2240,3.207) (0.5320,7.159) (0.6000,6.959) (0.9020,11.693) (1.0810,11.566) (1.3700,14.531)}; % drjohnson
+\addplot[ds, cB, dash pattern=on 2.5pt off 2pt, mark options={solid, fill=cB, draw=white, line width=0.2pt}, forget plot] coordinates {(1.3700,14.531) (4.0000,39.807)}; % drjohnson, last capped run to the default
+\addplot[ds, cB, mark options={fill=cB, draw=white, line width=0.2pt}, forget plot] coordinates {(0.1910,2.920) (0.4410,5.757) (0.6000,7.528) (0.9860,11.635) (1.0800,10.372) (1.0810,10.960) (1.0820,11.073) (1.2010,14.600)}; % playroom
+\addplot[ds, cB, dash pattern=on 2.5pt off 2pt, mark options={solid, fill=cB, draw=white, line width=0.2pt}, forget plot] coordinates {(1.2010,14.600) (4.0000,37.510)}; % playroom, last capped run to the default
+\addplot[ds, cC, mark options={fill=cC, draw=white, line width=0.2pt}, forget plot] coordinates {(0.0660,1.613) (0.0781,1.747) (0.0910,1.966) (0.1300,2.504) (0.1420,2.395) (0.1540,2.792) (0.1677,2.950) (0.1830,2.791) (0.2590,3.820) (0.3720,4.777) (0.5435,5.911)}; % lego
+\addplot[ds, cC, mark options={fill=cC, draw=white, line width=0.2pt}, forget plot] coordinates {(0.0668,1.647) (0.0670,1.651) (0.1371,2.265) (0.1420,2.401) (0.1780,2.634) (0.2390,3.390) (0.2620,3.384) (0.3134,3.204)}; % chair
+\addplot[ds, cC, mark options={fill=cC, draw=white, line width=0.2pt}, forget plot] coordinates {(0.0680,1.620) (0.0980,1.871) (0.1590,2.565) (0.1756,2.724) (0.1760,2.738) (0.2580,3.220) (0.2692,3.218) (0.3127,3.215)}; % drums
+\addplot[ds, cC, mark options={fill=cC, draw=white, line width=0.2pt}, forget plot] coordinates {(0.0356,1.025) (0.0676,1.335) (0.0750,1.348) (0.0971,1.491) (0.1046,1.492) (0.1130,1.515) (0.1150,1.501) (0.1710,1.511) (0.5150,1.500)}; % ficus
+\addplot[ds, cC, mark options={fill=cC, draw=white, line width=0.2pt}, forget plot] coordinates {(0.0476,1.386) (0.0690,1.564) (0.1001,1.904) (0.1460,2.453) (0.1770,2.748) (0.1790,2.778) (0.2220,2.837) (0.2409,2.809)}; % hotdog
+\addplot[ds, cC, mark options={fill=cC, draw=white, line width=0.2pt}, forget plot] coordinates {(0.0688,1.522) (0.0750,1.546) (0.1251,2.061) (0.1650,2.425) (0.1760,2.535) (0.2113,2.772) (0.2590,3.242) (0.2834,3.238)}; % materials
+\addplot[ds, cC, mark options={fill=cC, draw=white, line width=0.2pt}, forget plot] coordinates {(0.0467,1.257) (0.0690,1.483) (0.0839,1.606) (0.1337,2.068) (0.1450,2.036) (0.1700,2.053) (0.1707,2.055) (0.1740,2.041) (0.2470,2.051)}; % mic
+\addplot[ds, cC, mark options={fill=cC, draw=white, line width=0.2pt}, forget plot] coordinates {(0.0740,1.639) (0.1136,2.230) (0.1640,2.564) (0.1770,2.573) (0.2236,3.228) (0.2940,3.947) (0.3481,4.090) (0.4290,4.085)}; % ship
+\node[font=\scriptsize, text=ink, anchor=south east, align=right] at (axis cs:0.575,8.6) {cap 0.6 million:\\5.8 to 7.5 MB};
+\node[font=\scriptsize, text=ink, anchor=south east, align=right] at (axis cs:1.05,15.5) {cap 1.08 million:\\8.3 to 11.6 MB};
+\node[font=\scriptsize, text=ink, anchor=north east, align=right] at (axis cs:3.97,15.5) {released default,\\cap 4 million:\\20.0 to 39.8 MB};
+\node[font=\scriptsize, text=ink, anchor=west] at (axis cs:4.04,39.8) {drjohnson};
+\node[font=\scriptsize, text=ink, anchor=west] at (axis cs:4.04,37.3) {playroom};
+\node[font=\scriptsize, text=ink, anchor=west] at (axis cs:4.04,32.5) {garden};
+\node[font=\scriptsize, text=ink, anchor=west] at (axis cs:4.04,20.0) {truck};
+\node[font=\scriptsize, text=ink, anchor=west] at (axis cs:0.60,2.4) {8 objects: they flatten between 1.5 and 5.9 MB};
 \end{axis}
 \end{tikzpicture}
-\caption{Every cap run of all 21 scenes on one pair of axes. The common rule is the best single curve that turns a cap into a file size for all scenes together (file in MB = 0.0588 $\times$ cap in thousands to the power 0.738, fitted on these same runs). If the cap decided the file size, every point would sit on the dashed line. 114 of the 178 runs are within $\pm$10\% of it (light band); the others are between $-$75\% and +36\%.}\label{fig:cap}
+\caption{File size (with our codec) against vertex cap, all 21 scenes on the same axes, one line per scene, every cap run we have. Dashed: from the last capped run to the released default, with no runs in between. Dark vertical strips: caps at which all 13 captured scenes were trained.}\label{fig:cap}
 \end{figure}
 
 \begin{itemize}
-\item \textbf{No single rule turns a cap into a size.} Even the best common rule, fitted on these very runs, misses by more than 10\% in 64 of 178 runs. With one rule per dataset it is still 27 of 109 runs on captured scenes and 29 of 69 on objects.
+\item \textbf{The lines start together and spread apart.} With the released default (cap 4 million) the 13 captured scenes give files from 20.0 to 39.8\,MB, while the objects flatten between 1.5 and 5.9\,MB.
+\item \textbf{No single rule turns a cap into a size.} Even the best single curve drawn through all 178 runs misses by more than 10\% in 64 of them. With one curve per dataset it is still 27 of 109 runs on captured scenes and 29 of 69 on objects.
 \item \textbf{Same cap, different scenes, different sizes.} With a cap of exactly 600,000 the 13 captured scenes give files from 5.8 to 7.5\,MB. With a cap of about 1.08 million they give 8.3 to 11.6\,MB. With a cap of about 176 thousand the 8 objects give files from 1.5 to 2.8\,MB.
-\item \textbf{Same scene, almost the same cap, different sizes.} Garden: a cap of 1,104,000 gives 13.3\,MB, a cap of 1,105,000 gives 10.3\,MB.
-\item \textbf{A larger cap can give a smaller file.} Bonsai: 1,005,000 gives 9.6\,MB, 1,073,000 gives 8.3\,MB.
+\item \textbf{Same scene, almost the same cap, different sizes.} Garden: a cap of 1,104,000 gives 13.3\,MB, a cap of 1,105,000 gives 10.3\,MB. A larger cap can even give a smaller file. Bonsai: 1,005,000 gives 9.6\,MB, 1,073,000 gives 8.3\,MB.
 \item \textbf{Raising the cap can do nothing.} Mic stays at about 2.05\,MB from a cap of 134 thousand up to 247 thousand. Ficus stays at 1.5\,MB from 97 thousand up to 515 thousand.
-\item \textbf{Over all cap runs.} Take two runs of the same scene whose caps are less than 1\% apart: 11 such pairs, and in 4 of them the larger cap gave the smaller file. Less than 5\% apart: 29 pairs, 12 with the larger cap giving the smaller file, 8 with the file changing by more than 10\%.
+\item \textbf{Over all cap runs.} Of the 29 pairs of runs on the same scene whose caps are less than 5\% apart, 12 have the larger cap giving the smaller file and 8 have the file changing by more than 10\%.
 \end{itemize}
 
 \section{The ablation: controller against tuning the cap by hand}
