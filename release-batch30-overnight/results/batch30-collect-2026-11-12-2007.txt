@@ -1,0 +1,430 @@
+===== controller rows
+drjohnson abl24-feasq | target 10 MB | lam0 5.1997e-03 -> lamA q10/q50/q90 2.48e-03/6.30e-03/1.76e-02 -> lam_final (shadow) 2.85e-03 | final probe 8.715 MB | trained V 615031 F 1956630 | delivered 8.704 MB (hit 0.870 x target, probe/delivered 1.001) | test 26.082 0.8188 0.5072 | val 29.909 | K4096 R256 q15/q7 | growth-capped False (last landing est 9.216 MB) | densify events 17 (limiter-bound 0, front-loaded 0, V* 999510), sigma q10/q50/q90 0.48/0.57/1.00, yield q10/q50/q90 0.81/0.82/1.02, prune rounds 15 active 9 collapsed 352817 (both-kept share 1.00; V 995470 -> 630551)
+garden abl24-feasq | target 10 MB | lam0 5.1997e-03 -> lamA q10/q50/q90 5.28e-03/9.98e-03/2.55e-02 -> lam_final (shadow) 2.30e-03 | final probe 10.107 MB | trained V 832543 F 2124756 | delivered 10.116 MB (hit 1.012 x target, probe/delivered 0.999) | test 23.596 0.6643 0.3879 | val 24.231 | K4096 R256 q15/q7 | growth-capped False (last landing est 10.1144 MB) | densify events 18 (limiter-bound 0, front-loaded 0, V* 950447), sigma q10/q50/q90 0.51/0.55/1.00, yield q10/q50/q90 0.73/0.78/0.84, prune rounds 15 active 8 collapsed 59708 (both-kept share 1.00; V 935310 -> 855962)
+room abl24-feasq | target 5 MB | lam0 1.6546e-02 -> lamA q10/q50/q90 6.00e-03/1.05e-02/2.55e-02 -> lam_final (shadow) 6.56e-03 | final probe 4.927 MB | trained V 391015 F 1035956 | delivered 4.925 MB (hit 0.985 x target, probe/delivered 1.000) | test 27.279 0.8213 0.4688 | val 29.135 | K4096 R256 q14/q7 | growth-capped False (last landing est 5.1421 MB) | densify events 17 (limiter-bound 0, front-loaded 0, V* 479315), sigma q10/q50/q90 0.38/0.47/1.00, yield q10/q50/q90 0.79/0.84/0.93, prune rounds 15 active 8 collapsed 67751 (both-kept share 1.00; V 481463 -> 405267)
+treehill abl24-feasq35 | target 20 MB | lam0 1.6340e-03 -> lamA q10/q50/q90 2.55e-03/1.07e-02/4.44e-02 -> lam_final (shadow) 0.00e+00 | final probe 19.886 MB | trained V 1974120 F 3797923 | delivered 19.897 MB (hit 0.995 x target, probe/delivered 0.999) | test 20.364 0.5221 0.5282 | val 19.818 | K4096 R256 q16/q7 | growth-capped False (last landing est 20.0836 MB) | densify events 18 (limiter-bound 0, front-loaded 0, V* 2298246), sigma q10/q50/q90 0.73/0.76/1.00, yield q10/q50/q90 0.76/0.83/1.16, prune rounds 15 active 3 collapsed 14856 (both-kept share 1.00; V 2177617 -> 2115835)
+kitchen abl24-feas | target 10 MB | lam0 5.1997e-03 -> lamA q10/q50/q90 2.81e-03/6.02e-03/1.88e-02 -> lam_final (shadow) 5.46e-03 | final probe 9.882 MB | trained V 709961 F 2385822 | delivered 9.866 MB (hit 0.987 x target, probe/delivered 1.002) | test 26.339 0.8142 0.3567 | val 27.666 | K4096 R256 q16/q7 | growth-capped False (last landing est 10.2704 MB) | densify events 17 (limiter-bound 0, front-loaded 0, V* 957098), sigma q10/q50/q90 0.20/0.37/1.00, yield q10/q50/q90 0.91/0.92/1.01, prune rounds 15 active 11 collapsed 212209 (both-kept share 1.00; V 960874 -> 726403)
+kitchen abl24-feasq35 | target 10 MB | lam0 5.1997e-03 -> lamA q10/q50/q90 2.50e-03/5.52e-03/1.70e-02 -> lam_final (shadow) 2.24e-03 | final probe 9.441 MB | trained V 662968 F 2322840 | delivered 9.448 MB (hit 0.945 x target, probe/delivered 0.999) | test 26.286 0.8126 0.3572 | val 27.676 | K4096 R256 q16/q7 | growth-capped False (last landing est 9.8576 MB) | densify events 17 (limiter-bound 0, front-loaded 0, V* 1043306), sigma q10/q50/q90 0.20/0.36/1.00, yield q10/q50/q90 0.91/0.92/1.01, prune rounds 15 active 12 collapsed 342690 (both-kept share 1.00; V 1045246 -> 676750)
+kitchen abl24-feasq | target 10 MB | lam0 5.1997e-03 -> lamA q10/q50/q90 2.83e-03/6.08e-03/1.89e-02 -> lam_final (shadow) 4.10e-03 | final probe 9.859 MB | trained V 707807 F 2383707 | delivered 9.865 MB (hit 0.986 x target, probe/delivered 0.999) | test 26.347 0.8138 0.3564 | val 27.725 | K4096 R256 q16/q7 | growth-capped False (last landing est 10.1214 MB) | densify events 17 (limiter-bound 0, front-loaded 0, V* 956556), sigma q10/q50/q90 0.20/0.37/1.00, yield q10/q50/q90 0.90/0.92/1.01, prune rounds 15 active 10 collapsed 213424 (both-kept share 1.00; V 959943 -> 724140)
+playroom abl24-ratio35 | target 10 MB | lam0 5.1997e-03 -> lamA q10/q50/q90 1.80e-03/5.20e-03/1.92e-02 -> lam_final (shadow) 6.70e-03 | final probe 9.116 MB | trained V 655465 F 2115343 | delivered 9.093 MB (hit 0.909 x target, probe/delivered 1.003) | test 27.141 0.8478 0.4458 | val 32.553 | K4096 R256 q15/q7 | growth-capped False (last landing est 10.9782 MB) | densify events 17 (limiter-bound 0, front-loaded 0, V* 1119928), sigma q10/q50/q90 0.47/0.70/1.00, yield q10/q50/q90 0.74/0.81/1.07, prune rounds 15 active 8 collapsed 406154 (both-kept share 1.00; V 1096028 -> 678758)
+drjohnson abl24-ratio35 | target 10 MB | lam0 5.1997e-03 -> lamA q10/q50/q90 2.18e-03/5.83e-03/1.68e-02 -> lam_final (shadow) 6.31e-03 | final probe 9.210 MB | trained V 667049 F 2116670 | delivered 9.198 MB (hit 0.920 x target, probe/delivered 1.001) | test 26.039 0.8191 0.5063 | val 30.075 | K4096 R256 q15/q7 | growth-capped False (last landing est 10.6986 MB) | densify events 17 (limiter-bound 0, front-loaded 0, V* 1098712), sigma q10/q50/q90 0.49/0.56/1.00, yield q10/q50/q90 0.81/0.83/1.04, prune rounds 15 active 8 collapsed 383620 (both-kept share 1.00; V 1085038 -> 688359)
+garden abl24-ratio35 | target 10 MB | lam0 5.1997e-03 -> lamA q10/q50/q90 5.20e-03/9.28e-03/2.45e-02 -> lam_final (shadow) 7.74e-03 | final probe 9.642 MB | trained V 784353 F 2072882 | delivered 9.649 MB (hit 0.965 x target, probe/delivered 0.999) | test 23.655 0.6679 0.3852 | val 24.299 | K4096 R256 q15/q7 | growth-capped False (last landing est 10.4081 MB) | densify events 18 (limiter-bound 0, front-loaded 0, V* 1037258), sigma q10/q50/q90 0.51/0.55/1.00, yield q10/q50/q90 0.73/0.78/0.84, prune rounds 15 active 8 collapsed 194557 (both-kept share 1.00; V 1018386 -> 800824)
+room abl24-ratio35 | target 5 MB | lam0 1.6546e-02 -> lamA q10/q50/q90 5.27e-03/9.57e-03/2.24e-02 -> lam_final (shadow) 7.03e-03 | final probe 4.810 MB | trained V 377669 F 1027929 | delivered 4.812 MB (hit 0.962 x target, probe/delivered 1.000) | test 27.197 0.8212 0.4683 | val 29.167 | K4096 R256 q14/q7 | growth-capped False (last landing est 5.0561 MB) | densify events 17 (limiter-bound 0, front-loaded 0, V* 529039), sigma q10/q50/q90 0.38/0.47/1.00, yield q10/q50/q90 0.80/0.85/0.94, prune rounds 15 active 8 collapsed 129679 (both-kept share 1.00; V 529691 -> 390138)
+treehill abl24-ratio35 | target 20 MB | lam0 1.6340e-03 -> lamA q10/q50/q90 2.54e-03/1.07e-02/4.41e-02 -> lam_final (shadow) 0.00e+00 | final probe 19.735 MB | trained V 1977852 F 3790461 | delivered 19.746 MB (hit 0.987 x target, probe/delivered 0.999) | test 20.483 0.5237 0.5287 | val 19.811 | K4096 R256 q16/q7 | growth-capped False (last landing est 20.0474 MB) | densify events 18 (limiter-bound 0, front-loaded 0, V* 2297774), sigma q10/q50/q90 0.73/0.75/1.00, yield q10/q50/q90 0.76/0.83/1.16, prune rounds 15 active 8 collapsed 19669 (both-kept share 1.00; V 2186184 -> 2118873)
+kitchen abl24-ratio | target 10 MB | lam0 5.1997e-03 -> lamA q10/q50/q90 2.84e-03/6.10e-03/1.88e-02 -> lam_final (shadow) 5.23e-03 | final probe 9.762 MB | trained V 698869 F 2361989 | delivered 9.768 MB (hit 0.977 x target, probe/delivered 0.999) | test 26.363 0.8134 0.3567 | val 27.695 | K4096 R256 q16/q7 | growth-capped False (last landing est 10.2179 MB) | densify events 17 (limiter-bound 0, front-loaded 0, V* 959713), sigma q10/q50/q90 0.20/0.37/1.00, yield q10/q50/q90 0.90/0.92/1.01, prune rounds 15 active 8 collapsed 224739 (both-kept share 1.00; V 961912 -> 714953)
+kitchen abl24-ratio35 | target 10 MB | lam0 5.1997e-03 -> lamA q10/q50/q90 2.50e-03/5.57e-03/1.69e-02 -> lam_final (shadow) 7.91e-03 | final probe 9.694 MB | trained V 681636 F 2364012 | delivered 9.700 MB (hit 0.970 x target, probe/delivered 0.999) | test 26.361 0.8156 0.3540 | val 27.736 | K4096 R256 q16/q7 | growth-capped False (last landing est 10.4517 MB) | densify events 17 (limiter-bound 0, front-loaded 0, V* 1043183), sigma q10/q50/q90 0.20/0.36/1.00, yield q10/q50/q90 0.91/0.92/1.00, prune rounds 15 active 8 collapsed 320911 (both-kept share 1.00; V 1043144 -> 696705)
+garden abl24-final | target 10 MB | lam0 5.1997e-03 -> lamA q10/q50/q90 5.20e-03/9.35e-03/2.43e-02 -> lam_final (shadow) 3.29e-03 | final probe 10.033 MB | trained V 808016 F 2161867 | delivered 10.045 MB (hit 1.005 x target, probe/delivered 0.999) | test 23.688 0.6715 0.3807 | val 24.327 | K4096 R256 q15/q7 | growth-capped False (last landing est 10.1463 MB) | densify events 18 (limiter-bound 0, front-loaded 0, V* 1031952), sigma q10/q50/q90 0.51/0.56/1.00, yield q10/q50/q90 0.73/0.78/0.84, prune rounds 20 active 13 collapsed 168727 (both-kept share 1.00; V 1012324 -> 820665)
+bicycle abl24-final | target 10 MB | lam0 5.1997e-03 -> lamA q10/q50/q90 5.81e-03/1.74e-02/5.62e-02 -> lam_final (shadow) 8.44e-04 | final probe 9.995 MB | trained V 885396 F 2022757 | delivered 9.999 MB (hit 1.000 x target, probe/delivered 1.000) | test 22.487 0.5728 0.4864 | val 21.013 | K4096 R256 q16/q7 | growth-capped False (last landing est 10.1015 MB) | densify events 18 (limiter-bound 0, front-loaded 0, V* 1082129), sigma q10/q50/q90 0.67/0.74/1.00, yield q10/q50/q90 0.75/0.82/1.07, prune rounds 20 active 13 collapsed 110333 (both-kept share 1.00; V 1051716 -> 914522)
+stump abl24-final | target 10 MB | lam0 5.1997e-03 -> lamA q10/q50/q90 4.78e-03/1.16e-02/6.11e-02 -> lam_final (shadow) 3.02e-04 | final probe 9.934 MB | trained V 903755 F 2022710 | delivered 9.936 MB (hit 0.994 x target, probe/delivered 1.000) | test 23.960 0.6163 0.4592 | val 22.912 | K4096 R256 q16/q7 | growth-capped False (last landing est 10.0613 MB) | densify events 18 (limiter-bound 1, front-loaded 1, V* 1088390), sigma q10/q50/q90 0.46/0.77/1.00, yield q10/q50/q90 0.72/0.80/1.01, prune rounds 20 active 13 collapsed 101263 (both-kept share 1.00; V 1065232 -> 938738)
+flowers abl24-final | target 10 MB | lam0 5.1997e-03 -> lamA q10/q50/q90 6.06e-03/2.05e-02/1.00e-01 -> lam_final (shadow) 1.73e-03 | final probe 10.005 MB | trained V 895264 F 2000616 | delivered 10.013 MB (hit 1.001 x target, probe/delivered 0.999) | test 19.113 0.4490 0.5058 | val 19.798 | K4096 R256 q15/q7 | growth-capped False (last landing est 10.1547 MB) | densify events 18 (limiter-bound 0, front-loaded 0, V* 1096848), sigma q10/q50/q90 0.63/0.69/1.00, yield q10/q50/q90 0.79/0.81/1.16, prune rounds 20 active 13 collapsed 129843 (both-kept share 1.00; V 1080605 -> 924528)
+room abl24-final | target 10 MB | lam0 5.1997e-03 -> lamA q10/q50/q90 1.98e-03/5.20e-03/1.04e-02 -> lam_final (shadow) 1.86e-03 | final probe 10.011 MB | trained V 863919 F 2236983 | delivered 10.010 MB (hit 1.001 x target, probe/delivered 1.000) | test 27.954 0.8457 0.4230 | val 30.304 | K4096 R256 q14/q7 | growth-capped False (last landing est 10.2128 MB) | densify events 17 (limiter-bound 0, front-loaded 0, V* 1127161), sigma q10/q50/q90 0.45/0.48/1.00, yield q10/q50/q90 0.85/0.88/1.00, prune rounds 20 active 13 collapsed 206622 (both-kept share 1.00; V 1122520 -> 896534)
+bonsai abl24-final | target 10 MB | lam0 5.1997e-03 -> lamA q10/q50/q90 2.41e-03/5.20e-03/1.37e-02 -> lam_final (shadow) 1.36e-03 | final probe 9.980 MB | trained V 885866 F 2198018 | delivered 9.988 MB (hit 0.999 x target, probe/delivered 0.999) | test 26.802 0.8303 0.4584 | val 27.977 | K4096 R256 q15/q7 | growth-capped False (last landing est 10.163 MB) | densify events 17 (limiter-bound 0, front-loaded 0, V* 1112145), sigma q10/q50/q90 0.36/0.44/1.00, yield q10/q50/q90 0.82/0.87/1.01, prune rounds 20 active 12 collapsed 151256 (both-kept share 1.00; V 1108162 -> 931169)
+kitchen abl24-final | target 10 MB | lam0 5.1997e-03 -> lamA q10/q50/q90 2.47e-03/5.60e-03/1.69e-02 -> lam_final (shadow) 4.20e-03 | final probe 10.060 MB | trained V 713413 F 2474299 | delivered 10.069 MB (hit 1.007 x target, probe/delivered 0.999) | test 26.444 0.8184 0.3495 | val 27.795 | K4096 R256 q16/q7 | growth-capped False (last landing est 10.2032 MB) | densify events 17 (limiter-bound 0, front-loaded 0, V* 1043671), sigma q10/q50/q90 0.20/0.36/1.00, yield q10/q50/q90 0.91/0.93/1.01, prune rounds 20 active 13 collapsed 290380 (both-kept share 1.00; V 1043277 -> 727088)
+counter abl24-final | target 10 MB | lam0 5.1997e-03 -> lamA q10/q50/q90 1.79e-03/5.20e-03/1.38e-02 -> lam_final (shadow) 2.47e-03 | final probe 10.060 MB | trained V 780027 F 2314966 | delivered 10.059 MB (hit 1.006 x target, probe/delivered 1.000) | test 25.763 0.8054 0.4271 | val 27.094 | K4096 R256 q15/q7 | growth-capped False (last landing est 10.1892 MB) | densify events 17 (limiter-bound 0, front-loaded 0, V* 1115102), sigma q10/q50/q90 0.30/0.37/1.00, yield q10/q50/q90 0.90/0.93/1.00, prune rounds 20 active 13 collapsed 294398 (both-kept share 1.00; V 1122451 -> 806028)
+truck abl24-final | target 10 MB | lam0 5.1997e-03 -> lamA q10/q50/q90 5.16e-03/1.09e-02/3.38e-02 -> lam_final (shadow) 1.39e-03 | final probe 9.980 MB | trained V 816363 F 1887957 | delivered 9.990 MB (hit 0.999 x target, probe/delivered 0.999) | test 22.274 0.7820 0.3119 | val 22.917 | K4096 R256 q18/q7 | growth-capped False (last landing est 10.2505 MB) | densify events 18 (limiter-bound 0, front-loaded 0, V* 1016346), sigma q10/q50/q90 0.49/0.56/1.00, yield q10/q50/q90 0.75/0.82/0.92, prune rounds 20 active 10 collapsed 112725 (both-kept share 1.00; V 988976 -> 856327)
+train abl24-final | target 10 MB | lam0 5.1997e-03 -> lamA q10/q50/q90 6.47e-03/1.65e-02/4.76e-02 -> lam_final (shadow) 4.63e-03 | final probe 10.069 MB | trained V 816444 F 2109392 | delivered 10.073 MB (hit 1.007 x target, probe/delivered 1.000) | test 18.781 0.6868 0.4127 | val 19.662 | K4096 R256 q18/q7 | growth-capped False (last landing est 10.2464 MB) | densify events 18 (limiter-bound 1, front-loaded 1, V* 1073783), sigma q10/q50/q90 0.41/0.56/1.00, yield q10/q50/q90 0.87/0.92/1.00, prune rounds 20 active 13 collapsed 197742 (both-kept share 1.00; V 1062043 -> 846701)
+treehill abl24-final | target 10 MB | lam0 5.1997e-03 -> lamA q10/q50/q90 5.85e-03/1.82e-02/6.64e-02 -> lam_final (shadow) 2.46e-04 | final probe 9.950 MB | trained V 935515 F 1900197 | delivered 9.959 MB (hit 0.996 x target, probe/delivered 0.999) | test 20.558 0.5034 0.5721 | val 19.368 | K4096 R256 q16/q7 | growth-capped False (last landing est 10.0491 MB) | densify events 18 (limiter-bound 0, front-loaded 0, V* 1098601), sigma q10/q50/q90 0.72/0.78/1.00, yield q10/q50/q90 0.72/0.79/1.13, prune rounds 20 active 13 collapsed 64577 (both-kept share 1.00; V 1066501 -> 978786)
+playroom abl24-final | target 10 MB | lam0 5.1997e-03 -> lamA q10/q50/q90 1.79e-03/5.20e-03/1.89e-02 -> lam_final (shadow) 1.99e-03 | final probe 9.660 MB | trained V 734066 F 2350412 | delivered 9.635 MB (hit 0.964 x target, probe/delivered 1.003) | test 27.235 0.8484 0.4432 | val 32.670 | K4096 R256 q15/q7 | growth-capped False (last landing est 10.1675 MB) | densify events 17 (limiter-bound 0, front-loaded 0, V* 1121407), sigma q10/q50/q90 0.46/0.70/1.00, yield q10/q50/q90 0.74/0.81/1.05, prune rounds 20 active 10 collapsed 331906 (both-kept share 1.00; V 1100424 -> 757965)
+drjohnson abl24-final | target 10 MB | lam0 5.1997e-03 -> lamA q10/q50/q90 2.39e-03/5.92e-03/1.67e-02 -> lam_final (shadow) 1.43e-03 | final probe 10.059 MB | trained V 740484 F 2302183 | delivered 10.047 MB (hit 1.005 x target, probe/delivered 1.001) | test 26.151 0.8192 0.5048 | val 30.159 | K4096 R256 q15/q7 | growth-capped False (last landing est 9.9632 MB) | densify events 17 (limiter-bound 0, front-loaded 0, V* 1044404), sigma q10/q50/q90 0.48/0.56/1.00, yield q10/q50/q90 0.81/0.83/1.04, prune rounds 20 active 11 collapsed 268336 (both-kept share 1.00; V 1041704 -> 760935)
+stump abl24-ratio35 | target 10 MB | lam0 5.1997e-03 -> lamA q10/q50/q90 4.78e-03/1.16e-02/6.12e-02 -> lam_final (shadow) 5.66e-03 | final probe 9.432 MB | trained V 848571 F 1905905 | delivered 9.433 MB (hit 0.943 x target, probe/delivered 1.000) | test 23.986 0.6157 0.4597 | val 22.892 | K4096 R256 q16/q7 | growth-capped False (last landing est 10.3695 MB) | densify events 18 (limiter-bound 1, front-loaded 1, V* 1085182), sigma q10/q50/q90 0.46/0.77/1.00, yield q10/q50/q90 0.72/0.80/1.01, prune rounds 15 active 8 collapsed 149589 (both-kept share 1.00; V 1062814 -> 888440)
+treehill abl24-ratio35 | target 10 MB | lam0 5.1997e-03 -> lamA q10/q50/q90 5.84e-03/1.83e-02/6.68e-02 -> lam_final (shadow) 4.58e-03 | final probe 9.665 MB | trained V 904543 F 1840928 | delivered 9.676 MB (hit 0.968 x target, probe/delivered 0.999) | test 20.472 0.5003 0.5732 | val 19.360 | K4096 R256 q16/q7 | growth-capped False (last landing est 10.1755 MB) | densify events 18 (limiter-bound 0, front-loaded 0, V* 1098868), sigma q10/q50/q90 0.73/0.78/1.00, yield q10/q50/q90 0.71/0.79/1.13, prune rounds 15 active 8 collapsed 95632 (both-kept share 1.00; V 1067982 -> 949023)
+truck abl24-ratio35 | target 10 MB | lam0 5.1997e-03 -> lamA q10/q50/q90 5.16e-03/1.10e-02/3.35e-02 -> lam_final (shadow) 3.21e-03 | final probe 9.926 MB | trained V 814765 F 1852370 | delivered 9.931 MB (hit 0.993 x target, probe/delivered 1.000) | test 22.225 0.7811 0.3139 | val 22.867 | K4096 R256 q18/q7 | growth-capped False (last landing est 10.3025 MB) | densify events 18 (limiter-bound 0, front-loaded 0, V* 1014428), sigma q10/q50/q90 0.50/0.56/1.00, yield q10/q50/q90 0.75/0.82/0.92, prune rounds 15 active 8 collapsed 110117 (both-kept share 1.00; V 994203 -> 865579)
+bicycle abl24-ratio35 | target 10 MB | lam0 5.1997e-03 -> lamA q10/q50/q90 5.81e-03/1.75e-02/5.70e-02 -> lam_final (shadow) 5.61e-03 | final probe 9.718 MB | trained V 867298 F 1964968 | delivered 9.724 MB (hit 0.972 x target, probe/delivered 0.999) | test 22.547 0.5733 0.4866 | val 21.077 | K4096 R256 q16/q7 | growth-capped False (last landing est 10.2524 MB) | densify events 18 (limiter-bound 0, front-loaded 0, V* 1081810), sigma q10/q50/q90 0.67/0.74/1.00, yield q10/q50/q90 0.75/0.82/1.07, prune rounds 15 active 8 collapsed 124142 (both-kept share 1.00; V 1052609 -> 902637)
+train abl24-ratio35 | target 10 MB | lam0 5.1997e-03 -> lamA q10/q50/q90 6.48e-03/1.66e-02/4.77e-02 -> lam_final (shadow) 1.17e-02 | final probe 9.762 MB | trained V 796192 F 2029492 | delivered 9.766 MB (hit 0.977 x target, probe/delivered 1.000) | test 18.716 0.6851 0.4148 | val 19.630 | K4096 R256 q18/q7 | growth-capped False (last landing est 10.4868 MB) | densify events 18 (limiter-bound 1, front-loaded 1, V* 1075172), sigma q10/q50/q90 0.40/0.55/1.00, yield q10/q50/q90 0.87/0.91/1.00, prune rounds 15 active 8 collapsed 216205 (both-kept share 1.00; V 1063448 -> 830404)
+flowers abl24-ratio35 | target 10 MB | lam0 5.1997e-03 -> lamA q10/q50/q90 6.13e-03/2.06e-02/1.00e-01 -> lam_final (shadow) 9.40e-03 | final probe 9.546 MB | trained V 851151 F 1895136 | delivered 9.558 MB (hit 0.956 x target, probe/delivered 0.999) | test 19.091 0.4452 0.5082 | val 19.766 | K4096 R256 q15/q7 | growth-capped False (last landing est 10.3894 MB) | densify events 18 (limiter-bound 0, front-loaded 0, V* 1094861), sigma q10/q50/q90 0.63/0.69/1.00, yield q10/q50/q90 0.79/0.81/1.17, prune rounds 15 active 8 collapsed 165892 (both-kept share 1.00; V 1076605 -> 885042)
+room abl24-ratio35 | target 10 MB | lam0 5.1997e-03 -> lamA q10/q50/q90 1.94e-03/5.20e-03/1.04e-02 -> lam_final (shadow) 3.16e-03 | final probe 9.693 MB | trained V 838233 F 2159074 | delivered 9.690 MB (hit 0.969 x target, probe/delivered 1.000) | test 27.888 0.8425 0.4280 | val 30.287 | K4096 R256 q14/q7 | growth-capped False (last landing est 10.2332 MB) | densify events 17 (limiter-bound 0, front-loaded 0, V* 1136988), sigma q10/q50/q90 0.45/0.48/1.00, yield q10/q50/q90 0.85/0.88/0.99, prune rounds 15 active 8 collapsed 238633 (both-kept share 1.00; V 1130024 -> 872180)
+bonsai abl24-ratio35 | target 10 MB | lam0 5.1997e-03 -> lamA q10/q50/q90 2.40e-03/5.20e-03/1.37e-02 -> lam_final (shadow) 5.06e-03 | final probe 9.332 MB | trained V 819832 F 2055392 | delivered 9.335 MB (hit 0.933 x target, probe/delivered 1.000) | test 27.027 0.8303 0.4605 | val 27.927 | K4096 R256 q15/q7 | growth-capped False (last landing est 10.6122 MB) | densify events 17 (limiter-bound 0, front-loaded 0, V* 1110392), sigma q10/q50/q90 0.37/0.43/1.00, yield q10/q50/q90 0.82/0.87/1.02, prune rounds 15 active 8 collapsed 219279 (both-kept share 1.00; V 1109849 -> 864633)
+counter abl24-ratio35 | target 10 MB | lam0 5.1997e-03 -> lamA q10/q50/q90 1.89e-03/5.20e-03/1.39e-02 -> lam_final (shadow) 5.51e-03 | final probe 9.561 MB | trained V 744665 F 2181920 | delivered 9.562 MB (hit 0.956 x target, probe/delivered 1.000) | test 25.656 0.8011 0.4335 | val 27.032 | K4096 R256 q15/q7 | growth-capped False (last landing est 10.6019 MB) | densify events 17 (limiter-bound 0, front-loaded 0, V* 1085727), sigma q10/q50/q90 0.30/0.37/1.00, yield q10/q50/q90 0.90/0.92/1.00, prune rounds 15 active 8 collapsed 298155 (both-kept share 1.00; V 1093657 -> 774517)
+hotdog abl24-feasq25 | target 2.5 MB | best iter 25000 val 35.409 | lam0 5.2652e-02 -> lamA q10/q50/q90 1.72e-03/2.29e-02/5.27e-02 -> lam_final (shadow) 2.07e-02 | final probe 1.704 MB | trained V 59725 F 296751 | delivered 1.717 MB (hit 0.687 x target, probe/delivered 0.992) | test 34.968 0.9712 0.0669 | val 36.373 | K4096 R256 q14/q7 | growth-capped False (last landing est 2.0091 MB) | densify events 17 (limiter-bound 1, front-loaded 1, V* 184720), sigma q10/q50/q90 0.45/0.63/1.00, yield q10/q50/q90 0.88/0.98/1.02, prune rounds 15 active 8 collapsed 111336 (both-kept share 1.00; V 172356 -> 60517)
+lego abl24-feasq25 | target 2.5 MB | best iter 21000 val 33.074 | lam0 5.2652e-02 -> lamA q10/q50/q90 5.14e-03/3.29e-02/5.27e-02 -> lam_final (shadow) 1.45e-02 | final probe 1.938 MB | trained V 79773 F 307258 | delivered 1.888 MB (hit 0.755 x target, probe/delivered 1.027) | test 32.015 0.9585 0.0587 | val 34.651 | K4096 R256 q14/q7 | growth-capped False (last landing est 2.0563 MB) | densify events 17 (limiter-bound 0, front-loaded 0, V* 185308), sigma q10/q50/q90 0.64/0.71/1.00, yield q10/q50/q90 0.74/0.81/1.00, prune rounds 15 active 7 collapsed 100263 (both-kept share 1.00; V 181638 -> 80213)
+hotdog abl24-feas25 | target 2.5 MB | best iter 21000 val 35.865 | lam0 5.2652e-02 -> lamA q10/q50/q90 1.68e-03/2.38e-02/5.27e-02 -> lam_final (shadow) 7.09e-03 | final probe 2.117 MB | trained V 86720 F 368389 | delivered 2.068 MB (hit 0.827 x target, probe/delivered 1.024) | test 35.579 0.9758 0.0548 | val 37.064 | K4096 R256 q14/q7 | growth-capped False (last landing est 2.3653 MB) | densify events 17 (limiter-bound 1, front-loaded 1, V* 184482), sigma q10/q50/q90 0.45/0.65/1.00, yield q10/q50/q90 0.87/0.99/1.02, prune rounds 15 active 11 collapsed 85109 (both-kept share 1.00; V 173151 -> 87495)
+hotdog abl24-ratio35 | target 2.5 MB | best iter 26000 val 35.970 | lam0 5.2652e-02 -> lamA q10/q50/q90 1.35e-03/2.23e-02/5.27e-02 -> lam_final (shadow) 7.26e-03 | final probe 2.426 MB | trained V 108880 F 483772 | delivered 2.449 MB (hit 0.980 x target, probe/delivered 0.991) | test 35.373 0.9734 0.0621 | val 37.207 | K4096 R256 q14/q7 | growth-capped False (last landing est 2.5646 MB) | densify events 17 (limiter-bound 1, front-loaded 1, V* 203672), sigma q10/q50/q90 0.43/0.63/1.00, yield q10/q50/q90 0.89/0.99/1.04, prune rounds 15 active 8 collapsed 69511 (both-kept share 1.00; V 179984 -> 109931)
+lego abl24-ratio35 | target 2.5 MB | best iter 22000 val 33.823 | lam0 5.2652e-02 -> lamA q10/q50/q90 4.44e-03/3.12e-02/5.27e-02 -> lam_final (shadow) 1.10e-02 | final probe 2.443 MB | trained V 116591 F 428272 | delivered 2.398 MB (hit 0.959 x target, probe/delivered 1.018) | test 32.645 0.9639 0.0504 | val 35.581 | K4096 R256 q14/q7 | growth-capped False (last landing est 2.5798 MB) | densify events 17 (limiter-bound 0, front-loaded 0, V* 204412), sigma q10/q50/q90 0.63/0.73/1.00, yield q10/q50/q90 0.76/0.82/1.00, prune rounds 15 active 8 collapsed 81710 (both-kept share 1.00; V 200283 -> 117380)
+hotdog abl24-ratio25 | target 2.5 MB | best iter 21000 val 35.981 | lam0 5.2652e-02 -> lamA q10/q50/q90 1.61e-03/2.36e-02/5.27e-02 -> lam_final (shadow) 6.74e-03 | final probe 2.454 MB | trained V 110000 F 434166 | delivered 2.374 MB (hit 0.950 x target, probe/delivered 1.033) | test 35.668 0.9763 0.0548 | val 37.202 | K4096 R256 q14/q7 | growth-capped False (last landing est 2.5621 MB) | densify events 17 (limiter-bound 1, front-loaded 1, V* 184783), sigma q10/q50/q90 0.44/0.65/1.00, yield q10/q50/q90 0.87/0.98/1.02, prune rounds 15 active 8 collapsed 60402 (both-kept share 1.00; V 172184 -> 111302)
+mic abl24-ratio35 | target 2.5 MB | best iter 21000 val 33.196 | lam0 5.2652e-02 -> lamA q10/q50/q90 7.68e-04/1.83e-02/5.27e-02 -> lam_final (shadow) 2.79e-04 | final probe 2.528 MB | trained V 130523 F 344763 | delivered 2.346 MB (hit 0.938 x target, probe/delivered 1.078) | test 33.372 0.9835 0.0266 | val 35.110 | K4096 R256 q14/q7 | growth-capped False (last landing est 2.4906 MB) | densify events 17 (limiter-bound 3, front-loaded 3, V* 214392), sigma q10/q50/q90 0.43/0.64/1.00, yield q10/q50/q90 0.95/1.00/1.13, prune rounds 15 active 7 collapsed 9256 (both-kept share 1.00; V 145672 -> 133856)
+lego abl24-ratio25 | target 2.5 MB | best iter 21000 val 33.766 | lam0 5.2652e-02 -> lamA q10/q50/q90 5.10e-03/3.26e-02/5.27e-02 -> lam_final (shadow) 9.21e-03 | final probe 2.472 MB | trained V 118674 F 416104 | delivered 2.400 MB (hit 0.960 x target, probe/delivered 1.030) | test 32.585 0.9640 0.0503 | val 35.468 | K4096 R256 q14/q7 | growth-capped False (last landing est 2.5582 MB) | densify events 17 (limiter-bound 0, front-loaded 0, V* 185269), sigma q10/q50/q90 0.64/0.72/1.00, yield q10/q50/q90 0.74/0.79/1.00, prune rounds 15 active 8 collapsed 60700 (both-kept share 1.00; V 181575 -> 119699)
+lego abl24-final | target 2.5 MB | best iter 28000 val 33.262 | lam0 5.2652e-02 -> lamA q10/q50/q90 4.43e-03/3.04e-02/5.27e-02 -> lam_final (shadow) 7.36e-03 | final probe 2.511 MB | trained V 120238 F 475297 | delivered 2.490 MB (hit 0.996 x target, probe/delivered 1.009) | test 31.890 0.9566 0.0620 | val 35.009 | K4096 R256 q14/q7 | growth-capped False (last landing est 2.5422 MB) | densify events 17 (limiter-bound 0, front-loaded 0, V* 203939), sigma q10/q50/q90 0.63/0.72/1.00, yield q10/q50/q90 0.75/0.81/1.00, prune rounds 20 active 13 collapsed 79018 (both-kept share 1.00; V 200892 -> 120605)
+ficus abl24-final | target 2.5 MB | best iter 28000 val 31.819 | lam0 5.2652e-02 -> lamA q10/q50/q90 1.00e-04/2.74e-02/5.27e-02 -> lam_final (shadow) 1.00e-04 | final probe 1.927 MB | trained V 102166 F 281663 | delivered 1.934 MB (hit 0.773 x target, probe/delivered 0.997) | test 31.849 0.9689 0.0444 | val 33.681 | K4096 R256 q14/q7 | growth-capped False (last landing est 1.9423 MB) | densify events 17 (limiter-bound 4, front-loaded 4, V* 211936), sigma q10/q50/q90 0.26/0.59/1.00, yield q10/q50/q90 0.80/1.00/1.04, prune rounds 20 active 0 collapsed 0 (both-kept share 0.00; V 110284 -> 110284)
+chair abl24-final | target 2.5 MB | best iter 28000 val 32.049 | lam0 5.2652e-02 -> lamA q10/q50/q90 2.85e-03/3.13e-02/5.27e-02 -> lam_final (shadow) 6.21e-03 | final probe 2.490 MB | trained V 120564 F 456650 | delivered 2.498 MB (hit 0.999 x target, probe/delivered 0.997) | test 31.195 0.9595 0.0565 | val 33.673 | K4096 R256 q14/q7 | growth-capped False (last landing est 2.5431 MB) | densify events 17 (limiter-bound 0, front-loaded 0, V* 208563), sigma q10/q50/q90 0.51/0.69/1.00, yield q10/q50/q90 0.86/0.95/1.00, prune rounds 20 active 13 collapsed 72044 (both-kept share 1.00; V 196470 -> 120887)
+drums abl24-final | target 2.5 MB | best iter 28000 val 26.320 | lam0 5.2652e-02 -> lamA q10/q50/q90 4.69e-03/5.27e-02/5.93e-02 -> lam_final (shadow) 8.62e-03 | final probe 2.505 MB | trained V 126716 F 473510 | delivered 2.500 MB (hit 1.000 x target, probe/delivered 1.002) | test 25.403 0.9382 0.0749 | val 27.309 | K4096 R256 q14/q7 | growth-capped False (last landing est 2.5351 MB) | densify events 17 (limiter-bound 1, front-loaded 1, V* 214664), sigma q10/q50/q90 0.51/0.69/1.00, yield q10/q50/q90 0.86/0.99/1.08, prune rounds 20 active 13 collapsed 68174 (both-kept share 1.00; V 200537 -> 127251)
+mic abl24-final | target 2.5 MB | best iter 28000 val 32.682 | lam0 5.2652e-02 -> lamA q10/q50/q90 7.84e-04/1.76e-02/5.27e-02 -> lam_final (shadow) 2.28e-03 | final probe 2.484 MB | trained V 128264 F 428165 | delivered 2.490 MB (hit 0.996 x target, probe/delivered 0.998) | test 32.417 0.9784 0.0367 | val 34.590 | K4096 R256 q14/q7 | growth-capped False (last landing est 2.5625 MB) | densify events 17 (limiter-bound 3, front-loaded 3, V* 214343), sigma q10/q50/q90 0.42/0.64/1.00, yield q10/q50/q90 0.96/1.00/1.13, prune rounds 20 active 4 collapsed 13491 (both-kept share 1.00; V 146334 -> 130342)
+materials abl24-final | target 2.5 MB | best iter 28000 val 28.502 | lam0 5.2652e-02 -> lamA q10/q50/q90 2.09e-03/2.90e-02/5.27e-02 -> lam_final (shadow) 3.28e-03 | final probe 2.515 MB | trained V 130649 F 449874 | delivered 2.504 MB (hit 1.002 x target, probe/delivered 1.005) | test 27.605 0.9234 0.1139 | val 31.146 | K4096 R256 q14/q7 | growth-capped False (last landing est 2.5499 MB) | densify events 17 (limiter-bound 1, front-loaded 1, V* 213241), sigma q10/q50/q90 0.44/0.61/1.00, yield q10/q50/q90 0.84/0.93/1.00, prune rounds 20 active 13 collapsed 74375 (both-kept share 1.00; V 209522 -> 132914)
+hotdog abl24-final | target 2.5 MB | best iter 28000 val 35.526 | lam0 5.2652e-02 -> lamA q10/q50/q90 1.42e-03/2.19e-02/5.27e-02 -> lam_final (shadow) 6.07e-03 | final probe 2.490 MB | trained V 111173 F 504022 | delivered 2.500 MB (hit 1.000 x target, probe/delivered 0.996) | test 34.856 0.9703 0.0706 | val 36.641 | K4096 R256 q14/q7 | growth-capped False (last landing est 2.5534 MB) | densify events 17 (limiter-bound 1, front-loaded 1, V* 204233), sigma q10/q50/q90 0.45/0.64/1.00, yield q10/q50/q90 0.89/0.99/1.04, prune rounds 20 active 13 collapsed 68401 (both-kept share 1.00; V 180912 -> 111990)
+ship abl24-final | target 2.5 MB | best iter 28000 val 29.405 | lam0 5.2652e-02 -> lamA q10/q50/q90 6.21e-03/5.27e-02/6.69e-02 -> lam_final (shadow) 1.15e-02 | final probe 2.517 MB | trained V 126188 F 464333 | delivered 2.494 MB (hit 0.998 x target, probe/delivered 1.009) | test 29.012 0.8705 0.1703 | val 30.468 | K4096 R256 q14/q7 | growth-capped False (last landing est 2.5679 MB) | densify events 17 (limiter-bound 0, front-loaded 0, V* 216192), sigma q10/q50/q90 0.60/0.76/1.00, yield q10/q50/q90 0.85/0.96/1.13, prune rounds 20 active 13 collapsed 78842 (both-kept share 1.00; V 208926 -> 127144)
+lego abl24-ratio35 | target 2.5 MB | best iter 22000 val 33.823 | lam0 5.2652e-02 -> lamA q10/q50/q90 4.44e-03/3.12e-02/5.27e-02 -> lam_final (shadow) 1.10e-02 | final probe 2.443 MB | trained V 116591 F 428272 | delivered 2.398 MB (hit 0.959 x target, probe/delivered 1.018) | test 32.645 0.9639 0.0504 | val 35.581 | K4096 R256 q14/q7 | growth-capped False (last landing est 2.5798 MB) | densify events 17 (limiter-bound 0, front-loaded 0, V* 204412), sigma q10/q50/q90 0.63/0.73/1.00, yield q10/q50/q90 0.76/0.82/1.00, prune rounds 15 active 8 collapsed 81710 (both-kept share 1.00; V 200283 -> 117380)
+drums abl24-ratio35 | target 2.5 MB | best iter 26000 val 26.397 | lam0 5.2652e-02 -> lamA q10/q50/q90 4.88e-03/5.27e-02/5.90e-02 -> lam_final (shadow) 1.49e-02 | final probe 2.428 MB | trained V 121452 F 453145 | delivered 2.431 MB (hit 0.972 x target, probe/delivered 0.999) | test 25.514 0.9407 0.0718 | val 27.353 | K4096 R256 q14/q7 | growth-capped False (last landing est 2.5788 MB) | densify events 17 (limiter-bound 1, front-loaded 1, V* 214690), sigma q10/q50/q90 0.52/0.71/1.00, yield q10/q50/q90 0.85/0.99/1.07, prune rounds 15 active 8 collapsed 72437 (both-kept share 1.00; V 199554 -> 122180)
+chair abl24-ratio35 | target 2.5 MB | best iter 21000 val 32.491 | lam0 5.2652e-02 -> lamA q10/q50/q90 2.79e-03/3.18e-02/5.27e-02 -> lam_final (shadow) 1.00e-02 | final probe 2.400 MB | trained V 112375 F 376675 | delivered 2.306 MB (hit 0.922 x target, probe/delivered 1.041) | test 32.122 0.9678 0.0448 | val 34.033 | K4096 R256 q14/q7 | growth-capped False (last landing est 2.5739 MB) | densify events 17 (limiter-bound 0, front-loaded 0, V* 208458), sigma q10/q50/q90 0.51/0.67/1.00, yield q10/q50/q90 0.85/0.95/1.00, prune rounds 15 active 8 collapsed 79162 (both-kept share 1.00; V 195888 -> 113297)
+ficus abl24-ratio35 | target 2.5 MB | best iter 26000 val 32.028 | lam0 5.2652e-02 -> lamA q10/q50/q90 1.00e-04/2.65e-02/5.27e-02 -> lam_final (shadow) 1.00e-04 | final probe 1.945 MB | trained V 102283 F 286828 | delivered 1.964 MB (hit 0.786 x target, probe/delivered 0.990) | test 32.117 0.9712 0.0416 | val 33.975 | K4096 R256 q14/q7 | growth-capped False (last landing est 1.9436 MB) | densify events 17 (limiter-bound 4, front-loaded 4, V* 211960), sigma q10/q50/q90 0.25/0.58/1.00, yield q10/q50/q90 0.80/1.00/1.04, prune rounds 15 active 0 collapsed 0 (both-kept share 0.00; V 111063 -> 111063)
+hotdog abl24-ratio35 | target 2.5 MB | best iter 26000 val 35.970 | lam0 5.2652e-02 -> lamA q10/q50/q90 1.35e-03/2.23e-02/5.27e-02 -> lam_final (shadow) 7.26e-03 | final probe 2.426 MB | trained V 108880 F 483772 | delivered 2.449 MB (hit 0.980 x target, probe/delivered 0.991) | test 35.373 0.9734 0.0621 | val 37.207 | K4096 R256 q14/q7 | growth-capped False (last landing est 2.5646 MB) | densify events 17 (limiter-bound 1, front-loaded 1, V* 203672), sigma q10/q50/q90 0.43/0.63/1.00, yield q10/q50/q90 0.89/0.99/1.04, prune rounds 15 active 8 collapsed 69511 (both-kept share 1.00; V 179984 -> 109931)
+
+===== cap rows
+room budget 220000 TRAIN-AT-BUDGET | vertices 212808 faces 544319 | val0 27.437 val 27.451 worst 23.22 | test 25.901 | delivered 2.992 MB test 25.803 0.7944 0.4997 | K4096 R256 q14/q7 | images_2 | --indoor
+room budget 2198000 TRAIN-AT-BUDGET | vertices 1710844 faces 3771993 | val0 30.645 val 30.645 worst 26.99 | test 28.247 | delivered 17.678 MB test 27.889 0.8462 0.4106 | K4096 R256 q14/q7 | images_2 | --indoor
+room budget 1020000 TRAIN-AT-BUDGET | vertices 906257 faces 2074659 | val0 30.02 val 30.02 worst 26.43 | test 27.95 | delivered 9.909 MB test 27.658 0.8362 0.4402 | K4096 R256 q14/q7 | images_2 | --indoor
+room budget 477000 TRAIN-AT-BUDGET | vertices 416014 faces 1018070 | val0 28.787 val 28.787 worst 25.64 | test 26.991 | delivered 5.116 MB test 26.803 0.8191 0.4706 | K4096 R256 q14/q7 | images_2 | --indoor
+room budget 1078000 TRAIN-AT-BUDGET | vertices 997819 faces 2281259 | val0 30.176 val 30.176 worst 26.65 | test 28.09 | delivered 10.671 MB test 27.727 0.8361 0.4385 | K4096 R256 q14/q7 | images_2 | --indoor
+kitchen budget 1895000 TRAIN-AT-BUDGET | vertices 1410317 faces 3518148 | val0 27.867 val 27.867 worst 24.19 | test 26.876 | delivered 16.409 MB test 26.303 0.8118 0.3511 | K4096 R256 q16/q7 | images_2 | --indoor
+kitchen budget 928000 TRAIN-AT-BUDGET | vertices 751933 faces 1985422 | val0 26.945 val 26.928 worst 23.63 | test 26.177 | delivered 9.361 MB test 25.653 0.7834 0.3967 | K4096 R256 q16/q7 | images_2 | --indoor
+kitchen budget 409000 TRAIN-AT-BUDGET | vertices 373358 faces 1088705 | val0 25.666 val 25.684 worst 22.54 | test 25.132 | delivered 5.243 MB test 24.722 0.7451 0.443 | K4096 R256 q16/q7 | images_2 | --indoor
+kitchen budget 1086000 TRAIN-AT-BUDGET | vertices 956939 faces 2495983 | val0 27.308 val 27.273 worst 23.88 | test 26.503 | delivered 11.634 MB test 25.928 0.7959 0.3791 | K4096 R256 q16/q7 | images_2 | --indoor
+kitchen budget 900000 TRAIN-AT-BUDGET | vertices 716750 faces 1899214 | val0 26.938 val 26.921 worst 23.56 | test 26.197 | delivered 9.022 MB test 25.662 0.7833 0.3978 | K4096 R256 q16/q7 | images_2 | --indoor
+counter budget 245000 TRAIN-AT-BUDGET | vertices 234522 faces 636242 | val0 24.989 val 24.989 worst 22.94 | test 24.628 | delivered 3.435 MB test 24.288 0.7473 0.5 | K4096 R256 q15/q7 | images_2 | --indoor
+counter budget 2040000 TRAIN-AT-BUDGET | vertices 1599683 faces 3496762 | val0 27.135 val 27.135 worst 24.18 | test 26.247 | delivered 17.247 MB test 25.621 0.8036 0.4198 | K4096 R256 q15/q7 | images_2 | --indoor
+counter budget 978000 TRAIN-AT-BUDGET | vertices 828485 faces 1891835 | val0 26.563 val 26.563 worst 23.94 | test 25.867 | delivered 9.442 MB test 25.309 0.7883 0.4496 | K4096 R256 q15/q7 | images_2 | --indoor
+counter budget 449000 TRAIN-AT-BUDGET | vertices 400693 faces 1019409 | val0 25.697 val 25.697 worst 23.36 | test 25.256 | delivered 5.29 MB test 24.821 0.7672 0.4788 | K4096 R256 q15/q7 | images_2 | --indoor
+counter budget 1083000 TRAIN-AT-BUDGET | vertices 817438 faces 1856176 | val0 26.558 val 26.558 worst 23.79 | test 25.852 | delivered 9.311 MB test 25.318 0.7886 0.4486 | K4096 R256 q15/q7 | images_2 | --indoor
+bonsai budget 2090000 TRAIN-AT-BUDGET | vertices 1753075 faces 3413136 | val0 28.545 val 28.545 worst 22.74 | test 27.794 | delivered 17.157 MB test 27.259 0.8425 0.4325 | K4096 R256 q15/q7 | images_2 | --indoor
+bonsai budget 1005000 TRAIN-AT-BUDGET | vertices 871887 faces 1848700 | val0 27.39 val 27.39 worst 22.12 | test 26.979 | delivered 9.571 MB test 26.658 0.8223 0.4729 | K4096 R256 q15/q7 | images_2 | --indoor
+bonsai budget 473000 TRAIN-AT-BUDGET | vertices 436461 faces 1002900 | val0 26.096 val 26.105 worst 21.29 | test 25.794 | delivered 5.431 MB test 25.635 0.7976 0.5049 | K4096 R256 q15/q7 | images_2 | --indoor
+bonsai budget 1073000 TRAIN-AT-BUDGET | vertices 754307 faces 1583042 | val0 27.369 val 27.369 worst 22.19 | test 26.954 | delivered 8.315 MB test 26.665 0.8211 0.4773 | K4096 R256 q15/q7 | images_2 | --indoor
+bonsai budget 1367000 TRAIN-AT-BUDGET | vertices 934609 faces 1917107 | val0 27.677 val 27.677 worst 22.42 | test 27.227 | delivered 9.861 MB test 26.825 0.8244 0.4687 | K4096 R256 q15/q7 | images_2 | --indoor
+garden budget 1105000 TRAIN-AT-BUDGET | vertices 884328 faces 1993781 | val0 24.068 val 24.068 worst 20.51 | test 23.488 | delivered 10.298 MB test 23.49 0.6657 0.3947 | K4096 R256 q15/q7 | images_4
+garden budget 1073000 TRAIN-AT-BUDGET | vertices 1005902 faces 2292683 | val0 24.249 val 24.249 worst 20.62 | test 23.658 | delivered 11.641 MB test 23.652 0.6761 0.3811 | K4096 R256 q15/q7 | images_4
+garden budget 1106000 TRAIN-AT-BUDGET | vertices 877885 faces 1980500 | val0 24.064 val 24.064 worst 20.59 | test 23.49 | delivered 10.146 MB test 23.488 0.6649 0.3957 | K4096 R256 q15/q7 | images_4
+garden budget 1104000 TRAIN-AT-BUDGET | vertices 1170284 faces 2628891 | val0 24.422 val 24.422 worst 20.79 | test 23.811 | delivered 13.299 MB test 23.785 0.6882 0.3652 | K4096 R256 q15/q7 | images_4
+garden budget 1074000 TRAIN-AT-BUDGET | vertices 999506 faces 2277913 | val0 24.206 val 24.206 worst 20.63 | test 23.627 | delivered 11.607 MB test 23.622 0.6744 0.3825 | K4096 R256 q15/q7 | images_4
+bicycle budget 474000 TRAIN-AT-BUDGET | vertices 379892 faces 773913 | val0 19.886 val 19.886 worst 14.75 | test 21.551 | delivered 4.563 MB test 21.506 0.5095 0.5476 | K4096 R256 q16/q7 | images_4
+bicycle budget 2029000 TRAIN-AT-BUDGET | vertices 1888752 faces 3368456 | val0 21.201 val 21.201 worst 15.63 | test 22.705 | delivered 18.482 MB test 22.544 0.601 0.4482 | K4096 R256 q16/q7 | images_4
+bicycle budget 986000 TRAIN-AT-BUDGET | vertices 940945 faces 1766600 | val0 20.658 val 20.658 worst 15.33 | test 22.263 | delivered 9.88 MB test 22.14 0.5642 0.4932 | K4096 R256 q16/q7 | images_4
+bicycle budget 440000 TRAIN-AT-BUDGET | vertices 392041 faces 816139 | val0 19.816 val 19.816 worst 14.71 | test 21.513 | delivered 4.722 MB test 21.47 0.5098 0.5465 | K4096 R256 q16/q7 | images_4
+bicycle budget 1080000 TRAIN-AT-BUDGET | vertices 947525 faces 1785653 | val0 20.604 val 20.604 worst 15.22 | test 22.197 | delivered 10.042 MB test 22.095 0.5611 0.4961 | K4096 R256 q16/q7 | images_4
+stump budget 344000 TRAIN-AT-BUDGET | vertices 310355 faces 671321 | val0 21.287 val 21.287 worst 14.36 | test 22.651 | delivered 3.954 MB test 22.605 0.5205 0.5562 | K4096 R256 q16/q7 | images_4
+stump budget 2015000 TRAIN-AT-BUDGET | vertices 1709471 faces 2901520 | val0 23.223 val 23.223 worst 14.74 | test 24.409 | delivered 16.727 MB test 24.185 0.632 0.439 | K4096 R256 q16/q7 | images_4
+stump budget 983000 TRAIN-AT-BUDGET | vertices 901987 faces 1669604 | val0 22.424 val 22.424 worst 14.19 | test 23.73 | delivered 9.522 MB test 23.592 0.5899 0.4901 | K4096 R256 q16/q7 | images_4
+stump budget 440000 TRAIN-AT-BUDGET | vertices 373184 faces 785139 | val0 21.558 val 21.558 worst 14.73 | test 22.856 | delivered 4.555 MB test 22.788 0.5335 0.5451 | K4096 R256 q16/q7 | images_4
+stump budget 1069000 TRAIN-AT-BUDGET | vertices 975273 faces 1782308 | val0 22.532 val 22.532 worst 14.59 | test 23.771 | delivered 10.212 MB test 23.629 0.5951 0.4834 | K4096 R256 q16/q7 | images_4
+flowers budget 522000 TRAIN-AT-BUDGET | vertices 487358 faces 889020 | val0 18.953 val 18.953 worst 16.29 | test 18.51 | delivered 5.457 MB test 18.458 0.3921 0.5694 | K4096 R256 q15/q7 | images_4
+flowers budget 2068000 TRAIN-AT-BUDGET | vertices 1856651 faces 2975833 | val0 19.878 val 19.878 worst 16.95 | test 19.017 | delivered 17.388 MB test 18.903 0.4533 0.5008 | K4096 R256 q15/q7 | images_4
+flowers budget 992000 TRAIN-AT-BUDGET | vertices 873880 faces 1484787 | val0 19.215 val 19.215 worst 16.39 | test 18.737 | delivered 8.883 MB test 18.675 0.4164 0.5452 | K4096 R256 q15/q7 | images_4
+flowers budget 447000 TRAIN-AT-BUDGET | vertices 430462 faces 809335 | val0 18.753 val 18.753 worst 15.8 | test 18.528 | delivered 4.97 MB test 18.493 0.3856 0.5754 | K4096 R256 q15/q7 | images_4
+flowers budget 1071000 TRAIN-AT-BUDGET | vertices 930919 faces 1570126 | val0 19.334 val 19.334 worst 16.38 | test 18.683 | delivered 9.416 MB test 18.622 0.4187 0.5432 | K4096 R256 q15/q7 | images_4
+treehill budget 482000 TRAIN-AT-BUDGET | vertices 427543 faces 907320 | val0 18.46 val 18.46 worst 13.29 | test 20.084 | delivered 5.073 MB test 20.136 0.4779 0.6112 | K4096 R256 q16/q7 | images_4
+treehill budget 2054000 TRAIN-AT-BUDGET | vertices 1947397 faces 3302626 | val0 19.576 val 19.576 worst 13.97 | test 20.532 | delivered 18.694 MB test 20.501 0.5111 0.5458 | K4096 R256 q16/q7 | images_4
+treehill budget 1002000 TRAIN-AT-BUDGET | vertices 880522 faces 1653263 | val0 19.006 val 19.006 worst 13.6 | test 20.408 | delivered 9.219 MB test 20.407 0.4915 0.5852 | K4096 R256 q16/q7 | images_4
+treehill budget 449000 TRAIN-AT-BUDGET | vertices 424560 faces 913714 | val0 18.452 val 18.452 worst 13.32 | test 20.246 | delivered 5.049 MB test 20.263 0.4792 0.6095 | K4096 R256 q16/q7 | images_4
+treehill budget 1079000 TRAIN-AT-BUDGET | vertices 1023422 faces 1891109 | val0 19.067 val 19.067 worst 13.63 | test 20.485 | delivered 10.596 MB test 20.487 0.4983 0.5765 | K4096 R256 q16/q7 | images_4
+truck budget 1853000 TRAIN-AT-BUDGET | vertices 1379017 faces 2526246 | val0 23.189 val 23.189 worst 20.31 | test 22.449 | delivered 14.98 MB test 22.407 0.793 0.2937 | K4096 R256 q18/q7 | images
+truck budget 929000 TRAIN-AT-BUDGET | vertices 808599 faces 1521932 | val0 22.789 val 22.789 worst 20.02 | test 22.163 | delivered 9.142 MB test 22.143 0.7777 0.3261 | K4096 R256 q18/q7 | images
+truck budget 421000 TRAIN-AT-BUDGET | vertices 402029 faces 866816 | val0 21.914 val 21.914 worst 19.63 | test 21.471 | delivered 5.191 MB test 21.507 0.7449 0.3772 | K4096 R256 q18/q7 | images
+truck budget 1078000 TRAIN-AT-BUDGET | vertices 885368 faces 1655525 | val0 22.855 val 22.855 worst 20.18 | test 22.196 | delivered 9.951 MB test 22.165 0.7802 0.3198 | K4096 R256 q18/q7 | images
+truck budget 1083000 TRAIN-AT-BUDGET | vertices 893100 faces 1668169 | val0 22.862 val 22.862 worst 20.38 | test 22.214 | delivered 10.001 MB test 22.193 0.7803 0.32 | K4096 R256 q18/q7 | images
+train budget 553000 TRAIN-AT-BUDGET | vertices 506452 faces 1087550 | val0 18.874 val 18.874 worst 14.61 | test 18.237 | delivered 6.181 MB test 18.145 0.6557 0.455 | K4096 R256 q18/q7 | images
+train budget 2040000 TRAIN-AT-BUDGET | vertices 1557663 faces 3120532 | val0 19.673 val 19.673 worst 14.77 | test 18.748 | delivered 16.946 MB test 18.68 0.6903 0.4048 | K4096 R256 q18/q7 | images
+train budget 975000 TRAIN-AT-BUDGET | vertices 848788 faces 1765300 | val0 19.419 val 19.419 worst 13.88 | test 18.598 | delivered 9.702 MB test 18.535 0.6776 0.4271 | K4096 R256 q18/q7 | images
+train budget 436000 TRAIN-AT-BUDGET | vertices 419682 faces 924223 | val0 18.647 val 18.647 worst 14.07 | test 18.026 | delivered 5.311 MB test 17.949 0.6477 0.466 | K4096 R256 q18/q7 | images
+train budget 1085000 TRAIN-AT-BUDGET | vertices 917466 faces 1863948 | val0 19.468 val 19.468 worst 14.75 | test 18.593 | delivered 10.357 MB test 18.514 0.6779 0.4272 | K4096 R256 q18/q7 | images
+drjohnson budget 1370000 TRAIN-AT-BUDGET | vertices 1143832 faces 3107762 | val0 30.352 val 30.352 worst 25.31 | test 26.372 | delivered 14.531 MB test 26.168 0.8159 0.5009 | K4096 R256 q15/q7 | images | --indoor
+drjohnson budget 532000 TRAIN-AT-BUDGET | vertices 526885 faces 1485364 | val0 28.767 val 28.767 worst 24.06 | test 25.901 | delivered 7.159 MB test 25.727 0.8043 0.5213 | K4096 R256 q15/q7 | images | --indoor
+drjohnson budget 224000 TRAIN-AT-BUDGET | vertices 200645 faces 587344 | val0 26.285 val 26.285 worst 21.47 | test 24.319 | delivered 3.207 MB test 24.215 0.7798 0.5464 | K4096 R256 q15/q7 | images | --indoor
+drjohnson budget 1081000 TRAIN-AT-BUDGET | vertices 881894 faces 2441119 | val0 29.938 val 29.938 worst 24.82 | test 26.333 | delivered 11.566 MB test 26.165 0.815 0.5059 | K4096 R256 q15/q7 | images | --indoor
+drjohnson budget 902000 TRAIN-AT-BUDGET | vertices 900413 faces 2497983 | val0 29.896 val 29.896 worst 24.95 | test 26.271 | delivered 11.693 MB test 26.1 0.8137 0.5069 | K4096 R256 q15/q7 | images | --indoor
+playroom budget 191000 TRAIN-AT-BUDGET | vertices 182526 faces 561537 | val0 27.942 val 27.942 worst 22.7 | test 25.203 | delivered 2.92 MB test 25.113 0.8184 0.4941 | K4096 R256 q15/q7 | images | --indoor
+playroom budget 1081000 TRAIN-AT-BUDGET | vertices 847103 faces 2398296 | val0 32.484 val 32.484 worst 26.81 | test 27.148 | delivered 10.96 MB test 27.083 0.8446 0.4475 | K4096 R256 q15/q7 | images | --indoor
+playroom budget 986000 TRAIN-AT-BUDGET | vertices 937937 faces 2661486 | val0 32.511 val 32.511 worst 27.24 | test 27.105 | delivered 11.635 MB test 26.996 0.8436 0.4468 | K4096 R256 q15/q7 | images | --indoor
+playroom budget 1080000 TRAIN-AT-BUDGET | vertices 830815 faces 2368063 | val0 32.479 val 32.479 worst 27.14 | test 27.116 | delivered 10.372 MB test 26.989 0.8414 0.4516 | K4096 R256 q15/q7 | images | --indoor
+playroom budget 1082000 TRAIN-AT-BUDGET | vertices 845753 faces 2403234 | val0 32.485 val 32.485 worst 26.51 | test 27.204 | delivered 11.073 MB test 27.105 0.8439 0.4471 | K4096 R256 q15/q7 | images | --indoor
+lego budget 91000 TRAIN-AT-BUDGET-BLENDER | vertices 92381 faces 285301 | val0 33.209 val 33.261 worst 31.32 | test 31.314 | delivered 1.966 MB test 31.044 0.9502 0.0705 | K4096 R256 q14/q7 | train | blackbg --indoor | max_points 91000
+lego budget 183000 TRAIN-AT-BUDGET-BLENDER | vertices 156040 faces 452009 | val0 34.85 val 34.968 worst 32.81 | test 32.653 | delivered 2.791 MB test 32.314 0.962 0.0535 | K4096 R256 q14/q7 | train | blackbg --indoor | max_points 183000
+lego budget 154000 TRAIN-AT-BUDGET-BLENDER | vertices 156438 faces 461649 | val0 34.757 val 34.91 worst 32.82 | test 32.634 | delivered 2.792 MB test 32.28 0.9612 0.0549 | K4096 R256 q14/q7 | train | blackbg --indoor | max_points 154000
+lego budget 130000 TRAIN-AT-BUDGET-BLENDER | vertices 133085 faces 396097 | val0 34.378 val 34.569 worst 32.53 | test 32.421 | delivered 2.504 MB test 32.039 0.9592 0.058 | K4096 R256 q14/q7 | train | blackbg --indoor | max_points 130000
+chair budget 262000 TRAIN-AT-BUDGET-BLENDER | vertices 192705 faces 589109 | val0 34.324 val 34.324 worst 30.17 | test 32.139 | delivered 3.384 MB test 31.727 0.9633 0.0524 | K4096 R256 q14/q7 | train | blackbg --indoor | max_points 262000
+chair budget 142000 TRAIN-AT-BUDGET-BLENDER | vertices 128420 faces 358686 | val0 33.496 val 33.733 worst 29.71 | test 32.212 | delivered 2.401 MB test 31.886 0.9655 0.0484 | K4096 R256 q14/q7 | train | blackbg --indoor | max_points 142000
+chair budget 67000 TRAIN-AT-BUDGET-BLENDER | vertices 69508 faces 215780 | val0 32.682 val 32.865 worst 28.91 | test 31.414 | delivered 1.651 MB test 31.127 0.9587 0.0561 | K4096 R256 q14/q7 | train | blackbg --indoor | max_points 67000
+chair budget 178000 TRAIN-AT-BUDGET-BLENDER | vertices 146157 faces 400498 | val0 33.679 val 33.912 worst 29.86 | test 32.408 | delivered 2.634 MB test 32.07 0.9668 0.0464 | K4096 R256 q14/q7 | train | blackbg --indoor | max_points 178000
+drums budget 258000 TRAIN-AT-BUDGET-BLENDER | vertices 186525 faces 585763 | val0 27.363 val 27.363 worst 25.95 | test 25.58 | delivered 3.22 MB test 25.469 0.9398 0.073 | K4096 R256 q14/q7 | train | blackbg --indoor | max_points 258000
+drums budget 159000 TRAIN-AT-BUDGET-BLENDER | vertices 138120 faces 442282 | val0 27.215 val 27.215 worst 25.83 | test 25.529 | delivered 2.565 MB test 25.419 0.939 0.074 | K4096 R256 q14/q7 | train | blackbg --indoor | max_points 159000
+drums budget 68000 TRAIN-AT-BUDGET-BLENDER | vertices 69594 faces 229662 | val0 26.81 val 26.81 worst 25.48 | test 25.269 | delivered 1.62 MB test 25.152 0.9353 0.0782 | K4096 R256 q14/q7 | train | blackbg --indoor | max_points 68000
+drums budget 176000 TRAIN-AT-BUDGET-BLENDER | vertices 150402 faces 481302 | val0 27.252 val 27.252 worst 25.86 | test 25.533 | delivered 2.738 MB test 25.417 0.9393 0.0736 | K4096 R256 q14/q7 | train | blackbg --indoor | max_points 176000
+ficus budget 113000 TRAIN-AT-BUDGET-BLENDER | vertices 68591 faces 173100 | val0 33.499 val 33.499 worst 29.99 | test 32.104 | delivered 1.515 MB test 31.903 0.9693 0.044 | K4096 R256 q14/q7 | train | blackbg --indoor | max_points 113000
+ficus budget 75000 TRAIN-AT-BUDGET-BLENDER | vertices 56885 faces 137642 | val0 33.334 val 33.334 worst 29.72 | test 32.015 | delivered 1.348 MB test 31.803 0.9682 0.0453 | K4096 R256 q14/q7 | train | blackbg --indoor | max_points 75000
+ficus budget 171000 TRAIN-AT-BUDGET-BLENDER | vertices 68358 faces 172114 | val0 33.486 val 33.486 worst 29.98 | test 32.113 | delivered 1.511 MB test 31.899 0.9691 0.0447 | K4096 R256 q14/q7 | train | blackbg --indoor | max_points 171000
+ficus budget 515000 TRAIN-AT-BUDGET-BLENDER | vertices 68896 faces 173319 | val0 33.514 val 33.514 worst 29.93 | test 32.134 | delivered 1.5 MB test 31.92 0.9692 0.0439 | K4096 R256 q14/q7 | train | blackbg --indoor | max_points 515000
+hotdog budget 222000 TRAIN-AT-BUDGET-BLENDER | vertices 152711 faces 483538 | val0 37.135 val 37.135 worst 35.45 | test 35.985 | delivered 2.837 MB test 35.574 0.9759 0.0551 | K4096 R256 q14/q7 | train | blackbg --indoor | max_points 222000
+hotdog budget 146000 TRAIN-AT-BUDGET-BLENDER | vertices 125337 faces 404110 | val0 36.914 val 36.914 worst 35.11 | test 35.819 | delivered 2.453 MB test 35.416 0.975 0.0582 | K4096 R256 q14/q7 | train | blackbg --indoor | max_points 146000
+hotdog budget 69000 TRAIN-AT-BUDGET-BLENDER | vertices 60305 faces 211323 | val0 36.042 val 36.042 worst 34.44 | test 35.146 | delivered 1.564 MB test 34.82 0.9719 0.064 | K4096 R256 q14/q7 | train | blackbg --indoor | max_points 69000
+hotdog budget 177000 TRAIN-AT-BUDGET-BLENDER | vertices 146789 faces 465444 | val0 37.14 val 37.14 worst 35.45 | test 35.974 | delivered 2.748 MB test 35.571 0.9758 0.0554 | K4096 R256 q14/q7 | train | blackbg --indoor | max_points 177000
+materials budget 259000 TRAIN-AT-BUDGET-BLENDER | vertices 206265 faces 516670 | val0 31.029 val 31.029 worst 28.62 | test 28.209 | delivered 3.242 MB test 27.752 0.9298 0.1044 | K4096 R256 q14/q7 | train | blackbg --indoor | max_points 259000
+materials budget 165000 TRAIN-AT-BUDGET-BLENDER | vertices 137030 faces 365604 | val0 30.823 val 30.823 worst 28.54 | test 28.149 | delivered 2.425 MB test 27.736 0.9293 0.1069 | K4096 R256 q14/q7 | train | blackbg --indoor | max_points 165000
+materials budget 75000 TRAIN-AT-BUDGET-BLENDER | vertices 67994 faces 193141 | val0 30.114 val 30.114 worst 28.1 | test 27.743 | delivered 1.546 MB test 27.39 0.9255 0.114 | K4096 R256 q14/q7 | train | blackbg --indoor | max_points 75000
+materials budget 176000 TRAIN-AT-BUDGET-BLENDER | vertices 147311 faces 390025 | val0 30.871 val 30.871 worst 28.52 | test 28.193 | delivered 2.535 MB test 27.759 0.9294 0.1065 | K4096 R256 q14/q7 | train | blackbg --indoor | max_points 176000
+mic budget 145000 TRAIN-AT-BUDGET-BLENDER | vertices 106942 faces 280600 | val0 34.179 val 34.37 worst 32.39 | test 33.293 | delivered 2.036 MB test 33.01 0.9822 0.0287 | K4096 R256 q14/q7 | train | blackbg --indoor | max_points 145000
+mic budget 69000 TRAIN-AT-BUDGET-BLENDER | vertices 61108 faces 177016 | val0 33.291 val 33.458 worst 31.32 | test 32.638 | delivered 1.483 MB test 32.409 0.9799 0.0318 | K4096 R256 q14/q7 | train | blackbg --indoor | max_points 69000
+mic budget 174000 TRAIN-AT-BUDGET-BLENDER | vertices 106744 faces 279775 | val0 34.184 val 34.378 worst 32.41 | test 33.281 | delivered 2.041 MB test 33.001 0.9821 0.0287 | K4096 R256 q14/q7 | train | blackbg --indoor | max_points 174000
+mic budget 247000 TRAIN-AT-BUDGET-BLENDER | vertices 107011 faces 281436 | val0 34.284 val 34.451 worst 32.52 | test 33.291 | delivered 2.051 MB test 33.01 0.9823 0.0281 | K4096 R256 q14/q7 | train | blackbg --indoor | max_points 247000
+ship budget 294000 TRAIN-AT-BUDGET-BLENDER | vertices 253376 faces 688431 | val0 30.698 val 30.698 worst 28.1 | test 29.546 | delivered 3.947 MB test 29.187 0.8729 0.1645 | K4096 R256 q14/q7 | train | blackbg --indoor | max_points 294000
+ship budget 164000 TRAIN-AT-BUDGET-BLENDER | vertices 144319 faces 410497 | val0 30.057 val 30.057 worst 27.78 | test 29.049 | delivered 2.564 MB test 28.729 0.8664 0.1773 | K4096 R256 q14/q7 | train | blackbg --indoor | max_points 164000
+ship budget 74000 TRAIN-AT-BUDGET-BLENDER | vertices 70253 faces 228704 | val0 29.167 val 29.167 worst 27.32 | test 28.328 | delivered 1.639 MB test 28.048 0.8559 0.1954 | K4096 R256 q14/q7 | train | blackbg --indoor | max_points 74000
+ship budget 177000 TRAIN-AT-BUDGET-BLENDER | vertices 145351 faces 411929 | val0 30.086 val 30.086 worst 27.78 | test 29.088 | delivered 2.573 MB test 28.766 0.8671 0.177 | K4096 R256 q14/q7 | train | blackbg --indoor | max_points 177000
+
+===== retry launchers
+PASS2 bicycle cap1 1080000 delivered 10.042 MB (target 10 MB, error +0.4%): within 10%, no second training
+PASS2 bonsai cap1 1073000 delivered 8.315 MB (target 10 MB, error -16.9%, fixed bytes 2.17 MB) -> cap2 1367000
+submitted 22871694 (bonsai cap2 1367000)
+PASS2 counter cap1 1083000 delivered 9.311 MB (target 10 MB, error -6.9%): within 10%, no second training
+PASS2 drjohnson cap1 1081000 delivered 11.566 MB (target 10 MB, error +15.7%, fixed bytes 2.11 MB) -> cap2 902000
+submitted 22920909 (drjohnson cap2 902000)
+PASS2 drums cap1 176000 delivered 2.738 MB (target 2.5 MB, error +9.5%): within 10%, no second training
+PASS2 ficus cap1 171000 delivered 1.511 MB (target 2.5 MB, error -39.6%, fixed bytes 1.02 MB) -> cap2 515000
+submitted 22903677 (ficus cap2 515000)
+PASS2 flowers cap1 1071000 delivered 9.416 MB (target 10 MB, error -5.8%): within 10%, no second training
+PASS2 hotdog cap1 177000 delivered 2.748 MB (target 2.5 MB, error +9.9%): within 10%, no second training
+PASS2 materials cap1 176000 delivered 2.535 MB (target 2.5 MB, error +1.4%): within 10%, no second training
+PASS2 mic cap1 174000 delivered 2.041 MB (target 2.5 MB, error -18.4%, fixed bytes 0.95 MB) -> cap2 247000
+submitted 22904669 (mic cap2 247000)
+PASS2 room cap1 1078000 delivered 10.671 MB (target 10 MB, error +6.7%): within 10%, no second training
+PASS2 ship cap1 177000 delivered 2.573 MB (target 2.5 MB, error +2.9%): within 10%, no second training
+PASS2 stump cap1 1069000 delivered 10.212 MB (target 10 MB, error +2.1%): within 10%, no second training
+PASS2 train cap1 1085000 delivered 10.357 MB (target 10 MB, error +3.6%): within 10%, no second training
+PASS2 treehill cap1 1079000 delivered 10.596 MB (target 10 MB, error +6.0%): within 10%, no second training
+
+===== cap job stages (time stamps)
+=== A: drums budget 176000: train.py --max_points 176000 --indoor, checkpoints every 1k from 12k (Thu Nov 12 06:28:54 PM EST 2026) ===
+=== A: drums budget 176000: val_select_v3 (Thu Nov 12 06:39:50 PM EST 2026) ===
+=== A: drums budget 176000: level-1.0 protocol on /scratch/zr2245/drums-budgetb-176000-best (Thu Nov 12 06:43:00 PM EST 2026) ===
+=== B: drums control: collapse the dense original to 150402 vertices (Thu Nov 12 06:46:54 PM EST 2026) ===
+g0-refresh-blender drums exit 0 (0 stage failures)  Thu Nov 12 06:50:49 PM EST 2026
+=== A: ficus budget 171000: train.py --max_points 171000 --indoor, checkpoints every 1k from 12k (Thu Nov 12 06:29:14 PM EST 2026) ===
+=== A: ficus budget 171000: val_select_v3 (Thu Nov 12 06:38:35 PM EST 2026) ===
+=== A: ficus budget 171000: level-1.0 protocol on /scratch/zr2245/ficus-budgetb-171000-best (Thu Nov 12 06:41:35 PM EST 2026) ===
+=== B: ficus control: collapse the dense original to 68358 vertices (Thu Nov 12 06:45:00 PM EST 2026) ===
+g0-refresh-blender ficus exit 0 (0 stage failures)  Thu Nov 12 06:47:55 PM EST 2026
+=== A: ficus budget 515000: train.py --max_points 515000 --indoor, checkpoints every 1k from 12k (Thu Nov 12 06:54:02 PM EST 2026) ===
+=== A: ficus budget 515000: val_select_v3 (Thu Nov 12 07:03:48 PM EST 2026) ===
+=== A: ficus budget 515000: level-1.0 protocol on /scratch/zr2245/ficus-budgetb-515000-best (Thu Nov 12 07:07:15 PM EST 2026) ===
+=== B: ficus control: collapse the dense original to 68896 vertices (Thu Nov 12 07:10:52 PM EST 2026) ===
+g0-refresh-blender ficus exit 0 (0 stage failures)  Thu Nov 12 07:13:43 PM EST 2026
+=== A: hotdog budget 177000: train.py --max_points 177000 --indoor, checkpoints every 1k from 12k (Thu Nov 12 06:28:56 PM EST 2026) ===
+=== A: hotdog budget 177000: val_select_v3 (Thu Nov 12 06:40:30 PM EST 2026) ===
+=== A: hotdog budget 177000: level-1.0 protocol on /scratch/zr2245/hotdog-budgetb-177000-best (Thu Nov 12 06:43:46 PM EST 2026) ===
+=== B: hotdog control: collapse the dense original to 146789 vertices (Thu Nov 12 06:48:14 PM EST 2026) ===
+g0-refresh-blender hotdog exit 0 (0 stage failures)  Thu Nov 12 06:53:56 PM EST 2026
+=== A: bicycle budget 1080000: train with --max_points 1080000 (Thu Nov 12 12:58:31 PM EST 2026) ===
+=== A: bicycle budget 1080000: level-1.0 protocol (Thu Nov 12 01:21:15 PM EST 2026) ===
+=== B: bicycle control: collapse the dense original to 947525 vertices (Thu Nov 12 01:27:08 PM EST 2026) ===
+g0-refresh bicycle exit 0  Thu Nov 12 01:35:52 PM EST 2026
+=== A: lego budget 130000: train.py --max_points 130000 --indoor, checkpoints every 1k from 12k (Thu Nov 12 06:29:13 PM EST 2026) ===
+=== A: lego budget 130000: val_select_v3 (Thu Nov 12 06:39:55 PM EST 2026) ===
+=== A: lego budget 130000: level-1.0 protocol on /scratch/zr2245/lego-budgetb-130000-best (Thu Nov 12 06:43:06 PM EST 2026) ===
+=== B: lego control: collapse the dense original to 133085 vertices (Thu Nov 12 06:47:17 PM EST 2026) ===
+g0-refresh-blender lego exit 0 (0 stage failures)  Thu Nov 12 06:52:55 PM EST 2026
+=== A: materials budget 176000: train.py --max_points 176000 --indoor, checkpoints every 1k from 12k (Thu Nov 12 06:29:01 PM EST 2026) ===
+=== A: materials budget 176000: val_select_v3 (Thu Nov 12 06:40:08 PM EST 2026) ===
+=== A: materials budget 176000: level-1.0 protocol on /scratch/zr2245/materials-budgetb-176000-best (Thu Nov 12 06:43:10 PM EST 2026) ===
+=== B: materials control: collapse the dense original to 147311 vertices (Thu Nov 12 06:47:08 PM EST 2026) ===
+g0-refresh-blender materials exit 0 (0 stage failures)  Thu Nov 12 06:50:41 PM EST 2026
+=== A: mic budget 174000: train.py --max_points 174000 --indoor, checkpoints every 1k from 12k (Thu Nov 12 06:29:20 PM EST 2026) ===
+=== A: mic budget 174000: val_select_v3 (Thu Nov 12 06:39:56 PM EST 2026) ===
+=== A: mic budget 174000: level-1.0 protocol on /scratch/zr2245/mic-budgetb-174000-best (Thu Nov 12 06:42:58 PM EST 2026) ===
+=== B: mic control: collapse the dense original to 106744 vertices (Thu Nov 12 06:46:51 PM EST 2026) ===
+g0-refresh-blender mic exit 0 (0 stage failures)  Thu Nov 12 06:50:06 PM EST 2026
+=== A: mic budget 247000: train.py --max_points 247000 --indoor, checkpoints every 1k from 12k (Thu Nov 12 06:53:49 PM EST 2026) ===
+=== A: mic budget 247000: val_select_v3 (Thu Nov 12 07:04:18 PM EST 2026) ===
+=== A: mic budget 247000: level-1.0 protocol on /scratch/zr2245/mic-budgetb-247000-best (Thu Nov 12 07:07:20 PM EST 2026) ===
+=== B: mic control: collapse the dense original to 107011 vertices (Thu Nov 12 07:11:05 PM EST 2026) ===
+g0-refresh-blender mic exit 0 (0 stage failures)  Thu Nov 12 07:14:14 PM EST 2026
+=== A: bonsai budget 1073000: train with --max_points 1073000 (Thu Nov 12 12:58:20 PM EST 2026) ===
+=== A: bonsai budget 1073000: level-1.0 protocol (Thu Nov 12 01:30:06 PM EST 2026) ===
+=== B: bonsai control: collapse the dense original to 754307 vertices (Thu Nov 12 01:37:46 PM EST 2026) ===
+g0-refresh bonsai exit 0  Thu Nov 12 01:48:37 PM EST 2026
+=== A: bonsai budget 1367000: train with --max_points 1367000 (Thu Nov 12 04:11:26 PM EST 2026) ===
+=== A: bonsai budget 1367000: level-1.0 protocol (Thu Nov 12 04:44:44 PM EST 2026) ===
+=== B: bonsai control: collapse the dense original to 934609 vertices (Thu Nov 12 04:52:32 PM EST 2026) ===
+g0-refresh bonsai exit 0  Thu Nov 12 05:03:10 PM EST 2026
+=== A: ship budget 177000: train.py --max_points 177000 --indoor, checkpoints every 1k from 12k (Thu Nov 12 06:29:15 PM EST 2026) ===
+=== A: ship budget 177000: val_select_v3 (Thu Nov 12 06:40:48 PM EST 2026) ===
+=== A: ship budget 177000: level-1.0 protocol on /scratch/zr2245/ship-budgetb-177000-best (Thu Nov 12 06:44:08 PM EST 2026) ===
+=== B: ship control: collapse the dense original to 145351 vertices (Thu Nov 12 06:48:30 PM EST 2026) ===
+g0-refresh-blender ship exit 0 (0 stage failures)  Thu Nov 12 06:53:52 PM EST 2026
+=== A: counter budget 1083000: train with --max_points 1083000 (Thu Nov 12 12:47:10 PM EST 2026) ===
+=== A: counter budget 1083000: level-1.0 protocol (Thu Nov 12 01:21:53 PM EST 2026) ===
+=== B: counter control: collapse the dense original to 817438 vertices (Thu Nov 12 01:29:35 PM EST 2026) ===
+g0-refresh counter exit 0  Thu Nov 12 01:39:32 PM EST 2026
+=== A: drjohnson budget 1081000: train with --max_points 1081000 (Thu Nov 12 06:25:43 PM EST 2026) ===
+=== A: drjohnson budget 1081000: level-1.0 protocol (Thu Nov 12 06:51:15 PM EST 2026) ===
+=== B: drjohnson control: collapse the dense original to 881894 vertices (Thu Nov 12 06:57:46 PM EST 2026) ===
+g0-refresh drjohnson exit 0  Thu Nov 12 07:12:02 PM EST 2026
+=== A: drjohnson budget 902000: train with --max_points 902000 (Thu Nov 12 07:30:25 PM EST 2026) ===
+=== A: drjohnson budget 902000: level-1.0 protocol (Thu Nov 12 07:55:26 PM EST 2026) ===
+=== B: drjohnson control: collapse the dense original to 900413 vertices (Thu Nov 12 08:01:42 PM EST 2026) ===
+=== A: flowers budget 1071000: train with --max_points 1071000 (Thu Nov 12 04:14:35 PM EST 2026) ===
+=== A: flowers budget 1071000: level-1.0 protocol (Thu Nov 12 04:37:39 PM EST 2026) ===
+=== B: flowers control: collapse the dense original to 930919 vertices (Thu Nov 12 04:43:16 PM EST 2026) ===
+g0-refresh flowers exit 0  Thu Nov 12 04:51:09 PM EST 2026
+=== A: kitchen budget 900000: train with --max_points 900000 (Thu Nov 12 06:25:44 PM EST 2026) ===
+=== A: kitchen budget 900000: level-1.0 protocol (Thu Nov 12 07:00:18 PM EST 2026) ===
+=== B: kitchen control: collapse the dense original to 716750 vertices (Thu Nov 12 07:08:28 PM EST 2026) ===
+g0-refresh kitchen exit 0  Thu Nov 12 07:19:15 PM EST 2026
+=== A: room budget 1078000: train with --max_points 1078000 (Thu Nov 12 12:47:09 PM EST 2026) ===
+=== A: room budget 1078000: level-1.0 protocol (Thu Nov 12 01:20:15 PM EST 2026) ===
+=== B: room control: collapse the dense original to 997819 vertices (Thu Nov 12 01:28:23 PM EST 2026) ===
+g0-refresh room exit 0  Thu Nov 12 01:39:14 PM EST 2026
+=== A: stump budget 1069000: train with --max_points 1069000 (Thu Nov 12 01:01:06 PM EST 2026) ===
+=== A: stump budget 1069000: level-1.0 protocol (Thu Nov 12 01:22:53 PM EST 2026) ===
+=== B: stump control: collapse the dense original to 975273 vertices (Thu Nov 12 01:28:17 PM EST 2026) ===
+g0-refresh stump exit 0  Thu Nov 12 01:36:54 PM EST 2026
+=== A: train budget 1085000: train with --max_points 1085000 (Thu Nov 12 05:04:55 PM EST 2026) ===
+=== A: train budget 1085000: level-1.0 protocol (Thu Nov 12 05:24:11 PM EST 2026) ===
+=== B: train control: collapse the dense original to 917466 vertices (Thu Nov 12 05:29:42 PM EST 2026) ===
+g0-refresh train exit 0  Thu Nov 12 05:37:19 PM EST 2026
+=== A: treehill budget 1079000: train with --max_points 1079000 (Thu Nov 12 04:30:04 PM EST 2026) ===
+=== A: treehill budget 1079000: level-1.0 protocol (Thu Nov 12 04:53:27 PM EST 2026) ===
+=== B: treehill control: collapse the dense original to 1023422 vertices (Thu Nov 12 04:59:11 PM EST 2026) ===
+g0-refresh treehill exit 0  Thu Nov 12 05:07:21 PM EST 2026
+
+===== failures
+
+===== sacct
+22849893                  kitchen-exact-b29  COMPLETED   00:56:55      0:0 
+22849895                kitchen-exact35-b29  COMPLETED   00:58:01      0:0 
+22849896                kitchen-exactfl-b29  COMPLETED   00:56:37      0:0 
+22849897                 garden-exact35-b29 CANCELLED+   00:37:32      0:0 
+22849898               treehill-exact35-b29 CANCELLED+   00:37:32      0:0 
+22849900                   room-exact35-b29 CANCELLED+   00:19:41      0:0 
+22849902                 playroom-exact-b29 CANCELLED+   00:17:40      0:0 
+22849906                drjohnson-exact-b29 CANCELLED+   00:17:40      0:0 
+22849909                   lego-exact25-b29 CANCELLED+   00:16:41      0:0 
+22849914                 hotdog-exact25-b29 CANCELLED+   00:00:00      0:0 
+22849923                    mic-exact25-b29 CANCELLED+   00:00:00      0:0 
+22849930                   hotdog-exact-b29 CANCELLED+   00:00:00      0:0 
+22855343                  kitchen-feasq-b29  COMPLETED   00:57:26      0:0 
+22855344                   kitchen-feas-b29  COMPLETED   00:56:59      0:0 
+22855345                kitchen-feasq35-b29  COMPLETED   00:55:58      0:0 
+22855346                 hotdog-feasq25-b29  COMPLETED   00:26:14      0:0 
+22855347                  hotdog-feas25-b29  COMPLETED   00:27:25      0:0 
+22855349                drjohnson-feasq-b29  COMPLETED   00:40:45      0:0 
+22855350                   lego-feasq25-b29  COMPLETED   00:25:56      0:0 
+22855351               treehill-feasq35-b29  COMPLETED   00:51:29      0:0 
+22855352                     room-feasq-b29  COMPLETED   00:47:42      0:0 
+22855353                   garden-feasq-b29  COMPLETED   00:40:43      0:0 
+22863533              drjohnson-ratio35-b29  COMPLETED   00:42:28      0:0 
+22863534               playroom-ratio35-b29  COMPLETED   00:39:50      0:0 
+22863535                 hotdog-ratio35-b29  COMPLETED   00:27:15      0:0 
+22863536                 hotdog-ratio25-b29  COMPLETED   00:28:03      0:0 
+22863537                   lego-ratio35-b29  COMPLETED   00:27:54      0:0 
+22863538                   lego-ratio25-b29  COMPLETED   00:26:30      0:0 
+22863539                kitchen-ratio35-b29  COMPLETED   00:58:04      0:0 
+22863540                  kitchen-ratio-b29  COMPLETED   00:56:51      0:0 
+22863541                    mic-ratio35-b29  COMPLETED   00:24:58      0:0 
+22863542                   room-ratio35-b29  COMPLETED   00:46:07      0:0 
+22863543               treehill-ratio35-b29  COMPLETED   00:51:10      0:0 
+22863544                 garden-ratio35-b29  COMPLETED   00:40:28      0:0 
+22864610                   garden-final-b30  COMPLETED   00:42:39      0:0 
+22864611                     lego-final-b30  COMPLETED   00:26:24      0:0 
+22864612                     room-final-b30  COMPLETED   00:58:57      0:0 
+22864613                  kitchen-final-b30  COMPLETED   01:00:23      0:0 
+22864614                  counter-final-b30  COMPLETED   01:00:47      0:0 
+22864615                   bonsai-final-b30  COMPLETED   00:57:47      0:0 
+22864616                  bicycle-final-b30  COMPLETED   00:40:49      0:0 
+22864617                    stump-final-b30  COMPLETED   00:39:47      0:0 
+22864618                  flowers-final-b30  COMPLETED   00:43:09      0:0 
+22864619                 treehill-final-b30  COMPLETED   00:40:49      0:0 
+22864620                    truck-final-b30  COMPLETED   00:36:00      0:0 
+22864621                    train-final-b30  COMPLETED   00:38:18      0:0 
+22864622                drjohnson-final-b30  COMPLETED   00:44:22      0:0 
+22864623                 playroom-final-b30  COMPLETED   00:41:31      0:0 
+22864624                    chair-final-b30  COMPLETED   00:25:37      0:0 
+22864625                    drums-final-b30  COMPLETED   00:25:55      0:0 
+22864626                    ficus-final-b30  COMPLETED   00:23:23      0:0 
+22864627                   hotdog-final-b30  COMPLETED   00:26:09      0:0 
+22864628                materials-final-b30  COMPLETED   00:25:35      0:0 
+22864629                      mic-final-b30  COMPLETED   00:25:34      0:0 
+22864630                     ship-final-b30  COMPLETED   00:26:41      0:0 
+22864631                      room-cap1-b30  COMPLETED   00:53:16      0:0 
+22864632                       room-pass2v3  COMPLETED   00:00:18      0:0 
+22864633                   counter-cap1-b30  COMPLETED   00:53:37      0:0 
+22864634                    counter-pass2v3  COMPLETED   00:00:17      0:0 
+22864635                    bonsai-cap1-b30  COMPLETED   00:51:15      0:0 
+22864636                     bonsai-pass2v3  COMPLETED   00:00:19      0:0 
+22864637                   bicycle-cap1-b30  COMPLETED   00:38:31      0:0 
+22864638                    bicycle-pass2v3  COMPLETED   00:00:20      0:0 
+22864639                     stump-cap1-b30  COMPLETED   00:36:43      0:0 
+22864645                      stump-pass2v3  COMPLETED   00:00:15      0:0 
+22864657                   flowers-cap1-b30  COMPLETED   00:37:30      0:0 
+22864663                    flowers-pass2v3  COMPLETED   00:00:18      0:0 
+22864665                  treehill-cap1-b30  COMPLETED   00:38:18      0:0 
+22864671                   treehill-pass2v3  COMPLETED   00:00:17      0:0 
+22864673                     train-cap1-b30  COMPLETED   00:33:24      0:0 
+22864681                      train-pass2v3  COMPLETED   00:00:18      0:0 
+22864682                 drjohnson-cap1-b30  COMPLETED   00:48:07      0:0 
+22864685                  drjohnson-pass2v3  COMPLETED   00:00:17      0:0 
+22864687                     drums-cap1-b30  COMPLETED   00:23:06      0:0 
+22864688                      drums-pass2v3  COMPLETED   00:00:19      0:0 
+22864689                     ficus-cap1-b30  COMPLETED   00:20:11      0:0 
+22864766                      ficus-pass2v3  COMPLETED   00:00:19      0:0 
+22864768                    hotdog-cap1-b30  COMPLETED   00:26:13      0:0 
+22864774                     hotdog-pass2v3  COMPLETED   00:00:20      0:0 
+22864775                 materials-cap1-b30  COMPLETED   00:22:58      0:0 
+22864777                  materials-pass2v3  COMPLETED   00:00:20      0:0 
+22864778                       mic-cap1-b30  COMPLETED   00:22:22      0:0 
+22864783                        mic-pass2v3  COMPLETED   00:00:23      0:0 
+22864784                      ship-cap1-b30  COMPLETED   00:26:08      0:0 
+22864790                       ship-pass2v3  COMPLETED   00:00:17      0:0 
+22864791                   kitchen-cap2-b30  COMPLETED   00:55:20      0:0 
+22864792                      lego-cap3-b30  COMPLETED   00:25:11      0:0 
+22864818                   room-ratio35-b30  COMPLETED   00:55:06      0:0 
+22864820                counter-ratio35-b30  COMPLETED   00:59:18      0:0 
+22864824                 bonsai-ratio35-b30  COMPLETED   00:54:54      0:0 
+22864826                bicycle-ratio35-b30  COMPLETED   00:39:54      0:0 
+22864829                  stump-ratio35-b30  COMPLETED   00:36:54      0:0 
+22864831                flowers-ratio35-b30  COMPLETED   00:41:21      0:0 
+22864835               treehill-ratio35-b30  COMPLETED   00:38:33      0:0 
+22864837                  truck-ratio35-b30  COMPLETED   00:33:27      0:0 
+22864840                  train-ratio35-b30  COMPLETED   00:34:50      0:0 
+22864846                   lego-ratio35-b30  COMPLETED   00:00:38      0:0 
+22864848                  chair-ratio35-b30  COMPLETED   00:25:53      0:0 
+22864872                  drums-ratio35-b30  COMPLETED   00:25:38      0:0 
+22864875                  ficus-ratio35-b30  COMPLETED   00:26:06      0:0 
+22864877                 hotdog-ratio35-b30  COMPLETED   00:00:38      0:0 
+22864878              materials-ratio35-b30    RUNNING   00:04:02      0:0 
+22864884                    mic-ratio35-b30    PENDING   00:00:00      0:0 
+22864885                   ship-ratio35-b30    PENDING   00:00:00      0:0 
+22864895                     room-ratio-b30    PENDING   00:00:00      0:0 
+22864902                  counter-ratio-b30    PENDING   00:00:00      0:0 
+22864903                   bonsai-ratio-b30    PENDING   00:00:00      0:0 
+22864922                   garden-ratio-b30    PENDING   00:00:00      0:0 
+22864923                  bicycle-ratio-b30    PENDING   00:00:00      0:0 
+22864928                    stump-ratio-b30    PENDING   00:00:00      0:0 
+22864929                  flowers-ratio-b30    PENDING   00:00:00      0:0 
+22864937                 treehill-ratio-b30    PENDING   00:00:00      0:0 
+22864939                    truck-ratio-b30    PENDING   00:00:00      0:0 
+22864942                    train-ratio-b30    PENDING   00:00:00      0:0 
+22864944                drjohnson-ratio-b30    PENDING   00:00:00      0:0 
+22864948                 playroom-ratio-b30    PENDING   00:00:00      0:0 
+22864955                     lego-ratio-b30    PENDING   00:00:00      0:0 
+22864956                    chair-ratio-b30    PENDING   00:00:00      0:0 
+22864961                    drums-ratio-b30    PENDING   00:00:00      0:0 
+22864962                    ficus-ratio-b30    PENDING   00:00:00      0:0 
+22864963                   hotdog-ratio-b30    PENDING   00:00:00      0:0 
+22864964                materials-ratio-b30    PENDING   00:00:00      0:0 
+22864988                      mic-ratio-b30    PENDING   00:00:00      0:0 
+22864989                     ship-ratio-b30    PENDING   00:00:00      0:0 
+22871694                    bonsai-cap2-b30  COMPLETED   00:52:44      0:0 
+22903677                     ficus-cap2-b30  COMPLETED   00:20:57      0:0 
+22904669                       mic-cap2-b30  COMPLETED   00:21:27      0:0 
+22920909                 drjohnson-cap2-b30    RUNNING   00:38:23      0:0 
+
+===== queue
+  22864885             ship-ratio35-b30 PD       0:00 (Priority)
+  22864884              mic-ratio35-b30 PD       0:00 (Priority)
+  22864948           playroom-ratio-b30 PD       0:00 (Priority)
+  22864944          drjohnson-ratio-b30 PD       0:00 (Priority)
+  22864942              train-ratio-b30 PD       0:00 (Priority)
+  22864939              truck-ratio-b30 PD       0:00 (Priority)
+  22864937           treehill-ratio-b30 PD       0:00 (Priority)
+  22864929            flowers-ratio-b30 PD       0:00 (Priority)
+  22864928              stump-ratio-b30 PD       0:00 (Priority)
+  22864923            bicycle-ratio-b30 PD       0:00 (Priority)
+  22864922             garden-ratio-b30 PD       0:00 (Priority)
+  22864903             bonsai-ratio-b30 PD       0:00 (Priority)
+  22864902            counter-ratio-b30 PD       0:00 (Priority)
+  22864895               room-ratio-b30 PD       0:00 (Priority)
+  22864989               ship-ratio-b30 PD       0:00 (Priority)
+  22864988                mic-ratio-b30 PD       0:00 (Priority)
+  22864964          materials-ratio-b30 PD       0:00 (Priority)
+  22864963             hotdog-ratio-b30 PD       0:00 (Priority)
+  22864962              ficus-ratio-b30 PD       0:00 (Priority)
+  22864961              drums-ratio-b30 PD       0:00 (Priority)
+  22864956              chair-ratio-b30 PD       0:00 (Priority)
+  22864955               lego-ratio-b30 PD       0:00 (Priority)
+  22920909           drjohnson-cap2-b30  R      38:23 gl028
+  22864878        materials-ratio35-b30  R       4:02 gl042
