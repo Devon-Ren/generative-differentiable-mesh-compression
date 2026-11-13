@@ -57,12 +57,11 @@
 %%CAPFIG%%
 
 \begin{itemize}
-\item \textbf{The lines start together and spread apart.} With the released default (cap 4 million) the 13 captured scenes give files from 20.0 to 39.8\,MB, while the objects flatten between 1.5 and 5.9\,MB.
-\item \textbf{No single rule turns a cap into a size.} Even the best single curve drawn through all 178 runs misses by more than 10\% in 64 of them. With one curve per dataset it is still 27 of 109 runs on captured scenes and 29 of 69 on objects.
-\item \textbf{Same cap, different scenes, different sizes.} With a cap of exactly 600,000 the 13 captured scenes give files from 5.8 to 7.5\,MB. With a cap of about 1.08 million they give 8.3 to 11.6\,MB. With a cap of about 176 thousand the 8 objects give files from 1.5 to 2.8\,MB.
+\item \textbf{The lines start together and spread apart.} At the same cap, the largest file is 1.3 times the smallest at 0.6 million (5.8 to 7.5\,MB), 1.4 times at 1.08 million (8.3 to 11.6\,MB), 1.6 times at 3 million (19.9 to 31.6\,MB) and 2.0 times at the released default of 4 million (20.0 to 39.8\,MB). The 8 objects flatten between 1.5 and 5.9\,MB.
+\item \textbf{No single rule turns a cap into a size.} Even the best single curve drawn through all 191 runs misses by more than 10\% in 68 of them. With one curve per dataset it is still 31 of 122 runs on captured scenes and 29 of 69 on objects.
 \item \textbf{Same scene, almost the same cap, different sizes.} Garden: a cap of 1,104,000 gives 13.3\,MB, a cap of 1,105,000 gives 10.3\,MB. A larger cap can even give a smaller file. Bonsai: 1,005,000 gives 9.6\,MB, 1,073,000 gives 8.3\,MB.
-\item \textbf{Raising the cap can do nothing.} Mic stays at about 2.05\,MB from a cap of 134 thousand up to 247 thousand. Ficus stays at 1.5\,MB from 97 thousand up to 515 thousand.
-\item \textbf{Over all cap runs.} Of the 29 pairs of runs on the same scene whose caps are less than 5\% apart, 12 have the larger cap giving the smaller file and 8 have the file changing by more than 10\%.
+\item \textbf{Raising the cap can do nothing.} Truck, train and counter give the same file at 3 million and at 4 million. Mic stays at about 2.05\,MB from a cap of 134 thousand up to 247 thousand. Ficus stays at 1.5\,MB from 97 thousand up to 515 thousand.
+\item \textbf{Over all cap runs.} Of the 32 pairs of runs on the same scene whose caps are less than 5\% apart, 12 have the larger cap giving the smaller file and 8 have the file changing by more than 10\%.
 \end{itemize}
 
 \section{The ablation: controller against tuning the cap by hand}

@@ -1,0 +1,14 @@
+===== cap rows (cap 3,000,000; all 13 jobs complete)
+room budget 3000000 TRAIN-AT-BUDGET | vertices 2195302 faces 4747295 | val0 30.868 val 30.868 worst 27.17 | test 28.352 | delivered 22.376 MB test 27.993 0.8507 0.3982 | K4096 R256 q14/q7 | images_2 | --indoor
+kitchen budget 3000000 TRAIN-AT-BUDGET | vertices 2103785 faces 5156793 | val0 28.445 val 28.445 worst 24.45 | test 27.283 | delivered 23.821 MB test 26.657 0.8272 0.3249 | K4096 R256 q16/q7 | images_2 | --indoor
+counter budget 3000000 TRAIN-AT-BUDGET | vertices 2212258 faces 4765326 | val0 27.362 val 27.362 worst 24.24 | test 26.321 | delivered 23.599 MB test 25.71 0.812 0.4042 | K4096 R256 q15/q7 | images_2 | --indoor
+bonsai budget 3000000 TRAIN-AT-BUDGET | vertices 2349191 faces 4455967 | val0 28.876 val 28.876 worst 22.67 | test 28.054 | delivered 22.655 MB test 27.506 0.8527 0.4082 | K4096 R256 q15/q7 | images_2 | --indoor
+garden budget 3000000 TRAIN-AT-BUDGET | vertices 2436089 faces 5089735 | val0 25.415 val 25.415 worst 21.84 | test 24.531 | delivered 26.032 MB test 24.43 0.738 0.2899 | K4096 R256 q15/q7 | images_4
+bicycle budget 3000000 TRAIN-AT-BUDGET | vertices 2514982 faces 4424266 | val0 21.479 val 21.479 worst 15.85 | test 22.951 | delivered 24.259 MB test 22.772 0.6193 0.4242 | K4096 R256 q16/q7 | images_4
+stump budget 3000000 TRAIN-AT-BUDGET | vertices 2325965 faces 3932274 | val0 23.531 val 23.531 worst 14.47 | test 24.661 | delivered 22.429 MB test 24.409 0.6509 0.4095 | K4096 R256 q16/q7 | images_4
+flowers budget 3000000 TRAIN-AT-BUDGET | vertices 2299489 faces 3629781 | val0 20.061 val 20.061 worst 17.26 | test 19.159 | delivered 21.106 MB test 19.024 0.4668 0.4835 | K4096 R256 q15/q7 | images_4
+treehill budget 3000000 TRAIN-AT-BUDGET | vertices 2372955 faces 3964113 | val0 19.782 val 19.782 worst 14.15 | test 20.531 | delivered 22.453 MB test 20.477 0.5189 0.5274 | K4096 R256 q16/q7 | images_4
+truck budget 3000000 TRAIN-AT-BUDGET | vertices 1852275 faces 3443821 | val0 23.239 val 23.239 worst 20.41 | test 22.397 | delivered 19.919 MB test 22.354 0.7967 0.2821 | K4096 R256 q18/q7 | images
+train budget 3000000 TRAIN-AT-BUDGET | vertices 2054140 faces 4109977 | val0 19.825 val 19.825 worst 15.13 | test 18.842 | delivered 22.27 MB test 18.763 0.6963 0.3912 | K4096 R256 q18/q7 | images
+drjohnson budget 3000000 TRAIN-AT-BUDGET | vertices 2543736 faces 6716703 | val0 31.479 val 31.479 worst 26.25 | test 26.501 | delivered 31.643 MB test 26.298 0.8184 0.4809 | K4096 R256 q15/q7 | images | --indoor
+playroom budget 3000000 TRAIN-AT-BUDGET | vertices 2391238 faces 6098028 | val0 34.182 val 34.182 worst 27.32 | test 27.667 | delivered 28.414 MB test 27.583 0.8478 0.4103 | K4096 R256 q15/q7 | images | --indoor
