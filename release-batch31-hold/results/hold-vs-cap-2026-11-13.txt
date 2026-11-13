@@ -1,0 +1,76 @@
+room       T   10    9.992 MB  PSNR +0.33 dB  (cap pts n 7)
+room       T    5    4.912 MB  PSNR +0.61 dB  (cap pts n 7)
+kitchen    T   10   10.014 MB  PSNR +0.67 dB  (cap pts n 8)
+kitchen    T    5    5.004 MB  PSNR +0.72 dB  (cap pts n 8)
+counter    T   10   10.064 MB  PSNR +0.37 dB  (cap pts n 7)
+counter    T    5    4.975 MB  PSNR +0.45 dB  (cap pts n 7)
+bonsai     T   10    9.787 MB  PSNR +0.01 dB  (cap pts n 8)
+bonsai     T    5    4.871 MB  PSNR +0.81 dB  (cap pts n 8)
+garden     T   20   19.994 MB  PSNR +0.14 dB  (cap pts n 11)
+garden     T   10    9.997 MB  PSNR +0.21 dB  (cap pts n 11)
+bicycle    T   20   19.856 MB  PSNR +0.30 dB  (cap pts n 7)
+bicycle    T   10    9.784 MB  PSNR +0.38 dB  (cap pts n 7)
+bicycle    T    5    4.740 MB  PSNR +0.45 dB  (cap pts n 7)
+stump      T   10    9.645 MB  PSNR +0.41 dB  (cap pts n 7)
+stump      T    5    4.698 MB  PSNR +0.51 dB  (cap pts n 7)
+flowers    T   10    9.832 MB  PSNR +0.43 dB  (cap pts n 7)
+treehill   T   20   19.812 MB  PSNR -0.09 dB  (cap pts n 7)
+treehill   T   10    9.726 MB  PSNR -0.11 dB  (cap pts n 7)
+truck      T   10    9.904 MB  PSNR +0.08 dB  (cap pts n 8)
+truck      T    5    4.942 MB  PSNR +0.27 dB  (cap pts n 8)
+train      T   20   20.058 MB  PSNR +0.09 dB  (cap pts n 7)
+train      T   10    9.979 MB  PSNR +0.24 dB  (cap pts n 7)
+drjohnson  T   10    9.923 MB  PSNR +0.11 dB  (cap pts n 5)
+drjohnson  T    5    4.979 MB  PSNR +0.44 dB  (cap pts n 5)
+playroom   T   10    9.941 MB  PSNR +0.32 dB  (cap pts n 7)
+playroom   T    5    4.992 MB  PSNR +0.64 dB  (cap pts n 7)
+lego       T    4    4.005 MB  PSNR +0.29 dB  (cap pts n 11)
+lego       T  2.5    2.508 MB  PSNR +0.68 dB  (cap pts n 11)
+chair      T  2.5    2.514 MB  PSNR +0.32 dB  (cap pts n 8)
+drums      T  2.5    2.501 MB  PSNR +0.11 dB  (cap pts n 8)
+ficus      T  1.5    1.489 MB  PSNR +0.18 dB  (cap pts n 9)
+hotdog     T  2.5    2.518 MB  PSNR +0.28 dB  (cap pts n 8)
+hotdog     T  1.5    1.507 MB  PSNR +0.36 dB  (cap pts n 8)
+materials  T  2.5    2.513 MB  PSNR +0.09 dB  (cap pts n 8)
+mic        T  1.5    1.512 MB  PSNR +0.29 dB  (cap pts n 9)
+ship       T  2.5    2.503 MB  PSNR +0.49 dB  (cap pts n 8)
+
+('mip', 10.0) n 11 mean +0.28 better on 10 min -0.11 max +0.67
+('mip', 'all') n 22 mean +0.33 better on 20 min -0.11 max +0.81
+('all', 'all') n 36 mean +0.33 better on 34 min -0.11 max +0.81
+('mip', 5.0) n 7 mean +0.55 better on 7 min +0.27 max +0.81
+('mip', 20.0) n 4 mean +0.11 better on 3 min -0.09 max +0.30
+('db', 10.0) n 2 mean +0.21 better on 2 min +0.11 max +0.32
+('db', 'all') n 4 mean +0.38 better on 4 min +0.11 max +0.64
+('db', 5.0) n 2 mean +0.54 better on 2 min +0.44 max +0.64
+('obj', 4.0) n 1 mean +0.29 better on 1 min +0.29 max +0.29
+('obj', 'all') n 10 mean +0.31 better on 10 min +0.09 max +0.68
+('obj', 2.5) n 6 mean +0.33 better on 6 min +0.09 max +0.68
+('obj', 1.5) n 3 mean +0.28 better on 3 min +0.18 max +0.36
+
+not comparable:
+   ('room', 20.0, 19.557, 'cap runs span 2.99..17.68 MB (n 7)')
+   ('kitchen', 20.0, 20.046, 'cap runs span 3.87..16.41 MB (n 8)')
+   ('counter', 20.0, 20.025, 'cap runs span 3.44..17.25 MB (n 7)')
+   ('bonsai', 20.0, 20.273, 'cap runs span 3.65..17.16 MB (n 8)')
+   ('garden', 5.0, 4.905, 'cap runs span 5.35..21.51 MB (n 11)')
+   ('stump', 20.0, 19.709, 'cap runs span 3.95..16.73 MB (n 7)')
+   ('flowers', 20.0, 19.946, 'cap runs span 4.97..18.09 MB (n 7)')
+   ('flowers', 5.0, 4.859, 'cap runs span 4.97..18.09 MB (n 7)')
+   ('treehill', 5.0, 4.728, 'cap runs span 5.05..22.71 MB (n 7)')
+   ('truck', 20.0, 19.963, 'cap runs span 4.41..15.59 MB (n 8)')
+   ('train', 5.0, 4.98, 'cap runs span 5.31..21.45 MB (n 7)')
+   ('drjohnson', 20.0, 19.758, 'cap runs span 3.21..14.53 MB (n 5)')
+   ('playroom', 20.0, 20.106, 'cap runs span 2.92..14.60 MB (n 7)')
+   ('lego', 1.5, 1.503, 'cap runs span 1.61..5.91 MB (n 11)')
+   ('chair', 4.0, 4.019, 'cap runs span 1.65..3.39 MB (n 8)')
+   ('chair', 1.5, 1.505, 'cap runs span 1.65..3.39 MB (n 8)')
+   ('drums', 4.0, 4.017, 'cap runs span 1.62..3.22 MB (n 8)')
+   ('drums', 1.5, 1.502, 'cap runs span 1.62..3.22 MB (n 8)')
+   ('ficus', 4.0, 1.954, 'cap runs span 1.02..1.51 MB (n 9)')
+   ('ficus', 2.5, 1.963, 'cap runs span 1.02..1.51 MB (n 9)')
+   ('hotdog', 4.0, 4.011, 'cap runs span 1.39..2.84 MB (n 8)')
+   ('materials', 4.0, 3.867, 'cap runs span 1.52..3.24 MB (n 8)')
+   ('materials', 1.5, 1.5, 'cap runs span 1.52..3.24 MB (n 8)')
+   ('mic', 4.0, 2.62, 'cap runs span 1.26..2.07 MB (n 9)')
+   ('mic', 2.5, 2.453, 'cap runs span 1.26..2.07 MB (n 9)')
