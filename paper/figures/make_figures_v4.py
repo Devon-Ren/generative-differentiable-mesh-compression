@@ -42,24 +42,25 @@ ax.plot(xs, ys, '-', color=BLUE, lw=2, zorder=5); ax.plot(xs, ys, 'o', color=BLU
 ax.annotate('BudgetMesh', (xs[1], ys[1]), textcoords='offset points', xytext=(0, 9), ha='center', fontsize=8, color=INK, fontweight='bold')
 K = min(len(v) for v in simp.values()); gx, gy = [], []
 for k in range(K): pts = [sorted(simp[s], reverse=True)[k] for s in MIP]; gx.append(st.mean(p[0] for p in pts)); gy.append(st.mean(p[1] for p in pts))
-ax.plot(gx, gy, '-', color=AQUA, lw=2, zorder=4); ax.plot(gx, gy, 's', color=AQUA, ms=5.5, mec=SURF, mew=1.2, zorder=4, label='FP32 model simplified after training + our codec')
-ax.annotate('simplified after training', (gx[-1], gy[-1]), textcoords='offset points', xytext=(8, -3), ha='left', fontsize=8, color=INK)
+x0, y0, _ = mean(gen['our codec, all vertices'])  # the same FP32 model with no vertex removed: the end point of this family
+ax.plot([x0] + gx, [y0] + gy, '-', color=AQUA, lw=2, zorder=4); ax.plot(gx, gy, 's', color=AQUA, ms=5.5, mec=SURF, mew=1.2, zorder=4, label='FP32 model + our codec: no vertices removed (ring), simplified after training (squares)')
+ax.annotate('simplified after training', (gx[3], gy[3]), textcoords='offset points', xytext=(9, -4), ha='left', fontsize=8, color=INK)
 fx, fy = st.mean(FP[s][0] for s in MIP), st.mean(FP[s][1] for s in MIP)
 ax.plot([fx], [fy], '*', color=INK, ms=11, zorder=6); ax.annotate('FP32 model\n%.0f MB' % fx, (fx, fy), textcoords='offset points', xytext=(0, -9), ha='center', va='top', fontsize=7.5, color=INK)
-off = {'our codec, all vertices': (0, 9, 'center'), 'quantized PLY + zstd': (0, 9, 'center'), 'Draco, 8-bit SH': (0, 9, 'center'), 'MPEG TFAN, 8-bit SH': (0, -9, 'center'), 'Draco, RGB only': (-9, 0, 'right'), 'baked texture + Draco': (9, 0, 'left')}
+off = {'our codec, all vertices': (2, 9, 'center'), 'quantized PLY + zstd': (0, 9, 'center'), 'Draco, 8-bit SH': (0, 9, 'center'), 'MPEG TFAN, 8-bit SH': (0, -9, 'center'), 'Draco, RGB only': (-9, 0, 'right'), 'baked texture + Draco': (9, 0, 'left')}
 first = True
 for name, d in gen.items():
     x, y, n = mean(d)
-    if name == 'our codec, all vertices': ax.plot([x], [y], 'o', color=SURF, ms=6.5, mec=BLUE, mew=1.8, zorder=6)
+    if name == 'our codec, all vertices': ax.plot([x], [y], 'o', color=SURF, ms=6.5, mec=AQUA, mew=1.8, zorder=6)
     else: ax.plot([x], [y], 'D', color=ORANGE, ms=5.5, mec=SURF, mew=1.0, zorder=5, label='generic codecs on the full FP32 mesh' if first else None); first = False
-    dx, dy, ha = off[name]; ax.annotate(name + (' (10 scenes)' if n == 10 else '') + '\n%.0f MB' % x, (x, y), textcoords='offset points', xytext=(dx, dy), ha=ha, va='bottom' if dy > 0 else ('top' if dy < 0 else 'center'), fontsize=7, color=INK)
+    dx, dy, ha = off[name]; ax.annotate({'our codec, all vertices': 'FP32 model + our codec,\nno vertices removed'}.get(name, name) + (' (10 scenes)' if n == 10 else '') + ('\n%.0f MB' % x if name != 'our codec, all vertices' else ', %.0f MB' % x), (x, y), textcoords='offset points', xytext=(dx, dy), ha=ha, va='bottom' if dy > 0 else ('top' if dy < 0 else 'center'), fontsize=7, color=INK)
 ax.set_xscale('log'); ax.set_xlim(3.2, 900); ax.set_ylim(18.2, 25.9)
 import matplotlib.ticker as mt
 ax.xaxis.set_major_locator(mt.FixedLocator([5, 10, 20, 50, 100, 200, 500])); ax.xaxis.set_major_formatter(mt.FuncFormatter(lambda v, _: '%g' % v)); ax.xaxis.set_minor_formatter(mt.NullFormatter())
 ax.set_xlabel('file size (MB, log scale)'); ax.set_ylabel('PSNR (dB)'); ax.grid(axis='y', color=GRID, lw=0.6); ax.set_axisbelow(True)
 for s_ in ('top', 'right'): ax.spines[s_].set_visible(False)
 ax.tick_params(length=2); ax.set_title('Mip-NeRF 360 + Tanks and Temples, mean over 11 scenes', loc='left', fontsize=9, color=INK, pad=6)
-ax.legend(loc='lower right', frameon=False, fontsize=7.2, handlelength=1.6)
+ax.legend(loc='lower right', frameon=False, fontsize=7.0, handlelength=1.6)
 fig.tight_layout(); fig.savefig('paper/figures/fig_rd_system_v1.pdf'); fig.savefig('paper/figures/fig_rd_system_v1.png', dpi=170); plt.close(fig)
 # ---------------------------------------------------------------- figure 2
 txt = open('release-batch30-overnight/results/batch30-collect-2026-11-12-2007.txt').read(); sec = {m.group(1): m.group(2) for m in re.finditer(r'===== ([^\n]+)\n(.*?)(?=\n===== |\Z)', txt, re.S)}
