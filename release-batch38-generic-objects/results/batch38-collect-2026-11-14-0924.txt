@@ -1,0 +1,148 @@
+===== generic-rd rows (objects)
+chair GENERIC-RD | mesh full | V 219507 F 820226 | sh8 | zstd 13.007 MB | draco 69.3 MB | tfan 10.544 MB | test 31.867 0.9689 0.0434 | unquantised 31.874
+chair GENERIC-RD | mesh full | V 219507 F 820226 | sh6 | zstd 10.102 MB | draco 49.307 MB | tfan 7.94 MB | test 31.793 0.9672 0.0463 | unquantised 31.874
+chair GENERIC-RD | mesh full | V 219507 F 820226 | sh4 | zstd 7.26 MB | draco 29.539 MB | tfan 5.412 MB | test 30.488 0.9492 0.0662 | unquantised 31.874
+lego GENERIC-RD | mesh full | V 497529 F 1857294 | sh8 | zstd 25.894 MB | draco 142.608 MB | tfan 21.638 MB | test 33.401 0.9724 0.0389 | unquantised 33.413
+lego GENERIC-RD | mesh full | V 497529 F 1857294 | sh6 | zstd 20.673 MB | draco 100.253 MB | tfan 16.288 MB | test 33.297 0.9705 0.0411 | unquantised 33.413
+lego GENERIC-RD | mesh full | V 497529 F 1857294 | sh4 | zstd 15.558 MB | draco 58.707 MB | tfan 11.167 MB | test 31.393 0.9414 0.0713 | unquantised 33.413
+chair GENERIC-RD | mesh cap66755 | V 69976 F 215952 | sh8 | zstd 4.144 MB | draco 19.463 MB | tfan 3.396 MB | test 31.321 0.9611 0.0523 | unquantised 31.327
+chair GENERIC-RD | mesh cap66755 | V 69976 F 215952 | sh6 | zstd 3.228 MB | draco 14.028 MB | tfan 2.556 MB | test 31.248 0.9595 0.0553 | unquantised 31.327
+chair GENERIC-RD | mesh cap66755 | V 69976 F 215952 | sh4 | zstd 2.237 MB | draco 8.604 MB | tfan 1.729 MB | test 29.896 0.9412 0.0728 | unquantised 31.327
+lego GENERIC-RD | mesh cap78124 | V 76711 F 243193 | sh8 | zstd 4.493 MB | draco 21.303 MB | tfan 3.69 MB | test 30.748 0.9485 0.0735 | unquantised 30.754
+lego GENERIC-RD | mesh cap78124 | V 76711 F 243193 | sh6 | zstd 3.495 MB | draco 15.249 MB | tfan 2.768 MB | test 30.671 0.9466 0.0758 | unquantised 30.754
+lego GENERIC-RD | mesh cap78124 | V 76711 F 243193 | sh4 | zstd 2.44 MB | draco 9.239 MB | tfan 1.866 MB | test 29.457 0.9246 0.1002 | unquantised 30.754
+ficus GENERIC-RD | mesh full | V 74947 F 245535 | sh8 | zstd 4.446 MB | draco 21.377 MB | tfan 3.625 MB | test 32.128 0.9719 0.0410 | unquantised 32.131
+ficus GENERIC-RD | mesh full | V 74947 F 245535 | sh6 | zstd 3.51 MB | draco 15.452 MB | tfan 2.724 MB | test 32.098 0.9716 0.0413 | unquantised 32.131
+ficus GENERIC-RD | mesh full | V 74947 F 245535 | sh4 | zstd 2.452 MB | draco 9.498 MB | tfan 1.832 MB | test 31.624 0.9664 0.0456 | unquantised 32.131
+drums GENERIC-RD | mesh full | V 240891 F 1094114 | sh8 | zstd 13.502 MB | draco 84.401 MB | tfan 11.178 MB | test 25.469 0.9429 0.0669 | unquantised 25.472
+drums GENERIC-RD | mesh full | V 240891 F 1094114 | sh6 | zstd 10.666 MB | draco 59.366 MB | tfan 8.448 MB | test 25.432 0.9387 0.0719 | unquantised 25.472
+drums GENERIC-RD | mesh full | V 240891 F 1094114 | sh4 | zstd 8.032 MB | draco 35.207 MB | tfan 5.877 MB | test 24.651 0.9122 0.0990 | unquantised 25.472
+chair GENERIC-RD | mesh cap178000 | V 146157 F 400498 | sh8 | zstd 8.403 MB | draco 36.539 MB | tfan 6.896 MB | test 32.305 0.9694 0.0418 | unquantised 32.312
+chair GENERIC-RD | mesh cap178000 | V 146157 F 400498 | sh6 | zstd 6.559 MB | draco 26.204 MB | tfan 5.14 MB | test 32.238 0.9680 0.0447 | unquantised 32.312
+chair GENERIC-RD | mesh cap178000 | V 146157 F 400498 | sh4 | zstd 4.53 MB | draco 15.932 MB | tfan 3.422 MB | test 30.981 0.9517 0.0613 | unquantised 32.312
+lego GENERIC-RD | mesh cap183000 | V 156040 F 452009 | sh8 | zstd 9.169 MB | draco 39.855 MB | tfan 7.372 MB | test 32.538 0.9650 0.0492 | unquantised 32.544
+lego GENERIC-RD | mesh cap183000 | V 156040 F 452009 | sh6 | zstd 7.156 MB | draco 28.419 MB | tfan 5.497 MB | test 32.457 0.9635 0.0509 | unquantised 32.544
+lego GENERIC-RD | mesh cap183000 | V 156040 F 452009 | sh4 | zstd 4.911 MB | draco 17.093 MB | tfan 3.666 MB | test 31.094 0.9433 0.0754 | unquantised 32.544
+hotdog GENERIC-RD | mesh full | V 287754 F 1205503 | sh8 | zstd 12.435 MB | draco 80.091 MB | tfan 11.367 MB | test 35.668 0.9786 0.0492 | unquantised 35.682
+hotdog GENERIC-RD | mesh full | V 287754 F 1205503 | sh6 | zstd 10.383 MB | draco 54.564 MB | tfan 8.508 MB | test 35.499 0.9760 0.0601 | unquantised 35.682
+hotdog GENERIC-RD | mesh full | V 287754 F 1205503 | sh4 | zstd 8.339 MB | draco 31.374 MB | tfan 5.997 MB | test 32.929 0.9479 0.1089 | unquantised 35.682
+ficus GENERIC-RD | mesh cap35557 | V 30386 F 64482 | sh8 | zstd 1.691 MB | draco 6.121 MB | tfan 1.442 MB | test 30.562 0.9626 0.0527 | unquantised 30.564
+ficus GENERIC-RD | mesh cap35557 | V 30386 F 64482 | sh6 | zstd 1.345 MB | draco 4.481 MB | tfan 1.077 MB | test 30.545 0.9624 0.0529 | unquantised 30.564
+ficus GENERIC-RD | mesh cap35557 | V 30386 F 64482 | sh4 | zstd 0.912 MB | draco 2.821 MB | tfan 0.712 MB | test 30.272 0.9590 0.0560 | unquantised 30.564
+materials GENERIC-RD | mesh full | V 224941 F 775298 | sh8 | zstd 13.008 MB | draco 64.11 MB | tfan 10.343 MB | test 28.226 0.9393 0.0856 | unquantised 28.231
+materials GENERIC-RD | mesh full | V 224941 F 775298 | sh6 | zstd 9.778 MB | draco 44.897 MB | tfan 7.652 MB | test 28.158 0.9353 0.0945 | unquantised 28.231
+materials GENERIC-RD | mesh full | V 224941 F 775298 | sh4 | zstd 6.955 MB | draco 26.392 MB | tfan 5.123 MB | test 26.883 0.8983 0.1395 | unquantised 28.231
+drums GENERIC-RD | mesh cap68000 | V 69594 F 229662 | sh8 | zstd 4.081 MB | draco 19.789 MB | tfan 3.307 MB | test 25.267 0.9395 0.0713 | unquantised 25.269
+drums GENERIC-RD | mesh cap68000 | V 69594 F 229662 | sh6 | zstd 3.146 MB | draco 14.137 MB | tfan 2.473 MB | test 25.240 0.9368 0.0754 | unquantised 25.269
+drums GENERIC-RD | mesh cap68000 | V 69594 F 229662 | sh4 | zstd 2.2 MB | draco 8.581 MB | tfan 1.664 MB | test 24.666 0.9131 0.0982 | unquantised 25.269
+hotdog GENERIC-RD | mesh cap47578 | V 47459 F 170236 | sh8 | zstd 2.818 MB | draco 14.508 MB | tfan 2.317 MB | test 34.823 0.9729 0.0583 | unquantised 34.835
+hotdog GENERIC-RD | mesh cap47578 | V 47459 F 170236 | sh6 | zstd 2.319 MB | draco 10.359 MB | tfan 1.748 MB | test 34.676 0.9706 0.0694 | unquantised 34.835
+hotdog GENERIC-RD | mesh cap47578 | V 47459 F 170236 | sh4 | zstd 1.599 MB | draco 6.272 MB | tfan 1.193 MB | test 32.411 0.9462 0.1154 | unquantised 34.835
+ficus GENERIC-RD | mesh cap67614 | V 55235 F 133289 | sh8 | zstd 3.127 MB | draco 12.29 MB | tfan 2.602 MB | test 31.959 0.9704 0.0431 | unquantised 31.962
+ficus GENERIC-RD | mesh cap67614 | V 55235 F 133289 | sh6 | zstd 2.454 MB | draco 8.924 MB | tfan 1.938 MB | test 31.930 0.9701 0.0433 | unquantised 31.962
+ficus GENERIC-RD | mesh cap67614 | V 55235 F 133289 | sh4 | zstd 1.676 MB | draco 5.533 MB | tfan 1.279 MB | test 31.447 0.9650 0.0477 | unquantised 31.962
+chair GENERIC-RD | mesh cap238956 | V 193002 F 589369 | sh8 | zstd 11.264 MB | draco 53.002 MB | tfan 9.212 MB | test 32.398 0.9694 0.0437 | unquantised 32.406
+chair GENERIC-RD | mesh cap238956 | V 193002 F 589369 | sh6 | zstd 8.861 MB | draco 37.958 MB | tfan 6.893 MB | test 32.309 0.9675 0.0468 | unquantised 32.406
+chair GENERIC-RD | mesh cap238956 | V 193002 F 589369 | sh4 | zstd 6.141 MB | draco 23.001 MB | tfan 4.626 MB | test 30.905 0.9499 0.0636 | unquantised 32.406
+lego GENERIC-RD | mesh cap372025 | V 310876 F 850227 | sh8 | zstd 17.951 MB | draco 75.036 MB | tfan 14.367 MB | test 33.630 0.9727 0.0363 | unquantised 33.640
+lego GENERIC-RD | mesh cap372025 | V 310876 F 850227 | sh6 | zstd 13.875 MB | draco 53.159 MB | tfan 10.637 MB | test 33.517 0.9708 0.0385 | unquantised 33.640
+lego GENERIC-RD | mesh cap372025 | V 310876 F 850227 | sh4 | zstd 9.566 MB | draco 31.622 MB | tfan 7.011 MB | test 31.538 0.9471 0.0665 | unquantised 33.640
+materials GENERIC-RD | mesh cap68793 | V 64865 F 188671 | sh8 | zstd 3.615 MB | draco 16.267 MB | tfan 2.967 MB | test 27.702 0.9327 0.1012 | unquantised 27.706
+materials GENERIC-RD | mesh cap68793 | V 64865 F 188671 | sh6 | zstd 2.698 MB | draco 11.524 MB | tfan 2.19 MB | test 27.646 0.9295 0.1087 | unquantised 27.706
+materials GENERIC-RD | mesh cap68793 | V 64865 F 188671 | sh4 | zstd 1.858 MB | draco 6.932 MB | tfan 1.452 MB | test 26.532 0.8956 0.1452 | unquantised 27.706
+mic GENERIC-RD | mesh full | V 133739 F 465114 | sh8 | zstd 7.412 MB | draco 41.01 MB | tfan 6.302 MB | test 33.106 0.9832 0.0258 | unquantised 33.110
+mic GENERIC-RD | mesh full | V 133739 F 465114 | sh6 | zstd 5.672 MB | draco 29.747 MB | tfan 4.778 MB | test 33.065 0.9824 0.0277 | unquantised 33.110
+mic GENERIC-RD | mesh full | V 133739 F 465114 | sh4 | zstd 4.133 MB | draco 18.458 MB | tfan 3.289 MB | test 32.340 0.9731 0.0445 | unquantised 33.110
+drums GENERIC-RD | mesh cap176000 | V 150402 F 481302 | sh8 | zstd 8.904 MB | draco 41.847 MB | tfan 7.061 MB | test 25.531 0.9434 0.0658 | unquantised 25.533
+drums GENERIC-RD | mesh cap176000 | V 150402 F 481302 | sh6 | zstd 6.815 MB | draco 29.768 MB | tfan 5.258 MB | test 25.511 0.9412 0.0693 | unquantised 25.533
+drums GENERIC-RD | mesh cap176000 | V 150402 F 481302 | sh4 | zstd 4.775 MB | draco 17.913 MB | tfan 3.518 MB | test 25.138 0.9211 0.0879 | unquantised 25.533
+ship GENERIC-RD | mesh full | V 387201 F 1550245 | sh8 | zstd 20.513 MB | draco 112.418 MB | tfan 16.971 MB | test 29.454 0.8804 0.1590 | unquantised 29.463
+ship GENERIC-RD | mesh full | V 387201 F 1550245 | sh6 | zstd 16.289 MB | draco 78.18 MB | tfan 12.742 MB | test 29.351 0.8751 0.1669 | unquantised 29.463
+ship GENERIC-RD | mesh full | V 387201 F 1550245 | sh4 | zstd 12.299 MB | draco 45.639 MB | tfan 8.749 MB | test 27.471 0.8218 0.2200 | unquantised 29.463
+hotdog GENERIC-RD | mesh cap177000 | V 146789 F 465444 | sh8 | zstd 8.715 MB | draco 40.224 MB | tfan 6.901 MB | test 35.959 0.9789 0.0444 | unquantised 35.974
+hotdog GENERIC-RD | mesh cap177000 | V 146789 F 465444 | sh6 | zstd 6.9 MB | draco 28.507 MB | tfan 5.14 MB | test 35.750 0.9758 0.0572 | unquantised 35.974
+hotdog GENERIC-RD | mesh cap177000 | V 146789 F 465444 | sh4 | zstd 4.822 MB | draco 16.997 MB | tfan 3.439 MB | test 32.702 0.9450 0.1120 | unquantised 35.974
+ficus GENERIC-RD | mesh cap171000 | V 68358 F 172114 | sh8 | zstd 3.896 MB | draco 15.735 MB | tfan 3.207 MB | test 32.110 0.9714 0.0420 | unquantised 32.113
+ficus GENERIC-RD | mesh cap171000 | V 68358 F 172114 | sh6 | zstd 3.05 MB | draco 11.409 MB | tfan 2.385 MB | test 32.086 0.9711 0.0423 | unquantised 32.113
+ficus GENERIC-RD | mesh cap171000 | V 68358 F 172114 | sh4 | zstd 2.111 MB | draco 7.048 MB | tfan 1.57 MB | test 31.687 0.9667 0.0459 | unquantised 32.113
+materials GENERIC-RD | mesh cap176000 | V 147311 F 390025 | sh8 | zstd 8.193 MB | draco 33.917 MB | tfan 6.554 MB | test 28.187 0.9385 0.0888 | unquantised 28.193
+materials GENERIC-RD | mesh cap176000 | V 147311 F 390025 | sh6 | zstd 6.078 MB | draco 23.884 MB | tfan 4.791 MB | test 28.117 0.9345 0.0979 | unquantised 28.193
+materials GENERIC-RD | mesh cap176000 | V 147311 F 390025 | sh4 | zstd 4.208 MB | draco 14.2 MB | tfan 3.127 MB | test 26.814 0.8982 0.1431 | unquantised 28.193
+mic GENERIC-RD | mesh cap46659 | V 44011 F 130769 | sh8 | zstd 2.594 MB | draco 12.247 MB | tfan 2.163 MB | test 32.103 0.9794 0.0306 | unquantised 32.107
+mic GENERIC-RD | mesh cap46659 | V 44011 F 130769 | sh6 | zstd 1.965 MB | draco 8.946 MB | tfan 1.633 MB | test 32.065 0.9786 0.0327 | unquantised 32.107
+mic GENERIC-RD | mesh cap46659 | V 44011 F 130769 | sh4 | zstd 1.349 MB | draco 5.615 MB | tfan 1.109 MB | test 31.347 0.9685 0.0514 | unquantised 32.107
+ship GENERIC-RD | mesh cap74000 | V 70253 F 228704 | sh8 | zstd 4.254 MB | draco 19.389 MB | tfan 3.296 MB | test 28.321 0.8647 0.1833 | unquantised 28.328
+ship GENERIC-RD | mesh cap74000 | V 70253 F 228704 | sh6 | zstd 3.274 MB | draco 13.712 MB | tfan 2.454 MB | test 28.225 0.8596 0.1939 | unquantised 28.328
+ship GENERIC-RD | mesh cap74000 | V 70253 F 228704 | sh4 | zstd 2.208 MB | draco 8.168 MB | tfan 1.643 MB | test 26.508 0.8111 0.2454 | unquantised 28.328
+drums GENERIC-RD | mesh cap258000 | V 186525 F 585763 | sh8 | zstd 10.924 MB | draco 51.231 MB | tfan 8.729 MB | test 25.578 0.9441 0.0650 | unquantised 25.580
+drums GENERIC-RD | mesh cap258000 | V 186525 F 585763 | sh6 | zstd 8.404 MB | draco 36.439 MB | tfan 6.494 MB | test 25.555 0.9414 0.0688 | unquantised 25.580
+drums GENERIC-RD | mesh cap258000 | V 186525 F 585763 | sh4 | zstd 5.894 MB | draco 21.919 MB | tfan 4.337 MB | test 25.073 0.9189 0.0913 | unquantised 25.580
+hotdog GENERIC-RD | mesh cap222000 | V 152711 F 483538 | sh8 | zstd 8.997 MB | draco 41.734 MB | tfan 7.165 MB | test 35.971 0.9789 0.0445 | unquantised 35.985
+hotdog GENERIC-RD | mesh cap222000 | V 152711 F 483538 | sh6 | zstd 7.07 MB | draco 29.553 MB | tfan 5.333 MB | test 35.790 0.9762 0.0562 | unquantised 35.985
+hotdog GENERIC-RD | mesh cap222000 | V 152711 F 483538 | sh4 | zstd 5.003 MB | draco 17.624 MB | tfan 3.568 MB | test 32.990 0.9480 0.1076 | unquantised 35.985
+mic GENERIC-RD | mesh cap83900 | V 71386 F 200595 | sh8 | zstd 4.182 MB | draco 18.94 MB | tfan 3.433 MB | test 32.789 0.9826 0.0254 | unquantised 32.792
+mic GENERIC-RD | mesh cap83900 | V 71386 F 200595 | sh6 | zstd 3.112 MB | draco 13.798 MB | tfan 2.575 MB | test 32.742 0.9817 0.0278 | unquantised 32.792
+mic GENERIC-RD | mesh cap83900 | V 71386 F 200595 | sh4 | zstd 2.165 MB | draco 8.622 MB | tfan 1.73 MB | test 31.885 0.9708 0.0479 | unquantised 32.792
+ship GENERIC-RD | mesh cap177000 | V 145351 F 411929 | sh8 | zstd 8.532 MB | draco 35.855 MB | tfan 6.686 MB | test 29.080 0.8768 0.1638 | unquantised 29.088
+ship GENERIC-RD | mesh cap177000 | V 145351 F 411929 | sh6 | zstd 6.482 MB | draco 25.365 MB | tfan 4.943 MB | test 28.979 0.8716 0.1745 | unquantised 29.088
+ship GENERIC-RD | mesh cap177000 | V 145351 F 411929 | sh4 | zstd 4.475 MB | draco 15.112 MB | tfan 3.264 MB | test 27.284 0.8217 0.2194 | unquantised 29.088
+mic GENERIC-RD | mesh cap174000 | V 106744 F 279775 | sh8 | zstd 6.253 MB | draco 26.78 MB | tfan 5.113 MB | test 33.276 0.9842 0.0229 | unquantised 33.281
+mic GENERIC-RD | mesh cap174000 | V 106744 F 279775 | sh6 | zstd 4.656 MB | draco 19.494 MB | tfan 3.83 MB | test 33.222 0.9832 0.0256 | unquantised 33.281
+mic GENERIC-RD | mesh cap174000 | V 106744 F 279775 | sh4 | zstd 3.223 MB | draco 12.168 MB | tfan 2.567 MB | test 32.211 0.9714 0.0465 | unquantised 33.281
+ship GENERIC-RD | mesh cap294000 | V 253376 F 688431 | sh8 | zstd 14.799 MB | draco 59.862 MB | tfan 11.479 MB | test 29.538 0.8831 0.1508 | unquantised 29.546
+ship GENERIC-RD | mesh cap294000 | V 253376 F 688431 | sh6 | zstd 11.143 MB | draco 42.159 MB | tfan 8.441 MB | test 29.432 0.8775 0.1618 | unquantised 29.546
+ship GENERIC-RD | mesh cap294000 | V 253376 F 688431 | sh4 | zstd 7.66 MB | draco 24.925 MB | tfan 5.535 MB | test 27.537 0.8246 0.2214 | unquantised 29.546
+
+===== which mesh was encoded
+mesh cap full: /scratch/zr2245/chair-blender4-best/original/point_cloud/iteration_30000/point_cloud_state_dict.pt
+mesh cap 66755: /scratch/zr2245/chair-budgetb-66755-best/axisB/v1.0/finetune/best.pt
+mesh cap 178000: /scratch/zr2245/chair-budgetb-178000-best/axisB/v1.0/finetune/best.pt
+mesh cap 238956: /scratch/zr2245/chair-budgetb-238956-best/axisB/v1.0/finetune/best.pt
+generic-rd-v1 chair exit 0 (0 failures)  Sat Nov 14 06:28:56 AM EST 2026
+mesh cap full: /scratch/zr2245/drums-blender4-best/original/point_cloud/iteration_30000/point_cloud_state_dict.pt
+mesh cap 68000: /scratch/zr2245/drums-budgetb-68000-best/axisB/v1.0/finetune/best.pt
+mesh cap 176000: /scratch/zr2245/drums-budgetb-176000-best/axisB/v1.0/finetune/best.pt
+mesh cap 258000: /scratch/zr2245/drums-budgetb-258000-best/axisB/v1.0/finetune/best.pt
+generic-rd-v1 drums exit 0 (0 failures)  Sat Nov 14 06:33:08 AM EST 2026
+mesh cap full: /scratch/zr2245/ficus-blender4-best/original/point_cloud/iteration_30000/point_cloud_state_dict.pt
+mesh cap 35557: /scratch/zr2245/ficus-budgetb-35557-best/axisB/v1.0/finetune/best.pt
+mesh cap 67614: /scratch/zr2245/ficus-budgetb-67614-best/axisB/v1.0/finetune/best.pt
+mesh cap 171000: /scratch/zr2245/ficus-budgetb-171000-best/axisB/v1.0/finetune/best.pt
+generic-rd-v1 ficus exit 0 (0 failures)  Sat Nov 14 06:31:40 AM EST 2026
+mesh cap full: /scratch/zr2245/hotdog-blender4-best/original/point_cloud/iteration_30000/point_cloud_state_dict.pt
+mesh cap 47578: /scratch/zr2245/hotdog-budgetb-47578-best/axisB/v1.0/finetune/best.pt
+mesh cap 177000: /scratch/zr2245/hotdog-budgetb-177000-best/axisB/v1.0/finetune/best.pt
+mesh cap 222000: /scratch/zr2245/hotdog-budgetb-222000-best/axisB/v1.0/finetune/best.pt
+generic-rd-v1 hotdog exit 0 (0 failures)  Sat Nov 14 06:34:43 AM EST 2026
+mesh cap full: /scratch/zr2245/lego-blender4-best/original/point_cloud/iteration_30000/point_cloud_state_dict.pt
+mesh cap 78124: /scratch/zr2245/lego-budgetb-78124-best/axisB/v1.0/finetune/best.pt
+mesh cap 183000: /scratch/zr2245/lego-budgetb-183000-best/axisB/v1.0/finetune/best.pt
+mesh cap 372025: /scratch/zr2245/lego-budgetb-372025-best/axisB/v1.0/finetune/best.pt
+generic-rd-v1 lego exit 0 (0 failures)  Sat Nov 14 06:28:58 AM EST 2026
+mesh cap full: /scratch/zr2245/materials-blender4-best/original/point_cloud/iteration_30000/point_cloud_state_dict.pt
+mesh cap 68793: /scratch/zr2245/materials-budgetb-68793-best/axisB/v1.0/finetune/best.pt
+mesh cap 176000: /scratch/zr2245/materials-budgetb-176000-best/axisB/v1.0/finetune/best.pt
+mesh cap 259000: /scratch/zr2245/materials-budgetb-259000-best/axisB/v1.0/finetune/best.pt
+generic-rd-v1 materials exit 0 (0 failures)  Sat Nov 14 06:35:18 AM EST 2026
+mesh cap full: /scratch/zr2245/mic-blender4-best/original/point_cloud/iteration_30000/point_cloud_state_dict.pt
+mesh cap 46659: /scratch/zr2245/mic-budgetb-46659-best/axisB/v1.0/finetune/best.pt
+mesh cap 83900: /scratch/zr2245/mic-budgetb-83900-best/axisB/v1.0/finetune/best.pt
+mesh cap 174000: /scratch/zr2245/mic-budgetb-174000-best/axisB/v1.0/finetune/best.pt
+generic-rd-v1 mic exit 0 (0 failures)  Sat Nov 14 06:38:28 AM EST 2026
+mesh cap full: /scratch/zr2245/ship-blender4-best/original/point_cloud/iteration_30000/point_cloud_state_dict.pt
+mesh cap 74000: /scratch/zr2245/ship-budgetb-74000-best/axisB/v1.0/finetune/best.pt
+mesh cap 177000: /scratch/zr2245/ship-budgetb-177000-best/axisB/v1.0/finetune/best.pt
+mesh cap 294000: /scratch/zr2245/ship-budgetb-294000-best/axisB/v1.0/finetune/best.pt
+generic-rd-v1 ship exit 0 (0 failures)  Sat Nov 14 06:39:38 AM EST 2026
+
+===== sacct
+23111711                    lego-genobj-b38  COMPLETED   00:15:19      0:0 
+23111712                   chair-genobj-b38  COMPLETED   00:15:18      0:0 
+23111713                   drums-genobj-b38  COMPLETED   00:13:16      0:0 
+23111714                   ficus-genobj-b38  COMPLETED   00:11:48      0:0 
+23111715                  hotdog-genobj-b38  COMPLETED   00:13:36      0:0 
+23111716               materials-genobj-b38  COMPLETED   00:12:55      0:0 
+23111717                     mic-genobj-b38  COMPLETED   00:13:06      0:0 
+23111718                    ship-genobj-b38  COMPLETED   00:14:16      0:0 
+
+===== queue

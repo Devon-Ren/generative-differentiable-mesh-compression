@@ -1,0 +1,23 @@
+caps per object: {'lego': [78124, 183000, 372025], 'chair': [66755, 178000, 238956], 'drums': [68000, 176000, 258000], 'ficus': [35557, 67614, 171000], 'hotdog': [47578, 177000, 222000], 'materials': [68793, 176000, None], 'mic': [46659, 83900, 174000], 'ship': [74000, 177000, 294000]}
+objects with all generic rows: ['lego', 'chair', 'drums', 'ficus', 'hotdog', 'mic', 'ship']
+hold targets per object: {'lego': [1.5, 2.5, 4.0], 'chair': [1.5, 2.5, 4.0], 'drums': [1.5, 2.5, 4.0], 'ficus': [1.5, 2.5, 4.0], 'hotdog': [1.5, 2.5, 4.0], 'materials': [1.5, 2.5, 4.0], 'mic': [1.5, 2.5, 4.0], 'ship': [2.5]}
+
+== codec alone: same cap-trained mesh, size each generic codec needs for the PSNR of our codec (per object, then mean over objects and levels) ==
+level low  | tfan x1.38 (1.19..1.55, n 7) | zstd x1.76 (1.44..1.96, n 7) | draco x7.57 (6.40..8.49, n 7)
+level mid  | tfan x1.69 (1.26..1.89, n 8) | zstd x2.19 (1.61..2.46, n 8) | draco x8.67 (5.68..10.06, n 8)
+level high | tfan x1.81 (1.30..2.16, n 7) | zstd x2.35 (1.70..2.83, n 7) | draco x9.28 (6.02..10.73, n 7)
+all levels: tfan x1.63 (n 22) | zstd x2.11 (n 22) | draco x8.52 (n 22)
+
+objects with all generic rows and all three BudgetMesh targets: ['lego', 'chair', 'drums', 'ficus', 'hotdog', 'mic']
+== mean curves over these 6 objects ==
+BudgetMesh     : [(1.5, 31.24), (2.41, 31.95), (3.44, 32.04)]
+cap + our codec: [(1.45, 30.76), (2.31, 31.61), (2.96, 31.85)]
+tfan  hull: [(1.38, 29.67), (2.04, 30.74), (4.26, 31.77), (5.93, 32.08), (7.97, 32.16)]
+zstd  hull: [(1.79, 29.67), (2.58, 30.74), (5.5, 31.77), (7.65, 32.08), (9.88, 32.16)]
+draco hull: [(6.86, 29.67), (11.2, 30.74), (22.6, 31.77), (31.34, 32.08), (43.92, 32.16)]
+  BudgetMesh        1.50 MB 31.24 dB | tfan 2.9 MB (x1.9) | zstd 3.7 MB (x2.5) | draco 15.7 MB (x10.5)
+  BudgetMesh        2.41 MB 31.95 dB | tfan 5.2 MB (x2.2) | zstd 6.7 MB (x2.8) | draco 27.5 MB (x11.4)
+  BudgetMesh        3.44 MB 32.04 dB | tfan 5.7 MB (x1.7) | zstd 7.3 MB (x2.1) | draco 30.0 MB (x8.7)
+  cap + our codec   1.45 MB 30.76 dB | tfan 2.1 MB (x1.4) | zstd 2.6 MB (x1.8) | draco 11.3 MB (x7.8)
+  cap + our codec   2.31 MB 31.61 dB | tfan 3.8 MB (x1.6) | zstd 4.9 MB (x2.1) | draco 20.3 MB (x8.8)
+  cap + our codec   2.96 MB 31.85 dB | tfan 4.6 MB (x1.6) | zstd 6.0 MB (x2.0) | draco 24.6 MB (x8.3)
