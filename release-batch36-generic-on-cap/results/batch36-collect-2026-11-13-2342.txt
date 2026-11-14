@@ -1,0 +1,173 @@
+===== generic-rd rows (cap-trained meshes)
+garden GENERIC-RD | mesh cap600000 | V 510926 F 1229784 | sh8 | zstd 27.966 MB | draco 102.479 MB | tfan 21.952 MB | test 22.698 0.6117 0.4474 | unquantised 22.755
+garden GENERIC-RD | mesh cap600000 | V 510926 F 1229784 | sh6 | zstd 20.917 MB | draco 71.4 MB | tfan 15.88 MB | test 22.659 0.6065 0.4568 | unquantised 22.755
+garden GENERIC-RD | mesh cap600000 | V 510926 F 1229784 | sh4 | zstd 14.007 MB | draco 41.017 MB | tfan 10.087 MB | test 21.601 0.5333 0.5394 | unquantised 22.755
+room GENERIC-RD | mesh cap600000 | V 574171 F 1377300 | sh8 | zstd 27.792 MB | draco 95.177 MB | tfan 20.435 MB | test 27.268 0.8329 0.4426 | unquantised 27.401
+room GENERIC-RD | mesh cap600000 | V 574171 F 1377300 | sh6 | zstd 19.558 MB | draco 60.451 MB | tfan 13.829 MB | test 26.765 0.7892 0.4919 | unquantised 27.401
+room GENERIC-RD | mesh cap600000 | V 574171 F 1377300 | sh4 | zstd 13.801 MB | draco 31.113 MB | tfan 8.441 MB | test 21.732 0.5747 0.6252 | unquantised 27.401
+garden GENERIC-RD | mesh cap1073000 | V 1005902 F 2292683 | sh8 | zstd 54.388 MB | draco 189.957 MB | tfan 42.049 MB | test 23.569 0.6764 0.3732 | unquantised 23.658
+garden GENERIC-RD | mesh cap1073000 | V 1005902 F 2292683 | sh6 | zstd 40.222 MB | draco 131.307 MB | tfan 30.131 MB | test 23.498 0.6689 0.3845 | unquantised 23.658
+garden GENERIC-RD | mesh cap1073000 | V 1005902 F 2292683 | sh4 | zstd 27.179 MB | draco 74.149 MB | tfan 18.811 MB | test 22.312 0.5860 0.4751 | unquantised 23.658
+room GENERIC-RD | mesh cap1078000 | V 997819 F 2281259 | sh8 | zstd 48.436 MB | draco 156.36 MB | tfan 34.459 MB | test 27.817 0.8444 0.4194 | unquantised 28.090
+room GENERIC-RD | mesh cap1078000 | V 997819 F 2281259 | sh6 | zstd 33.701 MB | draco 98.397 MB | tfan 23.035 MB | test 27.301 0.7988 0.4732 | unquantised 28.090
+room GENERIC-RD | mesh cap1078000 | V 997819 F 2281259 | sh4 | zstd 23.403 MB | draco 50.54 MB | tfan 13.97 MB | test 21.821 0.5931 0.6068 | unquantised 28.090
+garden GENERIC-RD | mesh cap3000000 | V 2436089 F 5089735 | sh8 | zstd 132.332 MB | draco 416.575 MB | tfan 96.954 MB | test 24.410 0.7401 0.2789 | unquantised 24.531
+garden GENERIC-RD | mesh cap3000000 | V 2436089 F 5089735 | sh6 | zstd 96.184 MB | draco 283.798 MB | tfan 68.079 MB | test 24.312 0.7294 0.2950 | unquantised 24.531
+garden GENERIC-RD | mesh cap3000000 | V 2436089 F 5089735 | sh4 | zstd 64.466 MB | draco 156.7 MB | tfan 41.291 MB | test 22.680 0.6248 0.4231 | unquantised 24.531
+truck GENERIC-RD | mesh cap600000 | V 528590 F 1073116 | sh8 | zstd 27.535 MB | draco 87.364 MB | tfan 21.134 MB | test 21.720 0.7665 0.3460 | unquantised 21.733
+truck GENERIC-RD | mesh cap600000 | V 528590 F 1073116 | sh6 | zstd 19.597 MB | draco 59.482 MB | tfan 14.867 MB | test 21.664 0.7502 0.3641 | unquantised 21.733
+truck GENERIC-RD | mesh cap600000 | V 528590 F 1073116 | sh4 | zstd 13.388 MB | draco 33.478 MB | tfan 9.186 MB | test 20.510 0.6472 0.4814 | unquantised 21.733
+room GENERIC-RD | mesh cap3000000 | V 2195302 F 4747295 | sh8 | zstd 108.191 MB | draco 327.321 MB | tfan 74.27 MB | test 28.072 0.8589 0.3808 | unquantised 28.352
+room GENERIC-RD | mesh cap3000000 | V 2195302 F 4747295 | sh6 | zstd 75.252 MB | draco 205.025 MB | tfan 49.214 MB | test 27.657 0.8165 0.4337 | unquantised 28.352
+room GENERIC-RD | mesh cap3000000 | V 2195302 F 4747295 | sh4 | zstd 51.936 MB | draco 103.377 MB | tfan 29.375 MB | test 22.990 0.6213 0.6047 | unquantised 28.352
+kitchen GENERIC-RD | mesh cap600000 | V 554177 F 1556707 | sh8 | zstd 30.706 MB | draco 120.801 MB | tfan 22.382 MB | test 25.638 0.7931 0.3866 | unquantised 25.708
+kitchen GENERIC-RD | mesh cap600000 | V 554177 F 1556707 | sh6 | zstd 22.126 MB | draco 82.034 MB | tfan 15.906 MB | test 25.389 0.7679 0.4167 | unquantised 25.708
+kitchen GENERIC-RD | mesh cap600000 | V 554177 F 1556707 | sh4 | zstd 15.291 MB | draco 45.493 MB | tfan 10.127 MB | test 21.921 0.5939 0.5544 | unquantised 25.708
+bicycle GENERIC-RD | mesh cap600000 | V 596166 F 1198036 | sh8 | zstd 29.764 MB | draco 98.517 MB | tfan 23.774 MB | test 21.807 0.5401 0.5147 | unquantised 21.895
+bicycle GENERIC-RD | mesh cap600000 | V 596166 F 1198036 | sh6 | zstd 21.011 MB | draco 67.641 MB | tfan 16.701 MB | test 21.757 0.5341 0.5204 | unquantised 21.895
+bicycle GENERIC-RD | mesh cap600000 | V 596166 F 1198036 | sh4 | zstd 14.203 MB | draco 38.276 MB | tfan 10.22 MB | test 20.936 0.4685 0.5671 | unquantised 21.895
+counter GENERIC-RD | mesh cap600000 | V 541362 F 1314489 | sh8 | zstd 28.028 MB | draco 100.35 MB | tfan 20.895 MB | test 25.438 0.7972 0.4419 | unquantised 25.470
+counter GENERIC-RD | mesh cap600000 | V 541362 F 1314489 | sh6 | zstd 20.176 MB | draco 66.957 MB | tfan 14.566 MB | test 25.144 0.7619 0.4818 | unquantised 25.470
+counter GENERIC-RD | mesh cap600000 | V 541362 F 1314489 | sh4 | zstd 13.916 MB | draco 36.824 MB | tfan 9.119 MB | test 21.105 0.5669 0.6304 | unquantised 25.470
+bonsai GENERIC-RD | mesh cap600000 | V 589307 F 1305128 | sh8 | zstd 29.656 MB | draco 100.243 MB | tfan 22.282 MB | test 26.456 0.8130 0.4759 | unquantised 26.509
+bonsai GENERIC-RD | mesh cap600000 | V 589307 F 1305128 | sh6 | zstd 21.051 MB | draco 66.74 MB | tfan 15.403 MB | test 26.104 0.7841 0.5110 | unquantised 26.509
+bonsai GENERIC-RD | mesh cap600000 | V 589307 F 1305128 | sh4 | zstd 14.299 MB | draco 36.636 MB | tfan 9.53 MB | test 21.689 0.5980 0.6532 | unquantised 26.509
+truck GENERIC-RD | mesh cap1078000 | V 885368 F 1655525 | sh8 | zstd 45.905 MB | draco 133.579 MB | tfan 34.261 MB | test 22.177 0.7890 0.3078 | unquantised 22.196
+truck GENERIC-RD | mesh cap1078000 | V 885368 F 1655525 | sh6 | zstd 32.501 MB | draco 90.112 MB | tfan 23.794 MB | test 22.116 0.7713 0.3287 | unquantised 22.196
+truck GENERIC-RD | mesh cap1078000 | V 885368 F 1655525 | sh4 | zstd 21.899 MB | draco 50.218 MB | tfan 14.483 MB | test 20.849 0.6545 0.4535 | unquantised 22.196
+bicycle GENERIC-RD | mesh cap1080000 | V 947525 F 1785653 | sh8 | zstd 46.041 MB | draco 145.895 MB | tfan 36.623 MB | test 22.092 0.5632 0.4897 | unquantised 22.197
+bicycle GENERIC-RD | mesh cap1080000 | V 947525 F 1785653 | sh6 | zstd 32.244 MB | draco 99.431 MB | tfan 25.432 MB | test 22.049 0.5573 0.4959 | unquantised 22.197
+bicycle GENERIC-RD | mesh cap1080000 | V 947525 F 1785653 | sh4 | zstd 21.83 MB | draco 55.656 MB | tfan 15.307 MB | test 21.171 0.4847 0.5557 | unquantised 22.197
+kitchen GENERIC-RD | mesh cap1086000 | V 956939 F 2495983 | sh8 | zstd 50.98 MB | draco 188.338 MB | tfan 36.0 MB | test 26.415 0.8210 0.3458 | unquantised 26.503
+kitchen GENERIC-RD | mesh cap1086000 | V 956939 F 2495983 | sh6 | zstd 36.461 MB | draco 125.827 MB | tfan 25.036 MB | test 26.132 0.7946 0.3797 | unquantised 26.503
+kitchen GENERIC-RD | mesh cap1086000 | V 956939 F 2495983 | sh4 | zstd 25.436 MB | draco 69.007 MB | tfan 15.849 MB | test 22.430 0.6099 0.5297 | unquantised 26.503
+bonsai GENERIC-RD | mesh cap1073000 | V 754307 F 1583042 | sh8 | zstd 37.484 MB | draco 119.835 MB | tfan 27.634 MB | test 26.829 0.8218 0.4626 | unquantised 26.954
+bonsai GENERIC-RD | mesh cap1073000 | V 754307 F 1583042 | sh6 | zstd 26.334 MB | draco 78.946 MB | tfan 18.877 MB | test 26.484 0.7922 0.4982 | unquantised 26.954
+bonsai GENERIC-RD | mesh cap1073000 | V 754307 F 1583042 | sh4 | zstd 17.981 MB | draco 42.753 MB | tfan 11.528 MB | test 22.260 0.6276 0.6302 | unquantised 26.954
+counter GENERIC-RD | mesh cap1083000 | V 817438 F 1856176 | sh8 | zstd 41.927 MB | draco 138.72 MB | tfan 29.971 MB | test 25.787 0.8133 0.4179 | unquantised 25.852
+counter GENERIC-RD | mesh cap1083000 | V 817438 F 1856176 | sh6 | zstd 29.775 MB | draco 91.246 MB | tfan 20.51 MB | test 25.504 0.7783 0.4598 | unquantised 25.852
+counter GENERIC-RD | mesh cap1083000 | V 817438 F 1856176 | sh4 | zstd 20.321 MB | draco 48.591 MB | tfan 12.453 MB | test 21.793 0.5792 0.6213 | unquantised 25.852
+truck GENERIC-RD | mesh cap3000000 | V 1852275 F 3443821 | sh8 | zstd 94.85 MB | draco 268.609 MB | tfan 68.415 MB | test 22.378 0.8054 0.2698 | unquantised 22.397
+truck GENERIC-RD | mesh cap3000000 | V 1852275 F 3443821 | sh6 | zstd 66.468 MB | draco 177.318 MB | tfan 46.632 MB | test 22.322 0.7873 0.2899 | unquantised 22.397
+truck GENERIC-RD | mesh cap3000000 | V 1852275 F 3443821 | sh4 | zstd 44.927 MB | draco 95.912 MB | tfan 27.982 MB | test 21.152 0.6728 0.4174 | unquantised 22.397
+bicycle GENERIC-RD | mesh cap3000000 | V 2514982 F 4424266 | sh8 | zstd 120.811 MB | draco 354.361 MB | tfan 92.256 MB | test 22.782 0.6226 0.4157 | unquantised 22.951
+bicycle GENERIC-RD | mesh cap3000000 | V 2514982 F 4424266 | sh6 | zstd 84.089 MB | draco 238.06 MB | tfan 62.878 MB | test 22.721 0.6143 0.4276 | unquantised 22.951
+bicycle GENERIC-RD | mesh cap3000000 | V 2514982 F 4424266 | sh4 | zstd 56.965 MB | draco 130.136 MB | tfan 37.044 MB | test 21.650 0.5232 0.5050 | unquantised 22.951
+bonsai GENERIC-RD | mesh cap3000000 | V 2349191 F 4455967 | sh8 | zstd 115.35 MB | draco 319.393 MB | tfan 77.558 MB | test 27.784 0.8616 0.3868 | unquantised 28.054
+bonsai GENERIC-RD | mesh cap3000000 | V 2349191 F 4455967 | sh6 | zstd 79.499 MB | draco 204.429 MB | tfan 51.147 MB | test 27.415 0.8254 0.4347 | unquantised 28.054
+bonsai GENERIC-RD | mesh cap3000000 | V 2349191 F 4455967 | sh4 | zstd 54.666 MB | draco 107.85 MB | tfan 30.675 MB | test 22.902 0.6090 0.5930 | unquantised 28.054
+kitchen GENERIC-RD | mesh cap3000000 | V 2103785 F 5156793 | sh8 | zstd 112.493 MB | draco 384.194 MB | tfan 75.37 MB | test 27.174 0.8524 0.2893 | unquantised 27.283
+kitchen GENERIC-RD | mesh cap3000000 | V 2103785 F 5156793 | sh6 | zstd 79.537 MB | draco 253.769 MB | tfan 51.608 MB | test 26.825 0.8216 0.3309 | unquantised 27.283
+kitchen GENERIC-RD | mesh cap3000000 | V 2103785 F 5156793 | sh4 | zstd 54.974 MB | draco 136.011 MB | tfan 32.123 MB | test 22.830 0.6253 0.5022 | unquantised 27.283
+counter GENERIC-RD | mesh cap3000000 | V 2212258 F 4765326 | sh8 | zstd 113.671 MB | draco 356.242 MB | tfan 78.561 MB | test 26.267 0.8410 0.3630 | unquantised 26.321
+counter GENERIC-RD | mesh cap3000000 | V 2212258 F 4765326 | sh6 | zstd 80.64 MB | draco 232.659 MB | tfan 53.179 MB | test 25.984 0.8027 0.4133 | unquantised 26.321
+counter GENERIC-RD | mesh cap3000000 | V 2212258 F 4765326 | sh4 | zstd 55.639 MB | draco 124.524 MB | tfan 32.535 MB | test 22.176 0.5949 0.5788 | unquantised 26.321
+flowers GENERIC-RD | mesh cap600000 | V 519938 F 939651 | sh8 | zstd 26.876 MB | draco 80.424 MB | tfan 20.828 MB | test 18.432 0.3937 0.5659 | unquantised 18.483
+flowers GENERIC-RD | mesh cap600000 | V 519938 F 939651 | sh6 | zstd 18.765 MB | draco 55.676 MB | tfan 14.652 MB | test 18.409 0.3902 0.5717 | unquantised 18.483
+flowers GENERIC-RD | mesh cap600000 | V 519938 F 939651 | sh4 | zstd 12.363 MB | draco 31.791 MB | tfan 8.889 MB | test 17.883 0.3482 0.6120 | unquantised 18.483
+stump GENERIC-RD | mesh cap600000 | V 529299 F 1046312 | sh8 | zstd 27.496 MB | draco 86.852 MB | tfan 21.289 MB | test 23.158 0.5585 0.5198 | unquantised 23.228
+stump GENERIC-RD | mesh cap600000 | V 529299 F 1046312 | sh6 | zstd 19.326 MB | draco 59.714 MB | tfan 14.999 MB | test 23.105 0.5536 0.5264 | unquantised 23.228
+stump GENERIC-RD | mesh cap600000 | V 529299 F 1046312 | sh4 | zstd 12.848 MB | draco 33.705 MB | tfan 9.201 MB | test 22.022 0.4784 0.5975 | unquantised 23.228
+flowers GENERIC-RD | mesh cap1071000 | V 930919 F 1570126 | sh8 | zstd 46.405 MB | draco 131.795 MB | tfan 35.798 MB | test 18.616 0.4209 0.5382 | unquantised 18.683
+flowers GENERIC-RD | mesh cap1071000 | V 930919 F 1570126 | sh6 | zstd 32.381 MB | draco 90.265 MB | tfan 24.836 MB | test 18.592 0.4166 0.5452 | unquantised 18.683
+flowers GENERIC-RD | mesh cap1071000 | V 930919 F 1570126 | sh4 | zstd 21.32 MB | draco 50.769 MB | tfan 14.807 MB | test 18.035 0.3649 0.5932 | unquantised 18.683
+treehill GENERIC-RD | mesh cap600000 | V 574173 F 1166241 | sh8 | zstd 28.789 MB | draco 95.653 MB | tfan 23.192 MB | test 20.377 0.4900 0.5935 | unquantised 20.405
+treehill GENERIC-RD | mesh cap600000 | V 574173 F 1166241 | sh6 | zstd 20.379 MB | draco 65.584 MB | tfan 16.383 MB | test 20.334 0.4839 0.6037 | unquantised 20.405
+treehill GENERIC-RD | mesh cap600000 | V 574173 F 1166241 | sh4 | zstd 13.827 MB | draco 36.909 MB | tfan 10.078 MB | test 19.437 0.4249 0.6701 | unquantised 20.405
+stump GENERIC-RD | mesh cap1069000 | V 975273 F 1782308 | sh8 | zstd 49.166 MB | draco 146.114 MB | tfan 37.803 MB | test 23.661 0.5987 0.4762 | unquantised 23.771
+stump GENERIC-RD | mesh cap1069000 | V 975273 F 1782308 | sh6 | zstd 34.282 MB | draco 99.367 MB | tfan 26.251 MB | test 23.602 0.5927 0.4844 | unquantised 23.771
+stump GENERIC-RD | mesh cap1069000 | V 975273 F 1782308 | sh4 | zstd 22.678 MB | draco 54.987 MB | tfan 15.728 MB | test 22.431 0.5106 0.5647 | unquantised 23.771
+train GENERIC-RD | mesh cap600000 | V 562139 F 1205556 | sh8 | zstd 30.145 MB | draco 101.584 MB | tfan 23.35 MB | test 18.444 0.6706 0.4311 | unquantised 18.464
+train GENERIC-RD | mesh cap600000 | V 562139 F 1205556 | sh6 | zstd 21.701 MB | draco 70.335 MB | tfan 16.68 MB | test 18.419 0.6633 0.4457 | unquantised 18.464
+train GENERIC-RD | mesh cap600000 | V 562139 F 1205556 | sh4 | zstd 14.774 MB | draco 40.174 MB | tfan 10.424 MB | test 18.006 0.5981 0.5123 | unquantised 18.464
+treehill GENERIC-RD | mesh cap1079000 | V 1023422 F 1891109 | sh8 | zstd 50.614 MB | draco 154.496 MB | tfan 39.858 MB | test 20.451 0.5011 0.5708 | unquantised 20.485
+treehill GENERIC-RD | mesh cap1079000 | V 1023422 F 1891109 | sh6 | zstd 35.642 MB | draco 105.117 MB | tfan 27.767 MB | test 20.417 0.4952 0.5813 | unquantised 20.485
+treehill GENERIC-RD | mesh cap1079000 | V 1023422 F 1891109 | sh4 | zstd 23.918 MB | draco 58.855 MB | tfan 16.807 MB | test 19.731 0.4295 0.6452 | unquantised 20.485
+flowers GENERIC-RD | mesh cap3000000 | V 2299489 F 3629781 | sh8 | zstd 110.756 MB | draco 296.742 MB | tfan 83.124 MB | test 18.978 0.4652 0.4776 | unquantised 19.159
+flowers GENERIC-RD | mesh cap3000000 | V 2299489 F 3629781 | sh6 | zstd 77.563 MB | draco 200.085 MB | tfan 56.428 MB | test 18.951 0.4597 0.4855 | unquantised 19.159
+flowers GENERIC-RD | mesh cap3000000 | V 2299489 F 3629781 | sh4 | zstd 51.598 MB | draco 109.941 MB | tfan 32.951 MB | test 18.382 0.4026 0.5443 | unquantised 19.159
+train GENERIC-RD | mesh cap1085000 | V 917466 F 1863948 | sh8 | zstd 48.889 MB | draco 155.251 MB | tfan 36.766 MB | test 18.571 0.6884 0.4061 | unquantised 18.593
+train GENERIC-RD | mesh cap1085000 | V 917466 F 1863948 | sh6 | zstd 35.215 MB | draco 106.488 MB | tfan 25.883 MB | test 18.548 0.6792 0.4241 | unquantised 18.593
+train GENERIC-RD | mesh cap1085000 | V 917466 F 1863948 | sh4 | zstd 23.74 MB | draco 60.0 MB | tfan 15.843 MB | test 18.064 0.6020 0.5017 | unquantised 18.593
+stump GENERIC-RD | mesh cap3000000 | V 2325965 F 3932274 | sh8 | zstd 116.359 MB | draco 320.721 MB | tfan 87.401 MB | test 24.495 0.6584 0.3958 | unquantised 24.661
+stump GENERIC-RD | mesh cap3000000 | V 2325965 F 3932274 | sh6 | zstd 81.765 MB | draco 216.2 MB | tfan 59.917 MB | test 24.409 0.6499 0.4079 | unquantised 24.661
+stump GENERIC-RD | mesh cap3000000 | V 2325965 F 3932274 | sh4 | zstd 54.147 MB | draco 119.284 MB | tfan 35.728 MB | test 22.921 0.5511 0.5125 | unquantised 24.661
+treehill GENERIC-RD | mesh cap3000000 | V 2372955 F 3964113 | sh8 | zstd 117.083 MB | draco 325.584 MB | tfan 89.554 MB | test 20.485 0.5235 0.5177 | unquantised 20.531
+treehill GENERIC-RD | mesh cap3000000 | V 2372955 F 3964113 | sh6 | zstd 81.818 MB | draco 220.35 MB | tfan 61.626 MB | test 20.449 0.5166 0.5321 | unquantised 20.531
+treehill GENERIC-RD | mesh cap3000000 | V 2372955 F 3964113 | sh4 | zstd 55.255 MB | draco 121.883 MB | tfan 36.576 MB | test 19.710 0.4408 0.6169 | unquantised 20.531
+train GENERIC-RD | mesh cap3000000 | V 2054140 F 4109977 | sh8 | zstd 109.244 MB | draco 337.417 MB | tfan 80.195 MB | test 18.826 0.7087 0.3687 | unquantised 18.842
+train GENERIC-RD | mesh cap3000000 | V 2054140 F 4109977 | sh6 | zstd 79.185 MB | draco 228.719 MB | tfan 55.876 MB | test 18.804 0.6982 0.3866 | unquantised 18.842
+train GENERIC-RD | mesh cap3000000 | V 2054140 F 4109977 | sh4 | zstd 53.577 MB | draco 126.964 MB | tfan 34.004 MB | test 18.321 0.6124 0.4694 | unquantised 18.842
+
+===== which mesh was encoded
+mesh cap 600000: /scratch/zr2245/bicycle-budget-600000/axisB/v1.0/finetune/best.pt
+mesh cap 1080000: /scratch/zr2245/bicycle-budget-1080000/axisB/v1.0/finetune/best.pt
+mesh cap 3000000: /scratch/zr2245/bicycle-budget-3000000/axisB/v1.0/finetune/best.pt
+generic-rd-v1 bicycle exit 0 (0 failures)  Fri Nov 13 11:25:39 AM EST 2026
+mesh cap 600000: /scratch/zr2245/bonsai-budget-600000/axisB/v1.0/finetune/best.pt
+mesh cap 1073000: /scratch/zr2245/bonsai-budget-1073000/axisB/v1.0/finetune/best.pt
+mesh cap 3000000: /scratch/zr2245/bonsai-budget-3000000/axisB/v1.0/finetune/best.pt
+generic-rd-v1 bonsai exit 0 (0 failures)  Fri Nov 13 11:28:17 AM EST 2026
+mesh cap 600000: /scratch/zr2245/counter-budget-600000/axisB/v1.0/finetune/best.pt
+mesh cap 1083000: /scratch/zr2245/counter-budget-1083000/axisB/v1.0/finetune/best.pt
+mesh cap 3000000: /scratch/zr2245/counter-budget-3000000/axisB/v1.0/finetune/best.pt
+generic-rd-v1 counter exit 0 (0 failures)  Fri Nov 13 11:29:41 AM EST 2026
+mesh cap 600000: /scratch/zr2245/flowers-budget-600000/axisB/v1.0/finetune/best.pt
+mesh cap 1071000: /scratch/zr2245/flowers-budget-1071000/axisB/v1.0/finetune/best.pt
+mesh cap 3000000: /scratch/zr2245/flowers-budget-3000000/axisB/v1.0/finetune/best.pt
+generic-rd-v1 flowers exit 0 (0 failures)  Fri Nov 13 11:39:52 AM EST 2026
+mesh cap 600000: /scratch/zr2245/garden-budget-600000/axisB/v1.0/finetune/best.pt
+mesh cap 1073000: /scratch/zr2245/garden-budget-1073000/axisB/v1.0/finetune/best.pt
+mesh cap 3000000: /scratch/zr2245/garden-budget-3000000/axisB/v1.0/finetune/best.pt
+generic-rd-v1 garden exit 0 (0 failures)  Fri Nov 13 11:09:16 AM EST 2026
+mesh cap 600000: /scratch/zr2245/kitchen-budget-600000/axisB/v1.0/finetune/best.pt
+mesh cap 1086000: /scratch/zr2245/kitchen-budget-1086000/axisB/v1.0/finetune/best.pt
+mesh cap 3000000: /scratch/zr2245/kitchen-budget-3000000/axisB/v1.0/finetune/best.pt
+generic-rd-v1 kitchen exit 0 (0 failures)  Fri Nov 13 11:28:50 AM EST 2026
+mesh cap 600000: /scratch/zr2245/room-budget-600000/axisB/v1.0/finetune/best.pt
+mesh cap 1078000: /scratch/zr2245/room-budget-1078000/axisB/v1.0/finetune/best.pt
+mesh cap 3000000: /scratch/zr2245/room-budget-3000000/axisB/v1.0/finetune/best.pt
+generic-rd-v1 room exit 0 (0 failures)  Fri Nov 13 11:14:06 AM EST 2026
+mesh cap 600000: /scratch/zr2245/stump-budget-600000/axisB/v1.0/finetune/best.pt
+mesh cap 1069000: /scratch/zr2245/stump-budget-1069000/axisB/v1.0/finetune/best.pt
+mesh cap 3000000: /scratch/zr2245/stump-budget-3000000/axisB/v1.0/finetune/best.pt
+generic-rd-v1 stump exit 0 (0 failures)  Fri Nov 13 11:40:13 AM EST 2026
+mesh cap 600000: /scratch/zr2245/train-budget-600000/axisB/v1.0/finetune/best.pt
+mesh cap 1085000: /scratch/zr2245/train-budget-1085000/axisB/v1.0/finetune/best.pt
+mesh cap 3000000: /scratch/zr2245/train-budget-3000000/axisB/v1.0/finetune/best.pt
+generic-rd-v1 train exit 0 (0 failures)  Fri Nov 13 11:46:44 AM EST 2026
+mesh cap 600000: /scratch/zr2245/treehill-budget-600000/axisB/v1.0/finetune/best.pt
+mesh cap 1079000: /scratch/zr2245/treehill-budget-1079000/axisB/v1.0/finetune/best.pt
+mesh cap 3000000: /scratch/zr2245/treehill-budget-3000000/axisB/v1.0/finetune/best.pt
+generic-rd-v1 treehill exit 0 (0 failures)  Fri Nov 13 11:45:11 AM EST 2026
+mesh cap 600000: /scratch/zr2245/truck-budget-600000/axisB/v1.0/finetune/best.pt
+mesh cap 1078000: /scratch/zr2245/truck-budget-1078000/axisB/v1.0/finetune/best.pt
+mesh cap 3000000: /scratch/zr2245/truck-budget-3000000/axisB/v1.0/finetune/best.pt
+generic-rd-v1 truck exit 0 (0 failures)  Fri Nov 13 11:25:37 AM EST 2026
+
+===== sacct
+22999457                  garden-gencap-b36 CANCELLED+   00:00:00      0:0 
+22999459                    room-gencap-b36 CANCELLED+   00:00:00      0:0 
+22999461                   truck-gencap-b36 CANCELLED+   00:00:00      0:0 
+22999462                 kitchen-gencap-b36 CANCELLED+   00:00:00      0:0 
+22999463                 counter-gencap-b36 CANCELLED+   00:00:00      0:0 
+22999464                  bonsai-gencap-b36 CANCELLED+   00:00:00      0:0 
+22999466                 bicycle-gencap-b36 CANCELLED+   00:00:00      0:0 
+22999473                   stump-gencap-b36 CANCELLED+   00:00:00      0:0 
+22999474                 flowers-gencap-b36 CANCELLED+   00:00:00      0:0 
+22999478                treehill-gencap-b36 CANCELLED+   00:00:00      0:0 
+22999481                   train-gencap-b36 CANCELLED+   00:00:00      0:0 
+23008553                  garden-gencap-b36  COMPLETED   00:15:59      0:0 
+23008555                    room-gencap-b36  COMPLETED   00:20:49      0:0 
+23008557                   truck-gencap-b36  COMPLETED   00:17:05      0:0 
+23008558                 kitchen-gencap-b36  COMPLETED   00:18:47      0:0 
+23008559                 counter-gencap-b36  COMPLETED   00:19:38      0:0 
+23008560                  bonsai-gencap-b36  COMPLETED   00:17:08      0:0 
+23008561                 bicycle-gencap-b36  COMPLETED   00:14:30      0:0 
+23008563                   stump-gencap-b36  COMPLETED   00:13:34      0:0 
+23008565                 flowers-gencap-b36  COMPLETED   00:13:11      0:0 
+23008566                treehill-gencap-b36  COMPLETED   00:14:52      0:0 
+23008568                   train-gencap-b36  COMPLETED   00:16:25      0:0 
+23009873                  truck-gentest-b36 CANCELLED+   00:00:00      0:0 
+
+===== queue
