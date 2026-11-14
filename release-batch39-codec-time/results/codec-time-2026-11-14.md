@@ -21,3 +21,22 @@ Generic codecs at 8-bit SH.  Our round trip was exact on all 11 scenes.
 Seconds.  Ours: encode + decode = 8.28 s; de-quantisation adds 0.04 s; compiling the native coders once per machine took 6.4 to 7.5 s and is not included.
 Our encode starts from the shared representation (codebooks already built) and ends with the file.  TFAN: one driver call that encodes and decodes.
 zstd -19 used all cores of the node; Draco is single-threaded; threading of our native coders was not checked.
+
+## After training: fine-tuning, codebook, encoding (file time stamps, 13 captured scenes, target 10 MB / cap near 1.08 million)
+
+| | fine-tuning (no effect, see below) | codebook (k-means + 400-step fit) | encode + decode check + test renders |
+|---|---|---|---|
+| our controller, 13 scenes | 4.9 min (3.8 to 6.6) | 1.5 min (1.2 to 1.9) | 0.4 min |
+| vertex cap, 13 scenes | 4.6 min (3.3 to 5.9) | 1.6 min (1.3 to 2.0) | 0.4 min |
+
+Fine-tuning kept the unchanged mesh in 59 of 65 runs (36 of 39 controller runs, 23 of 26 cap runs); the other 6 changed by less than 0.01 dB.
+
+## One training, with the fine-tuning subtracted (minutes)
+
+| | whole run | without the fine-tuning |
+|---|---|---|
+| our controller, 13 scenes | 53.8 (41.2 to 70.8) | 48.8 (37.4 to 64.3) |
+| our controller, the 9 scenes below | 54.5 | 49.5 |
+| vertex cap, first training, 9 scenes with stage stamps | 32.6 (24.8 to 42.4) | 28.0 (21.0 to 36.8) |
+
+9 scenes: bicycle bonsai counter drjohnson flowers room stump train treehill.  The subtraction is arithmetic on measured parts, not a run without fine-tuning.
