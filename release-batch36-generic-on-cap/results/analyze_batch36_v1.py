@@ -25,7 +25,8 @@ for l in open('release-batch22-v1/results/generic-codecs-all-scenes-2026-11-10.m
     if len(c) > 4 and c[1] in MIP:
         m = re.match(r'([\d.]+) \(([-+\d.]+)\)', c[3]); D4[c[1]] = (float(m[1]), float(m[2]))
 H = collections.defaultdict(dict)
-for l in open('release-batch31-hold/results/batch31-collect-2026-11-13-0126.txt'):
+for fn in ('release-batch31-hold/results/batch31-collect-2026-11-13-0126.txt', 'release-batch37-more-points/results/batch37-rows-2026-11-14.txt'):
+  for l in open(fn):
     m = re.match(r'(\w+) abl24-hold \| target ([\d.]+) MB \|.*?delivered ([\d.]+) MB.*?\| test ([\d.]+)', l)
     if m and m[1] in MIP: H[m[1]][float(m[2])] = (float(m[3]), float(m[4]))
 for s in MIP:   # our codec at the default cap: size from the table, PSNR = FP32 model PSNR + the loss listed there (the 'unquantised' of the full mesh is the fine-tuned FP32 model)
@@ -67,7 +68,7 @@ def hull(p):
         Hh.append(q)
     k = max(range(len(Hh)), key=lambda t: Hh[t][1]); return [(math.exp(a), b) for a, b in Hh[:k + 1]]
 ours_cap = [(M[L][0], M[L][1]) for L in LEV[:3]]
-bm = [(mean([H[s][t][0] for s in MIP]), mean([H[s][t][1] for s in MIP])) for t in (5.0, 10.0, 20.0)]
+bm = [(mean([H[s][t][0] for s in MIP]), mean([H[s][t][1] for s in MIP])) for t in (5.0, 7.5, 10.0, 15.0, 20.0)]
 print('\n== mean curves ==\nBudgetMesh (hold):', [(round(a, 2), round(b, 2)) for a, b in bm]); print('cap + our codec  :', [(round(a, 2), round(b, 2)) for a, b in ours_cap])
 HU = {k: hull(v) for k, v in pts.items()}
 for k in ('tfan', 'zstd', 'draco'): print('%-5s hull:' % k, [(round(a, 1), round(b, 2)) for a, b in HU[k]])

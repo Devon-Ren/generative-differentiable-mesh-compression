@@ -13,7 +13,7 @@ cap 1.08M  our codec 10.2 MB | tfan x2.67 (2.10..3.20, n 7) | zstd x3.69 (3.07..
 cap 3M     our codec 22.8 MB | tfan x2.79 (2.12..3.67, n 9) | zstd x3.96 (3.29..4.82, n 9) | draco x11.21 (9.43..13.69, n 9)
 
 == mean curves ==
-BudgetMesh (hold): [(4.87, 22.81), (9.88, 23.41), (19.93, 23.77)]
+BudgetMesh (hold): [(4.87, 22.81), (7.37, 23.2), (9.88, 23.41), (14.94, 23.7), (19.93, 23.77)]
 cap + our codec  : [(6.57, 22.77), (10.2, 23.16), (22.81, 23.65)]
 tfan  hull: [(9.6, 20.62), (15.4, 22.7), (24.7, 23.11), (56.1, 23.62), (82.2, 23.79), (95.7, 23.82)]
 zstd  hull: [(13.9, 20.62), (20.4, 22.7), (33.5, 23.11), (80.2, 23.62), (113.7, 23.79), (133.0, 23.82)]
@@ -21,7 +21,9 @@ draco hull: [(36.9, 20.62), (66.0, 22.7), (101.5, 23.11), (223.7, 23.62), (337.0
 
 == size each generic codec needs (upper hull of its 12 mean points) for the PSNR of ... ==
   BudgetMesh        4.87 MB 22.81 dB | tfan 17.5 MB (x3.6) | zstd 23.3 MB (x4.8) | draco 74.1 MB (x15.2)
+  BudgetMesh        7.37 MB 23.20 dB | tfan 28.3 MB (x3.8) | zstd 38.8 MB (x5.3) | draco 115.9 MB (x15.7)
   BudgetMesh        9.88 MB 23.41 dB | tfan 40.1 MB (x4.1) | zstd 56.2 MB (x5.7) | draco 162.0 MB (x16.4)
+  BudgetMesh       14.94 MB 23.70 dB | tfan 67.5 MB (x4.5) | zstd 95.1 MB (x6.4) | draco 273.2 MB (x18.3)
   BudgetMesh       19.93 MB 23.77 dB | tfan 78.8 MB (x4.0) | zstd 109.5 MB (x5.5) | draco 322.2 MB (x16.2)
   cap + our codec   6.57 MB 22.77 dB | tfan 16.6 MB (x2.5) | zstd 22.1 MB (x3.4) | draco 70.6 MB (x10.7)
   cap + our codec  10.20 MB 23.16 dB | tfan 26.8 MB (x2.6) | zstd 36.6 MB (x3.6) | draco 109.8 MB (x10.8)

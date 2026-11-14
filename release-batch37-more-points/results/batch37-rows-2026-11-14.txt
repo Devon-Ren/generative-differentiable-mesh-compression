@@ -1,0 +1,27 @@
+# batch37 (hold controller, 7.5 and 15 MB, 13 captured scenes): the fields used by the analysis, copied from the pasted collect (26 rows, no failures reported)
+truck abl24-hold | target 7.5 MB | trained V 586351 F 1382076 | delivered 7.439 MB | test 22.054 0.7685 0.3345 | val 22.598
+garden abl24-hold | target 7.5 MB | trained V 586312 F 1559961 | delivered 7.435 MB | test 23.316 0.6375 0.4198 | val 23.856
+bicycle abl24-hold | target 7.5 MB | trained V 631851 F 1431169 | delivered 7.258 MB | test 22.247 0.5476 0.5124 | val 20.784
+stump abl24-hold | target 7.5 MB | trained V 631754 F 1398355 | delivered 7.184 MB | test 23.759 0.5967 0.4854 | val 22.579
+room abl24-hold | target 7.5 MB | trained V 619758 F 1657395 | delivered 7.300 MB | test 27.591 0.8347 0.4431 | val 29.929
+treehill abl24-hold | target 7.5 MB | trained V 659143 F 1346768 | delivered 7.260 MB | test 20.435 0.4873 0.5932 | val 19.164
+train abl24-hold | target 7.5 MB | trained V 585330 F 1535747 | delivered 7.458 MB | test 18.670 0.6752 0.4279 | val 19.462
+kitchen abl24-hold | target 7.5 MB | trained V 521993 F 1808555 | delivered 7.512 MB | test 26.103 0.8043 0.3717 | val 27.250
+playroom abl24-hold | target 7.5 MB | trained V 525889 F 1728768 | delivered 7.136 MB | test 26.833 0.8427 0.4579 | val 32.042
+bonsai abl24-hold | target 7.5 MB | trained V 641190 F 1613595 | delivered 7.417 MB | test 26.428 0.8145 0.4804 | val 27.415
+flowers abl24-hold | target 7.5 MB | trained V 634606 F 1424529 | delivered 7.312 MB | test 18.991 0.4309 0.5256 | val 19.551
+counter abl24-hold | target 7.5 MB | trained V 565120 F 1718191 | delivered 7.513 MB | test 25.593 0.7957 0.4433 | val 26.801
+drjohnson abl24-hold | target 7.5 MB | trained V 517768 F 1670227 | delivered 7.471 MB | test 25.965 0.8155 0.5114 | val 29.588
+truck abl24-hold | target 15 MB | trained V 1300413 F 2785862 | delivered 15.002 MB | test 22.439 0.7942 0.2884 | val 23.202
+garden abl24-hold | target 15 MB | trained V 1245324 F 3261401 | delivered 15.015 MB | test 24.096 0.7064 0.3361 | val 24.913
+room abl24-hold | target 15 MB | trained V 1342837 F 3361744 | delivered 15.019 MB | test 28.259 0.8546 0.4012 | val 30.858
+stump abl24-hold | target 15 MB | trained V 1387367 F 3033710 | delivered 14.726 MB | test 24.279 0.6398 0.4256 | val 23.339
+bicycle abl24-hold | target 15 MB | trained V 1368687 F 3012479 | delivered 14.825 MB | test 22.752 0.5993 0.4550 | val 21.369
+treehill abl24-hold | target 15 MB | trained V 1433987 F 2843719 | delivered 14.779 MB | test 20.584 0.5173 0.5457 | val 19.636
+flowers abl24-hold | target 15 MB | trained V 1386282 F 2967605 | delivered 14.887 MB | test 19.174 0.4669 0.4847 | val 20.088
+train abl24-hold | target 15 MB | trained V 1250324 F 3151449 | delivered 15.030 MB | test 18.899 0.6992 0.3935 | val 19.869
+drjohnson abl24-hold | target 15 MB | trained V 1126346 F 3485054 | delivered 14.867 MB | test 26.288 0.8253 0.4922 | val 30.931
+playroom abl24-hold | target 15 MB | trained V 1123692 F 3521593 | delivered 14.773 MB | test 27.384 0.8520 0.4263 | val 33.382
+bonsai abl24-hold | target 15 MB | trained V 1399566 F 3260274 | delivered 14.968 MB | test 27.486 0.8461 0.4310 | val 28.618
+counter abl24-hold | target 15 MB | trained V 1200082 F 3410734 | delivered 15.020 MB | test 25.911 0.8159 0.4072 | val 27.438
+kitchen abl24-hold | target 15 MB | trained V 1089478 F 3747506 | delivered 15.059 MB | test 26.849 0.8359 0.3189 | val 28.474

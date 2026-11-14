@@ -1,0 +1,26 @@
+room       hold pts 4 (4.9..15.0 MB) cap pts 9 | BD-PSNR +0.38 dB | BD-rate -34.8 %
+kitchen    hold pts 5 (5.0..20.0 MB) cap pts 9 | BD-PSNR +0.68 dB | BD-rate -40.8 %
+counter    hold pts 5 (5.0..20.0 MB) cap pts 8 | BD-PSNR +0.40 dB | BD-rate -47.8 %
+bonsai     hold pts 5 (4.9..20.3 MB) cap pts 9 | BD-PSNR +0.18 dB | BD-rate -10.9 %
+garden     hold pts 5 (4.9..20.0 MB) cap pts 12 | BD-PSNR +0.22 dB | BD-rate -16.7 %
+bicycle    hold pts 5 (4.7..19.9 MB) cap pts 7 | BD-PSNR +0.37 dB | BD-rate -41.0 %
+stump      hold pts 5 (4.7..19.7 MB) cap pts 9 | BD-PSNR +0.37 dB | BD-rate -33.1 %
+flowers    hold pts 5 (4.9..19.9 MB) cap pts 6 | BD-PSNR +0.33 dB | BD-rate -60.3 %
+treehill   hold pts 3 (4.7..14.8 MB) cap pts 4 | BD-PSNR +0.00 dB | BD-rate +3.0 %
+truck      hold pts 4 (4.9..15.0 MB) cap pts 8 | BD-PSNR +0.11 dB | BD-rate -12.3 %
+train      hold pts 4 (5.0..15.0 MB) cap pts 7 | BD-PSNR +0.28 dB | BD-rate -49.1 %
+drjohnson  hold pts 5 (5.0..19.8 MB) cap pts 6 | BD-PSNR +0.20 dB | BD-rate -21.6 %
+playroom   hold pts 5 (5.0..20.1 MB) cap pts 7 | BD-PSNR +0.26 dB | BD-rate -24.1 %
+lego       hold pts 3 (1.5..4.0 MB) cap pts 9 | BD-PSNR +0.65 dB | BD-rate -21.0 %
+chair      hold pts 2 (1.5..2.5 MB) cap pts 5 | BD-PSNR +0.29 dB | BD-rate -14.2 %
+drums      hold pts 3 (1.5..4.0 MB) cap pts 5 | BD-PSNR +0.12 dB | BD-rate -25.1 %
+ficus      hold pts 2 (1.5..2.0 MB) cap pts 6 | BD-PSNR +0.17 dB | BD-rate n/a
+hotdog     hold pts 2 (1.5..2.5 MB) cap pts 6 | BD-PSNR +0.27 dB | BD-rate -18.8 %
+materials  hold pts 2 (1.5..2.5 MB) cap pts 7 | BD-PSNR +0.16 dB | BD-rate -25.2 %
+mic        hold pts 3 (1.5..2.6 MB) cap pts 5 | BD-PSNR +0.21 dB | BD-rate -11.0 %
+ship       skipped (hold points 1, cap points 7)
+
+Mip-NeRF 360 / T&T   n 11 | BD-PSNR mean +0.30 dB (better on 11) range +0.00..+0.68 | BD-rate mean -31.3 % (n 11)
+all                  n 20 | BD-PSNR mean +0.28 dB (better on 20) range +0.00..+0.68 | BD-rate mean -26.6 % (n 19)
+Deep Blending        n  2 | BD-PSNR mean +0.23 dB (better on 2) range +0.20..+0.26 | BD-rate mean -22.8 % (n 2)
+objects              n  7 | BD-PSNR mean +0.27 dB (better on 7) range +0.12..+0.65 | BD-rate mean -19.2 % (n 6)
