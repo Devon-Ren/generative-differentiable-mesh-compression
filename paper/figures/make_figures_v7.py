@@ -44,7 +44,7 @@ SPEC = (('tfan', 'MPEG TFAN', 'D', C5[2]), ('zstd', 'quantized PLY + zstd', '^',
 # ---- (a) all solid
 curve(a, bm, C5[0], '-', 'o', lw=2.2, ms=6, z=8, hl=bm); curve(a, co, C5[1], '-', 's', lw=2.0, ms=5.5, z=7, hl=co)
 for k, name, mk, col in SPEC: curve(a, D['points'][k], col, '-', mk, hl=D['hull'][k])
-a.annotate('BudgetMesh', bm[1], textcoords='offset points', xytext=(-4, 8), ha='center', fontsize=7.5, color=INK, fontweight='bold')
+a.annotate('BudgetMesh', bm[1], textcoords='offset points', xytext=(-8, 15), ha='center', fontsize=7.5, color=INK, fontweight='bold')
 a.annotate('our codec', co[0], textcoords='offset points', xytext=(4, -8), ha='center', va='top', fontsize=7.5, color=INK)
 a.text(11.0, 21.5, 'TFAN', ha='right', va='center', fontsize=7.5, color=INK); a.text(19.0, 21.5, 'zstd', ha='left', va='center', fontsize=7.5, color=INK); a.text(64.0, 21.5, 'Draco', ha='left', va='center', fontsize=7.5, color=INK)
 # ---- (b) BudgetMesh solid, everything else dashed
@@ -53,7 +53,7 @@ pho = ph + [ring]; curve(b, pho, C5[1], DASH, 's', lw=2.0, ms=5.5, z=7)
 for k, name, mk, col in SPEC: curve(b, [(v[k], v['psnr']) for v in G33.values()], col, DASH, mk)
 fx, fy = st.mean(FP[s][0] for s in MIP), st.mean(FP[s][1] for s in MIP)
 b.plot([fx], [fy], '*', color=INK, ms=10, zorder=6); b.annotate('uncompressed\n%.0f MB' % fx, (fx, fy), textcoords='offset points', xytext=(0, 7), ha='center', va='bottom', fontsize=7, color=INK)
-b.annotate('BudgetMesh', bm[1], textcoords='offset points', xytext=(-4, 8), ha='center', fontsize=7.5, color=INK, fontweight='bold')
+b.annotate('BudgetMesh', bm[1], textcoords='offset points', xytext=(-8, 15), ha='center', fontsize=7.5, color=INK, fontweight='bold')
 for ax, cap in ((a, '(a) Baselines trained with a vertex cap'), (b, '(b) Baselines simplified after training')):
     ax.set_xscale('log'); ax.set_xlim(3.3, 900); ax.set_ylim(17.4, 25.1)
     ax.xaxis.set_major_locator(mt.FixedLocator([5, 10, 20, 50, 100, 200, 500])); ax.xaxis.set_major_formatter(mt.FuncFormatter(lambda v, _: '%g' % v)); ax.xaxis.set_minor_formatter(mt.NullFormatter())

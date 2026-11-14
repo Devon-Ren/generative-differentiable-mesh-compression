@@ -31,7 +31,7 @@ curve(bm, bm, C5[0], '-', 'o', 'BudgetMesh: our controller + our codec', lw=2.2,
 curve(co, co, C5[1], '-', 's', 'MeshSplatting with a vertex cap + our codec', lw=2.0, ms=5.5, z=7)
 for (k, name, ls, mk), col in zip((('tfan', 'MPEG TFAN', '-', 'D'), ('zstd', 'quantized PLY + zstd', (0, (5, 2)), '^'), ('draco', 'Draco', (0, (1.5, 1.8)), 'v')), C5[2:]):
     curve(D['points'][k], D['hull'][k], col, ls, mk, 'MeshSplatting with a vertex cap + ' + name)
-ax.annotate('BudgetMesh', bm[1], textcoords='offset points', xytext=(-4, 9), ha='center', fontsize=8, color=INK, fontweight='bold')
+ax.annotate('BudgetMesh', bm[1], textcoords='offset points', xytext=(-8, 15), ha='center', fontsize=8, color=INK, fontweight='bold')
 ax.annotate('cap + our codec', co[0], textcoords='offset points', xytext=(2, -8), ha='center', va='top', fontsize=7.5, color=INK)
 ax.text(11.3, 21.9, 'cap + TFAN', ha='right', va='center', fontsize=7.5, color=INK)
 ax.text(18.0, 21.9, 'cap + zstd', ha='left', va='center', fontsize=7.5, color=INK)
