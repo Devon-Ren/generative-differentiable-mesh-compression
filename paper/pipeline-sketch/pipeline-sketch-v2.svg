@@ -1,0 +1,204 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1560 640" width="1560" height="640" font-family="Helvetica, Arial, sans-serif">
+<defs><marker id="a0b0b0b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0b0b0b"/></marker><marker id="a2a78d6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2a78d6"/></marker><marker id="aeb6834" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#eb6834"/></marker><marker id="a52514e" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#52514e"/></marker><linearGradient id="op" x1="0" x2="1"><stop offset="0" stop-color="#9c9b95" stop-opacity="0.25"/><stop offset="1" stop-color="#9c9b95" stop-opacity="1"/></linearGradient></defs>
+<rect width="1560" height="640" fill="white"/>
+<rect x="30" y="8" width="16" height="14" rx="3" fill="#e6f0fc" stroke="#2a78d6" stroke-width="1.3"/>
+<text x="52" y="20" font-size="12" fill="#0b0b0b" text-anchor="start" font-weight="normal" font-style="normal">ours</text>
+<rect x="100" y="8" width="16" height="14" rx="3" fill="#e9e8e3" stroke="#8a8983" stroke-width="1.3"/>
+<text x="122" y="20" font-size="12" fill="#0b0b0b" text-anchor="start" font-weight="normal" font-style="normal">as in MeshSplatting</text>
+<text x="1120" y="20" font-size="12" fill="#52514e" text-anchor="end" font-weight="normal" font-style="normal">input: images + target size in MB</text>
+<rect x="40.0" y="40" width="354.0" height="430" rx="10" fill="#f7f7f4" stroke="#c9c8c2" stroke-width="1.3"/>
+<text x="52.0" y="60" font-size="14" fill="#0b0b0b" text-anchor="start" font-weight="bold" font-style="normal">A  Grow</text>
+<text x="382.0" y="60" font-size="11" fill="#52514e" text-anchor="end" font-weight="normal" font-style="normal">every 500 iterations</text>
+<polygon points="58,110 92,92 84,134" fill="#9c9b95" stroke="#52514e" stroke-width="1" fill-opacity="0.35" stroke-opacity="0.6"/>
+<polygon points="104,100 150,90 136,122" fill="#9c9b95" stroke="#52514e" stroke-width="1" fill-opacity="0.5" stroke-opacity="0.75"/>
+<polygon points="60,160 88,142 104,176" fill="#9c9b95" stroke="#52514e" stroke-width="1" fill-opacity="0.3" stroke-opacity="0.55"/>
+<polygon points="118,140 166,132 154,168" fill="#9c9b95" stroke="#52514e" stroke-width="1" fill-opacity="0.55" stroke-opacity="0.8"/>
+<polygon points="70,190 98,184 90,208" fill="#9c9b95" stroke="#52514e" stroke-width="1" fill-opacity="0.4" stroke-opacity="0.65"/>
+<polygon points="126,184 160,190 140,206" fill="#9c9b95" stroke="#52514e" stroke-width="1" fill-opacity="0.3" stroke-opacity="0.55"/>
+<text x="110" y="226" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal" font-style="normal">triangle soup:</text>
+<text x="110" y="240" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal" font-style="normal">semi-transparent,</text>
+<text x="110" y="254" font-size="11" fill="#52514e" text-anchor="middle" font-weight="normal" font-style="normal">not connected</text>
+<rect x="190" y="86" width="196" height="62" rx="7" fill="#e6f0fc" stroke="#2a78d6" stroke-width="1.3"/>
+<text x="288" y="106" font-size="11.5" fill="#0b0b0b" text-anchor="middle" font-weight="bold" font-style="normal">1  measure  (from 4k, every 1k)</text>
+<text x="288" y="122" font-size="10.5" fill="#52514e" text-anchor="middle" font-weight="normal" font-style="normal">block M: how big would the file be</text>
+<text x="288" y="136" font-size="10.5" fill="#52514e" text-anchor="middle" font-weight="normal" font-style="normal">if training stopped now?</text>
+<rect x="190" y="176" width="196" height="62" rx="7" fill="#e6f0fc" stroke="#2a78d6" stroke-width="1.3"/>
+<text x="288" y="196" font-size="11.5" fill="#0b0b0b" text-anchor="middle" font-weight="bold" font-style="normal">2  plan</text>
+<text x="288" y="212" font-size="10.5" fill="#52514e" text-anchor="middle" font-weight="normal" font-style="normal">how many triangles to split now so the</text>
+<text x="288" y="226" font-size="10.5" fill="#52514e" text-anchor="middle" font-weight="normal" font-style="normal">mesh ends 35% above the target</text>
+<rect x="190" y="266" width="196" height="74" rx="7" fill="#e6f0fc" stroke="#2a78d6" stroke-width="1.3"/>
+<text x="288" y="286" font-size="11.5" fill="#0b0b0b" text-anchor="middle" font-weight="bold" font-style="normal">3  split</text>
+<text x="288" y="302" font-size="10.5" fill="#52514e" text-anchor="middle" font-weight="normal" font-style="normal">only the triangles whose split lowers</text>
+<text x="288" y="316" font-size="10.5" fill="#52514e" text-anchor="middle" font-weight="normal" font-style="normal">the error most per byte; the rest</text>
+<text x="288" y="330" font-size="10.5" fill="#52514e" text-anchor="middle" font-weight="normal" font-style="normal">stay as they are</text>
+<line x1="288" y1="150" x2="288" y2="174" stroke="#2a78d6" stroke-width="1.5" marker-end="url(#a2a78d6)"/>
+<line x1="288" y1="240" x2="288" y2="264" stroke="#2a78d6" stroke-width="1.5" marker-end="url(#a2a78d6)"/>
+<path d="M 388 302 L 391 302 L 391 116 L 389 116" fill="none" stroke="#2a78d6" stroke-width="1.5" marker-end="url(#a2a78d6)"/>
+<polygon points="56,372 112,348 104,404" fill="#b7d3f6" stroke="#2a78d6" stroke-width="1" fill-opacity="0.7" stroke-opacity="0.95"/>
+<polygon points="56,372 84,360 80,388" fill="none" stroke="#2a78d6" stroke-width="1.1"/>
+<polygon points="84,360 112,348 108,376" fill="none" stroke="#2a78d6" stroke-width="1.1"/>
+<polygon points="80,388 108,376 104,404" fill="none" stroke="#2a78d6" stroke-width="1.1"/>
+<polygon points="84,360 108,376 80,388" fill="none" stroke="#2a78d6" stroke-width="1.1"/>
+<text x="84" y="422" font-size="10.5" fill="#2a78d6" text-anchor="middle" font-weight="normal" font-style="normal">split</text>
+<polygon points="150,352 196,362 164,398" fill="#9c9b95" stroke="#52514e" stroke-width="1" fill-opacity="0.55" stroke-opacity="0.8"/>
+<text x="172" y="422" font-size="10.5" fill="#52514e" text-anchor="middle" font-weight="normal" font-style="normal">kept</text>
+<polygon points="232,356 272,350 256,392" fill="#9c9b95" stroke="#52514e" stroke-width="1" fill-opacity="0.12" stroke-opacity="0.37"/>
+<path d="M 236 352 L 270 392 M 270 352 L 236 392" stroke="#52514e" stroke-width="1.4"/>
+<text x="254" y="422" font-size="10.5" fill="#52514e" text-anchor="middle" font-weight="normal" font-style="normal">removed</text>
+<rect x="300" y="352" width="88" height="74" rx="7" fill="#e9e8e3" stroke="#8a8983" stroke-width="1.3"/>
+<text x="344" y="372" font-size="10.2" fill="#52514e" text-anchor="middle" font-weight="normal" font-style="normal">MeshSplatting</text>
+<text x="344" y="386" font-size="10.2" fill="#52514e" text-anchor="middle" font-weight="normal" font-style="normal">also removes</text>
+<text x="344" y="400" font-size="10.2" fill="#52514e" text-anchor="middle" font-weight="normal" font-style="normal">faint or huge</text>
+<text x="344" y="414" font-size="10.2" fill="#52514e" text-anchor="middle" font-weight="normal" font-style="normal">triangles</text>
+<text x="220.0" y="458" font-size="10.5" fill="#0b0b0b" text-anchor="middle" font-weight="normal" font-style="italic">no collapse here: the soup has no shared edges to collapse</text>
+<rect x="402.0" y="40" width="84.0" height="430" rx="10" fill="#e9e8e3" stroke="#8a8983" stroke-width="1.3"/>
+<text x="444.0" y="60" font-size="13" fill="#0b0b0b" text-anchor="middle" font-weight="bold" font-style="normal">B  Connect</text>
+<polygon points="412,200 440,120 472,190" fill="#9c9b95" stroke="#52514e" stroke-width="1" fill-opacity="0.75" stroke-opacity="1"/>
+<polygon points="412,200 472,190 452,250" fill="#9c9b95" stroke="#52514e" stroke-width="1" fill-opacity="0.75" stroke-opacity="1"/>
+<polygon points="418,130 440,120 412,200" fill="#9c9b95" stroke="#52514e" stroke-width="1" fill-opacity="0.75" stroke-opacity="1"/>
+<text x="444.0" y="290" font-size="10.5" fill="#52514e" text-anchor="middle" font-weight="normal" font-style="normal">restricted</text>
+<text x="444.0" y="304" font-size="10.5" fill="#52514e" text-anchor="middle" font-weight="normal" font-style="normal">Delaunay</text>
+<text x="444.0" y="318" font-size="10.5" fill="#52514e" text-anchor="middle" font-weight="normal" font-style="normal">at 11k:</text>
+<text x="444.0" y="332" font-size="10.5" fill="#52514e" text-anchor="middle" font-weight="normal" font-style="normal">one mesh</text>
+<text x="444.0" y="346" font-size="10.5" fill="#52514e" text-anchor="middle" font-weight="normal" font-style="normal">with shared</text>
+<text x="444.0" y="360" font-size="10.5" fill="#52514e" text-anchor="middle" font-weight="normal" font-style="normal">vertices</text>
+<text x="444.0" y="374" font-size="10.5" fill="#52514e" text-anchor="middle" font-weight="normal" font-style="normal">and edges</text>
+<rect x="490.0" y="40" width="626.0" height="430" rx="10" fill="#f7f7f4" stroke="#c9c8c2" stroke-width="1.3"/>
+<text x="502.0" y="60" font-size="14" fill="#0b0b0b" text-anchor="start" font-weight="bold" font-style="normal">C  Hold at the target</text>
+<text x="1104.0" y="60" font-size="11" fill="#52514e" text-anchor="end" font-weight="normal" font-style="normal">every 500 iterations, 35 rounds; nothing is grown any more</text>
+<rect x="502.0" y="76" width="602.0" height="150" rx="8" fill="white" stroke="#2a78d6" stroke-width="1.2" stroke-dasharray="5 3"/>
+<text x="514.0" y="94" font-size="11.5" fill="#2a78d6" text-anchor="start" font-weight="bold" font-style="normal">M  measure the size (used in A and in C)</text>
+<polygon points="520,150 550,116 570,160" fill="#9c9b95" stroke="#52514e" stroke-width="1" fill-opacity="0.5" stroke-opacity="0.75"/>
+<polygon points="550,116 594,128 570,160" fill="#9c9b95" stroke="#52514e" stroke-width="1" fill-opacity="0.5" stroke-opacity="0.75"/>
+<polygon points="528,176 570,160 580,196" fill="#9c9b95" stroke="#52514e" stroke-width="1" fill-opacity="0.2" stroke-opacity="0.45"/>
+<text x="558.0" y="214" font-size="10.5" fill="#52514e" text-anchor="middle" font-weight="normal" font-style="normal">copy of the mesh</text>
+<line x1="606.0" y1="150" x2="632.0" y2="150" stroke="#2a78d6" stroke-width="1.5" marker-end="url(#a2a78d6)"/>
+<polygon points="640,150 670,116 690,160" fill="#9c9b95" stroke="#52514e" stroke-width="1" fill-opacity="1" stroke-opacity="1"/>
+<polygon points="670,116 714,128 690,160" fill="#9c9b95" stroke="#52514e" stroke-width="1" fill-opacity="1" stroke-opacity="1"/>
+<polygon points="648,176 690,160 700,196" fill="#9c9b95" stroke="#52514e" stroke-width="1" fill-opacity="0.1" stroke-opacity="0.35"/>
+<path d="M 660.0 166 L 692.0 196 M 692.0 166 L 660.0 196" stroke="#52514e" stroke-width="1.3"/>
+<text x="678.0" y="214" font-size="10.5" fill="#52514e" text-anchor="middle" font-weight="normal" font-style="normal">rendered fully opaque;</text>
+<text x="678.0" y="226" font-size="10.5" fill="#52514e" text-anchor="middle" font-weight="normal" font-style="normal">hidden triangles dropped</text>
+<line x1="726.0" y1="150" x2="752.0" y2="150" stroke="#2a78d6" stroke-width="1.5" marker-end="url(#a2a78d6)"/>
+<polygon points="756,112 818,129.16 818,172.84 756,190" fill="#e6f0fc" stroke="#2a78d6" stroke-width="1.5"/>
+<text x="787.0" y="148" font-size="10.5" fill="#0b0b0b" text-anchor="middle" font-weight="normal" font-style="normal">the real</text>
+<text x="787.0" y="161" font-size="10.5" fill="#0b0b0b" text-anchor="middle" font-weight="normal" font-style="normal">encoder</text>
+<line x1="822.0" y1="150" x2="848.0" y2="150" stroke="#2a78d6" stroke-width="1.5" marker-end="url(#a2a78d6)"/>
+<rect x="852.0" y="126" width="96" height="48" rx="7" fill="#e6f0fc" stroke="#2a78d6" stroke-width="1.3"/>
+<text x="900.0" y="146" font-size="11.5" fill="#0b0b0b" text-anchor="middle" font-weight="bold" font-style="normal">file size</text>
+<text x="900.0" y="162" font-size="10.5" fill="#52514e" text-anchor="middle" font-weight="normal" font-style="normal">in bytes</text>
+<text x="1032.0" y="134" font-size="10.5" fill="#52514e" text-anchor="middle" font-weight="normal" font-style="normal">in A (soup): only the</text>
+<text x="1032.0" y="147" font-size="10.5" fill="#52514e" text-anchor="middle" font-weight="normal" font-style="normal">bytes per vertex are used;</text>
+<text x="1032.0" y="160" font-size="10.5" fill="#52514e" text-anchor="middle" font-weight="normal" font-style="normal">in C: the whole file</text>
+<rect x="514.0" y="250" width="150" height="64" rx="7" fill="#e6f0fc" stroke="#2a78d6" stroke-width="1.3"/>
+<text x="589.0" y="270" font-size="11.5" fill="#0b0b0b" text-anchor="middle" font-weight="bold" font-style="normal">1  measure (M)</text>
+<text x="589.0" y="286" font-size="10.5" fill="#52514e" text-anchor="middle" font-weight="normal" font-style="normal">file above the target?</text>
+<text x="589.0" y="299" font-size="10.5" fill="#52514e" text-anchor="middle" font-weight="normal" font-style="normal">by how many bytes?</text>
+<rect x="704.0" y="250" width="220" height="150" rx="7" fill="#e6f0fc" stroke="#2a78d6" stroke-width="1.3"/>
+<text x="814.0" y="270" font-size="11.5" fill="#0b0b0b" text-anchor="middle" font-weight="bold" font-style="normal">2  collapse edges worth those bytes</text>
+<polygon points="722,328 756,294 748,328" fill="#9c9b95" stroke="#52514e" stroke-width="1" fill-opacity="0.8" stroke-opacity="1"/>
+<polygon points="756,294 768,328 748,328" fill="#9c9b95" stroke="#52514e" stroke-width="1" fill-opacity="0.8" stroke-opacity="1"/>
+<polygon points="756,294 792,328 768,328" fill="#9c9b95" stroke="#52514e" stroke-width="1" fill-opacity="0.8" stroke-opacity="1"/>
+<polygon points="722,328 748,328 756,364" fill="#9c9b95" stroke="#52514e" stroke-width="1" fill-opacity="0.8" stroke-opacity="1"/>
+<polygon points="748,328 768,328 756,364" fill="#9c9b95" stroke="#52514e" stroke-width="1" fill-opacity="0.8" stroke-opacity="1"/>
+<polygon points="768,328 792,328 756,364" fill="#9c9b95" stroke="#52514e" stroke-width="1" fill-opacity="0.8" stroke-opacity="1"/>
+<line x1="748.0" y1="328" x2="768.0" y2="328" stroke="#eb6834" stroke-width="3"/>
+<line x1="802.0" y1="328" x2="826.0" y2="328" stroke="#2a78d6" stroke-width="1.5" marker-end="url(#a2a78d6)"/>
+<polygon points="834,328 868,294 870,328" fill="#9c9b95" stroke="#52514e" stroke-width="1" fill-opacity="0.8" stroke-opacity="1"/>
+<polygon points="868,294 904,328 870,328" fill="#9c9b95" stroke="#52514e" stroke-width="1" fill-opacity="0.8" stroke-opacity="1"/>
+<polygon points="834,328 870,328 868,364" fill="#9c9b95" stroke="#52514e" stroke-width="1" fill-opacity="0.8" stroke-opacity="1"/>
+<polygon points="870,328 904,328 868,364" fill="#9c9b95" stroke="#52514e" stroke-width="1" fill-opacity="0.8" stroke-opacity="1"/>
+<text x="814.0" y="378" font-size="10.2" fill="#52514e" text-anchor="middle" font-weight="normal" font-style="normal">cheapest first: least error per byte freed;</text>
+<text x="814.0" y="390" font-size="10.2" fill="#52514e" text-anchor="middle" font-weight="normal" font-style="normal">never a collapse that folds the surface</text>
+<rect x="964.0" y="250" width="136" height="64" rx="7" fill="#e9e8e3" stroke="#8a8983" stroke-width="1.3"/>
+<text x="1032.0" y="270" font-size="11.5" fill="#0b0b0b" text-anchor="middle" font-weight="bold" font-style="normal">3  train on</text>
+<text x="1032.0" y="286" font-size="10.5" fill="#52514e" text-anchor="middle" font-weight="normal" font-style="normal">500 iterations, the mesh</text>
+<text x="1032.0" y="299" font-size="10.5" fill="#52514e" text-anchor="middle" font-weight="normal" font-style="normal">adapts to the removal</text>
+<line x1="666.0" y1="282" x2="702.0" y2="282" stroke="#2a78d6" stroke-width="1.5" marker-end="url(#a2a78d6)"/>
+<text x="684.0" y="274" font-size="10.5" fill="#2a78d6" text-anchor="middle" font-weight="normal" font-style="normal">yes</text>
+<line x1="926.0" y1="282" x2="962.0" y2="282" stroke="#2a78d6" stroke-width="1.5" marker-end="url(#a2a78d6)"/>
+<path d="M 1032.0 316 L 1032.0 426 L 589.0 426 L 589.0 318" fill="none" stroke="#2a78d6" stroke-width="1.5" marker-end="url(#a2a78d6)"/>
+<path d="M 550.0 316 L 550.0 446 L 1064.0 446 L 1064.0 318" fill="none" stroke="#2a78d6" stroke-width="1.2" marker-end="url(#a2a78d6)" stroke-dasharray="4 3"/>
+<text x="640.0" y="460" font-size="10.5" fill="#2a78d6" text-anchor="start" font-weight="normal" font-style="normal">no: nothing is removed this round</text>
+<line x1="40" y1="520" x2="1120" y2="520" stroke="#0b0b0b" stroke-width="1.4"/>
+<line x1="40.0" y1="514" x2="40.0" y2="526" stroke="#0b0b0b" stroke-width="1.2"/>
+<text x="40.0" y="540" font-size="10.5" fill="#52514e" text-anchor="middle" font-weight="normal" font-style="normal">0</text>
+<line x1="184.0" y1="514" x2="184.0" y2="526" stroke="#0b0b0b" stroke-width="1.2"/>
+<text x="184.0" y="540" font-size="10.5" fill="#52514e" text-anchor="middle" font-weight="normal" font-style="normal">4k</text>
+<line x1="400.0" y1="514" x2="400.0" y2="526" stroke="#0b0b0b" stroke-width="1.2"/>
+<text x="400.0" y="540" font-size="10.5" fill="#52514e" text-anchor="middle" font-weight="normal" font-style="normal">10k</text>
+<line x1="436.0" y1="514" x2="436.0" y2="526" stroke="#0b0b0b" stroke-width="1.2"/>
+<text x="436.0" y="540" font-size="10.5" fill="#52514e" text-anchor="middle" font-weight="normal" font-style="normal">11k</text>
+<line x1="490.0" y1="514" x2="490.0" y2="526" stroke="#0b0b0b" stroke-width="1.2"/>
+<text x="490.0" y="540" font-size="10.5" fill="#52514e" text-anchor="middle" font-weight="normal" font-style="normal">12.5k</text>
+<line x1="760.0" y1="514" x2="760.0" y2="526" stroke="#0b0b0b" stroke-width="1.2"/>
+<text x="760.0" y="540" font-size="10.5" fill="#52514e" text-anchor="middle" font-weight="normal" font-style="normal">20k</text>
+<line x1="904.0" y1="514" x2="904.0" y2="526" stroke="#0b0b0b" stroke-width="1.2"/>
+<text x="904.0" y="540" font-size="10.5" fill="#52514e" text-anchor="middle" font-weight="normal" font-style="normal">24k</text>
+<line x1="1102.0" y1="514" x2="1102.0" y2="526" stroke="#0b0b0b" stroke-width="1.2"/>
+<text x="1102.0" y="540" font-size="10.5" fill="#52514e" text-anchor="end" font-weight="normal" font-style="normal">29.5k</text>
+<line x1="1120.0" y1="514" x2="1120.0" y2="526" stroke="#0b0b0b" stroke-width="1.2"/>
+<text x="1120.0" y="540" font-size="10.5" fill="#52514e" text-anchor="start" font-weight="normal" font-style="normal">30k</text>
+<text x="40" y="506" font-size="11" fill="#52514e" text-anchor="start" font-weight="normal" font-style="normal">training iterations</text>
+<line x1="43.0" y1="494" x2="397.0" y2="494" stroke="#2a78d6" stroke-width="4"/>
+<text x="220.0" y="488" font-size="10.5" fill="#0b0b0b" text-anchor="middle" font-weight="normal" font-style="normal">A  grow</text>
+<line x1="403.0" y1="494" x2="487.0" y2="494" stroke="#8a8983" stroke-width="4"/>
+<text x="445.0" y="488" font-size="10.5" fill="#0b0b0b" text-anchor="middle" font-weight="normal" font-style="normal">B</text>
+<line x1="493.0" y1="494" x2="1099.0" y2="494" stroke="#2a78d6" stroke-width="4"/>
+<text x="796.0" y="488" font-size="10.5" fill="#0b0b0b" text-anchor="middle" font-weight="normal" font-style="normal">C  hold</text>
+<rect x="40.0" y="554" width="180.0" height="12" fill="#9c9b95" fill-opacity="0.25"/><rect x="220.0" y="554" width="684.0" height="12" fill="url(#op)"/><rect x="904.0" y="554" width="216.0" height="12" fill="#9c9b95"/>
+<text x="40.0" y="582" font-size="10.5" fill="#52514e" text-anchor="start" font-weight="normal" font-style="normal">opacity of the triangles: semi-transparent</text>
+<text x="562.0" y="582" font-size="10.5" fill="#52514e" text-anchor="middle" font-weight="normal" font-style="normal">raised step by step from 5k</text>
+<text x="1120.0" y="582" font-size="10.5" fill="#52514e" text-anchor="end" font-weight="normal" font-style="normal">fully opaque from 24k</text>
+<text x="760.0" y="602" font-size="10.5" fill="#52514e" text-anchor="middle" font-weight="normal" font-style="normal">rendering at 2x resolution from 20k, 4x from 25k (as in MeshSplatting)</text>
+<rect x="1150" y="40" width="268" height="430" rx="10" fill="#f7f7f4" stroke="#c9c8c2" stroke-width="1.3"/>
+<text x="1162" y="60" font-size="14" fill="#0b0b0b" text-anchor="start" font-weight="bold" font-style="normal">D  Encode</text>
+<text x="1406" y="60" font-size="11" fill="#52514e" text-anchor="end" font-weight="normal" font-style="normal">after training</text>
+<rect x="1166" y="80" width="120" height="44" rx="7" fill="#e9e8e3" stroke="#8a8983" stroke-width="1.3"/>
+<text x="1226" y="98" font-size="11.5" fill="#0b0b0b" text-anchor="middle" font-weight="normal" font-style="normal">fine-tune</text>
+<text x="1226" y="113" font-size="10.5" fill="#52514e" text-anchor="middle" font-weight="normal" font-style="normal">3,000 steps</text>
+<line x1="1226" y1="126" x2="1226" y2="146" stroke="#0b0b0b" stroke-width="1.5" marker-end="url(#a0b0b0b)"/>
+<rect x="1166" y="148" width="120" height="150" rx="7" fill="#e6f0fc" stroke="#2a78d6" stroke-width="1.3"/>
+<text x="1226" y="166" font-size="11.5" fill="#0b0b0b" text-anchor="middle" font-weight="bold" font-style="normal">shared colour</text>
+<text x="1226" y="180" font-size="11.5" fill="#0b0b0b" text-anchor="middle" font-weight="bold" font-style="normal">codebook</text>
+<rect x="1176" y="190" width="100" height="34" rx="7" fill="white" stroke="#2a78d6" stroke-width="1.3"/>
+<text x="1226" y="205" font-size="10.2" fill="#0b0b0b" text-anchor="middle" font-weight="normal" font-style="normal">main: 4,096 entries</text>
+<text x="1226" y="218" font-size="10" fill="#0b0b0b" text-anchor="middle" font-weight="normal" font-style="normal"></text>
+<rect x="1176" y="230" width="100" height="34" rx="7" fill="white" stroke="#2a78d6" stroke-width="1.3"/>
+<text x="1226" y="245" font-size="10.2" fill="#0b0b0b" text-anchor="middle" font-weight="normal" font-style="normal">residual: 256</text>
+<text x="1226" y="257" font-size="10.2" fill="#0b0b0b" text-anchor="middle" font-weight="normal" font-style="normal">entries</text>
+<text x="1226" y="280" font-size="10.2" fill="#52514e" text-anchor="middle" font-weight="normal" font-style="normal">vertex = base colour</text>
+<text x="1226" y="292" font-size="10.2" fill="#52514e" text-anchor="middle" font-weight="normal" font-style="normal">+ 2 indices</text>
+<line x1="1288" y1="223" x2="1306" y2="223" stroke="#0b0b0b" stroke-width="1.5" marker-end="url(#a0b0b0b)"/>
+<polygon points="1308,96 1370,151.88 1370,294.12 1308,350" fill="#e6f0fc" stroke="#2a78d6" stroke-width="1.5"/>
+<text x="1339" y="150" font-size="11.5" fill="#0b0b0b" text-anchor="middle" font-weight="bold" font-style="normal">Encoder</text>
+<text x="1339" y="178" font-size="10" fill="#52514e" text-anchor="middle" font-weight="normal" font-style="normal">connec-</text>
+<text x="1339" y="190" font-size="10" fill="#52514e" text-anchor="middle" font-weight="normal" font-style="normal">tivity</text>
+<text x="1339" y="202" font-size="10" fill="#52514e" text-anchor="middle" font-weight="normal" font-style="normal"></text>
+<text x="1339" y="214" font-size="10" fill="#52514e" text-anchor="middle" font-weight="normal" font-style="normal">positions</text>
+<text x="1339" y="226" font-size="10" fill="#52514e" text-anchor="middle" font-weight="normal" font-style="normal"></text>
+<text x="1339" y="238" font-size="10" fill="#52514e" text-anchor="middle" font-weight="normal" font-style="normal">base</text>
+<text x="1339" y="250" font-size="10" fill="#52514e" text-anchor="middle" font-weight="normal" font-style="normal">colour</text>
+<text x="1339" y="262" font-size="10" fill="#52514e" text-anchor="middle" font-weight="normal" font-style="normal"></text>
+<text x="1339" y="274" font-size="10" fill="#52514e" text-anchor="middle" font-weight="normal" font-style="normal">indices</text>
+<line x1="1372" y1="223" x2="1386" y2="223" stroke="#0b0b0b" stroke-width="1.5" marker-end="url(#a0b0b0b)"/>
+<rect x="1388" y="196" width="24" height="54" rx="3" fill="white" stroke="#0b0b0b" stroke-width="1.3"/>
+<text x="1400" y="220" font-size="9.5" fill="#0b0b0b" text-anchor="middle" font-weight="normal" font-style="normal">one</text>
+<text x="1400" y="232" font-size="9.5" fill="#0b0b0b" text-anchor="middle" font-weight="normal" font-style="normal">file</text>
+<text x="1284" y="388" font-size="10.5" fill="#eb6834" text-anchor="middle" font-weight="normal" font-style="normal">the same encoder as in block M;</text>
+<text x="1284" y="401" font-size="10.5" fill="#eb6834" text-anchor="middle" font-weight="normal" font-style="normal">M skips only the codebook</text>
+<text x="1284" y="414" font-size="10.5" fill="#eb6834" text-anchor="middle" font-weight="normal" font-style="normal">refit and the check render</text>
+<path d="M 1339 352 L 1339 366" fill="none" stroke="#eb6834" stroke-width="1.3" stroke-dasharray="5 3"/>
+<rect x="1430" y="40" width="110" height="430" rx="10" fill="#f7f7f4" stroke="#c9c8c2" stroke-width="1.3"/>
+<text x="1440" y="60" font-size="13" fill="#0b0b0b" text-anchor="start" font-weight="bold" font-style="normal">E  Decode</text>
+<line x1="1414" y1="223" x2="1448" y2="223" stroke="#0b0b0b" stroke-width="1.5" marker-end="url(#a0b0b0b)"/>
+<polygon points="1450,193.32 1502,170 1502,276 1450,252.68" fill="#e6f0fc" stroke="#2a78d6" stroke-width="1.5"/>
+<text x="1476" y="227" font-size="10.5" fill="#0b0b0b" text-anchor="middle" font-weight="bold" font-style="normal">Decoder</text>
+<line x1="1476" y1="280" x2="1476" y2="304" stroke="#0b0b0b" stroke-width="1.5" marker-end="url(#a0b0b0b)"/>
+<polygon points="1446,356 1476,312 1492,362" fill="#9c9b95" stroke="#52514e" stroke-width="1" fill-opacity="1" stroke-opacity="1"/>
+<polygon points="1476,312 1524,330 1492,362" fill="#9c9b95" stroke="#52514e" stroke-width="1" fill-opacity="1" stroke-opacity="1"/>
+<polygon points="1446,356 1492,362 1480,396" fill="#9c9b95" stroke="#52514e" stroke-width="1" fill-opacity="1" stroke-opacity="1"/>
+<text x="1485" y="418" font-size="10.5" fill="#52514e" text-anchor="middle" font-weight="normal" font-style="normal">opaque mesh;</text>
+<text x="1485" y="431" font-size="10.5" fill="#52514e" text-anchor="middle" font-weight="normal" font-style="normal">only the file</text>
+<text x="1485" y="444" font-size="10.5" fill="#52514e" text-anchor="middle" font-weight="normal" font-style="normal">is needed</text>
+</svg>
