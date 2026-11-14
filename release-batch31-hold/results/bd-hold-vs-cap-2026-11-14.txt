@@ -18,9 +18,9 @@ ficus      hold pts 2 (1.5..2.0 MB) cap pts 6 | BD-PSNR +0.17 dB | BD-rate n/a
 hotdog     hold pts 2 (1.5..2.5 MB) cap pts 6 | BD-PSNR +0.27 dB | BD-rate -18.8 %
 materials  hold pts 2 (1.5..2.5 MB) cap pts 7 | BD-PSNR +0.16 dB | BD-rate -25.2 %
 mic        hold pts 3 (1.5..2.6 MB) cap pts 5 | BD-PSNR +0.21 dB | BD-rate -11.0 %
-ship       skipped (hold points 1, cap points 7)
+ship       hold pts 3 (1.5..4.0 MB) cap pts 7 | BD-PSNR +0.46 dB | BD-rate -32.8 %
 
 Mip-NeRF 360 / T&T   n 11 | BD-PSNR mean +0.30 dB (better on 11) range +0.00..+0.68 | BD-rate mean -31.3 % (n 11)
-all                  n 20 | BD-PSNR mean +0.28 dB (better on 20) range +0.00..+0.68 | BD-rate mean -26.6 % (n 19)
+all                  n 21 | BD-PSNR mean +0.29 dB (better on 21) range +0.00..+0.68 | BD-rate mean -26.9 % (n 20)
 Deep Blending        n  2 | BD-PSNR mean +0.23 dB (better on 2) range +0.20..+0.26 | BD-rate mean -22.8 % (n 2)
-objects              n  7 | BD-PSNR mean +0.27 dB (better on 7) range +0.12..+0.65 | BD-rate mean -19.2 % (n 6)
+objects              n  8 | BD-PSNR mean +0.29 dB (better on 8) range +0.12..+0.65 | BD-rate mean -21.1 % (n 7)

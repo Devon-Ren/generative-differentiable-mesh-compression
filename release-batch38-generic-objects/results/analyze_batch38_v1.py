@@ -4,7 +4,7 @@ import re, glob, json, math, collections
 OBJ = ['lego','chair','drums','ficus','hotdog','materials','mic','ship']; mean = lambda v: sum(v) / len(v)
 R = re.compile(r'(\w+) GENERIC-RD \| mesh (\w+) \| V (\d+) F (\d+) \| sh(\d) \| zstd ([\d.]+) MB \| draco ([\d.]+) MB \| tfan ([\d.]+) MB \| test ([\d.]+) [\d.]+ [\d.]+ \| unquantised ([\d.]+)')
 G = collections.defaultdict(dict)
-for l in open('release-batch38-generic-objects/results/batch38-collect-2026-11-14-0924.txt'):
+for l in open('release-batch38-generic-objects/results/batch38-collect-2026-11-14-0924.txt').read().splitlines() + open('release-batch38-generic-objects/results/batch38-materials-cap259000-rows.txt').read().splitlines():
     m = R.match(l)
     if m: G[(m[1], m[2])][int(m[5])] = dict(zstd=float(m[6]), draco=float(m[7]), tfan=float(m[8]), psnr=float(m[9]), V=int(m[3]))
 C = re.compile(r'^(\w+) budget (\d+) TRAIN-AT-BUDGET-BLENDER \| vertices (\d+) .*?\| delivered ([\d.]+) MB test ([\d.]+)'); cap = collections.defaultdict(dict)
@@ -13,7 +13,7 @@ for f in sorted(glob.glob('release-*/results/*.txt')):
         m = C.match(l)
         if m and m[1] in OBJ: cap[m[1]].setdefault(int(m[2]), (float(m[4]), float(m[5])))
 H = collections.defaultdict(dict)
-for l in open('release-batch31-hold/results/batch31-collect-2026-11-13-0126.txt'):
+for l in open('release-batch31-hold/results/batch31-collect-2026-11-13-0126.txt').read().splitlines() + open('release-batch31-hold/results/batch31-ship-rows-2026-11-14.txt').read().splitlines():
     m = re.match(r'(\w+) abl24-hold \| target ([\d.]+) MB \|.*?delivered ([\d.]+) MB.*?\| test ([\d.]+)', l)
     if m and m[1] in OBJ: H[m[1]][float(m[2])] = (float(m[3]), float(m[4]))
 LEV = {}

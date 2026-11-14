@@ -1,0 +1,3 @@
+# ship, hold controller: the two runs that were still running at the batch31 collect (pasted 2026-11-14); fields used by the analyses
+ship abl24-hold | target 4 MB | best iter 26000 val 29.929 | trained V 241301 F 789332 | delivered 4.010 MB | test 29.559 0.8789 0.1558 | val 31.138
+ship abl24-hold | target 1.5 MB | best iter 26000 val 28.846 | trained V 54546 F 220917 | delivered 1.500 MB | test 28.522 0.8643 0.1843 | val 29.627

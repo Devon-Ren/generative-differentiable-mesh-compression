@@ -11,7 +11,7 @@ for f in sorted(glob.glob('release-*/results/*.txt')):
         m = C.match(l)
         if m: cap[m[1]][int(m[2])] = (float(m[4]), float(m[5]))
 H = collections.defaultdict(list)
-for fn in ('release-batch31-hold/results/batch31-collect-2026-11-13-0126.txt', 'release-batch37-more-points/results/batch37-rows-2026-11-14.txt'):
+for fn in ('release-batch31-hold/results/batch31-collect-2026-11-13-0126.txt', 'release-batch37-more-points/results/batch37-rows-2026-11-14.txt', 'release-batch31-hold/results/batch31-ship-rows-2026-11-14.txt'):
   for l in open(fn):
     m = re.match(r'(\w+) abl24-hold \| target ([\d.]+) MB \|.*?delivered ([\d.]+) MB.*?\| test ([\d.]+)', l)
     if m: H[m[1]].append((float(m[3]), float(m[4])))
