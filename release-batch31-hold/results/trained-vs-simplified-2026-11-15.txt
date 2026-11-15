@@ -1,0 +1,8 @@
+Mip+T&T   pairs  66 scenes 11 | trained better on  66 | mean +2.26 dB (+0.01..+6.02) | vertices 0.21..2.40 M | trained file 3.0..22.7 MB
+DB        pairs   6 scenes  2 | trained better on   6 | mean +2.71 dB (+1.39..+4.72) | vertices 0.18..1.16 M | trained file 2.9..14.6 MB
+captured  pairs  72 scenes 13 | trained better on  72 | mean +2.30 dB (+0.01..+6.02) | vertices 0.18..2.40 M | trained file 2.9..22.7 MB
+objects   pairs  56 scenes  8 | trained better on  55 | mean +1.30 dB (-0.03..+4.35) | vertices 0.03..0.38 M | trained file 1.0..5.9 MB
+all       pairs 128 scenes 21 | trained better on 127 | mean +1.86 dB (-0.03..+6.02) | vertices 0.03..2.40 M | trained file 1.0..22.7 MB
+captured, simplified file  0- 8 MB: n 30 mean +3.87 (+1.36..+6.02)
+captured, simplified file  8-12 MB: n 20 mean +1.87 (+0.73..+3.54)
+captured, simplified file 12-40 MB: n 22 mean +0.54 (+0.01..+1.58)
