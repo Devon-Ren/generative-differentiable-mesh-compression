@@ -1,0 +1,19 @@
+Bjontegaard deltas of ByteSplat (hold, 5 targets) against each baseline, per scene, 11 Mip-NeRF 360 / T&T scenes; piecewise-linear over log10(size); upper envelopes.
+BD-PSNR needs an overlap in file size, BD-rate an overlap in PSNR; n = scenes with that overlap.
+
+room | cap + our codec: +0.38 dB, -34.8 % | cap + tfan: +3.44 dB, -77.8 % | cap + zstd: +5.89 dB, -84.5 % | cap + draco: n/a dB, -95.0 %
+kitchen | cap + our codec: +0.68 dB, -40.8 % | cap + tfan: +3.47 dB, -71.0 % | cap + zstd: +3.77 dB, -79.9 % | cap + draco: n/a dB, -94.3 %
+counter | cap + our codec: +0.40 dB, -47.8 % | cap + tfan: +2.44 dB, -65.7 % | cap + zstd: +2.87 dB, -76.1 % | cap + draco: n/a dB, -92.4 %
+bonsai | cap + our codec: +0.18 dB, -10.9 % | cap + tfan: +2.88 dB, -65.6 % | cap + zstd: +4.96 dB, -75.9 % | cap + draco: n/a dB, -91.8 %
+garden | cap + our codec: +0.22 dB, -16.7 % | cap + tfan: +1.71 dB, -75.3 % | cap + zstd: +2.12 dB, -81.4 % | cap + draco: n/a dB, -94.4 %
+bicycle | cap + our codec: +0.37 dB, -41.0 % | cap + tfan: +1.43 dB, -81.0 % | cap + zstd: +1.52 dB, -85.3 % | cap + draco: n/a dB, -95.1 %
+stump | cap + our codec: +0.37 dB, -33.1 % | cap + tfan: +1.46 dB, -77.9 % | cap + zstd: +1.75 dB, -83.3 % | cap + draco: n/a dB, -94.1 %
+flowers | cap + our codec: +0.33 dB, -60.3 % | cap + tfan: +0.90 dB, -88.7 % | cap + zstd: +0.99 dB, -91.7 % | cap + draco: n/a dB, -96.9 %
+treehill | cap + our codec: +0.00 dB, +3.0 % | cap + tfan: +0.75 dB, -70.4 % | cap + zstd: +1.06 dB, -76.5 % | cap + draco: n/a dB, -92.7 %
+truck | cap + our codec: +0.11 dB, -12.3 % | cap + tfan: +1.60 dB, -73.2 % | cap + zstd: +1.73 dB, -80.5 % | cap + draco: n/a dB, -93.2 %
+train | cap + our codec: +0.28 dB, -49.1 % | cap + tfan: +0.81 dB, -81.3 % | cap + zstd: +0.88 dB, -86.3 % | cap + draco: n/a dB, -95.5 %
+
+cap + our codec  BD-PSNR +0.30 dB (n 11, range +0.00..+0.68) | BD-rate -31.3 % (n 11, range -60.3..+3.0)
+cap + tfan       BD-PSNR +1.90 dB (n 11, range +0.75..+3.47) | BD-rate -75.3 % (n 11, range -88.7..-65.6)
+cap + zstd       BD-PSNR +2.50 dB (n 11, range +0.88..+5.89) | BD-rate -81.9 % (n 11, range -91.7..-75.9)
+cap + draco      BD-PSNR n/a (n 0, range -) | BD-rate -94.1 % (n 11, range -96.9..-91.8)
