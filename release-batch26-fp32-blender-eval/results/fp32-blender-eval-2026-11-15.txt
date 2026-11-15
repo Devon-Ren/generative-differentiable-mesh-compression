@@ -1,0 +1,10 @@
+# MeshSplatting FP32 on NeRF-Synthetic, test split, eval_ckpt_v1.py (pasted 2026-11-15)
+EVAL lego-fp32 | V 497529 F 1857294 | test 33.413 / 0.9725 / 0.0388 | worst 24.43
+EVAL chair-fp32 | V 219507 F 820226 | test 31.874 / 0.9690 / 0.0429 | worst 27.77
+EVAL drums-fp32 | V 240891 F 1094114 | test 25.472 / 0.9432 / 0.0664 | worst 22.57
+EVAL ficus-fp32 | V 74947 F 245535 | test 32.131 / 0.9720 / 0.0409 | worst 29.02
+EVAL hotdog-fp32 | V 287754 F 1205503 | test 35.682 / 0.9788 / 0.0483 | worst 27.74
+EVAL materials-fp32 | V 224941 F 775298 | test 28.231 / 0.9396 / 0.0848 | worst 24.39
+EVAL mic-fp32 | V 133739 F 465114 | test 33.110 / 0.9832 / 0.0257 | worst 31.20
+EVAL ship-fp32 | V 387201 F 1550245 | test 29.463 / 0.8808 / 0.1583 | worst 26.14
+# mean of 8: PSNR 31.172  SSIM 0.9549  LPIPS 0.0633
