@@ -1,0 +1,82 @@
+\section{Method}
+\label{sec:method}
+
+\BM has two parts (Fig.~\ref{fig:pipeline}). The codec (Sec.~\ref{sec:codecm}) writes a mesh into one file. The rate-controlled construction (Sec.~\ref{sec:rc}) uses this codec while the mesh is constructed, so that the final file has the size $T$ that the user asks for. The renderer, the losses and the schedule of \MS are unchanged.
+
+\subsection{Preliminaries}
+\label{sec:prelim}
+\MS~\cite{meshsplatting2025} represents a scene by $V$ vertices and $F$ triangles. Each vertex has a position, a DC colour and 45 spherical-harmonic (SH) coefficients of degrees 1 to 3, which give the view-dependent colour: 52 floats per vertex. Construction takes 30k iterations. During the first 10k, the triangles are not connected (a triangle soup), and every 500 iterations \MS \emph{densifies}: it samples triangles by an importance score and splits each into four by inserting its three edge midpoints. It also prunes triangles that contribute little to the images. At 11k a restricted Delaunay triangulation connects the soup into a mesh. Afterwards the opacity of the triangles is raised step by step until every triangle is opaque. A cap on $V$ can stop densification early; this is the only size control in \MS.
+
+\subsection{Codec}
+\label{sec:codecm}
+The codec first reduces the data with three lossy steps and then codes the result without further loss.
+
+\noindent\textbf{Lossy steps.} (i)~\emph{Appearance.} The 45 SH coefficients are 87\% of the floats of a vertex. Many vertices of a scene have similar view-dependent colour, so we replace the coefficients $\mathbf{h}_v$ of vertex $v$ by two entries of codebooks shared by the whole scene:
+\begin{equation}
+\mathbf{h}_v \approx \mathbf{B}[i_v] + \mathbf{B}_r[j_v],
+\label{eq:cb}
+\end{equation}
+where the main codebook $\mathbf{B}$ has 4{,}096 entries and the residual codebook $\mathbf{B}_r$ has 256. Both are initialized by $k$-means and then refined for 400 steps on the rendering loss with the indices fixed. Each vertex keeps only the indices $i_v$ and $j_v$. (ii)~\emph{Positions} are quantized on a uniform grid per axis, with 14 to 18 bits depending on the scene, so that the grid step is about a tenth of the median edge length. (iii)~\emph{Colour and opacity.} The DC colour is quantized to 7 bits per channel. All triangles are opaque at the end, so the opacity is stored as one scalar.
+
+\noindent\textbf{Lossless coding.} The streams are coded in an order in which each stream is predicted from what the decoder already has. \emph{Order.} The faces are sorted into a strip-like order~\cite{meshoptimizer}, and a vertex receives the next free index the first time a face uses it. The decoder can therefore infer the index of every new vertex, and no vertex order is transmitted. \emph{Connectivity.} Consecutive triangles in this order usually share an edge. The coder keeps the 64 most recent edges; a triangle that uses one of them is coded by the slot of that edge and its third vertex, and a new vertex costs a single symbol. \emph{Positions.} Each vertex is predicted by a neighbour that was decoded earlier, and the integer residual is coded. \emph{SH indices.} The indices of the neighbours decoded earlier are offered as candidates; if the vertex has the same index as one of them, only the candidate number is coded. All symbols are coded by an adaptive binary arithmetic coder, and the DC colour is compressed with zstd. The file also contains the two codebooks.
+
+\noindent\textbf{Decoding.} A standalone decoder reads the file and returns a standard indexed triangle mesh with per-vertex attributes. It decodes the connectivity first and rebuilds every predictor from it, so no side information is needed. The encoder verifies an exact round trip before it writes the file.
+
+\subsection{Rate-controlled construction}
+\label{sec:rc}
+The file size cannot be predicted from the number of vertices alone (Sec.~\ref{sec:control}), so \BM measures it during construction, and uses the measurement in two phases: when the mesh grows, and after the mesh is connected.
+
+\noindent\textbf{Size probe.} A probe takes a copy of the current mesh, renders it at the final opacity, drops the faces that are hidden in every training view, and runs the encoder of Sec.~\ref{sec:codecm}. It returns the file size $R$ and its decomposition
+\begin{equation}
+R = b_v V + b_f F + R_0 ,
+\label{eq:bytes}
+\end{equation}
+where $b_v$ and $b_f$ are the measured bytes per vertex and per face, and $R_0$ is the fixed part (codebooks and header). The probe sees the mesh as the final file would store it, so $R$ is a real file size and not an estimate.
+
+\noindent\textbf{Per-triangle error.} For each triangle $t$ we accumulate the error $e_t$: the $L_1$ difference between the rendered and the reference image, summed over the pixels where $t$ is the front-most triangle and over the views rendered since the last decision. It is the only quality signal that the controller uses.
+
+\noindent\textbf{Phase 1: rate-controlled densification (to 10k).} We keep the densification steps of \MS but decide ourselves how many triangles are split and which ones. From 4k on, a probe runs every 1{,}000 iterations (before that, default values of $b_v$ and $R_0$ are used). The target is converted into a vertex count
+\begin{equation}
+V^\star = \frac{\alpha T - R_0}{b_v + \phi\, b_f},
+\label{eq:vstar}
+\end{equation}
+where $\phi = 2.5$ is the number of faces per vertex and $b_f$ keeps its default value, because the soup has no final connectivity yet. We set $\alpha = 1.35$: the mesh is grown past the target on purpose, and Phase~2 removes the excess. With $k$ densification steps left, the mesh should grow by the same factor $(V^\star/V)^{1/k}$ in each. A split adds three vertices, of which a fraction $\sigma$ survives the next pruning of \MS ($\sigma$ is measured on the previous step), so the number of triangles to split now is
+\begin{equation}
+n = \frac{V\big[(V^\star/V)^{1/k}-1\big]}{3\sigma}.
+\label{eq:n}
+\end{equation}
+We split the $n$ triangles with the largest error $e_t$, in place of the importance sampling of \MS. $V^\star$ and $n$ are recomputed at every step with the latest probe.
+
+\noindent\textbf{Phase 2: rate-controlled simplification (12.5k to 29.5k).} After the triangulation at 11k, the mesh is constructed for 1{,}500 iterations without any change, so that the errors $e_t$ are accumulated on the connected mesh. Then, every 500 iterations, a probe measures the file. If it is above the target, the excess $E = R - T$ is removed by edge collapses. Collapsing an edge $(u,v)$ merges its two vertices and removes the faces on the edge. Its cost is the error it puts at risk per byte it saves:
+\begin{equation}
+c_{uv} = \frac{\sum_{t \,\ni\, u \text{ or } v} e_t}{\Delta R_{uv}}, \qquad \Delta R_{uv} = b_v + b_f\, m_{uv},
+\label{eq:cost}
+\end{equation}
+where the sum runs over the triangles that touch $u$ or $v$, since all of them change shape, and $m_{uv}$ is the number of faces on the edge. Vertices and faces that the probe drops are not in the file and are not counted in $\Delta R_{uv}$. We collapse the edges in order of increasing cost until the saved bytes $\sum \Delta R_{uv}$ reach $E$, and skip a collapse that would flip a neighbouring triangle. If the file is not above the target, nothing is done.
+
+Two properties make this phase work. First, each round removes the whole measured excess, so no prediction of the future file size is needed; the file drifts between rounds because the opacity is still rising, and the next round corrects it. Second, construction continues after every round, so the remaining vertices move and change colour to fit their new neighbours. This is what simplification after construction cannot do (Sec.~\ref{sec:rd}). After the last round at 29.5k, the mesh is constructed to 30k, the codebooks of Eq.~\eqref{eq:cb} are fitted, and the encoder writes the file.
+
+\begin{algorithm}[t]
+\caption{\BM for a target file size $T$}
+\label{alg:bm}
+\small
+\begin{algorithmic}[1]
+\Require images, target $T$
+\For{iteration $i = 1 \dots 30\text{k}$}
+  \State one \MS step; accumulate $e_t$
+  \If{$i \le 10\text{k}$ and $i$ is a densification step}
+    \State probe (every 1k from 4k) $\rightarrow b_v, R_0$
+    \State $V^\star \gets$ Eq.~\eqref{eq:vstar}; \ $n \gets$ Eq.~\eqref{eq:n}
+    \State split the $n$ triangles with the largest $e_t$
+  \EndIf
+  \If{$i = 11\text{k}$} restricted Delaunay triangulation \EndIf
+  \If{$12.5\text{k} \le i \le 29.5\text{k}$ and $i$ is a multiple of 500}
+    \State probe $\rightarrow R, b_v, b_f$; \ $E \gets R - T$
+    \If{$E > 0$}
+      \State collapse edges by increasing $c_{uv}$ until $\sum \Delta R_{uv} \ge E$
+    \EndIf
+  \EndIf
+\EndFor
+\State fit the codebooks; encode $\rightarrow$ one file
+\end{algorithmic}
+\end{algorithm}
