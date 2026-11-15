@@ -1,16 +1,16 @@
 \section{Experiments}
 \label{sec:exp}
 
-\noindent\textbf{Datasets and protocol.} We use Mip-NeRF~360~\cite{barron2022mipnerf360} (9 scenes), Tanks and Temples~\cite{knapitsch2017tanks} (truck, train), Deep Blending~\cite{hedman2018deep} (drjohnson, playroom) and NeRF-Synthetic~\cite{mildenhall2020nerf} (8 objects), 21 scenes in total. The optimization settings of \MS are unchanged: 30k iterations, images downsampled by 2 indoors and by 4 outdoors, the standard test split, and a black background for NeRF-Synthetic. Quality is the PSNR, SSIM and LPIPS of the \emph{decoded file}. Every size is the size of the single file that the encoder writes. The \emph{FP32 model} is the mesh that \MS produces with its released settings, stored in 32-bit floats (our reproduction).
+\noindent\textbf{Datasets and protocol.} We use Mip-NeRF~360~\cite{barron2022mipnerf360} (9 scenes), Tanks and Temples~\cite{knapitsch2017tanks} (truck, train), Deep Blending~\cite{hedman2018deep} (drjohnson, playroom) and NeRF-Synthetic~\cite{mildenhall2020nerf} (8 objects), 21 scenes in total. The training settings of \MS are unchanged: 30k iterations, images downsampled by 2 indoors and by 4 outdoors, the standard test split, and a black background for NeRF-Synthetic. Quality is the PSNR, SSIM and LPIPS of the \emph{decoded file}. Every size is the size of the single file that the encoder writes. The \emph{FP32 model} is the mesh that \MS produces with its released settings, stored in 32-bit floats (our reproduction).
 
 \noindent\textbf{Settings.} The controller uses one setting for all 21 scenes and all target sizes: the file is measured every 500 iterations from 12.5k to 29.5k, and growth aims at 1.35 times the target. The codec uses codebooks of 4{,}096 and 256 entries and 7 bits for the DC colour everywhere. Positions use 14 to 18 bits depending on the scene (14 for the objects, 14--16 for Mip-NeRF~360, 15 for Deep Blending, 18 for Tanks and Temples). Every baseline on a scene uses the same position precision as \BM.
 
-\noindent\textbf{Baselines.} No codec exists for these meshes, so we build the baselines from what is available. For the mesh, the only size control in \MS is a cap on the number of vertices; we also simplify the FP32 model after optimization by edge collapse. For the file, we use three generic mesh codecs: TFAN~\cite{mamou2009tfan}, Draco~\cite{draco} and a quantized PLY compressed with zstd. Each generic codec is run with the SH coefficients quantized to 8, 6 and 4 bits, and we keep its best points. We summarize curves by BD-PSNR and BD-rate, computed with piecewise-linear interpolation over the logarithm of the file size.
+\noindent\textbf{Baselines.} No codec exists for these meshes, so we build the baselines from what is available. For the mesh, the only size control in \MS is a cap on the number of vertices; we also simplify the constructed FP32 model by edge collapse. For the file, we use three generic mesh codecs: TFAN~\cite{mamou2009tfan}, Draco~\cite{draco} and a quantized PLY compressed with zstd. Each generic codec is run with the SH coefficients quantized to 8, 6 and 4 bits, and we keep its best points. We summarize curves by BD-PSNR and BD-rate, computed with piecewise-linear interpolation over the logarithm of the file size.
 
 %------------------------------------------------------------------
 \begin{figure*}[t]\centering
 \includegraphics[width=\linewidth]{figures/fig_rd_pair_v4.pdf}
-\caption{\textbf{Rate--distortion on Mip-NeRF~360 and Tanks and Temples} (mean over 11 scenes). (a)~Baselines optimized with a vertex cap and written with our codec or a generic codec. (b)~Baselines obtained by simplifying the FP32 model (star, 609~MB) after optimization. \BM is the same curve in both panels; the two panels have different PSNR axes.}
+\caption{\textbf{Rate--distortion on Mip-NeRF~360 and Tanks and Temples} (mean over 11 scenes). (a)~Baselines trained with a vertex cap and written with our codec or a generic codec. (b)~Baselines obtained by simplifying the FP32 model (star, 609~MB) after training. \BM is the same curve in both panels; the two panels have different PSNR axes.}
 \label{fig:rd}
 \end{figure*}
 
@@ -56,7 +56,7 @@ Fig.~\ref{fig:rd} compares \BM with every baseline on the 11 scenes of Mip-NeRF~
 
 \noindent\textbf{Vertex cap with our codec (Fig.~\ref{fig:rd}a).} This baseline isolates the effect of the controller, because the codec is the same. Table~\ref{tab:bd} gives the Bjontegaard deltas. \BM is better on 20 of the 21 scenes and equal on one (treehill): the BD-PSNR is $+0.29$\dB on average and the BD-rate is $-26.9\%$.
 
-\noindent\textbf{Simplification after optimization (Fig.~\ref{fig:rd}b).} Simplifying the FP32 model loses more quality the further the mesh is reduced. Against \BM at the same file size, the simplified mesh is 0.3--2.1\dB worse at 12--19~MB, 1.0--3.6\dB worse at 8--12~MB and 1.8--5.9\dB worse below 8~MB (45 matched points on 11 scenes, same codec). The reason is that each pixel is covered by one opaque triangle: after a collapse, the neighbouring triangles have not been optimized for their new shape, and no other primitive covers the error.
+\noindent\textbf{Simplification after training (Fig.~\ref{fig:rd}b).} Simplifying the FP32 model loses more quality the further the mesh is reduced. Against \BM at the same file size, the simplified mesh is 0.3--2.1\dB worse at 12--19~MB, 1.0--3.6\dB worse at 8--12~MB and 1.8--5.9\dB worse below 8~MB (45 matched points on 11 scenes, same codec). The reason is that each pixel is covered by one opaque triangle: after a collapse, the neighbouring triangles have not been trained for their new shape, and no other primitive covers the error.
 
 \begin{table}[t]\centering\footnotesize
 \caption{\textbf{Bjontegaard deltas of \BM} against each baseline, computed per scene and averaged. Negative BD-rate: \BM needs fewer bytes for the same PSNR. Draco has no file size in common with \BM, so its BD-PSNR is undefined.}
@@ -82,7 +82,7 @@ Draco & Mip-NeRF 360, T\&T (11) & -- & $-94.1\%$ \\
 
 \subsection{The codec alone}
 \label{sec:codec}
-Here every codec encodes the \emph{same} mesh, so the mesh plays no role. The meshes are optimized with vertex caps of 0.6, 1.08 and 3 million. For each scene we find the file size at which a generic codec reaches the PSNR of our file. On Mip-NeRF~360 and Tanks and Temples, TFAN needs 2.5--2.8$\times$ the size of our file, zstd 3.4--4.0$\times$ and Draco about 11$\times$. On the objects the factors are 1.4--1.8$\times$, 1.8--2.3$\times$ and 7.6--9.1$\times$. At 10~MB on garden, the file holds connectivity (39\%), positions (21\%), SH indices (19\%), DC colour (15\%) and the codebooks (7\%).
+Here every codec encodes the \emph{same} mesh, so the mesh plays no role. The meshes are trained with vertex caps of 0.6, 1.08 and 3 million. For each scene we find the file size at which a generic codec reaches the PSNR of our file. On Mip-NeRF~360 and Tanks and Temples, TFAN needs 2.5--2.8$\times$ the size of our file, zstd 3.4--4.0$\times$ and Draco about 11$\times$. On the objects the factors are 1.4--1.8$\times$, 1.8--2.3$\times$ and 7.6--9.1$\times$. At 10~MB on garden, the file holds connectivity (39\%), positions (21\%), SH indices (19\%), DC colour (15\%) and the codebooks (7\%).
 
 \begin{table}[t]\centering\footnotesize
 \caption{\textbf{Encoding and decoding time} in seconds, mean over 11 scenes (about 0.93 million vertices each), CPU only. TFAN is called once for both directions.}
@@ -110,11 +110,11 @@ TFAN & \multicolumn{2}{c}{8.2 (both)} \\
 \label{fig:cap}
 \end{figure}
 
-\noindent\textbf{A vertex cap does not set the file size.} Fig.~\ref{fig:cap} plots the file size against the cap for every scene. With the same cap, the captured scenes give files of 5.8--7.5~MB at 0.6 million vertices, 8.3--11.6~MB at 1.08 million, 19.9--31.6~MB at 3 million and 20.0--39.8~MB at the default 4 million: the largest file is 1.3 to 2.0 times the smallest. Some scenes stop growing before the cap (truck, train and counter give the same file at 3 and 4 million). A user therefore cannot choose the cap for a given file size without first optimizing the scene. Even with all our runs in hand, the best single curve from cap to file size misses by more than 10\% in 68 of 191 cap runs.
+\noindent\textbf{A vertex cap does not set the file size.} Fig.~\ref{fig:cap} plots the file size against the cap for every scene. With the same cap, the captured scenes give files of 5.8--7.5~MB at 0.6 million vertices, 8.3--11.6~MB at 1.08 million, 19.9--31.6~MB at 3 million and 20.0--39.8~MB at the default 4 million: the largest file is 1.3 to 2.0 times the smallest. Some scenes stop growing before the cap (truck, train and counter give the same file at 3 and 4 million). A user therefore cannot choose the cap for a given file size without first training the scene. Even with all our runs in hand, the best single curve from cap to file size misses by more than 10\% in 68 of 191 cap runs.
 
 \noindent\textbf{\BM takes the file size as its input.} Table~\ref{tab:main} gives the size error of single runs. On the captured scenes the mean error is at most 2.9\% for every dataset and target, and all 65 runs end within 10\% of the target. On the objects, 21 of 24 runs end within 10\%. The three others are ficus and mic at 2.5 or 4~MB: these objects are fully represented by about 2 to 2.6~MB, the controller finds no more triangles with an error to split, and the file stays below the target.
 
-\noindent\textbf{Optimization time.} One run of \BM takes 48.8 minutes on average on the 13 captured scenes (one L40S GPU), against 28.0 minutes for one run of \MS with a cap. A cap user who does not know the scene needs a first run with the default settings to see its size, and then at least one capped run. Counted this way, the cap took 82.4 minutes on average to come within 10\% of a 10~MB target, against 54.7 minutes for \BM, both including a fine-tuning stage that we report in the supplement.
+\noindent\textbf{Training time.} One run of \BM takes 48.8 minutes on average on the 13 captured scenes (one L40S GPU), against 28.0 minutes for one run of \MS with a cap. A cap user who does not know the scene needs a first run with the default settings to see its size, and then at least one capped run. Counted this way, the cap took 82.4 minutes on average to come within 10\% of a 10~MB target, against 54.7 minutes for \BM, both including a fine-tuning stage that we report in the supplement.
 
 \subsection{Other representations}
 \label{sec:cross}
@@ -201,12 +201,12 @@ collapse by the importance score of \MS & 22.89 ($-0.78$) & 25.61 ($-2.38$) \\
 %==================================================================
 % \begin{figure*}[t]\centering
 % \includegraphics[width=\linewidth]{figures/fig_rd_ssim_lpips_v2.pdf}
-% \caption{\textbf{SSIM and LPIPS against file size} on Mip-NeRF~360 and Tanks and Temples (mean over 11 scenes), for the baselines optimized with a vertex cap. Same runs as Fig.~\ref{fig:rd}a.}
+% \caption{\textbf{SSIM and LPIPS against file size} on Mip-NeRF~360 and Tanks and Temples (mean over 11 scenes), for the baselines trained with a vertex cap. Same runs as Fig.~\ref{fig:rd}a.}
 % \label{fig:rd-ssim-lpips}
 % \end{figure*}
 %
 % \begin{figure}[t]\centering
 % \includegraphics[width=\linewidth]{figures/fig_rd_objects_v3.pdf}
-% \caption{\textbf{Rate--distortion on NeRF-Synthetic} (mean over 8 objects), baselines optimized with a vertex cap.}
+% \caption{\textbf{Rate--distortion on NeRF-Synthetic} (mean over 8 objects), baselines trained with a vertex cap.}
 % \label{fig:rd-objects}
 % \end{figure}

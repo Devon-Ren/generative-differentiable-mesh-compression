@@ -1,11 +1,11 @@
 \section{Method}
 \label{sec:method}
 
-\BM has two parts (Fig.~\ref{fig:pipeline}). The codec (Sec.~\ref{sec:codecm}) writes a mesh into one file. The rate-controlled construction (Sec.~\ref{sec:rc}) uses this codec while the mesh is constructed, so that the final file has the size $T$ that the user asks for. The renderer, the losses and the schedule of \MS are unchanged.
+\BM has two parts (Fig.~\ref{fig:pipeline}). The codec (Sec.~\ref{sec:codecm}) writes a mesh into one file. The rate-controlled training (Sec.~\ref{sec:rc}) uses this codec while the mesh is trained, so that the final file has the size $T$ that the user asks for. The renderer, the losses and the schedule of \MS are unchanged.
 
 \subsection{Preliminaries}
 \label{sec:prelim}
-\MS~\cite{meshsplatting2025} represents a scene by $V$ vertices and $F$ triangles. Each vertex has a position, a DC colour and 45 spherical-harmonic (SH) coefficients of degrees 1 to 3, which give the view-dependent colour: 52 floats per vertex. Construction takes 30k iterations. During the first 10k, the triangles are not connected (a triangle soup), and every 500 iterations \MS \emph{densifies}: it samples triangles by an importance score and splits each into four by inserting its three edge midpoints. It also prunes triangles that contribute little to the images. At 11k a restricted Delaunay triangulation connects the soup into a mesh. Afterwards the opacity of the triangles is raised step by step until every triangle is opaque. A cap on $V$ can stop densification early; this is the only size control in \MS.
+\MS~\cite{meshsplatting2025} represents a scene by $V$ vertices and $F$ triangles. Each vertex has a position, a DC colour and 45 spherical-harmonic (SH) coefficients of degrees 1 to 3, which give the view-dependent colour: 52 floats per vertex. Training takes 30k iterations. During the first 10k, the triangles are not connected (a triangle soup), and every 500 iterations \MS \emph{densifies}: it samples triangles by an importance score and splits each into four by inserting its three edge midpoints. It also prunes triangles that contribute little to the images. At 11k a restricted Delaunay triangulation connects the soup into a mesh. Afterwards the opacity of the triangles is raised step by step until every triangle is opaque. A cap on $V$ can stop densification early; this is the only size control in \MS.
 
 \subsection{Codec}
 \label{sec:codecm}
@@ -22,9 +22,9 @@ where the main codebook $\mathbf{B}$ has 4{,}096 entries and the residual codebo
 
 \noindent\textbf{Decoding.} A standalone decoder reads the file and returns a standard indexed triangle mesh with per-vertex attributes. It decodes the connectivity first and rebuilds every predictor from it, so no side information is needed. The encoder verifies an exact round trip before it writes the file.
 
-\subsection{Rate-controlled construction}
+\subsection{Rate-controlled training}
 \label{sec:rc}
-The file size cannot be predicted from the number of vertices alone (Sec.~\ref{sec:control}), so \BM measures it during construction, and uses the measurement in two phases: when the mesh grows, and after the mesh is connected.
+The file size cannot be predicted from the number of vertices alone (Sec.~\ref{sec:control}), so \BM measures it during training, and uses the measurement in two phases: when the mesh grows, and after the mesh is connected.
 
 \noindent\textbf{Size probe.} A probe takes a copy of the current mesh, renders it at the final opacity, drops the faces that are hidden in every training view, and runs the encoder of Sec.~\ref{sec:codecm}. It returns the file size $R$ and its decomposition
 \begin{equation}
@@ -47,14 +47,14 @@ n = \frac{V\big[(V^\star/V)^{1/k}-1\big]}{3\sigma}.
 \end{equation}
 We split the $n$ triangles with the largest error $e_t$, in place of the importance sampling of \MS. $V^\star$ and $n$ are recomputed at every step with the latest probe.
 
-\noindent\textbf{Phase 2: rate-controlled simplification (12.5k to 29.5k).} After the triangulation at 11k, the mesh is constructed for 1{,}500 iterations without any change, so that the errors $e_t$ are accumulated on the connected mesh. Then, every 500 iterations, a probe measures the file. If it is above the target, the excess $E = R - T$ is removed by edge collapses. Collapsing an edge $(u,v)$ merges its two vertices and removes the faces on the edge. Its cost is the error it puts at risk per byte it saves:
+\noindent\textbf{Phase 2: rate-controlled simplification (12.5k to 29.5k).} After the triangulation at 11k, the mesh is trained for 1{,}500 iterations without any change, so that the errors $e_t$ are accumulated on the connected mesh. Then, every 500 iterations, a probe measures the file. If it is above the target, the excess $E = R - T$ is removed by edge collapses. Collapsing an edge $(u,v)$ merges its two vertices and removes the faces on the edge. Its cost is the error it puts at risk per byte it saves:
 \begin{equation}
 c_{uv} = \frac{\sum_{t \,\ni\, u \text{ or } v} e_t}{\Delta R_{uv}}, \qquad \Delta R_{uv} = b_v + b_f\, m_{uv},
 \label{eq:cost}
 \end{equation}
 where the sum runs over the triangles that touch $u$ or $v$, since all of them change shape, and $m_{uv}$ is the number of faces on the edge. Vertices and faces that the probe drops are not in the file and are not counted in $\Delta R_{uv}$. We collapse the edges in order of increasing cost until the saved bytes $\sum \Delta R_{uv}$ reach $E$, and skip a collapse that would flip a neighbouring triangle. If the file is not above the target, nothing is done.
 
-Two properties make this phase work. First, each round removes the whole measured excess, so no prediction of the future file size is needed; the file drifts between rounds because the opacity is still rising, and the next round corrects it. Second, construction continues after every round, so the remaining vertices move and change colour to fit their new neighbours. This is what simplification after construction cannot do (Sec.~\ref{sec:rd}). After the last round at 29.5k, the mesh is constructed to 30k, the codebooks of Eq.~\eqref{eq:cb} are fitted, and the encoder writes the file.
+Two properties make this phase work. First, each round removes the whole measured excess, so no prediction of the future file size is needed; the file drifts between rounds because the opacity is still rising, and the next round corrects it. Second, training continues after every round, so the remaining vertices move and change colour to fit their new neighbours. This is what simplifying a constructed mesh cannot do (Sec.~\ref{sec:rd}). After the last round at 29.5k, the mesh is trained to 30k, the codebooks of Eq.~\eqref{eq:cb} are fitted, and the encoder writes the file.
 
 \begin{algorithm}[t]
 \caption{\BM for a target file size $T$}
