@@ -20,7 +20,7 @@ ROWS = [
  ('truck',   '000049',   0.80, 0.36, 0.56, dict(FP32=432, TFAN=9.2,  SIMP=9.1,  OURS=9.9),  dict(FP32=23.75, TFAN=21.42, SIMP=22.54, OURS=23.52)),
 ]
 WANT = sys.argv[1:] or ['garden', 'room', 'bicycle']; ROWS = [r for r in ROWS if r[0] in WANT]; TAG = '' if len(ROWS) == 3 else '_%drows' % len(ROWS)
-COLS = [('gt', 'Ground truth'), ('FP32', 'MeshSplatting\nFP32'), ('TFAN', 'Vertex cap\n+ TFAN'), ('SIMP', 'Simplified\nafter training'), ('OURS', 'ByteMesh\n(ours)')]
+COLS = [('gt', 'Ground truth'), ('FP32', 'MeshSplatting\nFP32'), ('TFAN', 'MeshSplatting\nwith cap + TFAN'), ('SIMP', 'Simplified\nwith our codec'), ('OURS', 'ByteMesh\n(ours)')]
 FULL_W = 1.5; CW = 1.0                      # widths in units of the row height
 W_IN = 7.1; unit = W_IN / (FULL_W + 5 * CW + 0.10); LAB = 0.022; HEAD = 0.27
 H_IN = HEAD + len(ROWS) * (unit + LAB) - LAB
