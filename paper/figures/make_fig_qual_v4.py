@@ -17,7 +17,7 @@ ROWS = [
  ('garden',  'DSC08076', 0.355, 0.47, 0.46, dict(FP32=740, TFAN=10.1, SIMP=10.1, OURS=10.0), dict(FP32=24.35, TFAN=21.62, SIMP=22.12, OURS=23.59)),
  ('room',    'DSCF4715', 0.66, 0.32, 0.46, dict(FP32=597, TFAN=8.4,  SIMP=10.0, OURS=10.0), dict(FP32=29.94, TFAN=21.71, SIMP=27.13, OURS=29.28)),
  ('bicycle', '_DSC8727', 0.38, 0.28, 0.46, dict(FP32=680, TFAN=10.2, SIMP=10.6, OURS=9.8),  dict(FP32=23.29, TFAN=21.15, SIMP=21.37, OURS=22.68)),
- ('lego',    'r_166',    0.58, 0.60, 0.38, dict(FP32=126, TFAN=2.77, SIMP=2.73, OURS=2.51), dict(FP32=35.63, TFAN=31.36, SIMP=27.95, OURS=34.31)),
+ ('lego',    'r_166',    0.60, 0.43, 0.36, dict(FP32=126, TFAN=2.77, SIMP=2.73, OURS=2.51), dict(FP32=35.63, TFAN=31.36, SIMP=27.95, OURS=34.31)),
  ('truck',   '000049',   0.80, 0.36, 0.56, dict(FP32=432, TFAN=9.2,  SIMP=9.1,  OURS=9.9),  dict(FP32=23.75, TFAN=21.42, SIMP=22.54, OURS=23.52)),
 ]
 WANT = sys.argv[1:] or ['garden', 'room', 'lego']; ROWS = [r for w in WANT for r in ROWS if r[0] == w]; TAG = '' if WANT == ['garden', 'room', 'lego'] else '_' + '-'.join(WANT)
