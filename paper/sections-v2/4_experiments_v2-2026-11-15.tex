@@ -50,7 +50,7 @@ Draco & Mip-NeRF 360, T\&T (11) & -- & $-94.1\%$ \\
 
 \subsection{The codec alone}
 \label{sec:codec}
-Here every codec encodes the \emph{same} mesh, so the mesh plays no role. The meshes are trained with vertex caps of 0.6, 1.08 and 3 million. For each scene we find the file size at which a generic codec reaches the PSNR of our file. On Mip-NeRF~360 and Tanks and Temples, TFAN needs 2.5--2.8$\times$ the size of our file, zstd 3.4--4.0$\times$ and Draco about 11$\times$. On the objects the factors are 1.4--1.8$\times$, 1.8--2.3$\times$ and 7.6--9.1$\times$. At 10~MB on garden, the file holds connectivity (39\%), positions (21\%), SH indices (19\%), DC color (15\%) and the codebooks (7\%).
+Here every codec encodes the \emph{same} mesh, so the mesh plays no role. The meshes are trained with vertex caps of 0.6, 1.08 and 3 million. For each scene we find the file size at which a generic codec reaches the PSNR of our file. On Mip-NeRF~360 and Tanks and Temples, TFAN needs 2.5--2.8$\times$ the size of our file, zstd 3.4--4.0$\times$ and Draco about 11$\times$. On the objects the factors are 1.4--1.8$\times$, 1.8--2.3$\times$ and 7.6--9.1$\times$. The lossy steps of the codec (vector quantization of the SH coefficients and quantization of positions and color) lower the PSNR by 0.15, 0.20 and 0.27\dB on average on the three meshes, and by at most 0.63\dB on one scene. At 10~MB on garden, the file holds connectivity (39\%), positions (21\%), SH indices (19\%), DC color (15\%) and the codebooks (7\%).
 
 \begin{table}[t]\centering\footnotesize
 \caption{\textbf{Encoding and decoding time} in seconds, mean over 11 scenes (about 0.93 million vertices each), CPU only. TFAN is called once for both directions.}
@@ -161,7 +161,7 @@ HAC++, high & 33.76 & 0.969 & 0.033 & 1.84 \\
 \midrule
 MobileNeRF~\cite{mobilenerf2023} & 30.90 & 0.947 & 0.062 & 125.8 \\
 NeRF2Mesh~\cite{nerf2mesh2023} & 29.76 & 0.940 & 0.072 & 73.5 \\
-\MS FP32$^\ddagger$ & 31.24 & -- & -- & 65.7 \\
+\MS FP32$^\ddagger$ & 31.17 & 0.955 & 0.063 & 65.7 \\
 \midrule
 \BM$^\ddagger$, 4 MB & 31.20 & 0.952 & 0.069 & 3.56 \\
 \BM$^\ddagger$, 2.5 MB & 31.10 & 0.951 & 0.069 & 2.43 \\
@@ -171,31 +171,78 @@ NeRF2Mesh~\cite{nerf2mesh2023} & 29.76 & 0.940 & 0.072 & 73.5 \\
 \end{tabular}
 \end{table*}
 
-Table~\ref{tab:cross} places \BM among other representations. Among the methods that output a mesh, \BM is the only one below 250~MB. At 20~MB it is 0.35\dB below the FP32 model of \MS on Mip-NeRF~360 and equal to it on Tanks and Temples, and it is above MiLo, RaDe-GS and GOF on Mip-NeRF~360 with files 13 to 75 times smaller. On NeRF-Synthetic, the 2.5~MB file has a higher PSNR than MobileNeRF and NeRF2Mesh at about 1/50 and 1/30 of their size.
+Table~\ref{tab:cross} places \BM among other representations. Among the methods that output a mesh, \BM is the only one below 250~MB. At 20~MB it is 0.35\dB below the FP32 model of \MS on Mip-NeRF~360 and equal to it on Tanks and Temples, and it is above MiLo, RaDe-GS and GOF on Mip-NeRF~360 with files 13 to 75 times smaller. On NeRF-Synthetic, the 3.6~MB file matches the PSNR of the 65.7~MB FP32 model (31.20 against 31.17\dB), with slightly lower SSIM and higher LPIPS, and the 2.5~MB file has a higher PSNR than MobileNeRF and NeRF2Mesh at about 1/50 and 1/30 of their size.
 
-Compressed Gaussians remain better at the same size: HAC++ is 3.4 to 4.2\dB higher in PSNR on the captured scenes. This gap comes from the representation (opaque triangles against semi-transparent Gaussians) and is already present before compression, between \MS and 3DGS. What the mesh offers in exchange is a standard indexed triangle mesh that any engine renders without sorting.
+Compressed Gaussians remain better at the same size: HAC++ is 3.4 to 4.2\dB higher in PSNR on the captured scenes. This gap comes from the representation (opaque triangles against semi-transparent Gaussians) and is already present before compression, between \MS and 3DGS. What the mesh offers in exchange is a standard indexed triangle mesh that any engine renders without sorting. In a WebGL viewer on a laptop (Apple M2 Max, $1920 \times 958$), the 5, 10 and 20~MB files of garden, room and bicycle render in 1.1, 1.3 and 2.0~ms per frame on average (about 960, 760 and 500 frames per second).
 
 \subsection{Ablation}
 \label{sec:abl}
 
 \begin{table}[t]\centering\footnotesize
-\caption{\textbf{Selection rules}, target 10~MB, one run each. Every file is within 1\% of the target.}
+\caption{\textbf{Selection rules}, PSNR at a target of 10~MB, one run each. ``Importance'' is the score that \MS uses for its own densification. Every file is within 1\% of the target.}
 \label{tab:abl}
+\setlength{\tabcolsep}{4pt}
 \begin{tabular}{@{}lcc@{}}
 \toprule
  & garden & room \\
 \midrule
 \BM & 23.67 & 27.99 \\
-split by the importance score of \MS & 23.51 ($-0.17$) & 27.56 ($-0.43$) \\
-collapse by the importance score of \MS & 22.89 ($-0.78$) & 25.61 ($-2.38$) \\
+split by importance & 23.51 ($-0.17$) & 27.56 ($-0.43$) \\
+collapse by importance & 22.89 ($-0.78$) & 25.61 ($-2.38$) \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\BM chooses the triangles to split by their accumulated rendering error, and the edges to collapse by the rendering error per byte saved. Table~\ref{tab:abl} replaces each rule in turn by the importance score that \MS uses for its own pruning, and keeps everything else. The split rule accounts for 0.17 and 0.43\dB, and the collapse rule for 0.78 and 2.38\dB, at the same file size. The collapse rule matters more because the controller removes vertices in up to 35 rounds, and a poor choice is repeated in each of them.
+\noindent\textbf{Selection rules.} \BM chooses the triangles to split by their accumulated rendering error, and the edges to collapse by the rendering error per byte saved. Table~\ref{tab:abl} replaces each rule in turn by the importance score of \MS and keeps everything else. The split rule accounts for 0.17 and 0.43\dB, and the collapse rule for 0.78 and 2.38\dB, at the same file size. The collapse rule matters more because vertices are removed in up to 35 rounds, and a poor choice is repeated in each of them.
 
-\noindent\textbf{Limitations.} LPIPS degrades more than PSNR: on Mip-NeRF~360 it rises from 0.309 for the FP32 model to 0.406 at 20~MB and 0.506 at 5~MB. The position precision is set per scene and is not chosen by the controller. An object that is fully represented below the target stays below it. The ablation uses two scenes and one run each.
+\noindent\textbf{Collapse schedule.} \BM measures the file every 500 iterations until 29.5k and removes the measured excess each time. We compare it with a variant that stops the collapse rounds at 19.5k and predicts the final file size from the measurements up to then. On the 33 runs of Mip-NeRF~360 and Tanks and Temples, the mean size error falls from 4.3\% to 1.5\%, and the number of runs within 2\% of the target rises from 7 to 23. At the same file size, the PSNR is higher by 0.02, 0.06 and 0.13\dB at 20, 10 and 5~MB. On Deep Blending the size error falls from 5.8--9.8\% to 0.3--0.9\%. Measuring until the end is both more accurate and slightly better in quality than predicting.
 
+\begin{table}[t]\centering\footnotesize
+\caption{\textbf{Growth aim $\alpha$}, target 10~MB, one run each. File size in MB and PSNR in dB. \BM uses $\alpha = 1.35$.}
+\label{tab:alpha}
+\setlength{\tabcolsep}{5pt}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+ & \multicolumn{2}{c}{garden} & \multicolumn{2}{c}{room} \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}
+$\alpha$ & file & PSNR & file & PSNR \\
+\midrule
+1.0 & 8.46 & 23.33 & 8.72 & 27.65 \\
+1.2 & 9.94 & 23.57 & 10.03 & 27.90 \\
+1.35 & 10.00 & 23.67 & 9.99 & 27.99 \\
+1.5 & 9.96 & 23.76 & 9.70 & 27.84 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\noindent\textbf{Growth aim.} \BM grows the mesh to $\alpha = 1.35$ times the target and then removes the excess. Table~\ref{tab:alpha} varies $\alpha$. With $\alpha = 1.0$, the file ends 13\% to 15\% below the target and no collapse round is active: vertices are lost between the end of densification and the final mesh, and nothing can add them back. Growing past the target is therefore necessary. Between 1.2 and 1.5, the file is on target and the PSNR changes by less than 0.2\dB; garden improves with a larger $\alpha$ and room is best at 1.35. We use 1.35 for all scenes.
+
+\begin{table}[t]\centering\footnotesize
+\caption{\textbf{Codec design choices}, bits per vertex, mean over 11 scenes (meshes of about one million vertices). Every stream was decoded and checked. The first row of each block is the codec used for all results; ``file'' is the change in file size against it.}
+\label{tab:codec-abl}
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}llcc@{}}
+\toprule
+stream & variant & bits & file \\
+\midrule
+\multirow{4}{*}{positions} & one earlier neighbor & 22.6 & -- \\
+ & previous vertex & 23.2 & $+0.7\%$ \\
+ & parallelogram & 23.5 & $+1.0\%$ \\
+ & mean of earlier neighbors & 21.6 & $-1.1\%$ \\
+\midrule
+\multirow{2}{*}{DC color} & zstd, no prediction & 12.6 & -- \\
+ & mean of earlier neighbors & 11.3 & $-1.5\%$ \\
+\midrule
+\multirow{3}{*}{SH indices} & neighbor candidates & 17.6 & -- \\
+ & no neighbor information & 17.4 & $-0.3\%$ \\
+ & fixed length & 20.0 & $+2.8\%$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\noindent\textbf{Codec design choices.} Table~\ref{tab:codec-abl} measures alternatives for three streams on the same meshes. For positions, predicting from one earlier neighbor is better than the previous vertex and than parallelogram prediction on all 11 scenes; the parallelogram is the worst because many edges of these meshes are boundary edges. Predicting from the mean of all earlier neighbors is better still, and the same holds for the DC color. For the SH indices, offering the indices of the neighbors as candidates does not help: an adaptive model without neighbor information gives slightly smaller streams. Neighboring vertices rarely share a codeword, and the saving over fixed-length codes comes from the uneven use of the codewords. Together, the better variants would make the files about 2.9\% smaller. They are not used in any reported file size, so the sizes in this paper are conservative. The size of the two codebooks is studied in the supplement: choosing the best size per scene and per file size would gain at most 0.15\dB over the fixed choice.
+
+\noindent\textbf{Limitations.} LPIPS degrades more than PSNR: on Mip-NeRF~360 it rises from 0.309 for the FP32 model to 0.406 at 20~MB and 0.506 at 5~MB. Training does not see the vector quantization: the per-triangle error is measured on the unquantized mesh, and the codebooks are fitted after training. The position precision is set per scene and is not chosen by the controller. An object that is fully represented below the target stays below it. The ablations of the selection rules and of the growth aim use two scenes and one run each.
 
 %==================================================================
 % SUPPLEMENT (paste into the appendix file)
@@ -211,3 +258,23 @@ collapse by the importance score of \MS & 22.89 ($-0.78$) & 25.61 ($-2.38$) \\
 % \caption{\textbf{Rate--distortion on NeRF-Synthetic} (mean over 8 objects), baselines trained with a vertex cap.}
 % \label{fig:rd-objects}
 % \end{figure}
+%
+% \noindent\textbf{Codebook size.} Table~\ref{tab:kr} compares five sizes of the two codebooks on the 11 scenes of Mip-NeRF~360 and Tanks and Temples at four file sizes. Removing the residual codebook saves about 8\% of the bytes and loses 0.12 to 0.15\dB. Enlarging the codebooks to 16{,}384 and 1{,}024 makes the files 12\% to 49\% larger for a gain of 0.06 to 0.07\dB. If the best size were chosen for each scene and each file size, the gain over the fixed choice would be between 0.02 and 0.15\dB per scene (0.08\dB on average); the largest gains are at the smallest files, where 1{,}024 + 256 is more efficient. The sweep was run on meshes from an earlier version of our training; the codec is the same.
+%
+% \begin{table*}[t]\centering\footnotesize
+% \caption{\textbf{Codebook size.} Change in file size and PSNR (dB) against $K{=}4{,}096$, $K_r{=}256$, mean over 11 scenes, at four file sizes (size of the default file in the header).}
+% \label{tab:kr}
+% \begin{tabular}{@{}lcccc@{}}
+% \toprule
+% $K + K_r$ & 4.5 MB & 9.4 MB & 20.4 MB & 27.0 MB \\
+% \midrule
+% 4{,}096 + 0 & $-8.0\%$, $-0.12$ & $-8.4\%$, $-0.14$ & $-8.7\%$, $-0.15$ & $-8.9\%$, $-0.15$ \\
+% 1{,}024 + 256 & $-12.8\%$, $-0.05$ & $-7.6\%$, $-0.05$ & $-5.0\%$, $-0.07$ & $-4.4\%$, $-0.07$ \\
+% 4{,}096 + 256 & \multicolumn{4}{c}{reference} \\
+% 4{,}096 + 1{,}024 & $+4.4\%$, $+0.02$ & $+3.3\%$, $+0.02$ & $+2.7\%$, $+0.03$ & $+2.7\%$, $+0.03$ \\
+% 16{,}384 + 1{,}024 & $+49\%$, $+0.06$ & $+27\%$, $+0.06$ & $+15\%$, $+0.07$ & $+12\%$, $+0.07$ \\
+% \bottomrule
+% \end{tabular}
+% \end{table*}
+%
+% \noindent\textbf{Prediction of the DC color.} In the codec used for all results, the DC color is quantized to 7 bits and compressed with zstd. We also coded it with a prediction from the vertices decoded earlier (the rounded mean of the earlier neighbors) and a context-adaptive binary arithmetic coder, and verified an exact round trip. On the 11 scenes of Mip-NeRF~360 and Tanks and Temples, the DC stream goes from 12.6 to 11.3 bits per vertex ($-10.4\%$) and the file becomes 1.46\% smaller on average ($0.84\%$ to $2.00\%$). The reported file sizes do not include this gain.
