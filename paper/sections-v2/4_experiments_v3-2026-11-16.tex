@@ -48,7 +48,7 @@ all (21) & & $+0.29$ dB & $-26.9\%$ \\
 
 \subsection{Compression efficiency of BM-Codec}
 \label{sec:codec}
-We first compare the codecs on the same meshes, so that only the codec differs (Fig.~\ref{fig:rd}a). The meshes come from \MS with caps of 0.6, 1.08 and 3 million vertices and from its default setting; stored in 32-bit floats they take 130, 216, 519 and 609~MB. Table~\ref{tab:bd} (top) gives the Bjontegaard deltas of BM-Codec against each baseline codec. On Mip-NeRF~360 and Tanks and Temples, BM-Codec needs 63\% fewer bytes than TFAN, 73\% fewer than zstd and 91\% fewer than Draco at the same PSNR. The results on Deep Blending are similar. On NeRF-Synthetic the reductions are 33\%, 47\% and 87\%. On the meshes obtained by collapse after training, the reductions are 61\%, 73\% and 88\%. The rate--distortion curves on Deep Blending and NeRF-Synthetic are in the supplement.
+We first compare the codecs on the same meshes, so that only the codec differs (Fig.~\ref{fig:rd}a). The meshes come from \MS with caps of 0.6, 1.08 and 3 million vertices and from its default setting; before coding, stored in 32-bit floats, they take 130, 216, 519 and 609~MB and reach 22.91, 23.36, 23.92 and 23.96\dB. Table~\ref{tab:bd} (top) gives the Bjontegaard deltas of BM-Codec against each baseline codec. On Mip-NeRF~360 and Tanks and Temples, BM-Codec needs 63\% fewer bytes than TFAN, 73\% fewer than zstd and 91\% fewer than Draco at the same PSNR. The results on Deep Blending are similar. On NeRF-Synthetic the reductions are 33\%, 47\% and 87\%. On the meshes obtained by collapse after training (92, 199 and 392~MB and 18.62, 21.30 and 23.23\dB before coding), the reductions are 61\%, 73\% and 88\%. The rate--distortion curves on Deep Blending and NeRF-Synthetic are in the supplement.
 
 The lossy steps of BM-Codec (vector quantization of the SH coefficients and quantization of positions and color) lower the PSNR by 0.15, 0.20 and 0.27\dB on average on the three capped meshes, relative to the same meshes before coding.
 
@@ -144,7 +144,7 @@ BM-Codec, entropy coding & 4.6 & 3.7 \\
 \end{tabular}
 \end{table}
 
-Table~\ref{tab:time} gives the encoding and decoding times. The codebooks of BM-Codec are fitted per scene, which takes about 90 seconds and includes the search for the nearest codeword of every vertex. With this step, encoding is slower than the baseline codecs. Decoding takes 3.7 seconds, similar to Draco. One training run of \BM takes 48.8 minutes on average on the 13 captured scenes (one L40S GPU), including the size probes.
+Table~\ref{tab:time} gives the encoding and decoding times. The codebooks of BM-Codec are fitted per scene, which takes about 90 seconds and includes the search for the nearest codeword of every vertex. With this step, encoding takes about 95 seconds in total and is slower than the baseline codecs. Decoding takes 3.7 seconds, similar to Draco. One training run of \BM takes 48.8 minutes on average on the 13 captured scenes (one L40S GPU), including the size probes.
 
 \subsection{Ablation}
 \label{sec:abl}
