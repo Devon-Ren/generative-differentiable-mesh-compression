@@ -1,0 +1,8 @@
+# Frame time of 3DGS in a WebGL viewer (measured by the user, 2026-11-16).  Same laptop and conditions as the mesh measurement of batch41:
+# MacBook with Apple M2 Max, Chrome, canvas 1920x958, 300 frames, each forced to complete with a 1-pixel readback.
+# Viewer: antimatter15/splat (https://antimatter15.com/splat/), WebGL2.  It renders the DC colour only (no spherical harmonics) and sorts in a
+# Web Worker (35-47 ms per sort in its own log, not included in the frame time).  Models: the .splat files hosted with the viewer.
+BENCH3DGS ?url=garden.splat | canvas 1920x958 | splats 5834784 | 300 frames | mean 10.80 ms | median 10.60 ms | min 10.40 ms
+BENCH3DGS ?url=bicycle.splat | canvas 1920x958 | splats 6131954 | 300 frames | mean 11.70 ms | median 11.50 ms | min 11.10 ms
+# For comparison (batch41, viewer-v3.html, SH degree 3): ByteMesh garden 1.10 / 1.32 / 2.09 ms and bicycle 0.99 / 1.31 / 1.94 ms at 5 / 10 / 20 MB;
+# MeshSplatting FP32 garden 19.32 ms, bicycle 13.14 ms.  Ratio 3DGS / ByteMesh: 5.2 to 11.8.
