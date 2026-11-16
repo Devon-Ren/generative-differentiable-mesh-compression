@@ -1,0 +1,14 @@
+# Vector quantization of BM-Codec, time of each step from the delivery logs (pasted 2026-11-16).  11 scenes, MeshSplatting with a cap near 1.08 million.
+# Intervals between log lines with 1-second stamps; each interval also contains one validation evaluation.
+VQTIME garden    k-means  2 s | assign  6 s | refine 47 s | total  55 s
+VQTIME bonsai    k-means  4 s | assign  8 s | refine 54 s | total  66 s
+VQTIME room      k-means  4 s | assign  9 s | refine 60 s | total  73 s
+VQTIME truck     k-means  2 s | assign  4 s | refine 36 s | total  42 s
+VQTIME kitchen   k-means  4 s | assign  8 s | refine 58 s | total  70 s
+VQTIME counter   k-means  3 s | assign  7 s | refine 54 s | total  64 s
+VQTIME bicycle   k-means  2 s | assign  5 s | refine 46 s | total  53 s
+VQTIME stump     k-means  2 s | assign  3 s | refine 40 s | total  45 s
+VQTIME flowers   k-means  2 s | assign  4 s | refine 45 s | total  51 s
+VQTIME treehill  k-means  2 s | assign  4 s | refine 44 s | total  50 s
+VQTIME train     k-means  2 s | assign  5 s | refine 41 s | total  48 s
+# mean: k-means 2.6 s | assign 5.7 s | refine 47.7 s | total 56.1 s ; with entropy coding (4.6 s): 60.7 s
