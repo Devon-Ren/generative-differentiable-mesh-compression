@@ -1,0 +1,14 @@
+# Vector quantization of BM-Codec: validation PSNR before quantisation, after k-means + index assignment, and after the 400-step refinement of
+# the codewords (delivery logs, pasted 2026-11-16).  11 scenes, MeshSplatting with a cap near 1.08 million.  Validation views, not test views.
+VQPSNR garden    before 24.25 | k-means only 23.95 (-0.30) | refined 24.21 (-0.04)
+VQPSNR bonsai    before 27.37 | k-means only 26.45 (-0.92) | refined 27.16 (-0.21)
+VQPSNR room      before 30.18 | k-means only 29.23 (-0.94) | refined 29.83 (-0.34)
+VQPSNR truck     before 22.86 | k-means only 22.65 (-0.20) | refined 22.76 (-0.09)
+VQPSNR kitchen   before 27.27 | k-means only 26.22 (-1.05) | refined 26.66 (-0.61)
+VQPSNR counter   before 26.56 | k-means only 25.55 (-1.01) | refined 25.90 (-0.66)
+VQPSNR bicycle   before 20.60 | k-means only 20.46 (-0.14) | refined 20.50 (-0.11)
+VQPSNR stump     before 22.53 | k-means only 22.28 (-0.25) | refined 22.31 (-0.22)
+VQPSNR flowers   before 19.33 | k-means only 19.20 (-0.14) | refined 19.23 (-0.11)
+VQPSNR treehill  before 19.07 | k-means only 18.94 (-0.13) | refined 18.95 (-0.11)
+VQPSNR train     before 19.47 | k-means only 19.29 (-0.18) | refined 19.30 (-0.16)
+# mean: k-means only -0.48 dB | refined -0.24 dB.  Indoor (room, kitchen, counter, bonsai): -0.98 -> -0.46.  Outdoor and T&T (7 scenes): -0.19 -> -0.12.
