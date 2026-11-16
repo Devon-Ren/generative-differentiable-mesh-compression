@@ -1,0 +1,32 @@
+== (1) BM-Codec relative to each generic codec, same meshes ==
+CAP  Mip-NeRF 360 / T&T    scenes 11, mesh levels per scene 4..4
+   vs tfan  BD-PSNR +1.37 dB (n 11) | BD-rate -63.4 % (n 11, -81.2..-38.0)
+   vs zstd  BD-PSNR +1.68 dB (n 10) | BD-rate -73.3 % (n 11, -85.4..-56.2)
+   vs draco BD-PSNR n/a (n 0) | BD-rate -91.3 % (n 11, -95.0..-86.3)
+CAP  Deep Blending         scenes  2, mesh levels per scene 4..4
+   vs tfan  BD-PSNR +1.67 dB (n 2) | BD-rate -62.5 % (n 2, -66.0..-59.1)
+   vs zstd  BD-PSNR +1.84 dB (n 2) | BD-rate -73.1 % (n 2, -76.5..-69.7)
+   vs draco BD-PSNR n/a (n 0) | BD-rate -92.5 % (n 2, -93.1..-92.0)
+CAP  NeRF-Synthetic        scenes  8, mesh levels per scene 3..3
+   vs tfan  BD-PSNR +0.68 dB (n 8) | BD-rate -32.5 % (n 8, -48.3..-13.3)
+   vs zstd  BD-PSNR +1.18 dB (n 8) | BD-rate -46.5 % (n 8, -60.8..-29.8)
+   vs draco BD-PSNR n/a (n 0) | BD-rate -87.2 % (n 8, -89.8..-80.9)
+SIMP Mip-NeRF 360 / T&T    scenes 11, mesh levels per scene 4..4
+   vs tfan  BD-PSNR +2.66 dB (n 11) | BD-rate -60.5 % (n 11, -64.2..-55.6)
+   vs zstd  BD-PSNR +3.77 dB (n 11) | BD-rate -72.7 % (n 11, -75.9..-69.3)
+   vs draco BD-PSNR +5.34 dB (n 8) | BD-rate -88.1 % (n 11, -91.8..-84.5)
+
+== (3) raw meshes before compression: mean over the 11 Mip-NeRF 360 / T&T scenes ==
+  cap 0.6M               n 11 | raw 130 MB | PSNR before quantisation 22.91 dB | vertices 0.55 M
+  cap 1.08M              n 11 | raw 216 MB | PSNR before quantisation 23.36 dB | vertices 0.93 M
+  cap 3M                 n 11 | raw 519 MB | PSNR before quantisation 23.92 dB | vertices 2.25 M
+  default (FP32 model)   n 11 | raw 609 MB | PSNR before quantisation 23.96 dB | vertices 2.63 M
+  simplified level 1       n 11 | raw 392 MB | PSNR before quantisation 23.23 dB | vertices 1.70 M
+  simplified level 2       n 11 | raw 199 MB | PSNR before quantisation 21.30 dB | vertices 0.87 M
+  simplified level 3       n 11 | raw 92 MB | PSNR before quantisation 18.62 dB | vertices 0.41 M
+
+== Deep Blending means (2 scenes): our codec and generic codecs on the cap meshes ==
+  cap600000   BM-Codec 7.2 MB 26.13 dB | sh8: tfan 22.1 zstd 29.6 draco 117.8 MB, 26.26 dB | sh6: tfan 15.8 zstd 22.0 draco 79.7 MB, 25.97 dB | sh4: tfan 10.2 zstd 15.4 draco 44.5 MB, 22.27 dB
+  cap1081000  BM-Codec 11.3 MB 26.62 dB | sh8: tfan 35.4 zstd 48.2 draco 184.5 MB, 26.72 dB | sh6: tfan 25.2 zstd 35.8 draco 124.0 MB, 26.45 dB | sh4: tfan 16.1 zstd 25.0 draco 69.1 MB, 22.87 dB
+  cap3000000  BM-Codec 30.0 MB 26.94 dB | sh8: tfan 98.0 zstd 138.9 draco 489.2 MB, 27.06 dB | sh6: tfan 68.9 zstd 102.9 draco 325.6 MB, 26.76 dB | sh4: tfan 43.4 zstd 71.5 draco 178.6 MB, 22.89 dB
+  full        BM-Codec 38.7 MB 26.80 dB | sh8: tfan 127.1 zstd 181.2 draco 624.9 MB, 26.90 dB | sh6: tfan 89.0 zstd 134.3 draco 414.3 MB, 26.60 dB | sh4: tfan 55.8 zstd 93.1 draco 225.6 MB, 22.64 dB

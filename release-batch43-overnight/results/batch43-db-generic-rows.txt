@@ -1,0 +1,25 @@
+# batch43 db: generic codecs on Deep Blending (pasted 2026-11-16; two rows had the SSIM and LPIPS fields run together in the paste, separated here)
+drjohnson GENERIC-RD | mesh full | V 3254127 F 8461723 | sh8 | zstd 182.653 MB | draco 654.937 MB | tfan 130.624 MB | test 26.447 0.8281 0.4548 | unquantised 26.471
+drjohnson GENERIC-RD | mesh full | V 3254127 F 8461723 | sh6 | zstd 134.646 MB | draco 436.827 MB | tfan 92.059 MB | test 26.103 0.7975 0.4889 | unquantised 26.471
+drjohnson GENERIC-RD | mesh full | V 3254127 F 8461723 | sh4 | zstd 93.928 MB | draco 240.35 MB | tfan 58.297 MB | test 21.902 0.6322 0.6448 | unquantised 26.471
+playroom GENERIC-RD | mesh full | V 3219509 F 7947988 | sh8 | zstd 179.65 MB | draco 594.831 MB | tfan 123.644 MB | test 27.358 0.8506 0.3834 | unquantised 27.381
+playroom GENERIC-RD | mesh full | V 3219509 F 7947988 | sh6 | zstd 133.952 MB | draco 391.708 MB | tfan 85.934 MB | test 27.098 0.8281 0.4173 | unquantised 27.381
+playroom GENERIC-RD | mesh full | V 3219509 F 7947988 | sh4 | zstd 92.256 MB | draco 210.846 MB | tfan 53.392 MB | test 23.383 0.6983 0.5364 | unquantised 27.381
+drjohnson GENERIC-RD | mesh cap600000 | V 509216 F 1434241 | sh8 | zstd 28.4 MB | draco 112.661 MB | tfan 21.478 MB | test 25.724 0.8113 0.5073 | unquantised 25.741
+drjohnson GENERIC-RD | mesh cap600000 | V 509216 F 1434241 | sh6 | zstd 20.968 MB | draco 76.658 MB | tfan 15.42 MB | test 25.474 0.7931 0.5310 | unquantised 25.741
+drjohnson GENERIC-RD | mesh cap600000 | V 509216 F 1434241 | sh4 | zstd 14.491 MB | draco 42.985 MB | tfan 9.867 MB | test 22.189 0.6811 0.6541 | unquantised 25.741
+playroom GENERIC-RD | mesh cap600000 | V 552576 F 1651672 | sh8 | zstd 30.762 MB | draco 123.03 MB | tfan 22.669 MB | test 26.792 0.8422 0.4449 | unquantised 26.820
+playroom GENERIC-RD | mesh cap600000 | V 552576 F 1651672 | sh6 | zstd 23.062 MB | draco 82.703 MB | tfan 16.224 MB | test 26.464 0.8214 0.4763 | unquantised 26.820
+playroom GENERIC-RD | mesh cap600000 | V 552576 F 1651672 | sh4 | zstd 16.218 MB | draco 46.024 MB | tfan 10.478 MB | test 22.348 0.7040 0.5735 | unquantised 26.820
+drjohnson GENERIC-RD | mesh cap1081000 | V 881894 F 2441119 | sh8 | zstd 48.781 MB | draco 190.629 MB | tfan 36.647 MB | test 26.312 0.8235 0.4896 | unquantised 26.333
+drjohnson GENERIC-RD | mesh cap1081000 | V 881894 F 2441119 | sh6 | zstd 36.138 MB | draco 128.985 MB | tfan 26.172 MB | test 26.030 0.8017 0.5170 | unquantised 26.333
+drjohnson GENERIC-RD | mesh cap1081000 | V 881894 F 2441119 | sh4 | zstd 25.216 MB | draco 72.515 MB | tfan 16.778 MB | test 22.384 0.6782 0.6517 | unquantised 26.333
+playroom GENERIC-RD | mesh cap1081000 | V 847103 F 2398296 | sh8 | zstd 47.524 MB | draco 178.444 MB | tfan 34.079 MB | test 27.128 0.8489 0.4272 | unquantised 27.148
+playroom GENERIC-RD | mesh cap1081000 | V 847103 F 2398296 | sh6 | zstd 35.403 MB | draco 119.02 MB | tfan 24.151 MB | test 26.879 0.8311 0.4583 | unquantised 27.148
+playroom GENERIC-RD | mesh cap1081000 | V 847103 F 2398296 | sh4 | zstd 24.703 MB | draco 65.744 MB | tfan 15.445 MB | test 23.362 0.7222 0.5472 | unquantised 27.148
+drjohnson GENERIC-RD | mesh cap3000000 | V 2543736 F 6716703 | sh8 | zstd 142.435 MB | draco 521.65 MB | tfan 102.819 MB | test 26.479 0.8296 0.4590 | unquantised 26.501
+drjohnson GENERIC-RD | mesh cap3000000 | V 2543736 F 6716703 | sh6 | zstd 105.481 MB | draco 349.23 MB | tfan 72.655 MB | test 26.143 0.8002 0.4920 | unquantised 26.501
+drjohnson GENERIC-RD | mesh cap3000000 | V 2543736 F 6716703 | sh4 | zstd 73.592 MB | draco 192.49 MB | tfan 45.96 MB | test 22.193 0.6567 0.6319 | unquantised 26.501
+playroom GENERIC-RD | mesh cap3000000 | V 2391238 F 6098028 | sh8 | zstd 135.297 MB | draco 456.704 MB | tfan 93.09 MB | test 27.645 0.8536 0.3884 | unquantised 27.667
+playroom GENERIC-RD | mesh cap3000000 | V 2391238 F 6098028 | sh6 | zstd 100.364 MB | draco 302.03 MB | tfan 65.061 MB | test 27.368 0.8311 0.4223 | unquantised 27.667
+playroom GENERIC-RD | mesh cap3000000 | V 2391238 F 6098028 | sh4 | zstd 69.484 MB | draco 164.637 MB | tfan 40.858 MB | test 23.591 0.7034 0.5269 | unquantised 27.667

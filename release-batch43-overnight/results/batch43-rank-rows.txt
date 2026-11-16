@@ -1,0 +1,17 @@
+# batch43 rank: selection-rule ablation, target 10 MB (pasted 2026-11-16; hold rows are the batch31 references)
+scene variant delivered_MB PSNR SSIM LPIPS
+bicycle hold 9.784 22.514 0.5711 0.4879
+bicycle holdis 9.705 22.228 0.5691 0.4869
+bicycle holdic 9.852 22.432 0.5699 0.4886
+truck hold 9.904 22.246 0.7822 0.3126
+truck holdis 9.950 22.044 0.7754 0.3267
+truck holdic 9.950 21.554 0.7752 0.3175
+kitchen hold 10.014 26.413 0.8204 0.3470
+kitchen holdis 9.996 25.797 0.7913 0.3876
+kitchen holdic 10.032 20.733 0.7562 0.3853
+garden hold 9.997 23.672 0.6691 0.3843
+garden holdis 9.917 23.507 0.6655 0.3927
+garden holdic 9.957 22.889 0.6531 0.3948
+room hold 9.992 27.991 0.8418 0.4271
+room holdis 9.966 27.563 0.8396 0.4340
+room holdic 9.999 25.609 0.8269 0.4364
