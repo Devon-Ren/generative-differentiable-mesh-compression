@@ -1,3 +1,4 @@
+% Add to the preamble:  \newcommand{\MSc}{MeshSplatting-cap\xspace}
 \section{Experiments}
 \label{sec:exp}
 
@@ -5,17 +6,17 @@
 
 \noindent\textbf{Settings.} \BM uses one setting for all 21 scenes and all target sizes. The size probe runs every 500 iterations from 12.5k to 29.5k, and the growth in Phase~1 aims at $\alpha = 1.35$ times the target. BM-Codec uses SH codebooks of $K = 4{,}096$ and $K_r = 256$ codewords and 7 bits for the DC color. Over the range of file sizes that we test, this choice is at most 0.07\dB below the best combination of codebook sizes, and 8 bits for the DC color would make the files 4\% larger for 0.03\dB (supplement). Positions use 14 to 18 bits depending on the scene (14 for NeRF-Synthetic, 14--16 for Mip-NeRF~360, 15 for Deep Blending, 18 for Tanks and Temples). All baselines use the same position precision as \BM on the same scene.
 
-\noindent\textbf{Baselines.} No codec exists for meshes with SH colors, so we build the baselines from what is available. \MS has no size control. Its cap on the number of vertices is the only parameter that affects the size, so we lower the cap to obtain smaller meshes (capped training). We also reduce the FP32 model by edge collapse after training. On these meshes we compare BM-Codec, the codec of \BM, with three baseline codecs: MPEG TFAN~\cite{mamou2009tfan}, Draco~\cite{draco} and a quantized PLY compressed with zstd. Each baseline codec is run with the SH coefficients quantized to 8, 6 and 4 bits, and its rate--quality curve is the convex hull of its points. We report the quality gain at the same size by BD-PSNR and the size reduction at the same quality by BD-rate, computed with piecewise-linear interpolation over the logarithm of the file size.
+\noindent\textbf{Baselines.} No codec exists for meshes with SH colors, so we build the baselines from what is available. \MS has no size control. Its cap on the number of vertices is the only parameter that affects the size, so we lower the cap to obtain smaller meshes. We call this baseline \MSc. We also reduce the FP32 model by edge collapse after training. On these meshes we compare BM-Codec, the codec of \BM, with three baseline codecs: MPEG TFAN~\cite{mamou2009tfan}, Draco~\cite{draco} and a quantized PLY compressed with zstd. Each baseline codec is run with the SH coefficients quantized to 8, 6 and 4 bits, and its rate--quality curve is the convex hull of its points. We report the quality gain at the same size by BD-PSNR and the size reduction at the same quality by BD-rate, computed with piecewise-linear interpolation over the logarithm of the file size.
 
 %------------------------------------------------------------------
 \begin{figure*}[t]\centering
-\includegraphics[width=\linewidth]{figures/fig_rd_three_v2.pdf}
+\includegraphics[width=\linewidth]{figures/fig_rd_three_v3.pdf}
 \caption{\textbf{Rate--distortion on Mip-NeRF~360 and Tanks and Temples} (mean over 11 scenes). One factor changes in each panel: (a)~the codec, (b)~the training, (c)~when the mesh is reduced. The panels have different PSNR ranges.}
 \label{fig:rd}
 \end{figure*}
 
 \begin{table}[t]\centering\footnotesize
-\caption{\textbf{Bjontegaard deltas}, computed per scene and averaged. Top: BM-Codec against each baseline codec on the same meshes. Bottom: \BM against capped training, both with BM-Codec. Negative BD-rate: fewer bytes for the same PSNR. ``--'': no file size in common.}
+\caption{\textbf{Bjontegaard deltas}, computed per scene and averaged. Top: BM-Codec against each baseline codec on the same meshes. Bottom: \BM against \MSc, both with BM-Codec. Negative BD-rate: fewer bytes for the same PSNR. ``--'': no file size in common.}
 \label{tab:bd}
 \setlength{\tabcolsep}{3.5pt}
 \begin{tabular}{@{}llcc@{}}
@@ -23,20 +24,20 @@
 meshes (scenes) & against & BD-PSNR & BD-rate \\
 \midrule
 \multicolumn{4}{@{}l}{BM-Codec against baseline codecs} \\
-\multirow{3}{*}{\shortstack[l]{capped training,\\Mip-NeRF 360, T\&T (11)}} & TFAN & $+1.37$ dB & $-63.4\%$ \\
+\multirow{3}{*}{\shortstack[l]{\MSc,\\Mip-NeRF 360, T\&T (11)}} & TFAN & $+1.37$ dB & $-63.4\%$ \\
  & zstd & $+1.68$ dB & $-73.3\%$ \\
  & Draco & -- & $-91.3\%$ \\
-\multirow{3}{*}{\shortstack[l]{capped training,\\Deep Blending (2)}} & TFAN & $+1.67$ dB & $-62.5\%$ \\
+\multirow{3}{*}{\shortstack[l]{\MSc,\\Deep Blending (2)}} & TFAN & $+1.67$ dB & $-62.5\%$ \\
  & zstd & $+1.84$ dB & $-73.1\%$ \\
  & Draco & -- & $-92.5\%$ \\
-\multirow{3}{*}{\shortstack[l]{capped training,\\NeRF-Synthetic (8)}} & TFAN & $+0.68$ dB & $-32.5\%$ \\
+\multirow{3}{*}{\shortstack[l]{\MSc,\\NeRF-Synthetic (8)}} & TFAN & $+0.68$ dB & $-32.5\%$ \\
  & zstd & $+1.18$ dB & $-46.5\%$ \\
  & Draco & -- & $-87.2\%$ \\
 \multirow{3}{*}{\shortstack[l]{collapse after training,\\Mip-NeRF 360, T\&T (11)}} & TFAN & $+2.66$ dB & $-60.5\%$ \\
  & zstd & $+3.77$ dB & $-72.7\%$ \\
  & Draco & $+5.34$ dB & $-88.1\%$ \\
 \midrule
-\multicolumn{4}{@{}l}{\BM against capped training + BM-Codec} \\
+\multicolumn{4}{@{}l}{\BM against \MSc + BM-Codec} \\
 Mip-NeRF 360, T\&T (11) & & $+0.30$ dB & $-31.3\%$ \\
 Deep Blending (2) & & $+0.23$ dB & $-22.8\%$ \\
 NeRF-Synthetic (8) & & $+0.29$ dB & $-21.1\%$ \\
@@ -46,15 +47,15 @@ all (21) & & $+0.29$ dB & $-26.9\%$ \\
 \end{table}
 %------------------------------------------------------------------
 
-\subsection{Compression efficiency of BM-Codec}
+\subsection{Compressing meshes generated by MeshSplatting with variable vertex caps}
 \label{sec:codec}
-We first compare the codecs on the same meshes, so that only the codec differs (Fig.~\ref{fig:rd}a). The meshes come from \MS with caps of 0.6, 1.08 and 3 million vertices and from its default setting; before coding, stored in 32-bit floats, they take 130, 216, 519 and 609~MB and reach 22.91, 23.36, 23.92 and 23.96\dB. Table~\ref{tab:bd} (top) gives the Bjontegaard deltas of BM-Codec against each baseline codec. On Mip-NeRF~360 and Tanks and Temples, BM-Codec needs 63\% fewer bytes than TFAN, 73\% fewer than zstd and 91\% fewer than Draco at the same PSNR. The results on Deep Blending are similar. On NeRF-Synthetic the reductions are 33\%, 47\% and 87\%. On the meshes obtained by collapse after training (92, 199 and 392~MB and 18.62, 21.30 and 23.23\dB before coding), the reductions are 61\%, 73\% and 88\%. The rate--distortion curves on Deep Blending and NeRF-Synthetic are in the supplement.
+We first evaluate the compression efficiency of BM-Codec. All codecs are applied to the same meshes, so that only the codec differs (Fig.~\ref{fig:rd}a). The meshes come from \MSc with caps of 0.6, 1.08 and 3 million vertices and from the default setting of \MS; before coding, stored in 32-bit floats, they take 130, 216, 519 and 609~MB and reach 22.91, 23.36, 23.92 and 23.96\dB. Table~\ref{tab:bd} (top) gives the Bjontegaard deltas of BM-Codec against each baseline codec. On Mip-NeRF~360 and Tanks and Temples, BM-Codec needs 63\% fewer bytes than TFAN, 73\% fewer than zstd and 91\% fewer than Draco at the same PSNR. The results on Deep Blending are similar. On NeRF-Synthetic the reductions are 33\%, 47\% and 87\%. On the meshes obtained by collapse after training (92, 199 and 392~MB and 18.62, 21.30 and 23.23\dB before coding), the reductions are 61\%, 73\% and 88\%. The rate--distortion curves on Deep Blending and NeRF-Synthetic are in the supplement.
 
-The lossy steps of BM-Codec (vector quantization of the SH coefficients and quantization of positions and color) lower the PSNR by 0.15, 0.20 and 0.27\dB on average on the three capped meshes, relative to the same meshes before coding.
+The lossy steps of BM-Codec (vector quantization of the SH coefficients and quantization of positions and color) lower the PSNR by 0.15, 0.20 and 0.27\dB on average on the three \MSc meshes, relative to the same meshes before coding.
 
 \subsection{Gain of rate-controlled training}
 \label{sec:rd}
-We now fix the codec to BM-Codec and compare the training (Fig.~\ref{fig:rd}b). \BM is better than capped training on 20 of the 21 scenes and equal on one (treehill). The BD-PSNR is $+0.29$\dB on average and the BD-rate is $-26.9\%$ (Table~\ref{tab:bd}, bottom).
+We now fix the codec to BM-Codec and compare the training (Fig.~\ref{fig:rd}b). \BM is better than \MSc on 20 of the 21 scenes and equal on one (treehill). The BD-PSNR is $+0.29$\dB on average and the BD-rate is $-26.9\%$ (Table~\ref{tab:bd}, bottom).
 
 \begin{table}[t]\centering\footnotesize
 \caption{\textbf{\BM at three target sizes and the FP32 model of \MS}, dataset means over single runs; size in MB. Size error is $|\text{file}-\text{target}|/\text{target}$. All targets are in the supplement. $^\dagger$Two objects (ficus, mic) are fully represented by about 2 to 2.6~MB and do not grow further.}
@@ -87,13 +88,13 @@ dataset & target & size & err. & PSNR & SSIM & LPIPS \\
 \end{tabular}
 \end{table}
 
-\noindent\textbf{No prior knowledge of the scene.} With capped training, the same cap gives files that differ by a factor of 1.3 to 2.0 across the captured scenes (5.8--7.5~MB at 0.6 million vertices, 20.0--39.8~MB at the default 4 million; supplement). The cap for a wanted file size therefore depends on the scene. \BM takes the file size as its input and uses the same controller settings everywhere. Table~\ref{tab:main} lists its results. On the captured scenes, all 65 runs end within 10\% of the target, and the mean error is at most 2.9\% for every dataset and target. On the objects, 21 of 24 runs end within 10\%. The three others are ficus and mic at 2.5 or 4~MB: these objects are fully represented by about 2 to 2.6~MB, so the file stays below the target.
+\noindent\textbf{No prior knowledge of the scene.} With \MSc, the same cap gives files that differ by a factor of 1.3 to 2.0 across the captured scenes (5.8--7.5~MB at 0.6 million vertices, 20.0--39.8~MB at the default 4 million; supplement). The cap for a wanted file size therefore depends on the scene. \BM takes the file size as its input and uses the same controller settings everywhere. Table~\ref{tab:main} lists its results. On the captured scenes, all 65 runs end within 10\% of the target, and the mean error is at most 2.9\% for every dataset and target. On the objects, 21 of 24 runs end within 10\%. The three others are ficus and mic at 2.5 or 4~MB: these objects are fully represented by about 2 to 2.6~MB, so the file stays below the target.
 
 \noindent\textbf{Against the FP32 model.} At the highest target of 20~MB, the files of \BM are 31 times smaller than the FP32 model on Mip-NeRF~360 and Tanks and Temples (609~MB on average), for a PSNR loss of 0.28\dB. On NeRF-Synthetic, the 3.6~MB files match the PSNR of the 65.7~MB FP32 models.
 
 \subsection{Collapse after training}
 \label{sec:simp}
-Fig.~\ref{fig:rd}c compares \BM with the FP32 model reduced by edge collapse after training, both written by BM-Codec. At the same vertex count, capped training is already better than collapse after training on 127 of 128 scene--budget pairs, by 1.86\dB on average. The loss grows as the mesh is reduced: 0.5\dB for files of 12 to 23~MB, 1.9\dB at 8 to 12~MB and 3.9\dB below 8~MB. The reason is that each pixel is covered by one opaque triangle. After a collapse, the neighboring triangles have not been trained for their new shape, and no other primitive covers the error. Fig.~\ref{fig:qual} shows the three ways to reach the same file size on three scenes.
+Fig.~\ref{fig:rd}c compares \BM with the FP32 model reduced by edge collapse after training, both written by BM-Codec. At the same vertex count, \MSc is already better than collapse after training on 127 of 128 scene--budget pairs, by 1.86\dB on average. The loss grows as the mesh is reduced: 0.5\dB for files of 12 to 23~MB, 1.9\dB at 8 to 12~MB and 3.9\dB below 8~MB. The reason is that each pixel is covered by one opaque triangle. After a collapse, the neighboring triangles have not been trained for their new shape, and no other primitive covers the error. Fig.~\ref{fig:qual} shows the three ways to reach the same file size on three scenes.
 
 \subsection{Other representations}
 \label{sec:cross}
