@@ -1,0 +1,216 @@
+== time (all 21 scenes)
+b46-time | host cs674.hpc.nyu.edu | INTEL(R) XEON(R) PLATINUM 8592+ | threads 8 | driver /scratch/zr2245/analysis/tfan-time/o3dgc_driver_timed | Mon Nov 16 08:06:30 AM EST 2026
+TIME garden ours | V 1005902 F 2292683 | 11.641 MB | ours encode 5.34 s | decode 4.27 s (+ restore 0.045 s) | compile once 7.2 s | roundtrip exact
+TIME garden generic | V 1005902 F 2292683 | sh8 | zstd encode 12.86 s decode 0.25 s | draco encode 23.86 s decode 5.45 s | tfan encode+decode 11.11 s
+TFANTIME garden | whole call 11.11 s | encode 7.152 s | decode 3.273 s
+TIME room ours | V 997819 F 2281259 | 10.671 MB | ours encode 6.24 s | decode 4.97 s (+ restore 0.047 s) | compile once 6.57 s | roundtrip exact
+TIME room generic | V 997819 F 2281259 | sh8 | zstd encode 15.74 s decode 0.21 s | draco encode 21.91 s decode 5.0 s | tfan encode+decode 8.71 s
+TFANTIME room | whole call 8.71 s | encode 5.445 s | decode 2.636 s
+TIME truck ours | V 885368 F 1655525 | 9.951 MB | ours encode 4.05 s | decode 3.22 s (+ restore 0.034 s) | compile once 5.91 s | roundtrip exact
+TIME truck generic | V 885368 F 1655525 | sh8 | zstd encode 8.52 s decode 0.18 s | draco encode 14.59 s decode 3.56 s | tfan encode+decode 6.7 s
+TFANTIME truck | whole call 6.7 s | encode 3.957 s | decode 2.186 s
+TIME kitchen ours | V 956939 F 2495983 | 11.634 MB | ours encode 5.43 s | decode 4.33 s (+ restore 0.039 s) | compile once 6.18 s | roundtrip exact
+TIME kitchen generic | V 956939 F 2495983 | sh8 | zstd encode 8.91 s decode 0.24 s | draco encode 21.43 s decode 5.19 s | tfan encode+decode 8.72 s
+TFANTIME kitchen | whole call 8.72 s | encode 5.289 s | decode 2.814 s
+TIME counter ours | V 817438 F 1856176 | 9.311 MB | ours encode 4.21 s | decode 3.38 s (+ restore 0.03 s) | compile once 5.95 s | roundtrip exact
+TIME counter generic | V 817438 F 1856176 | sh8 | zstd encode 8.08 s decode 0.18 s | draco encode 16.0 s decode 3.9 s | tfan encode+decode 6.79 s
+TFANTIME counter | whole call 6.79 s | encode 4.078 s | decode 2.199 s
+TIME bonsai ours | V 754307 F 1583042 | 8.315 MB | ours encode 3.71 s | decode 2.97 s (+ restore 0.027 s) | compile once 6.35 s | roundtrip exact
+TIME bonsai generic | V 754307 F 1583042 | sh8 | zstd encode 7.81 s decode 0.17 s | draco encode 13.74 s decode 3.31 s | tfan encode+decode 6.14 s
+TFANTIME bonsai | whole call 6.14 s | encode 3.675 s | decode 2.021 s
+TIME bicycle ours | V 947525 F 1785653 | 10.042 MB | ours encode 4.2 s | decode 3.43 s (+ restore 0.032 s) | compile once 6.27 s | roundtrip exact
+TIME bicycle generic | V 947525 F 1785653 | sh8 | zstd encode 7.91 s decode 0.17 s | draco encode 14.72 s decode 3.7 s | tfan encode+decode 6.9 s
+TFANTIME bicycle | whole call 6.9 s | encode 3.979 s | decode 2.308 s
+TIME stump ours | V 975273 F 1782308 | 10.212 MB | ours encode 4.24 s | decode 3.55 s (+ restore 0.037 s) | compile once 6.44 s | roundtrip exact
+TIME stump generic | V 975273 F 1782308 | sh8 | zstd encode 8.49 s decode 0.19 s | draco encode 15.31 s decode 3.77 s | tfan encode+decode 6.9 s
+TFANTIME stump | whole call 6.9 s | encode 3.961 s | decode 2.372 s
+TIME flowers ours | V 930919 F 1570126 | 9.416 MB | ours encode 3.86 s | decode 3.17 s (+ restore 0.038 s) | compile once 6.21 s | roundtrip exact
+TIME flowers generic | V 930919 F 1570126 | sh8 | zstd encode 8.23 s decode 0.19 s | draco encode 13.72 s decode 3.26 s | tfan encode+decode 6.36 s
+TFANTIME flowers | whole call 6.36 s | encode 3.658 s | decode 2.149 s
+TIME treehill ours | V 1023422 F 1891109 | 10.596 MB | ours encode 4.54 s | decode 3.66 s (+ restore 0.038 s) | compile once 6.3 s | roundtrip exact
+TIME treehill generic | V 1023422 F 1891109 | sh8 | zstd encode 8.84 s decode 0.23 s | draco encode 16.41 s decode 3.99 s | tfan encode+decode 7.56 s
+TFANTIME treehill | whole call 7.56 s | encode 4.405 s | decode 2.510 s
+TIME train ours | V 917466 F 1863948 | 10.357 MB | ours encode 4.45 s | decode 3.51 s (+ restore 0.036 s) | compile once 6.29 s | roundtrip exact
+TIME train generic | V 917466 F 1863948 | sh8 | zstd encode 8.91 s decode 0.22 s | draco encode 16.29 s decode 3.95 s | tfan encode+decode 7.57 s
+TFANTIME train | whole call 7.57 s | encode 4.632 s | decode 2.377 s
+TIME drjohnson ours | V 881894 F 2441119 | 11.566 MB | ours encode 5.29 s | decode 4.19 s (+ restore 0.034 s) | compile once 6.17 s | roundtrip exact
+TIME drjohnson generic | V 881894 F 2441119 | sh8 | zstd encode 7.35 s decode 0.19 s | draco encode 20.46 s decode 4.83 s | tfan encode+decode 8.97 s
+TFANTIME drjohnson | whole call 8.97 s | encode 5.673 s | decode 2.718 s
+TIME playroom ours | V 847103 F 2398296 | 10.96 MB | ours encode 5.35 s | decode 4.09 s (+ restore 0.034 s) | compile once 6.05 s | roundtrip exact
+TIME playroom generic | V 847103 F 2398296 | sh8 | zstd encode 11.9 s decode 0.19 s | draco encode 20.83 s decode 4.84 s | tfan encode+decode 8.93 s
+TFANTIME playroom | whole call 8.93 s | encode 5.792 s | decode 2.592 s
+TIME lego ours | V 156040 F 452009 | 2.791 MB | ours encode 1.12 s | decode 0.91 s (+ restore 0.006 s) | compile once 6.44 s | roundtrip exact
+TIME lego generic | V 156040 F 452009 | sh8 | zstd encode 2.93 s decode 0.02 s | draco encode 3.64 s decode 0.86 s | tfan encode+decode 1.61 s
+TFANTIME lego | whole call 1.61 s | encode 0.939 s | decode 0.515 s
+TIME chair ours | V 146157 F 400498 | 2.634 MB | ours encode 1.01 s | decode 0.85 s (+ restore 0.005 s) | compile once 5.93 s | roundtrip exact
+TIME chair generic | V 146157 F 400498 | sh8 | zstd encode 2.65 s decode 0.02 s | draco encode 3.19 s decode 0.78 s | tfan encode+decode 1.44 s
+TFANTIME chair | whole call 1.44 s | encode 0.865 s | decode 0.460 s
+TIME drums ours | V 150402 F 481302 | 2.738 MB | ours encode 1.16 s | decode 0.96 s (+ restore 0.005 s) | compile once 6.4 s | roundtrip exact
+TIME drums generic | V 150402 F 481302 | sh8 | zstd encode 3.1 s decode 0.02 s | draco encode 3.88 s decode 0.91 s | tfan encode+decode 1.6 s
+TFANTIME drums | whole call 1.6 s | encode 0.960 s | decode 0.520 s
+TIME ficus ours | V 55235 F 133289 | 1.335 MB | ours encode 0.46 s | decode 0.38 s (+ restore 0.002 s) | compile once 6.24 s | roundtrip exact
+TIME ficus generic | V 55235 F 133289 | sh8 | zstd encode 0.7 s decode 0.01 s | draco encode 1.04 s decode 0.24 s | tfan encode+decode 0.47 s
+TFANTIME ficus | whole call 0.47 s | encode 0.252 s | decode 0.161 s
+TIME hotdog ours | V 146789 F 465444 | 2.748 MB | ours encode 1.13 s | decode 0.92 s (+ restore 0.005 s) | compile once 6.15 s | roundtrip exact
+TIME hotdog generic | V 146789 F 465444 | sh8 | zstd encode 2.82 s decode 0.02 s | draco encode 3.73 s decode 0.92 s | tfan encode+decode 1.61 s
+TFANTIME hotdog | whole call 1.61 s | encode 0.980 s | decode 0.519 s
+TIME materials ours | V 147311 F 390025 | 2.535 MB | ours encode 1.03 s | decode 0.83 s (+ restore 0.006 s) | compile once 6.24 s | roundtrip exact
+TIME materials generic | V 147311 F 390025 | sh8 | zstd encode 3.46 s decode 0.03 s | draco encode 3.19 s decode 0.76 s | tfan encode+decode 1.48 s
+TFANTIME materials | whole call 1.48 s | encode 0.901 s | decode 0.451 s
+TIME mic ours | V 71386 F 200595 | 1.606 MB | ours encode 0.59 s | decode 0.48 s (+ restore 0.003 s) | compile once 6.28 s | roundtrip exact
+TIME mic generic | V 71386 F 200595 | sh8 | zstd encode 1.21 s decode 0.01 s | draco encode 1.59 s decode 0.38 s | tfan encode+decode 0.7 s
+TFANTIME mic | whole call 0.7 s | encode 0.411 s | decode 0.229 s
+TIME ship ours | V 145351 F 411929 | 2.573 MB | ours encode 1.04 s | decode 0.86 s (+ restore 0.006 s) | compile once 6.45 s | roundtrip exact
+TIME ship generic | V 145351 F 411929 | sh8 | zstd encode 2.88 s decode 0.02 s | draco encode 3.41 s decode 0.81 s | tfan encode+decode 1.49 s
+TFANTIME ship | whole call 1.49 s | encode 0.897 s | decode 0.464 s
+== choices (10 new scenes)
+DCPRED drjohnson | V 881894 | file 11.566 MB | DC zstd 1.282 MB (11.63 b/v) | first 10.42 b/v | mean 9.75 b/v | best mean: DC -16.2 %, file -1.79 % | roundtrip exact
+XYZPRED drjohnson | q15 | shipped 2.885 MB (26.17 b/v) | prev 27.22 b/v | first 26.70 b/v | mean 25.52 b/v (-4.4 % vs first) | para 27.72 b/v (+3.8 % vs first, available 94 % of vertices) | best mean (round trip exact), file -1.12 % vs first
+IDXCTX drjohnson | main K 4096: shipped 10.62 b/v, no context 10.92 b/v, fixed 12 b | residual R 256: shipped 7.59 b/v, no context 7.49 b/v, fixed 8 b | context saves 1.1 % of the index streams, 0.19 % of the file | roundtrip exact
+DCPRED playroom | V 847103 | file 10.960 MB | DC zstd 1.364 MB (12.89 b/v) | first 10.91 b/v | mean 10.23 b/v | best mean: DC -20.6 %, file -2.56 % | roundtrip exact
+XYZPRED playroom | q15 | shipped 2.508 MB (23.69 b/v) | prev 24.68 b/v | first 24.17 b/v | mean 22.98 b/v (-5.0 % vs first) | para 25.18 b/v (+4.1 % vs first, available 94 % of vertices) | best mean (round trip exact), file -1.16 % vs first
+IDXCTX playroom | main K 4096: shipped 9.44 b/v, no context 10.04 b/v, fixed 12 b | residual R 256: shipped 7.40 b/v, no context 7.27 b/v, fixed 8 b | context saves 2.7 % of the index streams, 0.45 % of the file | roundtrip exact
+DCPRED lego | V 156040 | file 2.791 MB | DC zstd 0.337 MB (17.29 b/v) | first 14.95 b/v | mean 14.00 b/v | best mean: DC -19.0 %, file -2.30 % | roundtrip exact
+XYZPRED lego | q14 | shipped 0.581 MB (29.77 b/v) | prev 30.45 b/v | first 30.19 b/v | mean 29.12 b/v (-3.6 % vs first) | para 31.48 b/v (+4.3 % vs first, available 95 % of vertices) | best mean (round trip exact), file -0.75 % vs first
+IDXCTX lego | main K 4096: shipped 11.39 b/v, no context 11.60 b/v, fixed 12 b | residual R 256: shipped 7.82 b/v, no context 7.83 b/v, fixed 8 b | context saves 1.1 % of the index streams, 0.15 % of the file | roundtrip exact
+DCPRED chair | V 146157 | file 2.634 MB | DC zstd 0.301 MB (16.46 b/v) | first 15.14 b/v | mean 14.28 b/v | best mean: DC -13.2 %, file -1.51 % | roundtrip exact
+XYZPRED chair | q14 | shipped 0.555 MB (30.36 b/v) | prev 30.90 b/v | first 30.65 b/v | mean 29.53 b/v (-3.6 % vs first) | para 31.91 b/v (+4.1 % vs first, available 94 % of vertices) | best mean (round trip exact), file -0.77 % vs first
+IDXCTX chair | main K 4096: shipped 11.33 b/v, no context 11.61 b/v, fixed 12 b | residual R 255: shipped 7.84 b/v, no context 7.84 b/v, fixed 8 b | context saves1.5 % of the index streams, 0.20 % of the file | roundtrip exact
+DCPRED drums | V 150402 | file 2.738 MB | DC zstd 0.300 MB (15.95 b/v) | first 14.80 b/v | mean 13.87 b/v | best mean: DC -13.0 %, file -1.43 % | roundtrip exact
+XYZPRED drums | q14 | shipped 0.556 MB (29.57 b/v) | prev 29.97 b/v | first 29.81 b/v | mean 28.74 b/v (-3.6 % vs first) | para 31.24 b/v (+4.8 % vs first, available 96 % of vertices) | best mean (round trip exact), file -0.74 % vs first
+IDXCTX drums | main K 4096: shipped 10.61 b/v, no context 11.26 b/v, fixed 12 b | residual R 256: shipped 7.68 b/v, no context 7.60 b/v, fixed 8 b | context saves3.1 % of the index streams, 0.40 % of the file | roundtrip exact
+DCPRED ficus | V 55235 | file 1.335 MB | DC zstd 0.108 MB (15.58 b/v) | first 14.14 b/v | mean 13.37 b/v | best mean: DC -14.2 %, file -1.14 % | roundtrip exact
+XYZPRED ficus | q14 | shipped 0.214 MB (31.06 b/v) | prev 31.36 b/v | first 31.37 b/v | mean 30.37 b/v (-3.2 % vs first) | para 32.72 b/v (+4.3 % vs first, available 91 % of vertices) | best mean (round trip exact), file -0.52 % vs first
+IDXCTX ficus | main K 4096: shipped 11.11 b/v, no context 11.70 b/v, fixed 12 b | residual R 256: shipped 7.88 b/v, no context 7.84 b/v, fixed 8 b | context saves2.8 % of the index streams, 0.29 % of the file | roundtrip exact
+DCPRED hotdog | V 146789 | file 2.748 MB | DC zstd 0.294 MB (16.00 b/v) | first 13.51 b/v | mean 12.60 b/v | best mean: DC -21.2 %, file -2.27 % | roundtrip exact
+XYZPRED hotdog | q14 | shipped 0.555 MB (30.27 b/v) | prev 30.70 b/v | first 30.47 b/v | mean 29.33 b/v (-3.8 % vs first) | para 31.77 b/v (+4.2 % vs first, available 94 % of vertices) | best mean (round trip exact), file -0.76 % vs first
+IDXCTX hotdog | main K 4096: shipped 10.74 b/v, no context 11.28 b/v, fixed 12 b | residual R 256: shipped 7.77 b/v, no context 7.75 b/v, fixed 8 b | context saves 2.7 % of the index streams, 0.34 % of the file | roundtrip exact
+DCPRED materials | V 147311 | file 2.535 MB | DC zstd 0.226 MB (12.29 b/v) | first 11.18 b/v | mean 10.43 b/v | best mean: DC -15.1 %, file -1.35 % | roundtrip exact
+XYZPRED materials | q14 | shipped 0.581 MB (31.57 b/v) | prev 32.22 b/v | first 32.00 b/v | mean 30.91 b/v (-3.4 % vs first) | para 33.25 b/v (+3.9 % vs first, available 92 % of vertices) | best mean (round trip exact), file -0.79 % vs first
+IDXCTX materials | main K 4096: shipped 10.83 b/v, no context 11.47 b/v, fixed 12 b | residual R 256: shipped 7.56 b/v, no context 7.51 b/v, fixed 8 b | context saves 3.1 % of the index streams, 0.43 % of the file | roundtrip exact
+DCPRED mic | V 71386 | file 1.606 MB | DC zstd 0.135 MB (15.17 b/v) | first 14.85 b/v | mean 13.97 b/v | best mean: DC -7.9 %, file -0.66 % | roundtrip exact
+XYZPRED mic | q14 | shipped 0.268 MB (30.03 b/v) | prev 30.38 b/v | first 30.19 b/v | mean 29.14 b/v (-3.5 % vs first) | para 31.56 b/v (+4.6 % vs first, available 94 % of vertices) | best mean (round trip exact), file -0.59 % vs first
+IDXCTX mic | main K 4096: shipped 11.42 b/v, no context 11.73 b/v, fixed 12 b | residual R 256: shipped 7.92 b/v, no context 7.90 b/v, fixed 8 b | context saves 1.5 % of the index streams, 0.16 % of the file | roundtrip exact
+DCPRED ship | V 145351 | file 2.573 MB | DC zstd 0.242 MB (13.33 b/v) | first 12.81 b/v | mean 12.00 b/v | best mean: DC -10.0 %, file -0.94 % | roundtrip exact
+XYZPRED ship | q14 | shipped 0.535 MB (29.45 b/v) | prev 30.17 b/v | first 29.85 b/v | mean 28.75 b/v (-3.7 % vs first) | para 31.05 b/v (+4.0 % vs first, available 94 % of vertices) | best mean (round trip exact), file -0.77 % vs first
+IDXCTX ship | main K 4096: shipped 11.21 b/v, no context 11.52 b/v, fixed 12 b | residual R 256: shipped 7.79 b/v, no context 7.73 b/v, fixed 8 b | context saves 1.3 % of the index streams, 0.17 % of the file | roundtrip exact
+== noref (10 new scenes)
+VQTIME drjohnson k-means  3 s | assign  6 s | refine 40 s | validation PSNR before 29.94, k-means only 29.02, refined 29.32
+VQNOREF drjohnson | before coding test 26.333 0.8251 0.4863 | with refinement 11.566 MB test 26.165 0.8150 0.5059 | without refinement 11.579 MB test 25.933 0.7999 0.5206
+VQTIME playroom  k-means  2 s | assign  5 s | refine 36 s | validation PSNR before 32.48, k-means only 30.72, refined 31.38
+VQNOREF playroom  | before coding test 27.148 0.8500 0.4241 | with refinement 10.960 MB test 27.083 0.8446 0.4475 | without refinement 10.969 MB test 26.681 0.8236 0.4709
+VQTIME lego      k-means  1 s | assign  7 s | refine 12 s | validation PSNR before 34.97, k-means only 34.08, refined 34.39
+VQNOREF lego      | before coding test 32.653 0.9657 0.0483 | with refinement 2.791 MB test 32.314 0.9620 0.0535 | without refinement 2.788 MB test 32.089 0.9584 0.0580
+VQTIME chair     k-means  1 s | assign  7 s | refine 11 s | validation PSNR before 33.91, k-means only 33.25, refined 33.48
+VQNOREF chair     | before coding test 32.408 0.9700 0.0408 | with refinement 2.634 MB test 32.070 0.9668 0.0464 | without refinement 2.633 MB test 31.918 0.9646 0.0509
+VQTIME drums     k-means  1 s | assign  7 s | refine 10 s | validation PSNR before 27.25, k-means only 26.84, refined 26.83
+VQNOREF drums     | before coding test 25.533 0.9436 0.0655 | with refinement 2.738 MB test 25.417 0.9393 0.0736 | without refinement 2.739 MB test 25.361 0.9346 0.0794
+VQTIME ficus     k-means  1 s | assign  6 s | refine  7 s | validation PSNR before 33.28, k-means only 32.45, refined 32.50
+VQNOREF ficus     | before coding test 31.962 0.9705 0.0430 | with refinement 1.335 MB test 31.765 0.9682 0.0454 | without refinement 1.336 MB test 31.664 0.9668 0.0464
+VQTIME hotdog    k-means  1 s | assign  7 s | refine 14 s | validation PSNR before 37.14, k-means only 36.06, refined 36.51
+VQNOREF hotdog    | before coding test 35.974 0.9791 0.0434 | with refinement 2.748 MB test 35.571 0.9758 0.0554 | without refinement 2.748 MB test 35.217 0.9718 0.0689
+VQTIME materials k-means  1 s | assign  7 s | refine 11 s | validation PSNR before 30.87, k-means only 30.01, refined 30.05
+VQNOREF materials | before coding test 28.193 0.9388 0.0879 | with refinement 2.535 MB test 27.759 0.9294 0.1065 | without refinement 2.536 MB test 27.623 0.9246 0.1130
+VQTIME mic       k-means  1 s | assign  7 s | refine  7 s | validation PSNR before 33.68, k-means only 33.25, refined 33.38
+VQNOREF mic       | before coding test 32.792 0.9827 0.0252 | with refinement 1.606 MB test 32.543 0.9806 0.0310 | without refinement 1.605 MB test 32.443 0.9788 0.0357
+VQTIME ship      k-means  1 s | assign  7 s | refine 13 s | validation PSNR before 30.09, k-means only 29.31, refined 29.48
+VQNOREF ship      | before coding test 29.088 0.8772 0.1629 | with refinement 2.573 MB test 28.766 0.8671 0.1770 | without refinement 2.576 MB test 28.587 0.8594 0.1860
+== collapse
+lego GENERIC-RD | mesh 372025 | V 310876 F 1196714 | sh8 | zstd 19.2 MB | draco 98.15 MB | tfan 15.547 MB | test 31.147 0.9628 0.0581 | unquantised 31.155
+lego GENERIC-RD | mesh 372025 | V 310876 F 1196714 | sh6 | zstd 15.194 MB | draco 69.75 MB | tfan 11.831 MB | test 31.078 0.9607 0.0601 | unquantised 31.155
+lego GENERIC-RD | mesh 372025 | V 310876 F 1196714 | sh4 | zstd 10.979 MB | draco 41.633 MB | tfan 8.2 MB | test 29.808 0.9358 0.0863 | unquantised 31.155
+ficus GENERIC-RD | mesh 104589 | V 68642 F 224224 | sh8 | zstd 4.074 MB | draco 19.476 MB | tfan 3.399 MB | test 31.907 0.9704 0.0427 | unquantised 31.910
+ficus GENERIC-RD | mesh 104589 | V 68642 F 224224 | sh6 | zstd 3.216 MB | draco 14.117 MB | tfan 2.573 MB | test 31.879 0.9701 0.0430 | unquantised 31.910
+ficus GENERIC-RD | mesh 104589 | V 68642 F 224224 | sh4 | zstd 2.252 MB | draco 8.711 MB | tfan 1.753 MB | test 31.429 0.9652 0.0470 | unquantised 31.910
+mic GENERIC-RD | mesh 170000 | V 107795 F 397426 | sh8 | zstd 6.634 MB | draco 35.909 MB | tfan 5.558 MB | test 33.113 0.9824 0.0282 | unquantised 33.118
+mic GENERIC-RD | mesh 170000 | V 107795 F 397426 | sh6 | zstd 5.025 MB | draco 26.179 MB | tfan 4.265 MB | test 33.065 0.9815 0.0301 | unquantised 33.118
+mic GENERIC-RD | mesh 170000 | V 107795 F 397426 | sh4 | zstd 3.613 MB | draco 16.369 MB | tfan 2.985 MB | test 32.213 0.9716 0.0476 | unquantised 33.118
+chair GENERIC-RD | mesh 238956 | V 193002 F 738911 | sh8 | zstd 11.819 MB | draco 62.737 MB | tfan 9.72 MB | test 31.440 0.9673 0.0461 | unquantised 31.448
+chair GENERIC-RD | mesh 238956 | V 193002 F 738911 | sh6 | zstd 9.269 MB | draco 44.85 MB | tfan 7.406 MB | test 31.360 0.9654 0.0496 | unquantised 31.448
+chair GENERIC-RD | mesh 238956 | V 193002 F 738911 | sh4 | zstd 6.613 MB | draco 27.084 MB | tfan 5.145 MB | test 29.923 0.9459 0.0685 | unquantised 31.448
+drums GENERIC-RD | mesh 258000 | V 186525 F 878495 | sh8 | zstd 11.632 MB | draco 70.223 MB | tfan 9.687 MB | test 25.175 0.9370 0.0750 | unquantised 25.178
+drums GENERIC-RD | mesh 258000 | V 186525 F 878495 | sh6 | zstd 9.119 MB | draco 49.865 MB | tfan 7.46 MB | test 25.141 0.9332 0.0791 | unquantised 25.178
+drums GENERIC-RD | mesh 258000 | V 186525 F 878495 | sh4 | zstd 6.714 MB | draco 29.876 MB | tfan 5.312 MB | test 24.420 0.9085 0.1032 | unquantised 25.178
+materials GENERIC-RD | mesh 259000 | V 206265 F 709690 | sh8 | zstd 12.101 MB | draco 59.007 MB | tfan 9.693 MB | test 28.195 0.9378 0.0901 | unquantised 28.201
+materials GENERIC-RD | mesh 259000 | V 206265 F 709690 | sh6 | zstd 9.116 MB | draco 41.535 MB | tfan 7.223 MB | test 28.128 0.9339 0.0980 | unquantised 28.201
+materials GENERIC-RD | mesh 259000 | V 206265 F 709690 | sh4 | zstd 6.492 MB | draco 24.57 MB | tfan 4.881 MB | test 26.870 0.8977 0.1407 | unquantised 28.201
+hotdog GENERIC-RD | mesh 222000 | V 152711 F 671812 | sh8 | zstd 9.007 MB | draco 51.39 MB | tfan 7.696 MB | test 35.224 0.9774 0.0562 | unquantised 35.238
+hotdog GENERIC-RD | mesh 222000 | V 152711 F 671812 | sh6 | zstd 7.242 MB | draco 36.033 MB | tfan 5.893 MB | test 35.061 0.9748 0.0663 | unquantised 35.238
+hotdog GENERIC-RD | mesh 222000 | V 152711 F 671812 | sh4 | zstd 5.458 MB | draco 21.227 MB | tfan 4.174 MB | test 32.575 0.9471 0.1121 | unquantised 35.238
+playroom GENERIC-RD | mesh 1201000 | V 1156617 F 3145332 | sh8 | zstd 69.218 MB | draco 226.619 MB | tfan 48.479 MB | test 25.549 0.8224 0.4557 | unquantised 25.561
+playroom GENERIC-RD | mesh 1201000 | V 1156617 F 3145332 | sh6 | zstd 53.073 MB | draco 153.311 MB | tfan 34.79 MB | test 25.357 0.8024 0.4792 | unquantised 25.561
+playroom GENERIC-RD | mesh 1201000 | V 1156617 F 3145332 | sh4 | zstd 37.915 MB | draco 85.675 MB | tfan 22.354 MB | test 22.381 0.6902 0.5670 | unquantised 25.561
+ship GENERIC-RD | mesh 294000 | V 253376 F 980821 | sh8 | zstd 15.731 MB | draco 79.41 MB | tfan 12.514 MB | test 28.773 0.8668 0.1762 | unquantised 28.780
+ship GENERIC-RD | mesh 294000 | V 253376 F 980821 | sh6 | zstd 12.222 MB | draco 56.08 MB | tfan 9.476 MB | test 28.685 0.8622 0.1818 | unquantised 28.780
+ship GENERIC-RD | mesh 294000 | V 253376 F 980821 | sh4 | zstd 8.786 MB | draco 33.2 MB | tfan 6.543 MB | test 26.970 0.8121 0.2313 | unquantised 28.780
+drjohnson GENERIC-RD | mesh 1370000 | V 1143832 F 3322522 | sh8 | zstd 69.419 MB | draco 242.889 MB | tfan 49.574 MB | test 24.835 0.7853 0.5179 | unquantised 24.850
+drjohnson GENERIC-RD | mesh 1370000 | V 1143832 F 3322522 | sh6 | zstd 52.715 MB | draco 165.455 MB | tfan 35.93 MB | test 24.609 0.7639 0.5415 | unquantised 24.850
+drjohnson GENERIC-RD | mesh 1370000 | V 1143832 F 3322522 | sh4 | zstd 37.835 MB | draco 93.071 MB | tfan 23.371 MB | test 21.347 0.6212 0.6734 | unquantised 24.850
+lego GENERIC-RD | mesh 167656 | V 168668 F 690008 | sh8 | zstd 10.899 MB | draco 54.826 MB | tfan 8.622 MB | test 28.659 0.9360 0.0955 | unquantised 28.662
+lego GENERIC-RD | mesh 167656 | V 168668 F 690008 | sh6 | zstd 8.687 MB | draco 39.243 MB | tfan 6.604 MB | test 28.620 0.9343 0.0969 | unquantised 28.662
+lego GENERIC-RD | mesh 167656 | V 168668 F 690008 | sh4 | zstd 6.434 MB | draco 23.77 MB | tfan 4.621 MB | test 27.867 0.9061 0.1221 | unquantised 28.662
+mic GENERIC-RD | mesh 83900 | V 71386 F 286932 | sh8 | zstd 4.543 MB | draco 25.527 MB | tfan 3.765 MB | test 31.874 0.9743 0.0456 | unquantised 31.877
+mic GENERIC-RD | mesh 83900 | V 71386 F 286932 | sh6 | zstd 3.521 MB | draco 18.732 MB | tfan 2.907 MB | test 31.837 0.9736 0.0470 | unquantised 31.877
+mic GENERIC-RD | mesh 83900 | V 71386 F 286932 | sh4 | zstd 2.535 MB | draco 11.852 MB | tfan 2.052 MB | test 31.217 0.9652 0.0596 | unquantised 31.877
+ficus GENERIC-RD | mesh 67614 | V 55235 F 177042 | sh8 | zstd 3.276 MB | draco 15.306 MB | tfan 2.74 MB | test 31.020 0.9658 0.0478 | unquantised 31.022
+ficus GENERIC-RD | mesh 67614 | V 55235 F 177042 | sh6 | zstd 2.611 MB | draco 11.127 MB | tfan 2.076 MB | test 30.997 0.9654 0.0480 | unquantised 31.022
+ficus GENERIC-RD | mesh 67614 | V 55235 F 177042 | sh4 | zstd 1.819 MB | draco 6.916 MB | tfan 1.414 MB | test 30.603 0.9606 0.0518 | unquantised 31.022
+chair GENERIC-RD | mesh 137117 | V 116560 F 479359 | sh8 | zstd 7.446 MB | draco 39.333 MB | tfan 6.03 MB | test 28.888 0.9479 0.0681 | unquantised 28.892
+chair GENERIC-RD | mesh 137117 | V 116560 F 479359 | sh6 | zstd 5.956 MB | draco 28.282 MB | tfan 4.631 MB | test 28.844 0.9464 0.0701 | unquantised 28.892
+chair GENERIC-RD | mesh 137117 | V 116560 F 479359 | sh4 | zstd 4.288 MB | draco 17.278 MB | tfan 3.257 MB | test 28.036 0.9314 0.0848 | unquantised 28.892
+drums GENERIC-RD | mesh 159000 | V 138120 F 658269 | sh8 | zstd 8.936 MB | draco 53.202 MB | tfan 7.269 MB | test 24.884 0.9310 0.0836 | unquantised 24.886
+drums GENERIC-RD | mesh 159000 | V 138120 F 658269 | sh6 | zstd 6.977 MB | draco 38.154 MB | tfan 5.612 MB | test 24.855 0.9280 0.0869 | unquantised 24.886
+drums GENERIC-RD | mesh 159000 | V 138120 F 658269 | sh4 | zstd 5.147 MB | draco 23.203 MB | tfan 3.99 MB | test 24.221 0.9048 0.1116 | unquantised 24.886
+hotdog GENERIC-RD | mesh 100090 | V 85437 F 377967 | sh8 | zstd 5.405 MB | draco 29.539 MB | tfan 4.426 MB | test 34.472 0.9710 0.0750 | unquantised 34.487
+hotdog GENERIC-RD | mesh 100090 | V 85437 F 377967 | sh6 | zstd 4.49 MB | draco 21.052 MB | tfan 3.405 MB | test 34.309 0.9684 0.0827 | unquantised 34.487
+hotdog GENERIC-RD | mesh 100090 | V 85437 F 377967 | sh4 | zstd 3.283 MB | draco 12.696 MB | tfan 2.406 MB | test 31.867 0.9414 0.1221 | unquantised 34.487
+materials GENERIC-RD | mesh 125118 | V 108027 F 402818 | sh8 | zstd 6.762 MB | draco 33.119 MB | tfan 5.389 MB | test 27.672 0.9247 0.1131 | unquantised 27.678
+materials GENERIC-RD | mesh 125118 | V 108027 F 402818 | sh6 | zstd 5.208 MB | draco 23.685 MB | tfan 4.092 MB | test 27.603 0.9214 0.1199 | unquantised 27.678
+materials GENERIC-RD | mesh 125118 | V 108027 F 402818 | sh4 | zstd 3.772 MB | draco 14.364 MB | tfan 2.83 MB | test 26.364 0.8892 0.1568 | unquantised 27.678
+lego GENERIC-RD | mesh 78124 | V 76711 F 345450 | sh8 | zstd 5.129 MB | draco 26.497 MB | tfan 4.035 MB | test 26.343 0.8988 0.1315 | unquantised 26.345
+lego GENERIC-RD | mesh 78124 | V 76711 F 345450 | sh6 | zstd 4.17 MB | draco 19.082 MB | tfan 3.12 MB | test 26.321 0.8976 0.1324 | unquantised 26.345
+lego GENERIC-RD | mesh 78124 | V 76711 F 345450 | sh4 | zstd 3.136 MB | draco 11.695 MB | tfan 2.213 MB | test 25.942 0.8827 0.1448 | unquantised 26.345
+playroom GENERIC-RD | mesh 441000 | V 422524 F 1182477 | sh8 | zstd 25.981 MB | draco 82.498 MB | tfan 18.252 MB | test 22.793 0.7788 0.5089 | unquantised 22.799
+playroom GENERIC-RD | mesh 441000 | V 422524 F 1182477 | sh6 | zstd 20.039 MB | draco 56.461 MB | tfan 13.243 MB | test 22.705 0.7666 0.5241 | unquantised 22.799
+playroom GENERIC-RD | mesh 441000 | V 422524 F 1182477 | sh4 | zstd 14.455 MB | draco 32.342 MB | tfan 8.639 MB | test 20.880 0.6773 0.5957 | unquantised 22.799
+mic GENERIC-RD | mesh 46659 | V 44011 F 195676 | sh8 | zstd 2.874 MB | draco 16.861 MB | tfan 2.408 MB | test 29.930 0.9599 0.0662 | unquantised 29.931
+mic GENERIC-RD | mesh 46659 | V 44011 F 195676 | sh6 | zstd 2.252 MB | draco 12.42 MB | tfan 1.879 MB | test 29.905 0.9593 0.0670 | unquantised 29.931
+mic GENERIC-RD | mesh 46659 | V 44011 F 195676 | sh4 | zstd 1.645 MB | draco 7.921 MB | tfan 1.35 MB | test 29.509 0.9523 0.0765 | unquantised 29.931
+ficus GENERIC-RD | mesh 35557 | V 30386 F 93779 | sh8 | zstd 1.832 MB | draco 7.903 MB | tfan 1.512 MB | test 27.759 0.9447 0.0625 | unquantised 27.760
+ficus GENERIC-RD | mesh 35557 | V 30386 F 93779 | sh6 | zstd 1.467 MB | draco 5.767 MB | tfan 1.147 MB | test 27.749 0.9445 0.0626 | unquantised 27.760
+ficus GENERIC-RD | mesh 35557 | V 30386 F 93779 | sh4 | zstd 1.033 MB | draco 3.615 MB | tfan 0.782 MB | test 27.580 0.9411 0.0650 | unquantised 27.760
+ship GENERIC-RD | mesh 164000 | V 144319 F 587355 | sh8 | zstd 9.338 MB | draco 46.137 MB | tfan 7.285 MB | test 27.802 0.8460 0.2014 | unquantised 27.808
+ship GENERIC-RD | mesh 164000 | V 144319 F 587355 | sh6 | zstd 7.351 MB | draco 32.771 MB | tfan 5.553 MB | test 27.726 0.8420 0.2059 | unquantised 27.808
+ship GENERIC-RD | mesh 164000 | V 144319 F 587355 | sh4 | zstd 5.347 MB | draco 19.607 MB | tfan 3.868 MB | test 26.264 0.7962 0.2498 | unquantised 27.808
+chair GENERIC-RD | mesh 66755 | V 69976 F 313556 | sh8 | zstd 4.594 MB | draco 24.761 MB | tfan 3.7 MB | test 26.955 0.9292 0.0842 | unquantised 26.957
+chair GENERIC-RD | mesh 66755 | V 69976 F 313556 | sh6 | zstd 3.714 MB | draco 17.854 MB | tfan 2.86 MB | test 26.925 0.9279 0.0859 | unquantised 26.957
+chair GENERIC-RD | mesh 66755 | V 69976 F 313556 | sh4 | zstd 2.714 MB | draco 10.974 MB | tfan 2.033 MB | test 26.389 0.9146 0.0979 | unquantised 26.957
+hotdog GENERIC-RD | mesh 47578 | V 47459 F 219055 | sh8 | zstd 3.061 MB | draco 16.699 MB | tfan 2.488 MB | test 33.029 0.9599 0.0973 | unquantised 33.036
+hotdog GENERIC-RD | mesh 47578 | V 47459 F 219055 | sh6 | zstd 2.549 MB | draco 11.956 MB | tfan 1.92 MB | test 32.913 0.9577 0.1019 | unquantised 33.036
+hotdog GENERIC-RD | mesh 47578 | V 47459 F 219055 | sh4 | zstd 1.883 MB | draco 7.277 MB | tfan 1.364 MB | test 31.029 0.9321 0.1367 | unquantised 33.036
+materials GENERIC-RD | mesh 68793 | V 64865 F 261258 | sh8 | zstd 4.114 MB | draco 20.983 MB | tfan 3.322 MB | test 26.836 0.9109 0.1294 | unquantised 26.840
+materials GENERIC-RD | mesh 68793 | V 64865 F 261258 | sh6 | zstd 3.238 MB | draco 15.099 MB | tfan 2.542 MB | test 26.779 0.9083 0.1347 | unquantised 26.840
+materials GENERIC-RD | mesh 68793 | V 64865 F 261258 | sh4 | zstd 2.363 MB | draco 9.269 MB | tfan 1.779 MB | test 25.746 0.8798 0.1613 | unquantised 26.840
+drjohnson GENERIC-RD | mesh 532000 | V 526885 F 1619702 | sh8 | zstd 33.017 MB | draco 113.793 MB | tfan 23.172 MB | test 23.298 0.7498 0.5454 | unquantised 23.309
+drjohnson GENERIC-RD | mesh 532000 | V 526885 F 1619702 | sh6 | zstd 25.08 MB | draco 77.883 MB | tfan 16.884 MB | test 23.143 0.7335 0.5650 | unquantised 23.309
+drjohnson GENERIC-RD | mesh 532000 | V 526885 F 1619702 | sh4 | zstd 18.248 MB | draco 44.392 MB | tfan 11.078 MB | test 20.589 0.6109 0.6858 | unquantised 23.309
+playroom GENERIC-RD | mesh 191000 | V 182526 F 455878 | sh8 | zstd 11.009 MB | draco 31.937 MB | tfan 7.862 MB | test 20.350 0.7405 0.5392 | unquantised 20.352
+playroom GENERIC-RD | mesh 191000 | V 182526 F 455878 | sh6 | zstd 8.536 MB | draco 22.062 MB | tfan 5.694 MB | test 20.304 0.7330 0.5502 | unquantised 20.352
+playroom GENERIC-RD | mesh 191000 | V 182526 F 455878 | sh4 | zstd 6.09 MB | draco 12.847 MB | tfan 3.686 MB | test 19.445 0.6734 0.5960 | unquantised 20.352
+ship GENERIC-RD | mesh 74000 | V 70253 F 320878 | sh8 | zstd 4.759 MB | draco 24.217 MB | tfan 3.651 MB | test 26.568 0.8231 0.2280 | unquantised 26.573
+ship GENERIC-RD | mesh 74000 | V 70253 F 320878 | sh6 | zstd 3.809 MB | draco 17.304 MB | tfan 2.808 MB | test 26.510 0.8200 0.2311 | unquantised 26.573
+ship GENERIC-RD | mesh 74000 | V 70253 F 320878 | sh4 | zstd 2.804 MB | draco 10.484 MB | tfan 1.984 MB | test 25.445 0.7876 0.2613 | unquantised 26.573
+drjohnson GENERIC-RD | mesh 224000 | V 200645 F 590080 | sh8 | zstd 12.513 MB | draco 40.747 MB | tfan 8.946 MB | test 21.421 0.7111 0.5682 | unquantised 21.428
+drjohnson GENERIC-RD | mesh 224000 | V 200645 F 590080 | sh6 | zstd 9.498 MB | draco 28.109 MB | tfan 6.551 MB | test 21.321 0.6998 0.5847 | unquantised 21.428
+drjohnson GENERIC-RD | mesh 224000 | V 200645 F 590080 | sh4 | zstd 6.907 MB | draco 16.237 MB | tfan 4.313 MB | test 19.547 0.6024 0.6973 | unquantised 21.428
+== alpha
+truck abl24-holda100 | target 10 MB | lam0 5.1997e-03 -> lamA q10/q50/q90 6.64e-03/1.49e-02/4.38e-02 -> lam_final (shadow) 6.64e-03 | final probe 8.075 MB | trained V 657773 F 1471855 | delivered 8.081 MB (hit 0.808 x target, probe/delivered 0.999) | test 22.014 0.7685 0.3339 | val 22.559 | K4096 R256 q18/q7 | growth-cappedFals
+bicycle abl24-holda100 | target 10 MB | lam0 5.1997e-03 -> lamA q10/q50/q90 8.52e-03/2.24e-02/6.90e-02 -> lam_final (shadow) 8.52e-03 | final probe 7.893 MB | trained V 700104 F 1538011 | delivered 7.897 MB (hit 0.790 x target, probe/delivered 1.000) | test 22.311 0.5508 0.5088 | val 20.822 | K4096 R256 q16/q7 | growth-capped Fa
+truck abl24-holda120 | target 10 MB | lam0 5.1997e-03 -> lamA q10/q50/q90 5.20e-03/1.22e-02/3.70e-02 -> lam_final (shadow) 5.19e-03 | final probe 9.650 MB | trained V 803912 F 1768792 | delivered 9.657 MB (hit 0.966 x target, probe/delivered 0.999) | test 22.199 0.7772 0.3207 | val 22.852 | K4096 R256 q18/q7 | growth-cappedFals
+truck abl24-holda150 | target 10 MB | lam0 5.1997e-03 -> lamA q10/q50/q90 4.54e-03/9.91e-03/3.11e-02 -> lam_final (shadow) 1.79e-04 | final probe 9.918 MB | trained V 809393 F 1913525 | delivered 9.922 MB (hit 0.992 x target, probe/delivered 1.000) | test 22.314 0.7843 0.3084 | val 22.999 | K4096 R256 q18/q7 | growth-cappedFals
+bicycle abl24-holda120 | target 10 MB | lam0 5.1997e-03 -> lamA q10/q50/q90 6.78e-03/1.92e-02/6.11e-02 -> lam_final (shadow) 6.78e-03 | final probe 9.448 MB | trained V 851514 F 1859355 | delivered 9.452 MB (hit 0.945 x target, probe/delivered 1.000) | test 22.435 0.5640 0.4945 | val 20.962 | K4096 R256 q16/q7 | growth-capped Fa
+bicycle abl24-holda150 | target 10 MB | lam0 5.1997e-03 -> lamA q10/q50/q90 5.20e-03/1.59e-02/5.37e-02 -> lam_final (shadow) 1.16e-04 | final probe 9.809 MB | trained V 872270 F 2016849 | delivered 9.816 MB (hit 0.982 x target, probe/delivered 0.999) | test 22.532 0.5744 0.4854 | val 21.093 | K4096 R256 q16/q7 | growth-capped Fa
+kitchen abl24-holda100 | target 10 MB | lam0 5.1997e-03 -> lamA q10/q50/q90 4.08e-03/7.89e-03/3.08e-02 -> lam_final (shadow) 3.74e-03 | final probe 9.505 MB | trained V 710826 F 2209005 | delivered 9.508 MB (hit 0.951 x target, probe/delivered 1.000) | test 26.143 0.8032 0.3733 | val 27.344 | K4096 R256 q16/q7 | growth-capped Fa
+kitchen abl24-holda120 | target 10 MB | lam0 5.1997e-03 -> lamA q10/q50/q90 3.06e-03/6.33e-03/2.01e-02 -> lam_final (shadow) 1.48e-03 | final probe 10.036 MB | trained V 718625 F 2418007 | delivered 10.046 MB (hit 1.005 x target, probe/delivered 0.999) | test 26.359 0.8162 0.3533 | val 27.726 | K4096 R256 q16/q7 | growth-capped 
+kitchen abl24-holda150 | target 10 MB | lam0 5.1997e-03 -> lamA q10/q50/q90 2.05e-03/4.98e-03/1.48e-02 -> lam_final (shadow) 3.98e-03 | final probe 10.008 MB | trained V 690081 F 2504394 | delivered 10.017 MB (hit 1.002 x target, probe/delivered 0.999) | test 26.369 0.8217 0.3440 | val 27.888 | K4096 R256 q16/q7 | growth-capped 
+== unfinished
