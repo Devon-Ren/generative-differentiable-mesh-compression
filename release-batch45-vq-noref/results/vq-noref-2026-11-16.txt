@@ -1,0 +1,13 @@
+# batch45: BM-Codec with and without the 400-step refinement of the codewords, TEST views (pasted 2026-11-16). 11 scenes, cap near 1.08 million.
+VQNOREF garden    | before coding test 23.658 0.6827 0.3683 | with refinement 11.641 MB test 23.652 0.6761 0.3811 | without refinement 11.630 MB test 23.365 0.6582 0.3978
+VQNOREF room      | before coding test 28.090 0.8565 0.4016 | with refinement 10.671 MB test 27.727 0.8361 0.4385 | without refinement 10.676 MB test 27.259 0.8040 0.4682
+VQNOREF truck     | before coding test 22.196 0.7913 0.3051 | with refinement 9.951 MB test 22.165 0.7802 0.3198 | without refinement 9.943 MB test 22.024 0.7654 0.3395
+VQNOREF kitchen   | before coding test 26.503 0.8261 0.3395 | with refinement 11.634 MB test 25.928 0.7959 0.3791 | without refinement 11.619 MB test 25.537 0.7649 0.4097
+VQNOREF counter   | before coding test 25.852 0.8186 0.4108 | with refinement 9.311 MB test 25.318 0.7886 0.4486 | without refinement 9.312 MB test 24.954 0.7535 0.4771
+VQNOREF bonsai    | before coding test 26.954 0.8275 0.4556 | with refinement 8.315 MB test 26.665 0.8211 0.4773 | without refinement 8.306 MB test 25.989 0.7730 0.5070
+VQNOREF bicycle   | before coding test 22.197 0.5687 0.4863 | with refinement 10.042 MB test 22.095 0.5611 0.4961 | without refinement 10.036 MB test 21.997 0.5507 0.5055
+VQNOREF stump     | before coding test 23.771 0.6063 0.4723 | with refinement 10.212 MB test 23.629 0.5951 0.4834 | without refinement 10.213 MB test 23.504 0.5834 0.4950
+VQNOREF flowers   | before coding test 18.683 0.4269 0.5357 | with refinement 9.416 MB test 18.622 0.4187 0.5432 | without refinement 9.407 MB test 18.557 0.4104 0.5533
+VQNOREF treehill  | before coding test 20.485 0.5065 0.5671 | with refinement 10.596 MB test 20.487 0.4983 0.5765 | without refinement 10.587 MB test 20.374 0.4894 0.5864
+VQNOREF train     | before coding test 18.593 0.6913 0.4031 | with refinement 10.357 MB test 18.514 0.6779 0.4272 | without refinement 10.353 MB test 18.466 0.6672 0.4413
+VQNOREF mean over 11 scenes | before coding 23.362 dB | with refinement 10.20 MB 23.164 dB | without refinement 10.19 MB 22.911 dB
