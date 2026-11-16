@@ -1,0 +1,13 @@
+# batch44: MPEG TFAN (Open3DGC), encode and decode timed separately inside the driver (pasted 2026-11-16).  11 scenes, cap near 1.08 million, SH 8 bits.
+TFANTIME garden | whole call 12.05 s | encode 7.902 s | decode 3.368 s
+TFANTIME room | whole call 11.84 s | encode 8.058 s | decode 3.015 s
+TFANTIME truck | whole call 9.05 s | encode 5.906 s | decode 2.479 s
+TFANTIME kitchen | whole call 11.72 s | encode 7.684 s | decode 3.252 s
+TFANTIME counter | whole call 9.05 s | encode 5.964 s | decode 2.482 s
+TFANTIME bonsai | whole call 7.79 s | encode 4.956 s | decode 2.272 s
+TFANTIME bicycle | whole call 8.97 s | encode 5.642 s | decode 2.656 s
+TFANTIME stump | whole call 9.9 s | encode 6.221 s | decode 2.973 s
+TFANTIME flowers | whole call 8.41 s | encode 5.207 s | decode 2.539 s
+TFANTIME treehill | whole call 9.84 s | encode 6.128 s | decode 2.932 s
+TFANTIME train | whole call 9.55 s | encode 6.320 s | decode 2.623 s
+# mean: whole call 9.83 s | encode 6.36 s | decode 2.78 s   (the whole call also reads and writes the files; batch39 measured 8.18 s for the whole call on another node)

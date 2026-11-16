@@ -1,0 +1,12 @@
+MeshSplatting-cap, Mip-NeRF 360 / T&T
+   relative to BM-Codec : tfan +198 % (x3.0, n 11) | zstd +302 % (x4.0, n 11) | draco +1120 % (x12.2, n 11) | none +1578 % (x16.8, n 11)
+   relative to no codec : bm -93.6 % (n 11) | tfan -82.5 % (n 11) | zstd -76.0 % (n 11) | draco -27.3 % (n 11)
+MeshSplatting-cap, Deep Blending
+   relative to BM-Codec : tfan +169 % (x2.7, n 2) | zstd +277 % (x3.8, n 2) | draco +1245 % (x13.5, n 2) | none +1437 % (x15.4, n 2)
+   relative to no codec : bm -93.4 % (n 2) | tfan -82.3 % (n 2) | zstd -75.0 % (n 2) | draco -11.3 % (n 2)
+MeshSplatting-cap, NeRF-Synthetic
+   relative to BM-Codec : tfan +53 % (x1.5, n 8) | zstd +93 % (x1.9, n 8) | draco +715 % (x8.1, n 8) | none +820 % (x9.2, n 8)
+   relative to no codec : bm -88.9 % (n 8) | tfan -83.0 % (n 8) | zstd -78.5 % (n 8) | draco -9.7 % (n 8)
+collapse after training, Mip-NeRF 360 / T&T
+   relative to BM-Codec : tfan +154 % (x2.5, n 11) | zstd +269 % (x3.7, n 11) | draco +777 % (x8.8, n 11) | none +1947 % (x20.5, n 11)
+   relative to no codec : bm -95.1 % (n 11) | tfan -87.5 % (n 11) | zstd -81.8 % (n 11) | draco -56.0 % (n 11)
