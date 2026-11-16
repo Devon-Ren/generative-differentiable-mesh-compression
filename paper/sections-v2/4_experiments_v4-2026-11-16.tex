@@ -16,8 +16,8 @@ We report the quality gain at the same size by BD-PSNR and the size reduction at
 
 %------------------------------------------------------------------
 \begin{figure*}[t]\centering
-\includegraphics[width=\linewidth]{figures/fig_rd_grid_v1.pdf}
-\caption{\textbf{Rate--distortion on the three groups of datasets} (dataset means). (a)~The same meshes, from \MSc, written by BM-Codec and by the three baseline codecs. (b)~The same codec, BM-Codec, with meshes from \BM, from \MSc and from collapse after training. The panels have different axis ranges.}
+\includegraphics[width=\linewidth]{figures/fig_rd_grid_v2.pdf}
+\caption{\textbf{Rate--distortion on the three groups of datasets} (dataset means). (a)~The same meshes, from \MSc, written by BM-Codec and by the three baseline codecs; the grey line is the same meshes without a codec. (b)~The same codec, BM-Codec, with meshes from \BM, from \MSc and from collapse after training. The panels have different axis ranges.}
 \label{fig:rd}
 \end{figure*}
 
@@ -55,7 +55,7 @@ all (21) & & $+0.29$ dB & $-26.9\%$ \\
 
 \subsection{Codec efficiency}
 \label{sec:codec}
-We first evaluate BM-Codec alone (Fig.~\ref{fig:rd}a). For each scene, we train \MSc with three caps and \MS with its default cap, which gives four meshes per scene (three per object on NeRF-Synthetic). On Mip-NeRF~360 and Tanks and Temples the caps are 0.6, 1.08, 3 and 4 million vertices; before coding, stored in 32-bit floats, the four meshes take 130, 216, 519 and 609~MB on average and reach 22.91, 23.36, 23.92 and 23.96\dB. BM-Codec writes each mesh into one file, which gives one point per mesh. A baseline codec is run with three SH precisions, which gives three points per mesh. Each point in Fig.~\ref{fig:rd}a is the mean over the scenes of a dataset for one cap and one precision. All codecs see the same meshes, so only the codec differs.
+We first evaluate BM-Codec alone (Fig.~\ref{fig:rd}a). For each scene, we train \MSc with three caps and \MS with its default cap, which gives four meshes per scene (three per object on NeRF-Synthetic). On Mip-NeRF~360 and Tanks and Temples the caps are 0.6, 1.08, 3 and 4 million vertices. The grey line in Fig.~\ref{fig:rd}a shows these meshes before coding, stored in 32-bit floats (130 to 609~MB on these two datasets). BM-Codec writes each mesh into one file, which gives one point per mesh. A baseline codec is run with three SH precisions, which gives three points per mesh. Each point in Fig.~\ref{fig:rd}a is the mean over the scenes of a dataset for one cap and one precision. All codecs see the same meshes, so only the codec differs.
 
 Table~\ref{tab:bd} (top) gives the Bjontegaard deltas of BM-Codec against each baseline codec. On Mip-NeRF~360 and Tanks and Temples, BM-Codec needs 63\% fewer bytes than TFAN, 73\% fewer than zstd and 91\% fewer than Draco at the same PSNR. Deep Blending gives the same picture. On NeRF-Synthetic the reductions are 33\%, 47\% and 87\%. On the meshes from collapse after training, they are 61\%, 73\% and 88\%. The lossy steps of BM-Codec (vector quantization of the SH coefficients and quantization of positions and color) lower the PSNR by 0.15 to 0.27\dB on average, relative to the same meshes before coding.
 
