@@ -1,0 +1,9 @@
+# batch47: ByteMesh (hold controller, growth aim 1.35), target 10 MB, three runs per scene: the paper run (seed 0 of the upstream code) and seeds 1, 2 (pasted 2026-11-17).
+# scene | file MB (3 runs) | PSNR dB (3 runs) | PSNR range | PSNR std | largest size error
+garden   | 9.997 / 9.966 / 9.962 | 23.672 / 23.687 / 23.697 | 0.025 | 0.013 | 0.4 %
+room     | 9.992 / 9.896 / 9.958 | 27.991 / 27.763 / 27.921 | 0.228 | 0.117 | 1.0 %
+bicycle  | 9.784 / 9.811 / 9.809 | 22.514 / 22.528 / 22.496 | 0.032 | 0.016 | 2.2 %
+kitchen  | 10.014 / 10.029 / 10.023 | 26.413 / 26.305 / 26.454 | 0.149 | 0.077 | 0.3 %
+truck    | 9.904 / 9.956 / 9.961 | 22.246 / 22.219 / 22.238 | 0.027 | 0.014 | 1.0 %
+mean over the five scenes, per run: 24.567 / 24.500 / 24.561 | range 0.067 dB
+mean of the per-scene ranges 0.092 dB | mean of the per-scene std 0.047 dB
