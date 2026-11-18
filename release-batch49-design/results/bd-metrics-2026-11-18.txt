@@ -1,0 +1,26 @@
+room       BD-PSNR +0.38 dB | BD-SSIM +0.0072 | BD-LPIPS -0.0134
+kitchen    BD-PSNR +0.68 dB | BD-SSIM +0.0305 | BD-LPIPS -0.0400
+counter    BD-PSNR +0.40 dB | BD-SSIM +0.0154 | BD-LPIPS -0.0186
+bonsai     BD-PSNR +0.18 dB | BD-SSIM +0.0028 | BD-LPIPS -0.0070
+garden     BD-PSNR +0.22 dB | BD-SSIM +0.0077 | BD-LPIPS -0.0150
+bicycle    BD-PSNR +0.37 dB | BD-SSIM +0.0080 | BD-LPIPS -0.0065
+stump      BD-PSNR +0.37 dB | BD-SSIM +0.0224 | BD-LPIPS -0.0252
+flowers    BD-PSNR +0.33 dB | BD-SSIM +0.0219 | BD-LPIPS -0.0271
+treehill   BD-PSNR +0.00 dB | BD-SSIM +0.0038 | BD-LPIPS -0.0066
+truck      BD-PSNR +0.11 dB | BD-SSIM +0.0023 | BD-LPIPS -0.0081
+train      BD-PSNR +0.28 dB | BD-SSIM +0.0105 | BD-LPIPS -0.0153
+drjohnson  BD-PSNR +0.20 dB | BD-SSIM +0.0086 | BD-LPIPS -0.0073
+playroom   BD-PSNR +0.26 dB | BD-SSIM +0.0058 | BD-LPIPS -0.0087
+lego       BD-PSNR +0.65 dB | BD-SSIM +0.0047 | BD-LPIPS -0.0071
+chair      BD-PSNR +0.29 dB | BD-SSIM +0.0029 | BD-LPIPS -0.0039
+drums      BD-PSNR +0.12 dB | BD-SSIM +0.0019 | BD-LPIPS -0.0023
+ficus      BD-PSNR +0.17 dB | BD-SSIM +0.0014 | BD-LPIPS -0.0020
+hotdog     BD-PSNR +0.27 dB | BD-SSIM +0.0013 | BD-LPIPS -0.0031
+materials  BD-PSNR +0.16 dB | BD-SSIM +0.0012 | BD-LPIPS -0.0037
+mic        BD-PSNR +0.21 dB | BD-SSIM +0.0006 | BD-LPIPS -0.0017
+ship       BD-PSNR +0.46 dB | BD-SSIM +0.0078 | BD-LPIPS -0.0113
+
+Mip-NeRF 360 + T&T (11)  BD-PSNR +0.30 dB (n 11, ByteMesh better on 11) | BD-SSIM +0.0121 (n 11, ByteMesh better on 11) | BD-LPIPS -0.0166 (n 11, ByteMesh better on 11)
+Deep Blending (2)        BD-PSNR +0.23 dB (n 2, ByteMesh better on 2) | BD-SSIM +0.0072 (n 2, ByteMesh better on 2) | BD-LPIPS -0.0080 (n 2, ByteMesh better on 2)
+NeRF-Synthetic (8)       BD-PSNR +0.29 dB (n 8, ByteMesh better on 8) | BD-SSIM +0.0027 (n 8, ByteMesh better on 8) | BD-LPIPS -0.0044 (n 8, ByteMesh better on 8)
+all (21)                 BD-PSNR +0.29 dB (n 21, ByteMesh better on 21) | BD-SSIM +0.0080 (n 21, ByteMesh better on 21) | BD-LPIPS -0.0111 (n 21, ByteMesh better on 21)
