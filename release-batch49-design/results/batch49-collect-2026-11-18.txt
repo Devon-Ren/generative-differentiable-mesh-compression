@@ -1,0 +1,128 @@
+== vq-mesh-b49.txt
+VQMESH garden | V 1005902 F 2292683 | BM-Codec 11.641 MB | VQ + Draco 34.090 MB (+192.8 %) | VQ + TFAN 13.279 MB (+14.1 %) | VQ + zstd 13.834 MB (+18.8 %) | codebooks 0.643 MB in each | draco: three attributes, decoded V 4964321 F 2292647 | tfan attributes round trip True
+VQMESH room | V 997819 F 2281259 | BM-Codec 10.671 MB | VQ + Draco 29.550 MB (+176.9 %) | VQ + TFAN 12.103 MB (+13.4 %) | VQ + zstd 12.973 MB (+21.6 %) |codebooks 0.635 MB in each | draco: three attributes, decoded V 5008508 F 2279640 | tfan attributes round trip True
+VQMESH truck | V 885368 F 1655525 | BM-Codec 9.951 MB | VQ + Draco 26.796 MB (+169.3 %) | VQ + TFAN 11.152 MB (+12.1 %) | VQ + zstd 11.901 MB (+19.6 %) |codebooks 0.641 MB in each | draco: three attributes, decoded V 3665883 F 1655525 | tfan attributes round trip True
+VQMESH kitchen | V 956939 F 2495983 | BM-Codec 11.634 MB | VQ + Draco 35.914 MB (+208.7 %) | VQ + TFAN 12.833 MB (+10.3 %) | VQ + zstd 13.635 MB (+17.2 %) | codebooks 0.649 MB in each | draco: three attributes, decoded V 5340576 F 2495980 | tfan attributes round trip True
+VQMESH counter | V 817438 F 1856176 | BM-Codec 9.311 MB | VQ + Draco 26.449 MB (+184.1 %) | VQ + TFAN 10.293 MB (+10.5 %) | VQ + zstd 10.993 MB (+18.1 %)| codebooks 0.644 MB in each | draco: three attributes, decoded V 4051334 F 1856076 | tfan attributes round trip True
+VQMESH bonsai | V 754307 F 1583042 | BM-Codec 8.315 MB | VQ + Draco 23.198 MB (+179.0 %) | VQ + TFAN 9.422 MB (+13.3 %) | VQ + zstd 9.840 MB (+18.3 %) | codebooks 0.625 MB in each | draco: three attributes, decoded V 3491450 F 1582742 | tfan attributes round trip True
+VQMESH bicycle | V 947525 F 1785653 | BM-Codec 10.042 MB | VQ + Draco 27.020 MB (+169.1 %) | VQ + TFAN 11.234 MB (+11.9 %) | VQ + zstd 11.934 MB (+18.8 %) | codebooks 0.639 MB in each | draco: three attributes, decoded V 3919758 F 1785594 | tfan attributes round trip True
+VQMESH stump | V 975273 F 1782308 | BM-Codec 10.212 MB | VQ + Draco 26.337 MB (+157.9 %) | VQ + TFAN 11.511 MB (+12.7 %) | VQ + zstd 12.322 MB (+20.7 %) | codebooks 0.642 MB in each | draco: three attributes, decoded V 3934670 F 1781490 | tfan attributes round trip True
+VQMESH flowers | V 930919 F 1570126 | BM-Codec 9.416 MB | VQ + Draco 23.970 MB (+154.6 %) | VQ + TFAN 10.514 MB (+11.7 %) | VQ + zstd 11.315 MB (+20.2 %)| codebooks 0.643 MB in each | draco: three attributes, decoded V 3513861 F 1569672 | tfan attributes round trip True
+VQMESH treehill | V 1023422 F 1891109 | BM-Codec 10.596 MB | VQ + Draco 27.989 MB (+164.1 %) | VQ + TFAN 11.982 MB (+13.1 %) | VQ + zstd 12.695 MB (+19.8%) | codebooks 0.639 MB in each | draco: three attributes, decoded V 4165699 F 1890795 | tfan attributes round trip True
+VQMESH train | V 917466 F 1863948 | BM-Codec 10.357 MB | VQ + Draco 29.158 MB (+181.5 %) | VQ + TFAN 11.625 MB (+12.2 %) | VQ + zstd 12.236 MB (+18.1 %) | codebooks 0.630 MB in each | draco: three attributes, decoded V 4111835 F 1863939 | tfan attributes round trip True
+VQMESH drjohnson | V 881894 F 2441119 | BM-Codec 11.566 MB | VQ + Draco 37.001 MB (+219.9 %) | VQ + TFAN 12.929 MB (+11.8 %) | VQ + zstd 13.401 MB (+15.9%) | codebooks 0.644 MB in each | draco: three attributes, decoded V 5200489 F 2441119 | tfan attributes round trip True
+VQMESH playroom | V 847103 F 2398296 | BM-Codec 10.960 MB | VQ + Draco 34.617 MB (+215.9 %) | VQ + TFAN 12.060 MB (+10.0 %) | VQ + zstd 12.739 MB (+16.2 %) | codebooks 0.656 MB in each | draco: three attributes, decoded V 5090236 F 2398296 | tfan attributes round trip True
+VQMESH lego | V 156040 F 452009 | BM-Codec 2.791 MB | VQ + Draco 8.366 MB (+199.8 %) | VQ + TFAN 3.084 MB (+10.5 %) | VQ + zstd 3.110 MB (+11.4 %) | codebooks 0.653 MB in each | draco: three attributes, decoded V 959105 F 452009 | tfan attributes round trip True
+VQMESH chair | V 146157 F 400498 | BM-Codec 2.634 MB | VQ + Draco 7.720 MB (+193.1 %) | VQ + TFAN 2.859 MB (+8.6 %) | VQ + zstd 2.926 MB (+11.1 %) | codebooks 0.650 MB in each | draco: three attributes, decoded V 865804 F 400498 | tfan attributes round trip True
+VQMESH drums | V 150402 F 481302 | BM-Codec 2.738 MB | VQ + Draco 8.727 MB (+218.8 %) | VQ + TFAN 3.015 MB (+10.1 %) | VQ + zstd 3.053 MB (+11.5 %) | codebooks 0.649 MB in each | draco: three attributes, decoded V 1013162 F 481302 | tfan attributes round trip True
+VQMESH ficus | V 55235 F 133289 | BM-Codec 1.335 MB | VQ + Draco 2.946 MB (+120.6 %) | VQ + TFAN 1.409 MB (+5.5 %) | VQ + zstd 1.440 MB (+7.8 %) | codebooks 0.653 MB in each | draco: three attributes, decoded V 281951 F 133289 | tfan attributes round trip True
+VQMESH hotdog | V 146789 F 465444 | BM-Codec 2.748 MB | VQ + Draco 8.496 MB (+209.1 %) | VQ + TFAN 3.007 MB (+9.4 %) | VQ + zstd 3.055 MB (+11.2 %) | codebooks 0.659 MB in each | draco: three attributes, decoded V 982526 F 465444 | tfan attributes round trip True
+VQMESH materials | V 147311 F 390025 | BM-Codec 2.535 MB | VQ + Draco 7.226 MB (+185.0 %) | VQ + TFAN 2.784 MB (+9.8 %) | VQ + zstd 2.864 MB (+13.0 %) | codebooks 0.646 MB in each | draco: three attributes, decoded V 840287 F 390025 | tfan attributes round trip True
+VQMESH mic | V 71386 F 200595 | BM-Codec 1.606 MB | VQ + Draco 4.137 MB (+157.5 %) | VQ + TFAN 1.703 MB (+6.0 %) | VQ + zstd 1.730 MB (+7.7 %) | codebooks 0.643 MB in each | draco: three attributes, decoded V 431133 F 200595 | tfan attributes round trip True
+VQMESH ship | V 145351 F 411929 | BM-Codec 2.573 MB | VQ + Draco 7.461 MB (+190.0 %) | VQ + TFAN 2.792 MB (+8.5 %) | VQ + zstd 2.885 MB (+12.2 %) | codebooks 0.653 MB in each | draco: three attributes, decoded V 879479 F 411929 | tfan attributes round trip True
+== qbits-b49.txt
+QBITS garden    | V 1005902 edges 3574543 | longest side 94.05 | median edge 0.05413 | rule (step <= 0.10 x median edge) -> 15 bits | used 15 bits | stepused / median edge 0.053
+QBITS room      | V 997819 edges 3682416 | longest side 76.43 | median edge 0.0516 | rule (step <= 0.10 x median edge) -> 14 bits | used 14 bits | step used / median edge 0.090
+QBITS truck     | V 885368 edges 2735315 | longest side 338.2 | median edge 0.07346 | rule (step <= 0.10 x median edge) -> 16 bits | used 18 bits | step used / median edge 0.018
+QBITS kitchen   | V 956939 edges 3718235 | longest side 77.67 | median edge 0.03868 | rule (step <= 0.10 x median edge) -> 15 bits | used 16 bits | step used / median edge 0.031
+QBITS counter   | V 817438 edges 2935932 | longest side 53.06 | median edge 0.05181 | rule (step <= 0.10 x median edge) -> 14 bits | used 15 bits | step used / median edge 0.031
+QBITS bonsai    | V 754307 edges 2593473 | longest side 85.84 | median edge 0.08519 | rule (step <= 0.10 x median edge) -> 14 bits | used 15 bits | step used / median edge 0.031
+QBITS bicycle   | V 947525 edges 2897252 | longest side 163.1 | median edge 0.07379 | rule (step <= 0.10 x median edge) -> 15 bits | used 16 bits | step used / median edge 0.034
+QBITS stump     | V 975273 edges 2942142 | longest side 203.5 | median edge 0.06468 | rule (step <= 0.10 x median edge) -> 15 bits | used 16 bits | step used / median edge 0.048
+QBITS flowers   | V 930919 edges 2687692 | longest side 111 | median edge 0.07784 | rule (step <= 0.10 x median edge) -> 14 bits | used 15 bits | step used / median edge 0.044
+QBITS treehill  | V 1023422 edges 3102944 | longest side 201.2 | median edge 0.07113 | rule (step <= 0.10 x median edge) -> 15 bits | used 16 bits | stepused / median edge 0.043
+QBITS train     | V 917466 edges 3048745 | longest side 392.9 | median edge 0.04965 | rule (step <= 0.10 x median edge) -> 17 bits | used 18 bits | step used / median edge 0.030
+QBITS drjohnson | V 881894 edges 3622143 | longest side 13.02 | median edge 0.04741 | rule (step <= 0.10 x median edge) -> 12 bits | used 15 bits | step used / median edge 0.008
+QBITS playroom  | V 847103 edges 3516198 | longest side 42.6 | median edge 0.07124 | rule (step <= 0.10 x median edge) -> 13 bits | used 15 bits | step used / median edge 0.018
+QBITS lego      | V 156040 edges 653733 | longest side 2.296 | median edge 0.03116 | rule (step <= 0.10 x median edge) -> 10 bits | used 14 bits | step used / median edge 0.004
+QBITS chair     | V 146157 edges 611282 | longest side 2.048 | median edge 0.03256 | rule (step <= 0.10 x median edge) -> 10 bits | used 14 bits | step used / median edge 0.004
+QBITS drums     | V 150402 edges 672525 | longest side 2.249 | median edge 0.03011 | rule (step <= 0.10 x median edge) -> 10 bits | used 14 bits | step used / median edge 0.005
+QBITS ficus     | V 55235 edges 191163 | longest side 2.179 | median edge 0.03246 | rule (step <= 0.10 x median edge) -> 10 bits | used 14 bits | step used / median edge 0.004
+QBITS hotdog    | V 146789 edges 655974 | longest side 2.407 | median edge 0.03081 | rule (step <= 0.10 x median edge) -> 10 bits | used 14 bits | step used / median edge 0.005
+QBITS materials | V 147311 edges 589229 | longest side 2.201 | median edge 0.03384 | rule (step <= 0.10 x median edge) -> 10 bits | used 14 bits | step used / median edge 0.004
+QBITS mic       | V 71386 edges 300203 | longest side 2.022 | median edge 0.03266 | rule (step <= 0.10 x median edge) -> 10 bits | used 14 bits | step used / median edge 0.004
+QBITS ship      | V 145351 edges 605839 | longest side 2.651 | median edge 0.03577 | rule (step <= 0.10 x median edge) -> 10 bits | used 14 bits | step used / median edge 0.005
+== probetime-b49.txt
+PROBETIME bicycle 10 MB    | probes 41 | probe time   1132 s | training   2515 s | share 45.0 % (lower bound) | growth probes: encoder  117 s, cleaning18 s
+PROBETIME bicycle 15 MB    | probes 41 | probe time   1303 s | training   2922 s | share 44.6 % (lower bound) | growth probes: encoder  127 s, cleaning19 s
+PROBETIME bicycle 20 MB    | probes 41 | probe time   1537 s | training   3468 s | share 44.3 % (lower bound) | growth probes: encoder  140 s, cleaning20 s
+PROBETIME bicycle 5 MB     | probes 41 | probe time    818 s | training   1910 s | share 42.8 % (lower bound) | growth probes: encoder  102 s, cleaning17 s
+PROBETIME /scratch/zr2245/bicycle-abl24-hold-t7.5mb | probes 41 | probe time   1079 s | training   2358 s | share 45.8 % (lower bound) | growth probes: encoder  125 s, cleaning   18 s
+PROBETIME bonsai 10 MB     | probes 42 | probe time   1100 s | training   3336 s | share 33.0 % (lower bound) | growth probes: encoder  131 s, cleaning51 s
+PROBETIME bonsai 15 MB     | probes 42 | probe time   1615 s | training   4297 s | share 37.6 % (lower bound) | growth probes: encoder  166 s, cleaning54 s
+PROBETIME bonsai 20 MB     | probes 42 | probe time   1588 s | training   4574 s | share 34.7 % (lower bound) | growth probes: encoder  159 s, cleaning56 s
+PROBETIME bonsai 5 MB      | probes 42 | probe time    911 s | training   2817 s | share 32.3 % (lower bound) | growth probes: encoder  123 s, cleaning49 s
+PROBETIME /scratch/zr2245/bonsai-abl24-hold-t7.5mb | probes 42 | probe time   1046 s | training   3122 s | share 33.5 % (lower bound) | growth probes: encoder  137 s, cleaning   50 s
+PROBETIME counter 10 MB    | probes 42 | probe time   1135 s | training   3576 s | share 31.8 % (lower bound) | growth probes: encoder  132 s, cleaning48 s
+PROBETIME counter 15 MB    | probes 42 | probe time   1465 s | training   4341 s | share 33.7 % (lower bound) | growth probes: encoder  139 s, cleaning50 s
+PROBETIME counter 20 MB    | probes 42 | probe time   1669 s | training   4966 s | share 33.6 % (lower bound) | growth probes: encoder  157 s, cleaning51 s
+PROBETIME counter 5 MB     | probes 42 | probe time    861 s | training   2865 s | share 30.0 % (lower bound) | growth probes: encoder  114 s, cleaning45 s
+PROBETIME /scratch/zr2245/counter-abl24-hold-t7.5mb | probes 42 | probe time   1182 s | training   3445 s | share 34.3 % (lower bound) | growth probes: encoder  149 s, cleaning   48 s
+PROBETIME drjohnson 10 MB  | probes 42 | probe time   1159 s | training   2727 s | share 42.5 % (lower bound) | growth probes: encoder  140 s, cleaning36 s
+PROBETIME drjohnson 15 MB  | probes 42 | probe time   1345 s | training   3137 s | share 42.9 % (lower bound) | growth probes: encoder  137 s, cleaning36 s
+PROBETIME drjohnson 20 MB  | probes 42 | probe time   1545 s | training   3593 s | share 43.0 % (lower bound) | growth probes: encoder  142 s, cleaning38 s
+PROBETIME drjohnson 5 MB   | probes 42 | probe time    876 s | training   2186 s | share 40.1 % (lower bound) | growth probes: encoder  119 s, cleaning34 s
+PROBETIME /scratch/zr2245/drjohnson-abl24-hold-t7.5mb | probes 42 | probe time   1179 s | training   2691 s | share 43.8 % (lower bound) | growth probes:encoder  147 s, cleaning   36 s
+PROBETIME flowers 10 MB    | probes 41 | probe time   1057 s | training   2522 s | share 41.9 % (lower bound) | growth probes: encoder  115 s, cleaning18 s
+PROBETIME flowers 15 MB    | probes 41 | probe time   1300 s | training   3031 s | share 42.9 % (lower bound) | growth probes: encoder  124 s, cleaning19 s
+PROBETIME flowers 20 MB    | probes 41 | probe time   1482 s | training   3520 s | share 42.1 % (lower bound) | growth probes: encoder  125 s, cleaning20 s
+PROBETIME flowers 5 MB     | probes 41 | probe time    847 s | training   2002 s | share 42.3 % (lower bound) | growth probes: encoder  105 s, cleaning17 s
+PROBETIME /scratch/zr2245/flowers-abl24-hold-t7.5mb | probes 41 | probe time   1126 s | training   2516 s | share 44.8 % (lower bound) | growth probes: encoder  126 s, cleaning   18 s
+PROBETIME garden 10 MB     | probes 41 | probe time   1204 s | training   2716 s | share 44.3 % (lower bound) | growth probes: encoder  135 s, cleaning20 s
+PROBETIME garden 15 MB     | probes 41 | probe time   1252 s | training   3008 s | share 41.6 % (lower bound) | growth probes: encoder  121 s, cleaning21 s
+PROBETIME garden 20 MB     | probes 41 | probe time   1736 s | training   3834 s | share 45.3 % (lower bound) | growth probes: encoder  151 s, cleaning23 s
+PROBETIME garden 5 MB      | probes 41 | probe time    815 s | training   1991 s | share 40.9 % (lower bound) | growth probes: encoder  113 s, cleaning17 s
+PROBETIME /scratch/zr2245/garden-abl24-hold-t7.5mb | probes 41 | probe time    989 s | training   2318 s | share 42.7 % (lower bound) | growth probes: encoder  118 s, cleaning   18 s
+PROBETIME kitchen 10 MB    | probes 42 | probe time   1135 s | training   3527 s | share 32.2 % (lower bound) | growth probes: encoder  135 s, cleaning53 s
+PROBETIME kitchen 15 MB    | probes 42 | probe time   1659 s | training   4578 s | share 36.2 % (lower bound) | growth probes: encoder  164 s, cleaning56 s
+PROBETIME kitchen 20 MB    | probes 42 | probe time   1815 s | training   5170 s | share 35.1 % (lower bound) | growth probes: encoder  169 s, cleaning57 s
+PROBETIME kitchen 5 MB     | probes 42 | probe time    916 s | training   2902 s | share 31.6 % (lower bound) | growth probes: encoder  126 s, cleaning51 s
+PROBETIME /scratch/zr2245/kitchen-abl24-hold-t7.5mb | probes 42 | probe time   1001 s | training   3183 s | share 31.5 % (lower bound) | growth probes: encoder  128 s, cleaning   52 s
+PROBETIME playroom 10 MB   | probes 42 | probe time   1066 s | training   2459 s | share 43.4 % (lower bound) | growth probes: encoder  126 s, cleaning28 s
+PROBETIME playroom 15 MB   | probes 42 | probe time   1660 s | training   3416 s | share 48.6 % (lower bound) | growth probes: encoder  154 s, cleaning30 s
+PROBETIME playroom 20 MB   | probes 42 | probe time   1531 s | training   3424 s | share 44.7 % (lower bound) | growth probes: encoder  140 s, cleaning30 s
+PROBETIME playroom 5 MB    | probes 42 | probe time    861 s | training   2000 s | share 43.1 % (lower bound) | growth probes: encoder  120 s, cleaning27 s
+PROBETIME /scratch/zr2245/playroom-abl24-hold-t7.5mb | probes 42 | probe time    999 s | training   2281 s | share 43.8 % (lower bound) | growth probes: encoder  127 s, cleaning   27 s
+PROBETIME room 10 MB       | probes 42 | probe time   1360 s | training   3668 s | share 37.1 % (lower bound) | growth probes: encoder  155 s, cleaning56 s
+PROBETIME room 15 MB       | probes 42 | probe time   1645 s | training   4368 s | share 37.7 % (lower bound) | growth probes: encoder  159 s, cleaning58 s
+PROBETIME room 20 MB       | probes 42 | probe time   1595 s | training   4540 s | share 35.1 % (lower bound) | growth probes: encoder  149 s, cleaning59 s
+PROBETIME room 5 MB        | probes 42 | probe time    864 s | training   2745 s | share 31.5 % (lower bound) | growth probes: encoder  114 s, cleaning53 s
+PROBETIME /scratch/zr2245/room-abl24-hold-t7.5mb | probes 42 | probe time   1053 s | training   3106 s | share 33.9 % (lower bound) | growth probes: encoder  135 s, cleaning   54 s
+PROBETIME stump 10 MB      | probes 41 | probe time   1051 s | training   2315 s | share 45.4 % (lower bound) | growth probes: encoder  114 s, cleaning12 s
+PROBETIME stump 15 MB      | probes 41 | probe time   1254 s | training   2754 s | share 45.5 % (lower bound) | growth probes: encoder  118 s, cleaning13 s
+PROBETIME stump 20 MB      | probes 41 | probe time   1763 s | training   3586 s | share 49.2 % (lower bound) | growth probes: encoder  144 s, cleaning14 s
+PROBETIME stump 5 MB       | probes 41 | probe time    810 s | training   1836 s | share 44.1 % (lower bound) | growth probes: encoder  100 s, cleaning11 s
+PROBETIME /scratch/zr2245/stump-abl24-hold-t7.5mb | probes 41 | probe time    969 s | training   2107 s | share 46.0 % (lower bound) | growth probes: encoder  116 s, cleaning   12 s
+PROBETIME train 10 MB      | probes 41 | probe time   1037 s | training   2251 s | share 46.1 % (lower bound) | growth probes: encoder  111 s, cleaning20 s
+PROBETIME train 15 MB      | probes 41 | probe time   1558 s | training   3208 s | share 48.6 % (lower bound) | growth probes: encoder  132 s, cleaning23 s
+PROBETIME train 20 MB      | probes 41 | probe time   1589 s | training   3509 s | share 45.3 % (lower bound) | growth probes: encoder  123 s, cleaning23 s
+PROBETIME train 5 MB       | probes 41 | probe time    836 s | training   1719 s | share 48.6 % (lower bound) | growth probes: encoder  103 s, cleaning18 s
+PROBETIME /scratch/zr2245/train-abl24-hold-t7.5mb | probes 41 | probe time   1066 s | training   2169 s | share 49.2 % (lower bound) | growth probes: encoder  122 s, cleaning   20 s
+PROBETIME treehill 10 MB   | probes 41 | probe time   1057 s | training   2413 s | share 43.8 % (lower bound) | growth probes: encoder  117 s, cleaning15 s
+PROBETIME treehill 15 MB   | probes 41 | probe time   1280 s | training   2864 s | share 44.7 % (lower bound) | growth probes: encoder  127 s, cleaning15 s
+PROBETIME treehill 20 MB   | probes 41 | probe time   1472 s | training   3316 s | share 44.4 % (lower bound) | growth probes: encoder  129 s, cleaning16 s
+PROBETIME treehill 5 MB    | probes 41 | probe time    829 s | training   1919 s | share 43.2 % (lower bound) | growth probes: encoder  103 s, cleaning13 s
+PROBETIME /scratch/zr2245/treehill-abl24-hold-t7.5mb | probes 41 | probe time    958 s | training   2172 s | share 44.1 % (lower bound) | growth probes: encoder  113 s, cleaning   14 s
+PROBETIME truck 10 MB      | probes 41 | probe time    993 s | training   2113 s | share 47.0 % (lower bound) | growth probes: encoder  108 s, cleaning16 s
+PROBETIME truck 15 MB      | probes 41 | probe time   1212 s | training   2648 s | share 45.8 % (lower bound) | growth probes: encoder  119 s, cleaning18 s
+PROBETIME truck 20 MB      | probes 41 | probe time   1513 s | training   3281 s | share 46.1 % (lower bound) | growth probes: encoder  132 s, cleaning19 s
+PROBETIME truck 5 MB       | probes 41 | probe time    815 s | training   1639 s | share 49.7 % (lower bound) | growth probes: encoder  103 s, cleaning14 s
+PROBETIME /scratch/zr2245/truck-abl24-hold-t7.5mb | probes 41 | probe time    974 s | training   1957 s | share 49.8 % (lower bound) | growth probes: encoder  116 s, cleaning   15 s
+PROBETIME mean over 65 runs | probes 41.5 | probe time 1209 s | training 2976 s | share 41.4 % (range 30.0..49.8)
+== p1only
+bicycle abl24-p1only | target 10 MB | lam0 5.1997e-03 -> lamA q10/q50/q90 8.50e-03/2.26e-02/6.90e-02 -> lam_final (shadow) 8.50e-03 | final probe 7.918 MB | trained V 700908 F 1538405 | delivered 7.922 MB (hit 0.792 x target, probe/delivered 0.999) | test 22.301 0.5517 0.5077 | val 20.795 | K4096 R256 q16/q7 | growth-capped Fals
+bicycle abl24-p1only | target 20 MB | lam0 1.6340e-03 -> lamA q10/q50/q90 3.54e-03/1.27e-02/4.56e-02 -> lam_final (shadow) 3.54e-03 | final probe 15.498 MB | trained V 1461961 F 3100921 | delivered 15.508 MB (hit 0.775 x target, probe/delivered 0.999) | test 22.735 0.5974 0.4567 | val 21.381 | K4096 R256 q16/q7 | growth-capped F
+bicycle abl24-p1only | target 5 MB | lam0 1.6546e-02 -> lamA q10/q50/q90 2.18e-02/5.21e-02/1.00e-01 -> lam_final (shadow) 2.18e-02 | final probe 3.903 MB| trained V 313358 F 689606 | delivered 3.905 MB (hit 0.781 x target, probe/delivered 1.000) | test 21.682 0.4964 0.5574 | val 20.124 | K4096 R256 q16/q7| growth-capped False 
+garden abl24-p1only | target 10 MB | lam0 5.1997e-03 -> lamA q10/q50/q90 7.09e-03/1.28e-02/3.09e-02 -> lam_final (shadow) 7.09e-03 | final probe 8.457 MB| trained V 697923 F 1751952 | delivered 8.463 MB (hit 0.846 x target, probe/delivered 0.999) | test 23.335 0.6423 0.4136 | val 23.881 | K4096 R256 q15/q7 | growth-capped False
+garden abl24-p1only | target 20 MB | lam0 1.6340e-03 -> lamA q10/q50/q90 2.85e-03/6.55e-03/1.95e-02 -> lam_final (shadow) 2.85e-03 | final probe 16.804 MB | trained V 1459758 F 3541491 | delivered 16.821 MB (hit 0.841 x target, probe/delivered 0.999) | test 24.092 0.7054 0.3369 | val 24.917 | K4096 R256 q15/q7 | growth-capped Fa
+garden abl24-p1only | target 5 MB | lam0 1.6546e-02 -> lamA q10/q50/q90 1.65e-02/1.65e-02/1.00e-01 -> lam_final (shadow) 2.97e-02 | final probe 4.131 MB | trained V 307644 F 769785 | delivered 4.132 MB (hit 0.826 x target, probe/delivered 1.000) | test 22.394 0.5619 0.4948 | val 22.596 | K4096 R256 q15/q7 | growth-capped False (
+kitchen abl24-p1only | target 10 MB | lam0 5.1997e-03 -> lamA q10/q50/q90 4.07e-03/7.95e-03/3.14e-02 -> lam_final (shadow) 3.74e-03 | final probe 9.623 MB | trained V 715705 F 2226830 | delivered 9.612 MB (hit 0.961 x target, probe/delivered 1.001) | test 26.003 0.8035 0.3713 | val 27.374 | K4096 R256 q16/q7 | growth-capped Fals
+kitchen abl24-p1only | target 20 MB | lam0 1.6340e-03 -> lamA q10/q50/q90 1.19e-03/3.63e-03/1.10e-02 -> lam_final (shadow) 9.66e-04 | final probe 19.135 MB | trained V 1483467 F 4486167 | delivered 19.149 MB (hit 0.957 x target, probe/delivered 0.999) | test 26.891 0.8347 0.3187 | val 28.515 | K4096 R256 q16/q7 | growth-capped F
+kitchen abl24-p1only | target 5 MB | lam0 1.6546e-02 -> lamA q10/q50/q90 1.19e-02/1.65e-02/3.31e-02 -> lam_final (shadow) 1.19e-02 | final probe 4.520 MB| trained V 315001 F 951018 | delivered 4.529 MB (hit 0.906 x target, probe/delivered 0.998) | test 24.821 0.7478 0.4403 | val 25.694 | K4096 R256 q16/q7| growth-capped False 
+room abl24-p1only | target 10 MB | lam0 5.1997e-03 -> lamA q10/q50/q90 3.06e-03/6.22e-03/1.35e-02 -> lam_final (shadow) 2.70e-03 | final probe 8.555 MB |trained V 761111 F 1854088 | delivered 8.559 MB (hit 0.856 x target, probe/delivered 1.000) | test 27.631 0.8310 0.4470 | val 29.851 | K4096 R256 q14/q7 | growth-capped False (
+room abl24-p1only | target 20 MB | lam0 1.6340e-03 -> lamA q10/q50/q90 1.10e-03/3.28e-03/7.76e-03 -> lam_final (shadow) 8.69e-04 | final probe 16.674 MB | trained V 1576933 F 3609325 | delivered 16.679 MB (hit 0.834 x target, probe/delivered 1.000) | test 28.067 0.8477 0.4114 | val 30.746 | K4096 R256 q14/q7 | growth-capped Fals
+room abl24-p1only | target 5 MB | lam0 1.6546e-02 -> lamA q10/q50/q90 8.03e-03/1.65e-02/5.30e-02 -> lam_final (shadow) 7.45e-03 | final probe 4.302 MB | trained V 350618 F 890473 | delivered 4.302 MB (hit 0.860 x target, probe/delivered 1.000) | test 26.810 0.8087 0.4839 | val 28.677 | K4096 R256 q14/q7 | growth-capped False (la
+truck abl24-p1only | target 10 MB | lam0 5.1997e-03 -> lamA q10/q50/q90 6.63e-03/1.48e-02/4.43e-02 -> lam_final (shadow) 6.63e-03 | final probe 8.096 MB | trained V 661886 F 1481456 | delivered 8.102 MB (hit 0.810 x target, probe/delivered 0.999) | test 22.031 0.7689 0.3341 | val 22.644 | K4096 R256 q18/q7| growth-capped False 
+truck abl24-p1only | target 20 MB | lam0 1.6340e-03 -> lamA q10/q50/q90 2.58e-03/7.59e-03/2.57e-02 -> lam_final (shadow) 2.58e-03 | final probe 15.387 MB| trained V 1349037 F 2799248 | delivered 15.401 MB (hit 0.770 x target, probe/delivered 0.999) | test 22.419 0.7919 0.2935 | val 23.154 | K4096 R256 q18/q7 | growth-capped Fal
+truck abl24-p1only | target 5 MB | lam0 1.6546e-02 -> lamA q10/q50/q90 1.65e-02/1.81e-02/4.11e-02 -> lam_final (shadow) 1.81e-02 | final probe 4.052 MB |trained V 293701 F 678290 | delivered 4.054 MB (hit 0.811 x target, probe/delivered 1.000) | test 21.289 0.7268 0.3953 | val 21.661 | K4096 R256 q18/q7 |growth-capped False (l
+== unfinished

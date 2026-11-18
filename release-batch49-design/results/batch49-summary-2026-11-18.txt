@@ -1,0 +1,20 @@
+== same vector quantization, different lossless coding: mean file size (MB) and mean per-scene increase over BM-Codec
+Mip-NeRF 360 + T&T (11)  BM-Codec 10.20 | VQ + TFAN 11.45 (+12.3 %, +10.3..+14.1) | VQ + zstd 12.15 (+19.2 %) | VQ + Draco 28.22 (+176.2 %; Draco decodes 4.5x the vertices)
+Deep Blending (2)        BM-Codec 11.26 | VQ + TFAN 12.49 (+10.9 %, +10.0..+11.8) | VQ + zstd 13.07 (+16.0 %) | VQ + Draco 35.81 (+217.9 %; Draco decodes 6.0x the vertices)
+captured (13)            BM-Codec 10.36 | VQ + TFAN 11.61 (+12.1 %, +10.0..+14.1) | VQ + zstd 12.29 (+18.7 %) | VQ + Draco 29.39 (+182.6 %; Draco decodes 4.7x the vertices)
+NeRF-Synthetic (8)       BM-Codec 2.37 | VQ + TFAN 2.58 (+8.6 %, +5.5..+10.5) | VQ + zstd 2.63 (+10.7 %) | VQ + Draco 6.88 (+184.3 %; Draco decodes 6.0x the vertices)
+all (21)                 BM-Codec 7.32 | VQ + TFAN 8.17 (+10.7 %, +5.5..+14.1) | VQ + zstd 8.61 (+15.7 %) | VQ + Draco 20.82 (+183.2 %; Draco decodes 5.2x the vertices)
+== position bits: rule (step <= 0.1 x median edge) vs used
+Mip-NeRF 360 + T&T (11)  rule = used on 2 of 11 | used - rule: 0 1 1 1 0 1 1 1 1 2 1 | step used / median edge 0.018..0.090
+Deep Blending (2)        rule = used on 0 of 2 | used - rule: 3 2 | step used / median edge 0.008..0.018
+captured (13)            rule = used on 2 of 13 | used - rule: 0 1 1 1 0 1 1 1 1 2 1 3 2 | step used / median edge 0.008..0.090
+NeRF-Synthetic (8)       rule = used on 0 of 8 | used - rule: 4 4 4 4 4 4 4 4 | step used / median edge 0.004..0.005
+all (21)                 rule = used on 2 of 21 | used - rule: 0 1 1 1 0 1 1 1 1 2 1 3 2 4 4 4 4 4 4 4 4 | step used / median edge 0.004..0.090
+== probe time: 65 runs | probe 1208 s of 2976 s training (41.4 %, lower bound) | per run 30.1..49.8 %
+== Phase 1 only (no collapse rounds, growth aims at the target) | size / target, and BD against ByteMesh and against MeshSplatting-cap
+garden   size/target 0.83 0.85 0.84 | PSNR vs ByteMesh -0.140, vs cap +0.088 | SSIM vs ByteMesh -0.0101, vs cap -0.0026 | LPIPS vs ByteMesh +0.0100, vs cap -0.0047
+room     size/target 0.86 0.86 0.83 | PSNR vs ByteMesh -0.238, vs cap +0.159 | SSIM vs ByteMesh -0.0088, vs cap -0.0015 | LPIPS vs ByteMesh +0.0127, vs cap -0.0006
+bicycle  size/target 0.78 0.79 0.78 | PSNR vs ByteMesh -0.051, vs cap +0.330 | SSIM vs ByteMesh -0.0040, vs cap +0.0034 | LPIPS vs ByteMesh +0.0030, vs cap -0.0030
+kitchen  size/target 0.91 0.96 0.96 | PSNR vs ByteMesh -0.346, vs cap +0.340 | SSIM vs ByteMesh -0.0153, vs cap +0.0153 | LPIPS vs ByteMesh +0.0200, vs cap -0.0197
+truck    size/target 0.81 0.81 0.77 | PSNR vs ByteMesh -0.108, vs cap +0.009 | SSIM vs ByteMesh -0.0056, vs cap -0.0030 | LPIPS vs ByteMesh +0.0083, vs cap -0.0012
+mean     PSNR vs ByteMesh -0.177 | PSNR vs cap +0.185 | SSIM vs ByteMesh -0.0088 | SSIM vs cap +0.0023 | LPIPS vs ByteMesh +0.0108 | LPIPS vs cap -0.0058
