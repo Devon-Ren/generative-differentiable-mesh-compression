@@ -1,0 +1,10 @@
+torch
+torchvision
+numpy
+scipy
+zstandard
+meshoptimizer
+pybind11
+lpips
+Pillow
+tqdm
