@@ -4,7 +4,7 @@ only the typeface, the font sizes, the colours of axes and background, and the o
   text inside a plot (bar percentages, corner labels, 'better') 6.5 pt | background #fcfcfb, axes #dddcd6, labels #52514e (as the paper)
   fig_rd_all_v4 (make_fig_rd_all_v3)            fig_triangles_v7 (make_fig_wire_v6)          fig_qual_error_v3 (make_fig_qual_err_v2)
   fig_cap_instability_v2 (make_cap_fig_single_v1)   fig_streams_v2 (make_fig_streams_v1)     fig_codebook_sweep_v3 (make_fig_codebook_sweep_v1)
-  fig_controller_traces_v3 (make_fig_traces_v1)
+  fig_controller_traces_v4 (make_fig_traces_v1, height 2.05 in)
 Run from the repository root."""
 STYLE = "plt.rcParams.update({'font.size': 7.5, 'font.family': 'DejaVu Sans', 'pdf.fonttype': 42, 'axes.edgecolor': '#dddcd6', 'axes.labelcolor': '#52514e', 'xtick.color': '#52514e', 'ytick.color': '#52514e', 'text.color': '#0b0b0b', 'figure.facecolor': '#fcfcfb', 'axes.facecolor': '#fcfcfb'})"
 def run(path, reps):
@@ -26,6 +26,6 @@ run('paper/figures/make_fig_streams_v1.py', [("plt.rcParams.update({'font.size':
                                              ('figsize=(3.4, 2.5)', 'figsize=(3.4, 2.8)', 1), ('rect=(0, 0, 1, 0.93)', 'rect=(0, 0, 1, 0.87)', 1), ("edgecolor='white'", "edgecolor='#fcfcfb'", 1), ("'paper/figures/fig_streams_v1", "'paper/figures/fig_streams_v2", 2)])
 run('paper/figures/make_fig_codebook_sweep_v1.py', [('fontsize=6.2', 'fontsize=7.5', 1), ('title_fontsize=6.5', 'title_fontsize=7.5', 1), ("title='$K + K_r$'", "title='$K + L$'", 1), ('figsize=(3.35, 2.6)', 'figsize=(3.35, 3.0)', 1),
                                                     ("'paper/figures/fig_codebook_sweep_v1", "'paper/figures/fig_codebook_sweep_v3", 2)])
-run('paper/figures/make_fig_traces_v1.py', [("plt.rcParams.update({'font.size': 7.5, 'axes.edgecolor': MUTED, 'axes.labelcolor': INK, 'xtick.color': MUTED, 'ytick.color': MUTED, 'pdf.fonttype': 42})", STYLE, 1),
+run('paper/figures/make_fig_traces_v1.py', [('figsize=(3.4, 2.35)', 'figsize=(3.4, 2.05)', 1), ("plt.rcParams.update({'font.size': 7.5, 'axes.edgecolor': MUTED, 'axes.labelcolor': INK, 'xtick.color': MUTED, 'ytick.color': MUTED, 'pdf.fonttype': 42})", STYLE, 1),
                                             ("INK, MUTED, GRID, BLUE, ORANGE = '#1f2430', '#5b6270', '#e3e6ea'", "INK, MUTED, GRID, BLUE, ORANGE = '#0b0b0b', '#52514e', '#dddcd6'", 1), ('fontsize=6.5', 'fontsize=7.5', 1),
-                                            ("'paper/figures/fig_controller_traces_v2", "'paper/figures/fig_controller_traces_v3", 2)])
+                                            ("'paper/figures/fig_controller_traces_v2", "'paper/figures/fig_controller_traces_v4", 2)])
