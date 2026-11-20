@@ -1,0 +1,5 @@
+bicycle   L1 where ByteMesh is denser: cap 0.0656 ours 0.0616 | coarser: cap 0.0303 ours 0.0334
+truck     denser: cap 0.0479 ours 0.0467 | coarser: cap 0.0378 ours 0.0443
+drjohnson denser: cap 0.0215 ours 0.0199 | coarser: cap 0.0146 ours 0.0155
+chair     denser: cap 0.0497 ours 0.0462 | coarser: cap 0.0301 ours 0.0300
+(make_fig_wire_v6.py, 2026-11-20; denser = density ratio > 1.41, coarser = ratio < 0.71)
