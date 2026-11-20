@@ -1,0 +1,16 @@
+WIRE IMG_6292 CAP | V 1143832 F 3107762 | id map (3504, 5328) ss 4 | PSNR 32.23 | visible triangles 122803 | triangle area over the pixels (image px): q25 12.25 median 31.06 q75 74.12 | covered pixels 1.000
+WIRE IMG_6332 CAP | V 1143832 F 3107762 | id map (3504, 5328) ss 4 | PSNR 28.28 | visible triangles 74727 | triangle area over the pixels (image px): q25 21.50 median 56.50 q75 149.12 | covered pixels 1.000
+WIRE IMG_6366 CAP | V 1143832 F 3107762 | id map (3504, 5328) ss 4 | PSNR 26.48 | visible triangles 48683 | triangle area over the pixels (image px): q25 34.00 median 88.81 q75 216.44 | covered pixels 1.000
+WIRE IMG_6401 CAP | V 1143832 F 3107762 | id map (3504, 5328) ss 4 | PSNR 28.54 | visible triangles 125041 | triangle area over the pixels (image px): q25 15.69 median 60.00 q75 190.62 | covered pixels 1.000
+WIRE IMG_6442 CAP | V 1143832 F 3107762 | id map (3504, 5328) ss 4 | PSNR 26.59 | visible triangles 51821 | triangle area over the pixels (image px): q25 32.50 median 91.12 q75 255.19 | covered pixels 0.995
+WIRE IMG_6483 CAP | V 1143832 F 3107762 | id map (3504, 5328) ss 4 | PSNR 28.91 | visible triangles 65724 | triangle area over the pixels (image px): q25 27.75 median 78.75 q75 213.94 | covered pixels 1.000
+WIRE IMG_6516 CAP | V 1143832 F 3107762 | id map (3504, 5328) ss 4 | PSNR 31.29 | visible triangles 66365 | triangle area over the pixels (image px): q25 23.94 median 64.81 q75 184.50 | covered pixels 1.000
+WIRE IMG_6552 CAP | V 1143832 F 3107762 | id map (3504, 5328) ss 4 | PSNR 29.24 | visible triangles 118724 | triangle area over the pixels (image px): q25 20.62 median 70.81 q75 210.06 | covered pixels 1.000
+WIRE IMG_6292 OURS | V 1126346 F 3485054 | id map (3504, 5328) ss 4 | PSNR 32.38 | visible triangles 130699 | triangle area over the pixels (image px): q25 11.31 median 29.25 q75 72.75 | covered pixels 1.000
+WIRE IMG_6332 OURS | V 1126346 F 3485054 | id map (3504, 5328) ss 4 | PSNR 28.69 | visible triangles 82041 | triangle area over the pixels (image px): q25 19.25 median 51.62 q75 133.75 | covered pixels 1.000
+WIRE IMG_6366 OURS | V 1126346 F 3485054 | id map (3504, 5328) ss 4 | PSNR 24.10 | visible triangles 61534 | triangle area over the pixels (image px): q25 26.38 median 72.50 q75 197.56 | covered pixels 1.000
+WIRE IMG_6401 OURS | V 1126346 F 3485054 | id map (3504, 5328) ss 4 | PSNR 28.65 | visible triangles 140635 | triangle area over the pixels (image px): q25 14.12 median 52.31 q75 167.94 | covered pixels 1.000
+WIRE IMG_6442 OURS | V 1126346 F 3485054 | id map (3504, 5328) ss 4 | PSNR 25.13 | visible triangles 54355 | triangle area over the pixels (image px): q25 32.25 median 96.62 q75 307.94 | covered pixels 0.993
+WIRE IMG_6483 OURS | V 1126346 F 3485054 | id map (3504, 5328) ss 4 | PSNR 29.16 | visible triangles 68546 | triangle area over the pixels (image px): q25 25.56 median 71.44 q75 210.38 | covered pixels 1.000
+WIRE IMG_6516 OURS | V 1126346 F 3485054 | id map (3504, 5328) ss 4 | PSNR 31.58 | visible triangles 73183 | triangle area over the pixels (image px): q25 21.81 median 61.06 q75 177.50 | covered pixels 1.000
+WIRE IMG_6552 OURS | V 1126346 F 3485054 | id map (3504, 5328) ss 4 | PSNR 29.68 | visible triangles 135491 | triangle area over the pixels (image px): q25 15.44 median 48.50 q75 148.31 | covered pixels 1.000

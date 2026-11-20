@@ -1,0 +1,16 @@
+WIRE r_0 CAP | V 146157 F 400498 | id map (3200, 3200) ss 4 | PSNR 36.87 | visible triangles 73445 | triangle area over the pixels (image px): q25 22724.75 median 292918.00 q75 292918.00 | covered pixels 0.644
+WIRE r_120 CAP | V 146157 F 400498 | id map (3200, 3200) ss 4 | PSNR 33.50 | visible triangles 77860 | triangle area over the pixels (image px): q25 43.75 median 277372.56 q75 277372.56 | covered pixels 0.628
+WIRE r_143 CAP | V 146157 F 400498 | id map (3200, 3200) ss 4 | PSNR 30.20 | visible triangles 121220 | triangle area over the pixels (image px): q25 6.38 median 225126.81 q75 225126.81 | covered pixels 0.622
+WIRE r_166 CAP | V 146157 F 400498 | id map (3200, 3200) ss 4 | PSNR 31.92 | visible triangles 126305 | triangle area over the pixels (image px): q25 5.88 median 227685.62 q75 227685.62 | covered pixels 0.620
+WIRE r_189 CAP | V 146157 F 400498 | id map (3200, 3200) ss 4 | PSNR 34.97 | visible triangles 95859 | triangle area over the pixels (image px): q25 18.50 median 279883.56 q75 279883.56 | covered pixels 0.642
+WIRE r_31 CAP | V 146157 F 400498 | id map (3200, 3200) ss 4 | PSNR 30.67 | visible triangles 125023 | triangle area over the pixels (image px): q25 6.25 median 233014.81 q75 233014.81 | covered pixels 0.630
+WIRE r_54 CAP | V 146157 F 400498 | id map (3200, 3200) ss 4 | PSNR 29.66 | visible triangles 117935 | triangle area over the pixels (image px): q25 6.50 median 221229.75 q75 221229.75 | covered pixels 0.621
+WIRE r_77 CAP | V 146157 F 400498 | id map (3200, 3200) ss 4 | PSNR 31.38 | visible triangles 77591 | triangle area over the pixels (image px): q25 20057.00 median 297412.25 q75 297412.25 | covered pixels 0.638
+WIRE r_0 OURS | V 128166 F 419199 | id map (3200, 3200) ss 4 | PSNR 36.89 | visible triangles 72122 | triangle area over the pixels (image px): q25 24380.19 median 287198.12 q75 287198.12 | covered pixels 0.635
+WIRE r_120 OURS | V 128166 F 419199 | id map (3200, 3200) ss 4 | PSNR 33.55 | visible triangles 80920 | triangle area over the pixels (image px): q25 43.56 median 277590.31 q75 277590.31 | covered pixels 0.628
+WIRE r_143 OURS | V 128166 F 419199 | id map (3200, 3200) ss 4 | PSNR 30.36 | visible triangles 130107 | triangle area over the pixels (image px): q25 5.69 median 219257.81 q75 219257.81 | covered pixels 0.617
+WIRE r_166 OURS | V 128166 F 419199 | id map (3200, 3200) ss 4 | PSNR 32.16 | visible triangles 138255 | triangle area over the pixels (image px): q25 5.19 median 225889.38 q75 225889.38 | covered pixels 0.620
+WIRE r_189 OURS | V 128166 F 419199 | id map (3200, 3200) ss 4 | PSNR 35.09 | visible triangles 100817 | triangle area over the pixels (image px): q25 19.88 median 277997.31 q75 277997.31 | covered pixels 0.645
+WIRE r_31 OURS | V 128166 F 419199 | id map (3200, 3200) ss 4 | PSNR 30.95 | visible triangles 137537 | triangle area over the pixels (image px): q25 5.56 median 236052.94 q75 236052.94 | covered pixels 0.630
+WIRE r_54 OURS | V 128166 F 419199 | id map (3200, 3200) ss 4 | PSNR 29.90 | visible triangles 129635 | triangle area over the pixels (image px): q25 5.69 median 217408.81 q75 217408.81 | covered pixels 0.615
+WIRE r_77 OURS | V 128166 F 419199 | id map (3200, 3200) ss 4 | PSNR 31.71 | visible triangles 84121 | triangle area over the pixels (image px): q25 21534.38 median 295251.19 q75 295251.19 | covered pixels 0.637
