@@ -1,0 +1,3 @@
+WIRE _DSC8727 FP32 | V 2972065 F 5191667 | id map (3288, 4948) ss 4 | PSNR 23.29 | visible triangles 374108 | triangle area over the pixels (image px): q25 3.25 median 8.19 q75 18.81 | covered pixels 1.000
+WIRE _DSC8727 CAP | V 947525 F 1785653 | id map (3288, 4948) ss 4 | PSNR 22.47 | visible triangles 188181 | triangle area over the pixels (image px): q25 6.75 median 17.31 q75 40.62 | covered pixels 1.000
+WIRE _DSC8727 OURS | V 873620 F 1972925 | id map (3288, 4948) ss 4 | PSNR 22.84 | visible triangles 218820 | triangle area over the pixels (image px): q25 5.62 median 14.12 q75 33.31 | covered pixels 1.000

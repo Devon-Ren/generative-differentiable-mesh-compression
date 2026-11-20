@@ -1,0 +1,3 @@
+WIRE DSCF4715 FP32 | V 2552806 F 5493354 | id map (4152, 6228) ss 4 | PSNR 29.94 | visible triangles 648160 | triangle area over the pixels (image px): q25 2.94 median 7.56 q75 20.19 | covered pixels 1.000
+WIRE DSCF4715 CAP | V 997819 F 2281259 | id map (4152, 6228) ss 4 | PSNR 29.33 | visible triangles 340890 | triangle area over the pixels (image px): q25 5.81 median 15.00 q75 40.69 | covered pixels 1.000
+WIRE DSCF4715 OURS | V 861028 F 2240586 | id map (4152, 6228) ss 4 | PSNR 30.09 | visible triangles 360171 | triangle area over the pixels (image px): q25 5.38 median 13.31 q75 33.69 | covered pixels 1.000

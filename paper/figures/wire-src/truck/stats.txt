@@ -1,0 +1,3 @@
+WIRE 000049 FP32 | V 1877757 F 3482376 | id map (2184, 3916) ss 4 | PSNR 23.75 | visible triangles 282759 | triangle area over the pixels (image px): q25 2.31 median 6.31 q75 15.94 | covered pixels 1.000
+WIRE 000049 CAP | V 885368 F 1655525 | id map (2184, 3916) ss 4 | PSNR 23.39 | visible triangles 158579 | triangle area over the pixels (image px): q25 4.25 median 11.50 q75 28.94 | covered pixels 1.000
+WIRE 000049 OURS | V 808126 F 1869011 | id map (2184, 3916) ss 4 | PSNR 23.39 | visible triangles 205284 | triangle area over the pixels (image px): q25 3.19 median 8.38 q75 21.06 | covered pixels 1.000

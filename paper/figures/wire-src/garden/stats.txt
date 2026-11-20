@@ -1,0 +1,3 @@
+WIRE DSC08076 FP32 | V 3171988 F 6667681 | id map (3360, 5188) ss 4 | PSNR 24.35 | visible triangles 630481 | triangle area over the pixels (image px): q25 1.88 median 4.62 q75 11.00 | covered pixels 1.000
+WIRE DSC08076 CAP | V 1005902 F 2292683 | id map (3360, 5188) ss 4 | PSNR 23.50 | visible triangles 261173 | triangle area over the pixels (image px): q25 4.81 median 11.62 q75 28.38 | covered pixels 1.000
+WIRE DSC08076 OURS | V 808420 F 2140445 | id map (3360, 5188) ss 4 | PSNR 23.57 | visible triangles 277262 | triangle area over the pixels (image px): q25 4.56 median 10.56 q75 22.75 | covered pixels 1.000
