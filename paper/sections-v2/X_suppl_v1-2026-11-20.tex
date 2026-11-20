@@ -20,7 +20,7 @@ This appendix has four parts. Sec.~\ref{sup:impl} gives the implementation detai
 
 \noindent\textbf{Phase~1.} Four details complete Sec.~3.3 of the paper. (i) \MS limits the growth of each densification step, and it excludes triangles that are too small in area or in the image. Both rules stay active, so the number of split triangles is the smaller of $n$ in Eq.~(4) of the paper and the limit of \MS. (ii) \MS also splits the largest triangles at every step; this is unchanged. (iii) The $n$ triangles are selected through a threshold on $e_t$ that is computed from the errors of the previous step, so the number of triangles that are split can differ slightly from $n$. (iv) $\sigma$ is the mean of the last three measurements, and it is 0.5 before the first one.
 
-\noindent\textbf{Phase~2.} One round collapses at most 15\% of the vertices. When the excess $E$ needs more, the rest is removed in the next round.
+\noindent\textbf{Phase~2.} One round collapses at most 15\% of the vertices. When the excess $E$ needs more, the rest is removed in the next round. This happened in the first round of 2 of the 65 runs on the captured scenes.
 
 \noindent\textbf{Final codebooks.} After $k$-means on 65{,}536 sampled vertices (8 iterations), the codebooks are updated by 4 more iterations over all vertices (2 in the size probe). The 400 refinement steps update the codewords of both codebooks and the DC colors. The positions and the indices $i_v$, $j_v$ are fixed.
 
@@ -426,9 +426,17 @@ Each round removes the whole measured excess, $c_k = \max(R_k - T,\, 0)$. Whenev
 R_{k+1} - T = d_k + \epsilon_k .
 \label{sup:eq:excess}
 \end{equation}
-Three properties follow. First, the excess at a round depends only on what happened since the previous round. Errors of earlier rounds do not accumulate, and no prediction of the future size is needed. Second, the final error is the drift after the last round, plus the difference between the probe and the final encoder. Third, the control is one-sided: nothing adds bytes after Phase~1. If the mesh is below the target, it stays below. This is why Phase~1 aims above the target ($\alpha > 1$, Table~\ref{sup:tab:alpha}), and why ficus and mic, which stop growing, end below it.
+Three properties follow. First, the excess at a round depends only on what happened since the previous round. Errors of earlier rounds do not accumulate, and no prediction of the future size is needed. Second, the final error is the drift after the last round, plus the difference between the probe and the final encoder. Third, the controller can only remove bytes. A mesh below the target reaches it only through the drift.
 
-The measurements agree with this. On the 39 runs of the 13 captured scenes at 5, 10 and 20~MB, the probe at the end of training is within 0.32\% of the file that the final encoder writes, although the probe builds its codebooks without the refinement. On these runs, 16 of the 35 rounds collapse edges on average; in the other rounds the measured size is not above the target.
+Fig.~\ref{sup:fig:traces} shows the measured size at every round for the 65 runs on the 13 captured scenes. 40 runs are above the target at the first round, by up to 23\%, and are brought to it in one or two rounds. The other 25 runs start below the target, by up to 20\%. Their size rises during training, because the opacity rises and more faces become visible; the collapses start once the target is reached. In the 1{,}083 cases where a round measures a size at or above the target, the size at the next round is within 1.9\% of the target in 95\% of the cases (median $+0.4\%$). On average, 17 of the 35 rounds collapse edges. In the last rounds the size decreases slightly, and nothing adds bytes: at 30k the measured size is between 94\% and 101\% of the target (99\% on average). When the growth of Phase~1 is too small, the size never reaches the target: this is the case with $\alpha = 1$ (Table~\ref{sup:tab:alpha}), and for ficus and mic, which stop growing.
+
+The probe is close to the final encoder. On the 39 runs at 5, 10 and 20~MB, the probe at the end of training is within 0.32\% of the file that the final encoder writes, although the probe builds its codebooks without the refinement.
+
+\begin{figure}[h]\centering
+\includegraphics[width=\linewidth]{figures/fig_controller_traces_v2.pdf}
+\caption{\textbf{Measured file size during Phase~2}, divided by the target, for the 65 runs on the 13 captured scenes (five targets). One line per run; the last point is the size at 30k. Grey band: $\pm10\%$.}
+\label{sup:fig:traces}
+\end{figure}
 
 \subsection{Cost of the size probes}
 One training run has 41 or 42 probes. Over the 65 runs on the 13 captured scenes, they take at least 41\% of the training time on average (30\% to 50\%), about 20 minutes per run. The number is a lower bound because the time to find the hidden faces is not recorded for the rounds of Phase~2. Fewer probes in Phase~2 would reduce this cost; we did not study this.
