@@ -1,3 +1,4 @@
 # experiment code stays local (user 11/21: do not push code to GitHub)
 memory-medium/**/*.py
 memory-medium/**/*.zip
+memory-medium/f3v1/
